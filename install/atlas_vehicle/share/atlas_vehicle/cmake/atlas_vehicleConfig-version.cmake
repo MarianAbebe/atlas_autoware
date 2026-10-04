@@ -1,0 +1,1 @@
+/home/marian/roam/atlas_autoware/build/atlas_vehicle/ament_cmake_core/atlas_vehicleConfig-version.cmake

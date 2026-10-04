@@ -1,0 +1,16 @@
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/README.md
+/home/marian/roam/atlas_autoware/install/atlas_description/share/ament_index/resource_index/package_run_dependencies/atlas_description
+/home/marian/roam/atlas_autoware/install/atlas_description/share/ament_index/resource_index/parent_prefix_path/atlas_description
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/environment/ament_prefix_path.sh
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/environment/ament_prefix_path.dsv
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/environment/path.sh
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/environment/path.dsv
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/local_setup.bash
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/local_setup.sh
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/local_setup.zsh
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/local_setup.dsv
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/package.dsv
+/home/marian/roam/atlas_autoware/install/atlas_description/share/ament_index/resource_index/packages/atlas_description
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/cmake/atlas_descriptionConfig.cmake
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/cmake/atlas_descriptionConfig-version.cmake
+/home/marian/roam/atlas_autoware/install/atlas_description/share/atlas_description/package.xml

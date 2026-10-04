@@ -1,0 +1,6 @@
+Invoking command in '/home/marian/roam/atlas_autoware/build/atlas_tools': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/marian/roam/atlas_autoware/src/atlas_tools -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/marian/roam/atlas_autoware/install/atlas_tools
+Invoked command in '/home/marian/roam/atlas_autoware/build/atlas_tools' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/marian/roam/atlas_autoware/src/atlas_tools -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/marian/roam/atlas_autoware/install/atlas_tools
+Invoking command in '/home/marian/roam/atlas_autoware/build/atlas_tools': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/marian/roam/atlas_autoware/build/atlas_tools -- -j6 -l6
+Invoked command in '/home/marian/roam/atlas_autoware/build/atlas_tools' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/marian/roam/atlas_autoware/build/atlas_tools -- -j6 -l6
+Invoking command in '/home/marian/roam/atlas_autoware/build/atlas_tools': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/marian/roam/atlas_autoware/build/atlas_tools
+Invoked command in '/home/marian/roam/atlas_autoware/build/atlas_tools' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/marian/roam/atlas_autoware/build/atlas_tools

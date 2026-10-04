@@ -1,0 +1,9 @@
+/home/marian/roam/atlas_autoware/build/atlas_sensor_kit/CMakeFiles/uninstall.dir
+/home/marian/roam/atlas_autoware/build/atlas_sensor_kit/CMakeFiles/atlas_sensor_kit_uninstall.dir
+/home/marian/roam/atlas_autoware/build/atlas_sensor_kit/CMakeFiles/test.dir
+/home/marian/roam/atlas_autoware/build/atlas_sensor_kit/CMakeFiles/edit_cache.dir
+/home/marian/roam/atlas_autoware/build/atlas_sensor_kit/CMakeFiles/rebuild_cache.dir
+/home/marian/roam/atlas_autoware/build/atlas_sensor_kit/CMakeFiles/list_install_components.dir
+/home/marian/roam/atlas_autoware/build/atlas_sensor_kit/CMakeFiles/install.dir
+/home/marian/roam/atlas_autoware/build/atlas_sensor_kit/CMakeFiles/install/local.dir
+/home/marian/roam/atlas_autoware/build/atlas_sensor_kit/CMakeFiles/install/strip.dir

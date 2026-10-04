@@ -1,0 +1,16 @@
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/README.md
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/ament_index/resource_index/package_run_dependencies/atlas_sensor_kit
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/ament_index/resource_index/parent_prefix_path/atlas_sensor_kit
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/environment/ament_prefix_path.sh
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/environment/ament_prefix_path.dsv
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/environment/path.sh
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/environment/path.dsv
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/local_setup.bash
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/local_setup.sh
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/local_setup.zsh
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/local_setup.dsv
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/package.dsv
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/ament_index/resource_index/packages/atlas_sensor_kit
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/cmake/atlas_sensor_kitConfig.cmake
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/cmake/atlas_sensor_kitConfig-version.cmake
+/home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/package.xml

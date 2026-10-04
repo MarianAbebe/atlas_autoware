@@ -1,0 +1,1 @@
+/home/marian/roam/atlas_autoware/build/atlas_description/ament_cmake_environment_hooks/local_setup.sh

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>atlas_vehicle_interface</name>
+  <version>0.0.0</version>
+  <description>Atlas drivetrain integration with Autoware.</description>
+  <!-- TODO: Replace the maintainer name/contact with confirmed project metadata. -->
+  <maintainer email="todo@example.com">TODO: ROAM maintainer</maintainer>
+  <!-- TODO: Choose and document the repository license. -->
+  <license>TODO</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

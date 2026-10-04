@@ -1,0 +1,4 @@
+source;share/atlas_vehicle/local_setup.bash
+source;share/atlas_vehicle/local_setup.dsv
+source;share/atlas_vehicle/local_setup.sh
+source;share/atlas_vehicle/local_setup.zsh

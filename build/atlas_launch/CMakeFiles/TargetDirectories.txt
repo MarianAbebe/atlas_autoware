@@ -1,0 +1,9 @@
+/home/marian/roam/atlas_autoware/build/atlas_launch/CMakeFiles/uninstall.dir
+/home/marian/roam/atlas_autoware/build/atlas_launch/CMakeFiles/atlas_launch_uninstall.dir
+/home/marian/roam/atlas_autoware/build/atlas_launch/CMakeFiles/test.dir
+/home/marian/roam/atlas_autoware/build/atlas_launch/CMakeFiles/edit_cache.dir
+/home/marian/roam/atlas_autoware/build/atlas_launch/CMakeFiles/rebuild_cache.dir
+/home/marian/roam/atlas_autoware/build/atlas_launch/CMakeFiles/list_install_components.dir
+/home/marian/roam/atlas_autoware/build/atlas_launch/CMakeFiles/install.dir
+/home/marian/roam/atlas_autoware/build/atlas_launch/CMakeFiles/install/local.dir
+/home/marian/roam/atlas_autoware/build/atlas_launch/CMakeFiles/install/strip.dir

@@ -1,0 +1,1 @@
+/home/marian/roam/atlas_autoware/build/atlas_sensor_kit/ament_cmake_core/atlas_sensor_kitConfig.cmake

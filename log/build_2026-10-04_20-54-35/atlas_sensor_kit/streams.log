@@ -1,0 +1,42 @@
+[0.031s] Invoking command in '/home/marian/roam/atlas_autoware/build/atlas_sensor_kit': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/marian/roam/atlas_autoware/src/atlas_sensor_kit -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/marian/roam/atlas_autoware/install/atlas_sensor_kit
+[0.126s] -- The C compiler identification is GNU 11.4.0
+[0.177s] -- The CXX compiler identification is GNU 11.4.0
+[0.183s] -- Detecting C compiler ABI info
+[0.241s] -- Detecting C compiler ABI info - done
+[0.254s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.254s] -- Detecting C compile features
+[0.255s] -- Detecting C compile features - done
+[0.258s] -- Detecting CXX compiler ABI info
+[0.335s] -- Detecting CXX compiler ABI info - done
+[0.342s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.342s] -- Detecting CXX compile features
+[0.343s] -- Detecting CXX compile features - done
+[0.345s] -- Found ament_cmake: 1.3.14 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.459s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[0.506s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.577s] -- Configuring done
+[0.580s] -- Generating done
+[0.581s] -- Build files have been written to: /home/marian/roam/atlas_autoware/build/atlas_sensor_kit
+[0.587s] Invoked command in '/home/marian/roam/atlas_autoware/build/atlas_sensor_kit' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/marian/roam/atlas_autoware/src/atlas_sensor_kit -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/marian/roam/atlas_autoware/install/atlas_sensor_kit
+[0.588s] Invoking command in '/home/marian/roam/atlas_autoware/build/atlas_sensor_kit': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/marian/roam/atlas_autoware/build/atlas_sensor_kit -- -j6 -l6
+[0.619s] Invoked command in '/home/marian/roam/atlas_autoware/build/atlas_sensor_kit' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/marian/roam/atlas_autoware/build/atlas_sensor_kit -- -j6 -l6
+[0.639s] Invoking command in '/home/marian/roam/atlas_autoware/build/atlas_sensor_kit': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/marian/roam/atlas_autoware/build/atlas_sensor_kit
+[0.640s] -- Install configuration: ""
+[0.640s] -- Execute custom install script
+[0.640s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/README.md
+[0.642s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/ament_index/resource_index/package_run_dependencies/atlas_sensor_kit
+[0.648s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/ament_index/resource_index/parent_prefix_path/atlas_sensor_kit
+[0.656s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/environment/ament_prefix_path.sh
+[0.660s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/environment/ament_prefix_path.dsv
+[0.667s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/environment/path.sh
+[0.675s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/environment/path.dsv
+[0.679s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/local_setup.bash
+[0.685s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/local_setup.sh
+[0.691s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/local_setup.zsh
+[0.697s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/local_setup.dsv
+[0.703s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/package.dsv
+[0.709s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/ament_index/resource_index/packages/atlas_sensor_kit
+[0.715s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/cmake/atlas_sensor_kitConfig.cmake
+[0.725s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/cmake/atlas_sensor_kitConfig-version.cmake
+[0.731s] -- Symlinking: /home/marian/roam/atlas_autoware/install/atlas_sensor_kit/share/atlas_sensor_kit/package.xml
+[0.738s] Invoked command in '/home/marian/roam/atlas_autoware/build/atlas_sensor_kit' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/marian/roam/atlas_autoware/build/atlas_sensor_kit
