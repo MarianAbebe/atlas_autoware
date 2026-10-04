@@ -1,0 +1,7 @@
+# Third-party source imported with atlas_dependencies.repos into src/.
+/src/external/
+
+# ROS 2 / colcon workspace artifacts.
+/build/
+/install/
+/log/

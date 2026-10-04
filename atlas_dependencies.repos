@@ -1,0 +1,5 @@
+repositories:
+  external/livox_ros_driver2:
+    type: git
+    url: https://github.com/Livox-SDK/livox_ros_driver2
+    version: "1.2.6"

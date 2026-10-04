@@ -23,6 +23,26 @@ Each package uses `ament_cmake` and currently contains only its manifest, build
 file, and responsibility README. Implementation-specific directories and
 dependencies will be added when their requirements are confirmed.
 
+## External Dependencies
+
+Third-party ROS source dependencies are managed with vcstool through
+[`atlas_dependencies.repos`](atlas_dependencies.repos). The manifest currently
+contains only the official Livox ROS 2 driver, `livox_ros_driver2`.
+
+The Livox driver dependency is currently pinned to the upstream tag `1.2.6`
+for reproducibility.
+
+With vcstool available, import from the workspace root with:
+
+```bash
+vcs import src < atlas_dependencies.repos
+```
+
+Imports go under `src/external/`, which is ignored by Git. Third-party source
+must not be committed or vendored into this repository. Livox-SDK2 is not listed
+as a ROS workspace package; its setup requirements remain future integration work.
+No dependencies have been imported or installed by this scaffold.
+
 ## Build the scaffold
 
 With ROS 2 Humble and colcon already installed:
