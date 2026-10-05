@@ -3,3 +3,7 @@ repositories:
     type: git
     url: https://github.com/Livox-SDK/livox_ros_driver2
     version: "1.2.6"
+  external/camera_aravis2:
+    type: git
+    url: https://github.com/leggedrobotics/camera_aravis2.git
+    version: "1.2.0"

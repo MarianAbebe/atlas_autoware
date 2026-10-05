@@ -4,9 +4,10 @@ Atlas is an autonomous UGV developed by the ROAM student team. This repository
 contains Atlas-specific integration, configuration, descriptions, interfaces,
 and tooling for Ubuntu 22.04 and ROS 2 Humble.
 
-This is a scaffold only. It contains no robot functionality, drivers, launch
-files, or numerical robot configuration. Autoware will remain an upstream
-dependency; it is not forked, copied, cloned, or vendored here.
+Atlas packages remain scaffolds with workspace build/setup tooling. No robot
+functionality, sensor launch files, or numerical robot configuration is defined.
+Autoware will remain an upstream dependency; it is not forked, copied, cloned,
+or vendored here.
 
 ## Packages
 
@@ -19,43 +20,69 @@ dependency; it is not forked, copied, cloned, or vendored here.
 | `atlas_launch` | Top-level Atlas and Autoware subsystem launch integration |
 | `atlas_tools` | Development, rosbag, diagnostics, localization initialization, setup tools |
 
-Each package uses `ament_cmake` and currently contains only its manifest, build
-file, and responsibility README. Implementation-specific directories and
+Each Atlas package uses `ament_cmake`. `atlas_tools` also contains source-checkout
+workspace preparation and build scripts. Robot implementation files and
 dependencies will be added when their requirements are confirmed.
 
 ## External Dependencies
 
 Third-party ROS source dependencies are managed with vcstool through
 [`atlas_dependencies.repos`](atlas_dependencies.repos). The manifest currently
-contains only the official Livox ROS 2 driver, `livox_ros_driver2`.
+contains the official Livox ROS 2 driver, `livox_ros_driver2`, and the camera
+driver `camera_aravis2`.
 
-The Livox driver dependency is currently pinned to the upstream tag `1.2.6`
-for reproducibility.
+The Livox driver is pinned to tag `1.2.6`. It requires Livox-SDK2 tag `v1.3.1`,
+built and installed separately as a system dependency before building Atlas.
+This combination has been build-validated on Ubuntu 22.04 + ROS 2 Humble + ARM64;
+physical Mid-360S validation remains pending hardware testing. Livox-SDK2 is not
+a ROS workspace package and is not included in `atlas_dependencies.repos`.
 
-With vcstool available, import from the workspace root with:
-
-```bash
-vcs import src < atlas_dependencies.repos
-```
+`camera_aravis2` is pinned to tag `1.2.0` and is the selected ROS acquisition
+driver for the Atlas VEN USB3 Vision / GenICam cameras. This version has been
+build-validated on Ubuntu 22.04, ARM64, and ROS 2 Humble. Compatibility with the
+physical VEN-161-61U3C-M01 cameras still requires hardware validation. Resolve
+its system dependencies through rosdep rather than arbitrary manual apt commands.
 
 Imports go under `src/external/`, which is ignored by Git. Third-party source
-must not be committed or vendored into this repository. Livox-SDK2 is not listed
-as a ROS workspace package; its setup requirements remain future integration work.
-No dependencies have been imported or installed by this scaffold.
+must not be committed or vendored into this repository. Atlas tooling does not
+clone dependencies or install software.
 
-## Build the scaffold
+## Prepare and build the workspace
 
-With ROS 2 Humble and colcon already installed:
+Use Ubuntu 22.04 with ROS 2 Humble, colcon, vcstool, and initialized rosdep
+already available. Install Livox-SDK2 `v1.3.1` separately following its upstream
+instructions, outside this repository. Its shared library
+`liblivox_lidar_sdk_shared.so` must be available in a standard system library
+directory (the upstream default is `/usr/local/lib`). The build script checks
+for the library's presence; it does not verify its version or SDK headers.
+
+From the workspace root in a fresh shell:
 
 ```bash
 source /opt/ros/humble/setup.bash
-colcon list --base-paths src
-colcon build --base-paths src
+vcs import src < atlas_dependencies.repos
+bash src/atlas_tools/scripts/prepare_workspace.sh
+rosdep install --from-paths src --ignore-src --rosdistro humble -y
+bash src/atlas_tools/scripts/build_workspace.sh
 source install/setup.bash
 ```
 
-The build only registers these empty packages and installs their READMEs. It
-provides no runnable nodes or launch files and requires no Autoware checkout.
+Preparation must precede rosdep: `livox_ros_driver2` ships its ROS 2 manifest as
+`package_ROS2.xml`. Atlas copies it to `package.xml` only when their contents
+differ. Missing dependencies or manifests cause a clear failure.
+
+The build script can be invoked from any working directory using its path. It
+sources `/opt/ros/humble/setup.bash`, runs preparation again safely, checks for
+the Livox SDK shared library, and runs the validated full-workspace command:
+
+```bash
+colcon build --symlink-install --cmake-args -DROS_EDITION=ROS2 -DDISTRO_ROS=humble
+```
+
+These CMake arguments select Livox's ROS 2 and Humble behavior. The script
+preserves colcon output and exit status. Resolve ROS/system package dependencies,
+including camera dependencies, through rosdep; the separate Livox SDK installation
+is still required. No Autoware checkout is needed for this build.
 
 ## TODO before implementation
 
