@@ -28,8 +28,8 @@ dependencies will be added when their requirements are confirmed.
 
 Third-party ROS source dependencies are managed with vcstool through
 [`atlas_dependencies.repos`](atlas_dependencies.repos). The manifest currently
-contains the official Livox ROS 2 driver, `livox_ros_driver2`, and the camera
-driver `camera_aravis2`.
+contains the official Livox ROS 2 driver, `livox_ros_driver2`, the camera driver
+`camera_aravis2`, and NORLAB's IMU driver, `ros2_icm20948`.
 
 The Livox driver is pinned to tag `1.2.6`. It requires Livox-SDK2 tag `v1.3.1`,
 built and installed separately as a system dependency before building Atlas.
@@ -42,6 +42,32 @@ driver for the Atlas VEN USB3 Vision / GenICam cameras. This version has been
 build-validated on Ubuntu 22.04, ARM64, and ROS 2 Humble. Compatibility with the
 physical VEN-161-61U3C-M01 cameras still requires hardware validation. Resolve
 its system dependencies through rosdep rather than arbitrary manual apt commands.
+
+`ros2_icm20948` is the selected ROS 2 acquisition driver for the Atlas ICM-20948.
+The exact upstream commit `5af0f48976623e2e1a5e8a1e65b659d8e5f513eb` is pinned
+for reproducibility. Its Python hardware-access dependency is
+`sparkfun-qwiic-icm20948` version `2.0.1`, which imports as `qwiic_icm20948`.
+This combination has been build-validated on Ubuntu 22.04 + ROS 2 Humble + ARM64.
+Physical Raspberry Pi 5 + ICM-20948 validation remains pending. VIO timing,
+achievable sample rate, jitter, calibration, covariance, and camera/IMU
+synchronization remain pending hardware validation.
+
+Known upstream limitations at the pinned commit (no Atlas patches applied):
+
+- The driver publishes `/imu/data_raw` and `/imu/mag_raw`; these are upstream
+  topic names, with no Atlas remaps defined.
+- I2C address, `frame_id`, and publication rate are ROS parameters. Atlas values
+  remain unspecified pending hardware validation.
+- The driver explicitly configures the accelerometer to ±16 g and the gyro to
+  ±2000 deg/s. These are upstream settings, not Atlas calibration values.
+- When `dataReady()` is false, the driver currently publishes empty/default
+  messages.
+- An acquisition exception may still result in a message being published.
+- Covariance characterization/calibration is not implemented.
+- The SparkFun Python dependency is not declared in the upstream ROS
+  `package.xml`; rosdep cannot resolve it from that manifest. It must be provided
+  separately in the Python environment used by the driver. Atlas tooling does
+  not install it or modify the upstream package.
 
 Imports go under `src/external/`, which is ignored by Git. Third-party source
 must not be committed or vendored into this repository. Atlas tooling does not
@@ -82,7 +108,9 @@ colcon build --symlink-install --cmake-args -DROS_EDITION=ROS2 -DDISTRO_ROS=humb
 These CMake arguments select Livox's ROS 2 and Humble behavior. The script
 preserves colcon output and exit status. Resolve ROS/system package dependencies,
 including camera dependencies, through rosdep; the separate Livox SDK installation
-is still required. No Autoware checkout is needed for this build.
+is still required. The undeclared SparkFun Python dependency described above
+must also be available for ICM-20948 hardware access. No Autoware checkout is
+needed for this build.
 
 ## TODO before implementation
 

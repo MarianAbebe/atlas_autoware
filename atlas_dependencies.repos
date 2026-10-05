@@ -7,3 +7,7 @@ repositories:
     type: git
     url: https://github.com/leggedrobotics/camera_aravis2.git
     version: "1.2.0"
+  external/ros2_icm20948:
+    type: git
+    url: https://github.com/norlab-ulaval/ros2_icm20948.git
+    version: "5af0f48976623e2e1a5e8a1e65b659d8e5f513eb"
