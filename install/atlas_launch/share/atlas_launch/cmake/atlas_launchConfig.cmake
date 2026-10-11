@@ -1,1 +1,0 @@
-/home/marian/roam/atlas_autoware/build/atlas_launch/ament_cmake_core/atlas_launchConfig.cmake

@@ -5,3 +5,11 @@
 /build/
 /install/
 /log/
+
+# ROS 2 / colcon generated files
+/build/
+/install/
+/log/
+/src/build/
+/src/install/
+/src/log/

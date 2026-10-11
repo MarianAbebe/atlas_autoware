@@ -1,1 +1,0 @@
-/home/marian/roam/atlas_autoware/src/atlas_vehicle_interface/README.md
