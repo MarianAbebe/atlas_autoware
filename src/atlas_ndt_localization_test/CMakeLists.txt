@@ -1,0 +1,38 @@
+cmake_minimum_required(VERSION 3.14)
+project(atlas_ndt_localization_test)
+find_package(ament_cmake REQUIRED)
+foreach(dep autoware_utils_geometry autoware_map_msgs ament_index_cpp class_loader
+    rclcpp rclcpp_components rcl_yaml_param_parser geometry_msgs diagnostic_msgs sensor_msgs
+    std_srvs pcl_conversions tf2_ros tf2 tf2_msgs atlas_sensor_kit atlas_distortion_corrector_test)
+  find_package(${dep} REQUIRED)
+endforeach()
+find_package(autoware_ndt_scan_matcher REQUIRED)
+find_package(PCL REQUIRED COMPONENTS common filters)
+set(ATLAS_NDT_SOURCE "$ENV{HOME}/roam/references/autoware/src/core/autoware_core/localization/autoware_ndt_scan_matcher"
+  CACHE PATH "Unmodified pinned NDT source directory, including its test fixtures")
+foreach(f test/test_util.hpp test/stub_pcd_loader.hpp)
+  if(NOT EXISTS "${ATLAS_NDT_SOURCE}/${f}")
+    message(FATAL_ERROR "Required pinned fixture missing: ${ATLAS_NDT_SOURCE}/${f}")
+  endif()
+endforeach()
+get_filename_component(deskew_prefix "${atlas_distortion_corrector_test_DIR}/../../.." ABSOLUTE)
+find_library(deskew_support NAMES pinned_distortion_support PATHS "${deskew_prefix}/lib" NO_DEFAULT_PATH REQUIRED)
+set(managed_tf_headers "$ENV{HOME}/roam/references/autoware/src/universe/external/managed_transform_buffer/managed_transform_buffer/include" CACHE PATH "Pinned managed-TF headers")
+add_executable(ndt_synthetic_demo test/ndt_synthetic_demo.cpp)
+target_compile_features(ndt_synthetic_demo PRIVATE cxx_std_17)
+target_compile_options(ndt_synthetic_demo PRIVATE -Wall -Wextra -Wpedantic)
+target_include_directories(ndt_synthetic_demo SYSTEM PRIVATE ${PCL_INCLUDE_DIRS} "${ATLAS_NDT_SOURCE}/test" "${managed_tf_headers}")
+target_link_libraries(ndt_synthetic_demo ${PCL_LIBRARIES} ${deskew_support})
+ament_target_dependencies(ndt_synthetic_demo autoware_utils_geometry autoware_map_msgs
+  ament_index_cpp class_loader rclcpp rclcpp_components rcl_yaml_param_parser
+  geometry_msgs diagnostic_msgs sensor_msgs std_srvs pcl_conversions tf2_ros tf2 tf2_msgs atlas_sensor_kit atlas_distortion_corrector_test)
+install(TARGETS ndt_synthetic_demo DESTINATION lib/${PROJECT_NAME})
+install(FILES README.md config/ndt_demo.rviz DESTINATION share/${PROJECT_NAME})
+if(BUILD_TESTING)
+  enable_testing()
+  add_test(NAME ndt_two_positions COMMAND ndt_synthetic_demo)
+  add_test(NAME lidar_to_ndt_two_positions COMMAND ndt_synthetic_demo --ros-args -p pipeline:=true)
+  set_tests_properties(ndt_two_positions lidar_to_ndt_two_positions PROPERTIES TIMEOUT 90 RUN_SERIAL TRUE
+    ENVIRONMENT "ROS_LOCALHOST_ONLY=1")
+endif()
+ament_package()

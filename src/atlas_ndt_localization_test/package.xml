@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>atlas_ndt_localization_test</name>
+  <version>0.0.0</version>
+  <description>Hardware-free demonstration of the pinned Autoware NDT component.</description>
+  <maintainer email="todo@example.com">TODO: ROAM maintainer</maintainer>
+  <license>TODO</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>autoware_ndt_scan_matcher</depend>
+  <depend>autoware_utils_geometry</depend>
+  <depend>autoware_map_msgs</depend>
+  <depend>ament_index_cpp</depend>
+  <depend>class_loader</depend>
+  <depend>rclcpp</depend>
+  <depend>rclcpp_components</depend>
+  <depend>rcl_yaml_param_parser</depend>
+  <depend>geometry_msgs</depend>
+  <depend>diagnostic_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>pcl_conversions</depend>
+  <build_depend>libpcl-all-dev</build_depend>
+  <exec_depend>libpcl-all</exec_depend>
+  <depend>tf2_ros</depend>
+  <depend>tf2</depend>
+  <depend>tf2_msgs</depend>
+  <depend>atlas_sensor_kit</depend>
+  <depend>atlas_distortion_corrector_test</depend>
+  <exec_depend>rviz2</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

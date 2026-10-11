@@ -1,0 +1,95 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 2
+      Plane Cell Count: 30
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Synthetic map loaded by NDT
+      Enabled: true
+      Color Transformer: FlatColor
+      Color: 160; 160; 160
+      Style: Points
+      Size (Pixels): 2
+      Topic:
+        Value: /atlas_ndt_demo/debug/loaded_pointcloud_map
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Livox input scan (ground-truth TF)
+      Enabled: true
+      Color Transformer: FlatColor
+      Color: 0; 170; 255
+      Style: Points
+      Size (Pixels): 3
+      Topic:
+        Value: /atlas_ndt_demo/livox
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/PointCloud2
+      Name: NDT aligned scan
+      Enabled: true
+      Color Transformer: FlatColor
+      Color: 255; 170; 0
+      Style: Points
+      Size (Pixels): 3
+      Topic:
+        Value: /atlas_ndt_demo/points_aligned
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Compact XYZIRC scan sent to NDT
+      Enabled: true
+      Color Transformer: FlatColor
+      Color: 0; 255; 120
+      Style: Points
+      Size (Pixels): 3
+      Topic:
+        Value: /atlas_ndt_demo/compact
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/Pose
+      Name: NDT estimated vehicle pose
+      Enabled: true
+      Shape: Arrow
+      Color: 255; 0; 255
+      Topic:
+        Value: /atlas_ndt_demo/ndt_pose
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 10
+    - Class: rviz_default_plugins/TF
+      Name: Test TF
+      Enabled: true
+      Show Names: true
+  Global Options:
+    Fixed Frame: map
+    Background Color: 30; 30; 30
+    Frame Rate: 30
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 55
+      Focal Point:
+        X: 110
+        Y: 110
+        Z: 5
+      Pitch: 0.7
+      Yaw: 0.8
+Window Geometry:
+  Width: 1280
+  Height: 800
