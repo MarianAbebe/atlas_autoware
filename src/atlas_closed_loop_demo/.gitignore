@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+/build/
+/install/
+/log/
+/results/*
+!/results/README.md
+!/results/safety_validation/
+/results/safety_validation/*
+!/results/safety_validation/thresholds.json
+!/results/safety_validation/operational_thresholds.json
+!/results/safety_validation/release_summary.json
+!/results/safety_validation/pinned_source_audit.json
+!/results/safety_validation/evidence_manifest.json

@@ -1,0 +1,29 @@
+# Test-only synthetic model values. These are not Atlas calibration data.
+/**:
+  ros__parameters:
+    origin_frame_id: map
+    simulated_frame_id: atlas_closed_loop_base_link
+    vehicle_model_type: IDEAL_STEER_ACC
+    initialize_source: INITIAL_POSE_TOPIC
+    initial_engage_state: true
+    enable_road_slope_simulation: false
+    enable_pub_steer: true
+    add_measurement_noise: false
+    timer_sampling_time_ms: 20
+    vel_lim: 1.5
+    vel_rate_lim: 1.5
+    steer_lim: 0.45
+    steer_rate_lim: 1.0
+    x_stddev: 0.0001
+    y_stddev: 0.0001
+    # Provisional geometry for this visualization and the simulator bicycle model only.
+    wheel_radius: 0.20
+    wheel_width: 0.08
+    wheel_base: 1.20
+    wheel_tread: 0.80
+    front_overhang: 0.30
+    rear_overhang: 0.30
+    left_overhang: 0.10
+    right_overhang: 0.10
+    vehicle_height: 0.50
+    max_steer_angle: 0.45

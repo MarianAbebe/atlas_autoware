@@ -1,0 +1,28 @@
+# Provisional ideal-model test configuration, not Atlas calibration.
+/**:
+  ros__parameters:
+    lateral_controller_mode: mpc
+    longitudinal_controller_mode: pid
+    ego_nearest_dist_threshold: 3.0
+    ego_nearest_yaw_threshold: 1.57
+    vehicle_model_type: kinematics_no_delay
+    input_delay: 0.0
+    delay_compensation_time: 0.0
+    enable_slope_compensation: false
+    max_acc: 0.5
+    min_acc: -0.5
+    max_jerk: 0.3
+    min_jerk: -0.3
+    # The ungeared ideal model integrates acceleration literally. Pedal-like
+    # stopped_acc=-3.4 would accelerate backwards; use zero at STOPPED.
+    stopped_acc: 0.0
+    stopped_state_entry_duration_time: 0.1
+    stopped_state_entry_vel: 0.03
+    stopped_state_entry_acc: 1.0
+    smooth_stop_max_strong_acc: -0.3
+    smooth_stop_min_strong_acc: -0.5
+    smooth_stop_weak_acc: -0.2
+    smooth_stop_weak_stop_acc: -0.2
+    smooth_stop_strong_stop_acc: -0.5
+    emergency_acc: -0.5
+    publish_debug_trajectories: true

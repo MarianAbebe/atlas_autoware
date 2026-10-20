@@ -1,0 +1,9 @@
+{
+  "declared_before_frozen_implementation_runs": true,
+  "measurement_errors_allowed": false,
+  "shutdown_max_sec": 30.0,
+  "configured_sigterm_fallback_after_sigint_sec": 5.0,
+  "sigkill_allowed": false,
+  "shutdown_warnings_retained": true,
+  "numerical_thresholds_unchanged": true
+}

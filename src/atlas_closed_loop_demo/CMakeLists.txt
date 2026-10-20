@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.14)
+project(atlas_closed_loop_demo)
+find_package(ament_cmake REQUIRED)
+set(deps rclcpp autoware_motion_utils autoware_lanelet2_utils autoware_lanelet2_extension
+  autoware_map_msgs autoware_internal_planning_msgs autoware_planning_msgs autoware_adapi_v1_msgs
+  geometry_msgs nav_msgs visualization_msgs tf2_ros lanelet2_core lanelet2_routing)
+foreach(dep IN LISTS deps)
+  find_package(${dep} REQUIRED)
+endforeach()
+add_executable(route_adapter src/route_adapter.cpp)
+target_compile_features(route_adapter PUBLIC cxx_std_17)
+ament_target_dependencies(route_adapter ${deps})
+install(TARGETS route_adapter DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS scripts/feedback_relay.py scripts/feedback_watchdog.py scripts/run_validation.py DESTINATION lib/${PROJECT_NAME})
+ament_package()

@@ -1,0 +1,873 @@
+{
+  "scope": "Final drive and six final fault recordings; raw files deliberately not versioned.",
+  "files": {
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/commands.csv": {
+      "bytes": 300220,
+      "sha256": "0f54d4f616355ec1168fc84a7cc83f023111f68bc1a9ac12a44464344da0e897"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/feedback.csv": {
+      "bytes": 331761,
+      "sha256": "88aced44fe374c0af0741d7637bcb634bafa136d19d27605b10bdeae258490f3"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/gate_commands.csv": {
+      "bytes": 299578,
+      "sha256": "571e320791edad69abe73d8bcf5bcdf3aca8d781d5ad67aec4ca179992de4b71"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/initial_trajectory.csv": {
+      "bytes": 27350,
+      "sha256": "359420724e2ae27a34d2cdb9f2acc4c225ab47f7bc8a6a40cadbd368435f8e28"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/map/boundaries.csv": {
+      "bytes": 2975206,
+      "sha256": "be5e3395b711bfa27d1a6e1592f28ef4afdc21641bf2e54da48ae5b87ab24861"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/map/centerlines.csv": {
+      "bytes": 4663557,
+      "sha256": "ca3cdc4ffe2fab4862c91219ae72bac4f6e13206f1ee16b9c6aa3e4d01e9ac3f"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/map/publications.json": {
+      "bytes": 237,
+      "sha256": "408ab435bab8cf9959e62ca54bd32bfa238832aee724d86a470993cf12f09e3b"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/map/route.csv": {
+      "bytes": 7370,
+      "sha256": "fd21ca145558ecfc71a50cda8d2d07dadb0dcdca7c8b5bb83e7eeb11e323beb6"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/map/routing.json": {
+      "bytes": 2710,
+      "sha256": "59d99093ae83d89c6674eec0bbe70e041c5f08798cc742a6f3e56b303baead2e"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/odometry.csv": {
+      "bytes": 698180,
+      "sha256": "0bb64307870fd73a97990842611a753226fdad4f144183637b403a262394d943"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/raw_commands.csv": {
+      "bytes": 300379,
+      "sha256": "6612f38b706d105549b4a55bed7de104239416d9a87b14ffd58de0de97dd3dd5"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/2026-10-20-21-30-04-505876-marianlinux-101/launch.log": {
+      "bytes": 4399,
+      "sha256": "710580d134f69c9ed829a513f5401374c1d2509bf2d4a83bcbb3715da5f3aa02"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_116_1792531804699.log": {
+      "bytes": 2734,
+      "sha256": "74db914c7441aa654ac46b39ca4d45b7395e6d96597d66f02eb77fa2ed70e137"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_124_1792531804729.log": {
+      "bytes": 1176,
+      "sha256": "b07adbddf66cfa384a2a4f8612bfc6f61eddef336e3c7a605cf8c0b8867dcb5a"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_156_1792531804739.log": {
+      "bytes": 813,
+      "sha256": "cc272fe66a7c0d0f0e6f9f9aed5881bb2e2b1c556241fdb70d987a16e99d8dbc"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/controller_node_exe_169_1792531804758.log": {
+      "bytes": 2233,
+      "sha256": "75ce34c9d8cfeac44adca0f16e23448ed4f39d9f0aa14be3fd1af20464471a23"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/map_routing_probe_118_1792531804698.log": {
+      "bytes": 395,
+      "sha256": "ba7860845b523a914cfd6fa00aaf3166cab681a3d6af1bed1b88f24240288f2b"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_101_1792531804552.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_164_1792531805090.log": {
+      "bytes": 175,
+      "sha256": "d3847936780f982e761d486bdd56c32bf38329649b7120e9de0bb52a961af1be"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_185_1792531805137.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/route_adapter_120_1792531804704.log": {
+      "bytes": 270,
+      "sha256": "c7919b2053c459f1e4fd5da60ef4fcdaa9fbdd14b703d5f907861be15a9a0351"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/vehicle_cmd_gate_exe_174_1792531804776.log": {
+      "bytes": 3649,
+      "sha256": "4db2cba482a4e437b822594162f6e0f660f8633a1231c72eda10ebab9e58e3a7"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/velocity_smoother_node_149_1792531804738.log": {
+      "bytes": 71,
+      "sha256": "e6e1643004caee0d48573e248d157020b531760aefc8191c1a2a91e73a25425b"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/route.csv": {
+      "bytes": 5805,
+      "sha256": "ec891e9da30975587362c1052f292ba17942233d7fe09e2840d6b59e79d4ca85"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/runtime.log": {
+      "bytes": 22870,
+      "sha256": "ef11104ffc0e4bcc2001a49bb0a1dc11c9bcf7686744f4374019f581ef326e89"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/safety_events.json": {
+      "bytes": 1042514,
+      "sha256": "21c5b1f879de5a2c904fa166bd6ceb9eaa8d37562e21c94abd06e0eaa1e83062"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/selected_route.json": {
+      "bytes": 167,
+      "sha256": "8b2e349ca01bf27c740e798ba91f07ba6f53a5952e9b189c6cdd4ce7dd78232e"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/source_sha256.json": {
+      "bytes": 1909,
+      "sha256": "92c86639f57a4c7ae597f78ebd17f125cddf89ec14d7c91ef21bc7c510caec77"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/steering_feedback.csv": {
+      "bytes": 271232,
+      "sha256": "97d9a8cf3d11dfebcd730ca831c2bbbb9945d605e68e8395f3f986587d68a2fe"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/thresholds.json": {
+      "bytes": 863,
+      "sha256": "d7a6e0333313f74bd86599d3a1e9a9080cb7d92623b545b7da931ecf6de96be2"
+    },
+    "results/safety_validation/release_drive/run_20261020_213004_none_odometry_IDEAL_STEER_ACC_GEARED_gated/validation.json": {
+      "bytes": 4098604,
+      "sha256": "5fec151c762f91021c899845a25c69d11dcebc27f67df29321954c5615af9967"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/commands.csv": {
+      "bytes": 63190,
+      "sha256": "30c26f78c8c63342aae84798441822f9047c1ad3e97e03c48858ec917a486147"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/feedback.csv": {
+      "bytes": 38786,
+      "sha256": "5099e3a0f8af06ed958192223af84033857a0e3d384ebcb77d13a30b7c1a7c79"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/gate_commands.csv": {
+      "bytes": 47114,
+      "sha256": "3361b3de05988eb899f640dee16f73866eeb9a9d659594c439dc82dbaec1854d"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/initial_trajectory.csv": {
+      "bytes": 27350,
+      "sha256": "359420724e2ae27a34d2cdb9f2acc4c225ab47f7bc8a6a40cadbd368435f8e28"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/map/boundaries.csv": {
+      "bytes": 2975206,
+      "sha256": "be5e3395b711bfa27d1a6e1592f28ef4afdc21641bf2e54da48ae5b87ab24861"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/map/centerlines.csv": {
+      "bytes": 4663557,
+      "sha256": "ca3cdc4ffe2fab4862c91219ae72bac4f6e13206f1ee16b9c6aa3e4d01e9ac3f"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/map/publications.json": {
+      "bytes": 237,
+      "sha256": "0e2da521462d2c620404a07fbb7139723b958a992f02223ed4bccd5e4854133f"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/map/route.csv": {
+      "bytes": 7370,
+      "sha256": "fd21ca145558ecfc71a50cda8d2d07dadb0dcdca7c8b5bb83e7eeb11e323beb6"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/map/routing.json": {
+      "bytes": 2709,
+      "sha256": "6e549954858d2befaafcfbae8a4a6f3f8cd4c1438442bfb92550bf7b11d257df"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/odometry.csv": {
+      "bytes": 125922,
+      "sha256": "58e7919830531c58445cf7c14427d202efd16ca3f72d9bc0f66690068b15603e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/raw_commands.csv": {
+      "bytes": 63164,
+      "sha256": "137b12e431acefe97e04b481179c0f9f1bd0b0fd7a93bc13046a18b15b99a50f"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/2026-10-20-21-22-09-928825-marianlinux-102/launch.log": {
+      "bytes": 4233,
+      "sha256": "6207449ba0dde6fe7d0b7158d7dcdcf4a8b7e1ce3c3c26c08bde550bc25e1c94"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_117_1792531330093.log": {
+      "bytes": 2734,
+      "sha256": "8d6abf7b9e3026cb053ff8f50a08ae6042887a7c305b0d577c090e16be9fe547"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_123_1792531330094.log": {
+      "bytes": 1176,
+      "sha256": "3cee9e4f349585a9b790627e33015546f93f81b403436ff62b8eb25fe6af6276"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_127_1792531330106.log": {
+      "bytes": 813,
+      "sha256": "3dd75afcce29f00b77ed82f0d973e26004b49744de77bee5793a8a212aa4488e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/controller_node_exe_163_1792531330140.log": {
+      "bytes": 275,
+      "sha256": "dd980e20367c484db75b7d6de12dad270488d039a93b1d1318d5e4a051e55b5e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/map_routing_probe_119_1792531330114.log": {
+      "bytes": 395,
+      "sha256": "6d7bd9f5022957a468aa1ba1ae273a9716756e2d4049393a2faab2b49ddd75c0"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_102_1792531329970.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_151_1792531330385.log": {
+      "bytes": 266,
+      "sha256": "9923f4d531889f1f3554eb77a94b2e2c5d7ffd1310e364ab8d256ad4ece84128"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_196_1792531330421.log": {
+      "bytes": 152,
+      "sha256": "5976a89d235ca0d49d657db7317cab7c3b6741315561dcd1ecd322ea2264e9ab"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/route_adapter_121_1792531330107.log": {
+      "bytes": 270,
+      "sha256": "e9cf76e8e436dc6e712c465d78ee3b9f81c9e92851bc26637043de2bc4c4714b"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/vehicle_cmd_gate_exe_171_1792531330122.log": {
+      "bytes": 1537,
+      "sha256": "e02835bbdfe365ea742896caa50847fed30c091ada824089065d037207142b96"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/velocity_smoother_node_125_1792531330095.log": {
+      "bytes": 71,
+      "sha256": "298ccdf9f3560a6a817fd208f130cacb1b93cdeb4ff7ec43aa85e60c97d9eed4"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/route.csv": {
+      "bytes": 5805,
+      "sha256": "ec891e9da30975587362c1052f292ba17942233d7fe09e2840d6b59e79d4ca85"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/runtime.log": {
+      "bytes": 18455,
+      "sha256": "b8203c80b0c2402b7a9dc12c33f43a05683108394432b398f0f02f2e19c0bdf0"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/safety_events.json": {
+      "bytes": 270341,
+      "sha256": "4dccd5013c971256802964862250ca2aaa819caa6ccd3f31d6be6f01cf78fa77"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/selected_route.json": {
+      "bytes": 167,
+      "sha256": "8b2e349ca01bf27c740e798ba91f07ba6f53a5952e9b189c6cdd4ce7dd78232e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/source_sha256.json": {
+      "bytes": 1909,
+      "sha256": "75bb83b35771264c2158b59094393a85c411a3fa26285a1473b55e5ebeff7429"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/steering_feedback.csv": {
+      "bytes": 56679,
+      "sha256": "2a7614ee24c124a4ddebac4215892f400dcbf3b1d807aec49a4d33e457e35418"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/thresholds.json": {
+      "bytes": 863,
+      "sha256": "d7a6e0333313f74bd86599d3a1e9a9080cb7d92623b545b7da931ecf6de96be2"
+    },
+    "results/safety_validation/release_faults/run_20261020_212209_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/validation.json": {
+      "bytes": 948228,
+      "sha256": "da24b6e4c67ec5623f13081067c92078485869883ad945a83d2ed33dc71ac760"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/commands.csv": {
+      "bytes": 63215,
+      "sha256": "d8dfd80e0d7ddd96ab040f419e99f9213718c67bce2bd0378216ca3da5277a91"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/feedback.csv": {
+      "bytes": 70001,
+      "sha256": "53a8832e13573a85ca7514ab7a31a65beea77e9616c3bfc18e09a8777aede711"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/gate_commands.csv": {
+      "bytes": 47401,
+      "sha256": "27b4d6e6b162cb8230dc386e4bcd173717d094b7f712dc30cdfed430b46b8c29"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/initial_trajectory.csv": {
+      "bytes": 27350,
+      "sha256": "359420724e2ae27a34d2cdb9f2acc4c225ab47f7bc8a6a40cadbd368435f8e28"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/map/boundaries.csv": {
+      "bytes": 2975206,
+      "sha256": "be5e3395b711bfa27d1a6e1592f28ef4afdc21641bf2e54da48ae5b87ab24861"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/map/centerlines.csv": {
+      "bytes": 4663557,
+      "sha256": "ca3cdc4ffe2fab4862c91219ae72bac4f6e13206f1ee16b9c6aa3e4d01e9ac3f"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/map/publications.json": {
+      "bytes": 237,
+      "sha256": "f4bc70ee44db1a4ae9e6b60f8019e18111dd2b2377b7f1188fd00383b24a2ef0"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/map/route.csv": {
+      "bytes": 7370,
+      "sha256": "fd21ca145558ecfc71a50cda8d2d07dadb0dcdca7c8b5bb83e7eeb11e323beb6"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/map/routing.json": {
+      "bytes": 2710,
+      "sha256": "c73e5544772b4f2415dad2da3ecad93c8a26788926d30ad9c905b42e8495ec2e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/odometry.csv": {
+      "bytes": 127636,
+      "sha256": "c75bfee3c013cc8833d5285291745d250117803f711bcede6ddcf12478c4440e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/raw_commands.csv": {
+      "bytes": 63320,
+      "sha256": "86eaa0dbfa4c2074f19c4a80f0c7be0f5f6229aaa2369f92591ebbbd8412320c"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/2026-10-20-21-22-44-655953-marianlinux-299/launch.log": {
+      "bytes": 4396,
+      "sha256": "196a4a21d8a2845ac59f666992ae8e217e9a2c0108cdcdcd61bcd119e1f7cc13"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_314_1792531364829.log": {
+      "bytes": 2734,
+      "sha256": "81a1251bc9ab089e8446acb659d12ea6bcf3158299e2d0fd6c6066bca65a0394"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_320_1792531364830.log": {
+      "bytes": 1176,
+      "sha256": "c1039fcee830dca0c2c58d2630dacb22eddddced7081ed1d3930f5985c0a6fcb"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_324_1792531364843.log": {
+      "bytes": 813,
+      "sha256": "e82e5e9d06f41b07c290d0b3682337339f3f3422c9eda8679c86409e055f86e9"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/controller_node_exe_366_1792531364852.log": {
+      "bytes": 275,
+      "sha256": "1e2cfe132fca3cd15228ce723c02f92c8c803a730927d5d5b93b312e710122b8"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/map_routing_probe_316_1792531364836.log": {
+      "bytes": 395,
+      "sha256": "3d48ec9fbca18850e8b30741e6eae1f5ba376093612db8c1c919379be5e5a303"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_299_1792531364700.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_354_1792531365188.log": {
+      "bytes": 268,
+      "sha256": "559da6e5bb6d93bf0c8333c9647c0c0c8d3577449407f8d65ab64c5f914ba5d1"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_393_1792531365116.log": {
+      "bytes": 152,
+      "sha256": "e782133a3fab57cf2acee5a408c74de6b4217a895391d6b1db642d6ab56a9494"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/route_adapter_318_1792531364837.log": {
+      "bytes": 270,
+      "sha256": "28206678c595b28e60496e74310bd7544b850a020761a182164d4716dac68827"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/vehicle_cmd_gate_exe_380_1792531364876.log": {
+      "bytes": 1747,
+      "sha256": "ebf946230ca0725678776f2c4f1c289345f207388e917ca7a1633d9ef79d5f0e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/ros_logs/velocity_smoother_node_322_1792531364830.log": {
+      "bytes": 71,
+      "sha256": "f649bd8e390f88ff6eaed90ba23e84ee5102759c8fc2e4b19c985ec40d2d9ccf"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/route.csv": {
+      "bytes": 5805,
+      "sha256": "ec891e9da30975587362c1052f292ba17942233d7fe09e2840d6b59e79d4ca85"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/runtime.log": {
+      "bytes": 18836,
+      "sha256": "7cdc056ed72e61c713258a1dd23ecc1e6c87fc194f54c09d37166b47c7e48874"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/safety_events.json": {
+      "bytes": 271173,
+      "sha256": "09b07b12212b92927f2dac63c3457cfdfd48ccec1242e8ab23a6497bcef68715"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/selected_route.json": {
+      "bytes": 167,
+      "sha256": "8b2e349ca01bf27c740e798ba91f07ba6f53a5952e9b189c6cdd4ce7dd78232e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/source_sha256.json": {
+      "bytes": 1909,
+      "sha256": "75bb83b35771264c2158b59094393a85c411a3fa26285a1473b55e5ebeff7429"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/steering_feedback.csv": {
+      "bytes": 57030,
+      "sha256": "0e483eeb5de07a5a5c14a8c2653c30fbaeff2cb52ac8cb853b0e8b7741db125a"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/thresholds.json": {
+      "bytes": 863,
+      "sha256": "d7a6e0333313f74bd86599d3a1e9a9080cb7d92623b545b7da931ecf6de96be2"
+    },
+    "results/safety_validation/release_faults/run_20261020_212244_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/validation.json": {
+      "bytes": 951545,
+      "sha256": "1e5c1a0293a11071a4be01872b9b3f39fc83b0911f6985365428fc96fabca65e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/commands.csv": {
+      "bytes": 61950,
+      "sha256": "e7a2b8224fee3f3986a56401bbb7dc8e76a7b539e542d0800ffc3e113b14c40e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/feedback.csv": {
+      "bytes": 68344,
+      "sha256": "1b77bad26b7243b9af2bf993bdfcc21b413fdfd8ce7a9cf963fe8ddaa7d49d07"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/gate_commands.csv": {
+      "bytes": 47025,
+      "sha256": "5691fda921f1a6df4c956735325f233ddfa15ffc147f381bd7a1847118f742be"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/initial_trajectory.csv": {
+      "bytes": 27350,
+      "sha256": "359420724e2ae27a34d2cdb9f2acc4c225ab47f7bc8a6a40cadbd368435f8e28"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/map/boundaries.csv": {
+      "bytes": 2975206,
+      "sha256": "be5e3395b711bfa27d1a6e1592f28ef4afdc21641bf2e54da48ae5b87ab24861"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/map/centerlines.csv": {
+      "bytes": 4663557,
+      "sha256": "ca3cdc4ffe2fab4862c91219ae72bac4f6e13206f1ee16b9c6aa3e4d01e9ac3f"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/map/publications.json": {
+      "bytes": 237,
+      "sha256": "209c5deda31a28a21c62329ce24d8e39c43c10a43efd1d0b7422898c2cae0a26"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/map/route.csv": {
+      "bytes": 7370,
+      "sha256": "fd21ca145558ecfc71a50cda8d2d07dadb0dcdca7c8b5bb83e7eeb11e323beb6"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/map/routing.json": {
+      "bytes": 2710,
+      "sha256": "f6b7ac5827fb41c0b4a0cb005de1f77f2ec9553ad3837a6165bd3c5d64baacf1"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/odometry.csv": {
+      "bytes": 125147,
+      "sha256": "76742e5af895c1c3cfa07277de6353cb4a93908adadcb05b0034e74c22033218"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/raw_commands.csv": {
+      "bytes": 61960,
+      "sha256": "55981896fa1e402f71b2117d362f74872ae3473cd023e5a9d068e00426505c71"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/2026-10-20-21-23-25-250465-marianlinux-496/launch.log": {
+      "bytes": 4400,
+      "sha256": "f6b14cf70e46df862da44aefa93713608a02ce0878bd38cc6cf5d0a6e0a94ae8"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_511_1792531405420.log": {
+      "bytes": 2734,
+      "sha256": "7bb28f7096183f9cc5f76e7a846e0e1739daf1ca33a920b481eb1a26b1d1c67c"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_517_1792531405421.log": {
+      "bytes": 1176,
+      "sha256": "b35e1935ecf03272bc981a7ecf0feb393c4becc0ac5fc60eeb4efc200461ff92"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_535_1792531405437.log": {
+      "bytes": 813,
+      "sha256": "63bb78925ff17eb7f412e4f4e532be577aa2fdea6933ab4e92cc4bd311c51d06"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/controller_node_exe_577_1792531405455.log": {
+      "bytes": 275,
+      "sha256": "5b24314a3ec8d8cbf7396206c6390c7ddb17515d41094dd6c45cc541be0af46c"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/map_routing_probe_513_1792531405433.log": {
+      "bytes": 395,
+      "sha256": "0bd6903a6d3ae614fbe601c2cc4fab782871ed236e1ae8fce3061858029f076d"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_496_1792531405295.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_545_1792531405750.log": {
+      "bytes": 266,
+      "sha256": "00960c046520b87abb6079a95127bee03624e23d062bce8a3c4c35d36686b272"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_590_1792531405819.log": {
+      "bytes": 152,
+      "sha256": "212dbac3ec97a2042b926b38f3131fbd12494d842f8ebb385d14bba5b352b701"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/route_adapter_515_1792531405433.log": {
+      "bytes": 270,
+      "sha256": "cc8a0ab5d6efc543d59d4807e148eae6f60c519558b6ba68b3438f0899862e9e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/vehicle_cmd_gate_exe_580_1792531405483.log": {
+      "bytes": 1747,
+      "sha256": "26ffa8490021e912d9940024445ddf79819dcdbbe1948c8331e431adaead0f12"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/velocity_smoother_node_519_1792531405422.log": {
+      "bytes": 71,
+      "sha256": "50e716b2f3dcf47d1025790e0997b85385754cba15c7f1db7aa6dbddf3d2116e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/route.csv": {
+      "bytes": 5805,
+      "sha256": "ec891e9da30975587362c1052f292ba17942233d7fe09e2840d6b59e79d4ca85"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/runtime.log": {
+      "bytes": 18838,
+      "sha256": "2574cc8a838e092a5f04904200608601996df907f51be89db66f5124a1db8121"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/safety_events.json": {
+      "bytes": 267517,
+      "sha256": "d43480f6d93b38483de45136a2ab96b660e013e044bc8963e30b58b458b39124"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/selected_route.json": {
+      "bytes": 167,
+      "sha256": "8b2e349ca01bf27c740e798ba91f07ba6f53a5952e9b189c6cdd4ce7dd78232e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/source_sha256.json": {
+      "bytes": 1909,
+      "sha256": "75bb83b35771264c2158b59094393a85c411a3fa26285a1473b55e5ebeff7429"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/steering_feedback.csv": {
+      "bytes": 31916,
+      "sha256": "58c71846209e03e3003436030f85426f352335c50331e71b0f43dae01bedc4c9"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/thresholds.json": {
+      "bytes": 863,
+      "sha256": "d7a6e0333313f74bd86599d3a1e9a9080cb7d92623b545b7da931ecf6de96be2"
+    },
+    "results/safety_validation/release_faults/run_20261020_212324_drop_steering_IDEAL_STEER_ACC_GEARED_gated/validation.json": {
+      "bytes": 938113,
+      "sha256": "c12a4c823e799446c2ff65e46236b740216bca280a9c3ac2685827e9ecfb0dff"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/commands.csv": {
+      "bytes": 62673,
+      "sha256": "b1f38fbe212a235aa224cfd18f7e58f2b6a4587a7a4090ad5614570aaf95f149"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/feedback.csv": {
+      "bytes": 68862,
+      "sha256": "8525fd265922b8ee19f51dba4d4c4dbc3b36fa66f4c33ee2f90530b60b8e0406"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/gate_commands.csv": {
+      "bytes": 47486,
+      "sha256": "618748ab3c9f8f2d19b156476e479b262cf009f2585cd337e7dec21629e9e9fa"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/initial_trajectory.csv": {
+      "bytes": 27350,
+      "sha256": "359420724e2ae27a34d2cdb9f2acc4c225ab47f7bc8a6a40cadbd368435f8e28"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/map/boundaries.csv": {
+      "bytes": 2975206,
+      "sha256": "be5e3395b711bfa27d1a6e1592f28ef4afdc21641bf2e54da48ae5b87ab24861"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/map/centerlines.csv": {
+      "bytes": 4663557,
+      "sha256": "ca3cdc4ffe2fab4862c91219ae72bac4f6e13206f1ee16b9c6aa3e4d01e9ac3f"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/map/publications.json": {
+      "bytes": 237,
+      "sha256": "d7fc9a3fb21f7c8d35b63d109c3c9f83abf4863d50956030e817bbe71ebe2533"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/map/route.csv": {
+      "bytes": 7370,
+      "sha256": "fd21ca145558ecfc71a50cda8d2d07dadb0dcdca7c8b5bb83e7eeb11e323beb6"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/map/routing.json": {
+      "bytes": 2710,
+      "sha256": "34aaa6dabc035d43890c4753f6f9ae5930705ab3cc0b120fdf023bb5ec53731a"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/odometry.csv": {
+      "bytes": 125203,
+      "sha256": "b1313c1c61ed07c247c52f569c874d5706f87176f22ac87ba4931dabefb424e1"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/raw_commands.csv": {
+      "bytes": 62666,
+      "sha256": "aba6e5162a26b2ccad6b76dc446d4dbca968b5dbf945e693d9635a8855eb1270"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/2026-10-20-21-24-04-863399-marianlinux-693/launch.log": {
+      "bytes": 4235,
+      "sha256": "ca7ce9d190ea596b9c9e1244dee7e1f74857c3302c4b399d6731fdc11e589964"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_708_1792531445031.log": {
+      "bytes": 2734,
+      "sha256": "b4f83e1553efac7a3787cdad1de4845e04774f11c66a790076e2b3c1218b0375"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_714_1792531445032.log": {
+      "bytes": 1176,
+      "sha256": "cd12eb5055f17e3769aa8b654bc5b5217ae27bfc18df8b05dcbdb4f0ca13c6a0"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_718_1792531445039.log": {
+      "bytes": 813,
+      "sha256": "62a0ee274e469a5cb1fb827ea9e49e91f9a43ec2b9c39a2bff9b6b7dd77af0ed"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/controller_node_exe_762_1792531445095.log": {
+      "bytes": 275,
+      "sha256": "a786816677b743afb85a98b0018bb28346facbd883b65ba0a3f52457ec7cc601"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/map_routing_probe_710_1792531445038.log": {
+      "bytes": 395,
+      "sha256": "ed54d9e211a620b827c1f1668819e4d38f1ef2da2bee91cbc934a814dfa1dd9e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_693_1792531444904.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_742_1792531445313.log": {
+      "bytes": 268,
+      "sha256": "16e50a2c1381e712b08d2f361b8d9dc8b034ec2bcaab6bb8f4a99a0a3f29459d"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_770_1792531445321.log": {
+      "bytes": 152,
+      "sha256": "9345a1b449c06b43c65aa68b39dad04ee0ed65fc60e3486263d29c9c3251fbf1"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/route_adapter_712_1792531445038.log": {
+      "bytes": 270,
+      "sha256": "1aae9c962a422f05080494e0d966bbfea6fee51eb514bcbc5e967905a661d4b7"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/vehicle_cmd_gate_exe_768_1792531445054.log": {
+      "bytes": 1749,
+      "sha256": "11bbf9c571372ee88727f83a41bae41af45d616397aca0488cc3a36b08b94c03"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/ros_logs/velocity_smoother_node_716_1792531445033.log": {
+      "bytes": 71,
+      "sha256": "63b939fc96e74beee80ac8e700757ca8306c438d3f513100ff85a11545da66f2"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/route.csv": {
+      "bytes": 5805,
+      "sha256": "ec891e9da30975587362c1052f292ba17942233d7fe09e2840d6b59e79d4ca85"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/runtime.log": {
+      "bytes": 18696,
+      "sha256": "d06c55216beb3408c7f15e4b3179da847bd4c9cf7eb712bb0503bfcf5d187a0d"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/safety_events.json": {
+      "bytes": 269789,
+      "sha256": "cfbdd406e86fab8e931af36bd12646496e635cb23d783f8b29411bbf41d6809c"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/selected_route.json": {
+      "bytes": 167,
+      "sha256": "8b2e349ca01bf27c740e798ba91f07ba6f53a5952e9b189c6cdd4ce7dd78232e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/source_sha256.json": {
+      "bytes": 1909,
+      "sha256": "75bb83b35771264c2158b59094393a85c411a3fa26285a1473b55e5ebeff7429"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/steering_feedback.csv": {
+      "bytes": 57469,
+      "sha256": "979d1ac324acc1ac03101c2d000d4f7a25155625b2f68de9124feef49ea244b5"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/thresholds.json": {
+      "bytes": 863,
+      "sha256": "d7a6e0333313f74bd86599d3a1e9a9080cb7d92623b545b7da931ecf6de96be2"
+    },
+    "results/safety_validation/release_faults/run_20261020_212404_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/validation.json": {
+      "bytes": 943856,
+      "sha256": "9a138a0749c6f502b0330bd733250762df98440f0bad70f320bde1ae84e2ecfa"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/commands.csv": {
+      "bytes": 35351,
+      "sha256": "a4e6ce54436ffaee83d14eab4e707714239643fc5dcbc07c0399d059d47e1c77"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/feedback.csv": {
+      "bytes": 68671,
+      "sha256": "c74e1d96f9d4e356e197581f3ff49425db6af6796b649c5ec38f6abf33f4b8c8"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/gate_commands.csv": {
+      "bytes": 44957,
+      "sha256": "9b2913669ab8a9039b2b085e426a2bf52dac0a737953c09f49d3e491be1f1f19"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/initial_trajectory.csv": {
+      "bytes": 27350,
+      "sha256": "359420724e2ae27a34d2cdb9f2acc4c225ab47f7bc8a6a40cadbd368435f8e28"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/map/boundaries.csv": {
+      "bytes": 2975206,
+      "sha256": "be5e3395b711bfa27d1a6e1592f28ef4afdc21641bf2e54da48ae5b87ab24861"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/map/centerlines.csv": {
+      "bytes": 4663557,
+      "sha256": "ca3cdc4ffe2fab4862c91219ae72bac4f6e13206f1ee16b9c6aa3e4d01e9ac3f"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/map/publications.json": {
+      "bytes": 237,
+      "sha256": "0add1c7635f43ea349095ff4cbd879e98d376f2254504ddb6f9a5bdbca82654a"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/map/route.csv": {
+      "bytes": 7370,
+      "sha256": "fd21ca145558ecfc71a50cda8d2d07dadb0dcdca7c8b5bb83e7eeb11e323beb6"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/map/routing.json": {
+      "bytes": 2710,
+      "sha256": "968d38e2dbed6948093ab8eccd2016f54e5f4d9814719428c01d240a113909a7"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/odometry.csv": {
+      "bytes": 126063,
+      "sha256": "332ac6c8b68edfb52e8ba1a79ebc8fb5b9b12ea709e82842f3db9bfd958ecf59"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/raw_commands.csv": {
+      "bytes": 62038,
+      "sha256": "8acb09c4831d6db52bc3ee3585ea8200ccca61f12e4afdbc9e158e0f14afd4b4"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/2026-10-20-21-24-39-701895-marianlinux-890/launch.log": {
+      "bytes": 4232,
+      "sha256": "37e8680a643b53ffe7b5a24903485289e0a3e67ebc1bd2e3ac4d6a7849916ec7"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_905_1792531479868.log": {
+      "bytes": 2734,
+      "sha256": "880be8f6f912671ec26a203f25bd36bf5a3f8345b15914023ce56a6c760be20f"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_911_1792531479869.log": {
+      "bytes": 1176,
+      "sha256": "bc60c9506965c5e6da810f96ed165a59c493a355ca0ee3ee60ff57cef1be39a9"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_915_1792531479882.log": {
+      "bytes": 813,
+      "sha256": "dab17f2fe1ed1cc8101570cf2e494f74e969388723e0b649864a883a5b976ff1"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/controller_node_exe_966_1792531479908.log": {
+      "bytes": 275,
+      "sha256": "ce64c94c5c22d7e315c6edc332483fab64491879d1fa84d7ebec57823fc2240d"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/map_routing_probe_907_1792531479880.log": {
+      "bytes": 395,
+      "sha256": "2e15bb91788a445ca6d325c636de7a63688dc2cf743cedd650a239c9d54edbef"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_890_1792531479744.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_950_1792531480225.log": {
+      "bytes": 262,
+      "sha256": "07e5e4d4bed706aefa8679c10b7ea3924f7fd9619dc5bb46d588137f758d06fd"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_982_1792531480186.log": {
+      "bytes": 151,
+      "sha256": "043e4dd1b49602c274df0bc79b0eee1f4be29a0418299b32bdf7b5e4af1a7bd5"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/route_adapter_909_1792531479877.log": {
+      "bytes": 270,
+      "sha256": "3e6b5f0e49699ce9fc23742ece6da6f2b20433b58ad459331318e885a884975a"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/vehicle_cmd_gate_exe_980_1792531479905.log": {
+      "bytes": 1748,
+      "sha256": "88ec18c405cd3953490ade2db229b00804df8b45ed4a05e5ccff0e0782d9aa13"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/velocity_smoother_node_913_1792531479869.log": {
+      "bytes": 71,
+      "sha256": "d3b2c150b6303fa70a3f9c77b1314d6b713ea3c3bfa0cd209c7bf34113d98102"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/route.csv": {
+      "bytes": 5805,
+      "sha256": "ec891e9da30975587362c1052f292ba17942233d7fe09e2840d6b59e79d4ca85"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/runtime.log": {
+      "bytes": 18685,
+      "sha256": "da88de14feca5b62f4749d4629e1ca46847711cc3824e68175fa83d4ca6f05d4"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/safety_events.json": {
+      "bytes": 269224,
+      "sha256": "ae4e00af9cc9d8f302ce00c800f9fc5fd6ee826c7c183bc41eba09c23ea2d990"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/selected_route.json": {
+      "bytes": 167,
+      "sha256": "8b2e349ca01bf27c740e798ba91f07ba6f53a5952e9b189c6cdd4ce7dd78232e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/source_sha256.json": {
+      "bytes": 1909,
+      "sha256": "75bb83b35771264c2158b59094393a85c411a3fa26285a1473b55e5ebeff7429"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/steering_feedback.csv": {
+      "bytes": 56529,
+      "sha256": "af5232ef84650087bb63b77e0dc042e20a4a25355c01b7214a1d9784338fda42"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/thresholds.json": {
+      "bytes": 863,
+      "sha256": "d7a6e0333313f74bd86599d3a1e9a9080cb7d92623b545b7da931ecf6de96be2"
+    },
+    "results/safety_validation/release_faults/run_20261020_212439_drop_command_IDEAL_STEER_ACC_GEARED_gated/validation.json": {
+      "bytes": 941720,
+      "sha256": "43b5e3864d8cede6576a71d317543a1019026d8fee90330581b97b084121b1d3"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/commands.csv": {
+      "bytes": 61860,
+      "sha256": "feaf78630e9572ee1b2996f07e5943ce6635f46f16cd6a048a14ba58e6256c70"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/feedback.csv": {
+      "bytes": 68208,
+      "sha256": "60a2dcb2bc3aeffbf75bb65120a25ecc2dbc34826d73553be37f539587c6fd45"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/gate_commands.csv": {
+      "bytes": 46496,
+      "sha256": "de6195a779729bc429b54a0ca938d85c3e56834c5f13b6fb57c12b291aea989d"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/initial_trajectory.csv": {
+      "bytes": 27350,
+      "sha256": "359420724e2ae27a34d2cdb9f2acc4c225ab47f7bc8a6a40cadbd368435f8e28"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/map/boundaries.csv": {
+      "bytes": 2975206,
+      "sha256": "be5e3395b711bfa27d1a6e1592f28ef4afdc21641bf2e54da48ae5b87ab24861"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/map/centerlines.csv": {
+      "bytes": 4663557,
+      "sha256": "ca3cdc4ffe2fab4862c91219ae72bac4f6e13206f1ee16b9c6aa3e4d01e9ac3f"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/map/publications.json": {
+      "bytes": 237,
+      "sha256": "7935243083dfc228ab5539b62da22e7e5e9b4f3c21cf5fd8a2df10a6c789c748"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/map/route.csv": {
+      "bytes": 7370,
+      "sha256": "fd21ca145558ecfc71a50cda8d2d07dadb0dcdca7c8b5bb83e7eeb11e323beb6"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/map/routing.json": {
+      "bytes": 2709,
+      "sha256": "c12c507b18ca8ce18e9ce87c1741f1f275b71ddbe72fdec0a525c1785f525fa1"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/odometry.csv": {
+      "bytes": 125283,
+      "sha256": "60841bfacad098da95fbdea136a7712d9d952e8762ec03962b546f2e358637d8"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/raw_commands.csv": {
+      "bytes": 61843,
+      "sha256": "d167e11946cfa7ed2d33d06a9d7938cfedcee980f3a1d1b4a59ca3e232eacb49"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/2026-10-20-21-25-14-560518-marianlinux-1087/launch.log": {
+      "bytes": 4255,
+      "sha256": "f439dbdf31f343c3f9b6a21dfb99700841cfc2890bb441f9db1755f88a4f0fc3"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_1102_1792531514729.log": {
+      "bytes": 2734,
+      "sha256": "c0c61084a2c02029afce6e733e1b40d04397a6e60ce710e82bb6db645b8754fa"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_1108_1792531514737.log": {
+      "bytes": 1176,
+      "sha256": "fc4f4eb55fd2f513cf92bb9e8197111943156675a877c9f7c8d4c26bee1f6e89"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/component_container_1112_1792531514741.log": {
+      "bytes": 813,
+      "sha256": "898d77514dacc7793b1bd4bba1291cf713320574278c75d5c4d32d1222f196a0"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/controller_node_exe_1143_1792531514778.log": {
+      "bytes": 275,
+      "sha256": "a23c2fceb26135d5f68ba4820863c4f5cfeb60d27229cfa70bb14e8fd26b0526"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/map_routing_probe_1104_1792531514743.log": {
+      "bytes": 395,
+      "sha256": "4f103f90fe4738a8cb5e84ec0e0fc444f3ca3e88007ef9023e87b6d0d173e622"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_1087_1792531514601.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_1126_1792531515049.log": {
+      "bytes": 264,
+      "sha256": "0c783b4f0387ad602a3af1bed4a9bbe04ed4bdcb30db9e2449702c5a601a89d0"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/python3_1180_1792531515096.log": {
+      "bytes": 151,
+      "sha256": "b78960e542c510733c5c2cb1f2f2ae4aa976c52fff4f6010061eb37c84be684b"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/route_adapter_1106_1792531514742.log": {
+      "bytes": 270,
+      "sha256": "31f56ee95fe1c127dc12aaee7c10eecfb9fd5030422f61d05425f5b8f1264be5"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/vehicle_cmd_gate_exe_1178_1792531514769.log": {
+      "bytes": 1537,
+      "sha256": "608a155d8c65da42ea0692670ec193496eaa29b60620e3a0830cfca6a9622d16"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/ros_logs/velocity_smoother_node_1110_1792531514731.log": {
+      "bytes": 71,
+      "sha256": "ed0fe16ebc775ce444935cfc6d0b2db3e3fbfe71110e81bd1252e6b26c53a652"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/route.csv": {
+      "bytes": 5805,
+      "sha256": "ec891e9da30975587362c1052f292ba17942233d7fe09e2840d6b59e79d4ca85"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/runtime.log": {
+      "bytes": 18474,
+      "sha256": "e1fe3b9a43f9e95907fa905d69bbd1a9aae8eebcf7049b8caba821b6e9498b11"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/safety_events.json": {
+      "bytes": 266933,
+      "sha256": "3c3718ec73563d9ff6887221c750f1119f54dd957540fd4e580cbc81754cbac0"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/selected_route.json": {
+      "bytes": 167,
+      "sha256": "8b2e349ca01bf27c740e798ba91f07ba6f53a5952e9b189c6cdd4ce7dd78232e"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/source_sha256.json": {
+      "bytes": 1909,
+      "sha256": "75bb83b35771264c2158b59094393a85c411a3fa26285a1473b55e5ebeff7429"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/steering_feedback.csv": {
+      "bytes": 56185,
+      "sha256": "cc0ea289a147cac75f053a6aab3e0349e83f689e1b57ff316cae05ca2c7948bb"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/thresholds.json": {
+      "bytes": 863,
+      "sha256": "d7a6e0333313f74bd86599d3a1e9a9080cb7d92623b545b7da931ecf6de96be2"
+    },
+    "results/safety_validation/release_faults/run_20261020_212514_freeze_command_IDEAL_STEER_ACC_GEARED_gated/validation.json": {
+      "bytes": 937519,
+      "sha256": "7bcdcf2e5453d81eb1deeba4583075d389793925a7475c64a113bb0071e0d982"
+    }
+  }
+}

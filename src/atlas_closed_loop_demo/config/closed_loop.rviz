@@ -1,0 +1,93 @@
+Panels:
+- Class: rviz_common/Displays
+  Name: Displays
+Visualization Manager:
+  Displays:
+  - Class: rviz_default_plugins/Grid
+    Name: Map grid
+    Enabled: true
+    Cell Size: 5
+    Plane Cell Count: 60
+    Reference Frame: map
+  - Class: rviz_default_plugins/PointCloud2
+    Name: Original PCD
+    Enabled: true
+    Topic:
+      Value: /atlas_map_demo/pointcloud_map
+      Durability Policy: Transient Local
+      Reliability Policy: Reliable
+    Position Transformer: XYZ
+    Color Transformer: AxisColor
+    Axis: Z
+    Style: Points
+    Size (Pixels): 2
+  - Class: rviz_default_plugins/MarkerArray
+    Name: Lanelet2 roads
+    Enabled: true
+    Topic:
+      Value: /atlas_map_demo/road_markers
+      Durability Policy: Transient Local
+      Reliability Policy: Reliable
+  - Class: rviz_default_plugins/Path
+    Name: Chosen route
+    Enabled: true
+    Topic:
+      Value: /atlas_closed_loop/route_path
+      Durability Policy: Transient Local
+      Reliability Policy: Reliable
+    Color: 255; 180; 0
+    Line Width: 0.3
+  - Class: rviz_default_plugins/Path
+    Name: Smoothed Autoware trajectory
+    Enabled: true
+    Topic:
+      Value: /atlas_closed_loop/trajectory_visualization
+      Durability Policy: Volatile
+      Reliability Policy: Reliable
+    Color: 255; 20; 150
+    Line Width: 0.6
+  - Class: rviz_default_plugins/MarkerArray
+    Name: Route start and goal
+    Enabled: true
+    Topic:
+      Value: /atlas_closed_loop/markers
+      Durability Policy: Volatile
+      Reliability Policy: Reliable
+  - Class: rviz_default_plugins/TF
+    Name: Live vehicle axes
+    Enabled: true
+    Show Axes: true
+    Show Names: true
+  - Class: rviz_default_plugins/Path
+    Name: Actual driven path
+    Enabled: true
+    Topic:
+      Value: /atlas_closed_loop/driven_path
+      Durability Policy: Volatile
+      Reliability Policy: Reliable
+    Color: 255; 20; 150
+    Line Width: 0.6
+  - Class: rviz_default_plugins/MarkerArray
+    Name: Live simulated Atlas
+    Enabled: true
+    Topic:
+      Value: /atlas_closed_loop/vehicle_markers
+      Durability Policy: Volatile
+      Reliability Policy: Reliable
+  Enabled: true
+  Global Options:
+    Fixed Frame: map
+    Background Color: 35; 35; 35
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 150
+      Focal Point:
+        X: 75
+        Y: 65
+        Z: 0
+      Pitch: 1.3
+      Yaw: 0.0
+Window Geometry:
+  Width: 1200
+  Height: 800

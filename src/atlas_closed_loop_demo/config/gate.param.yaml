@@ -1,0 +1,69 @@
+# Derived test-only parameter copy; upstream is unchanged.
+/**:
+  ros__parameters:
+    update_rate: 30.0
+    system_emergency_heartbeat_timeout: 0.5
+    use_emergency_handling: false
+    check_external_emergency_heartbeat: true
+    enable_cmd_limit_filter: true
+    filter_activated_count_threshold: 5
+    filter_activated_velocity_threshold: 1.0
+    external_emergency_stop_heartbeat_timeout: 0.3
+    stop_hold_acceleration: -0.2
+    emergency_acceleration: -0.5
+    moderate_stop_service_acceleration: -0.5
+    stop_check_duration: 0.1
+    nominal:
+      vel_lim: 1.0
+      reference_speed_points:
+      - 0.0
+      - 1.0
+      steer_cmd_lim:
+      - 0.45
+      - 0.45
+      steer_rate_lim_for_steer_cmd:
+      - 1.0
+      - 1.0
+      lon_acc_lim_for_lon_vel:
+      - 0.5
+      - 0.5
+      lon_jerk_lim_for_lon_acc:
+      - 0.3
+      - 0.3
+      lat_acc_lim_for_steer_cmd:
+      - 1.0
+      - 1.0
+      lat_jerk_lim_for_steer_cmd:
+      - 1.0
+      - 1.0
+      lat_jerk_lim_for_steer_rate: 10.0
+      steer_cmd_diff_lim_from_current_steer:
+      - 1.0
+      - 1.0
+    on_transition:
+      vel_lim: 1.0
+      reference_speed_points:
+      - 0.0
+      - 1.0
+      steer_cmd_lim:
+      - 0.45
+      - 0.45
+      steer_rate_lim_for_steer_cmd:
+      - 1.0
+      - 1.0
+      lon_acc_lim_for_lon_vel:
+      - 0.5
+      - 0.5
+      lon_jerk_lim_for_lon_acc:
+      - 0.3
+      - 0.3
+      lat_acc_lim_for_steer_cmd:
+      - 1.0
+      - 1.0
+      lat_jerk_lim_for_steer_cmd:
+      - 1.0
+      - 1.0
+      lat_jerk_lim_for_steer_rate: 10.0
+      steer_cmd_diff_lim_from_current_steer:
+      - 1.0
+      - 1.0
