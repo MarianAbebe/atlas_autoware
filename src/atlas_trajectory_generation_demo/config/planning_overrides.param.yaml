@@ -1,0 +1,43 @@
+# Explicit experimental UGV limits; do not modify map speed-limit attributes.
+/**:
+  ros__parameters:
+    ego_nearest_dist_threshold: 3.0
+    ego_nearest_yaw_threshold: 1.57
+    path_length:
+      backward: 0.5
+      forward: 100.0
+    max_velocity: 1.0
+    max_vel: 1.0
+    normal:
+      min_acc: -0.5
+      max_acc: 0.5
+      min_jerk: -0.3
+      max_jerk: 0.3
+    limit:
+      min_acc: -0.5
+      max_acc: 0.5
+      min_jerk: -0.3
+      max_jerk: 0.3
+    forward:
+      max_acc: 0.5
+      min_acc: -0.5
+      max_jerk: 0.3
+      min_jerk: -0.3
+    backward:
+      start_jerk: -0.1
+      min_jerk_mild_stop: -0.2
+      min_jerk: -0.3
+      min_acc_mild_stop: -0.3
+      min_acc: -0.5
+    min_curve_velocity: 0.1
+    min_decel_for_lateral_acc_lim_filter: -0.5
+    stopping_velocity: 0.1
+    engage_velocity: 0.05
+    engage_acceleration: 0.1
+    max_trajectory_length: 100.0
+    min_trajectory_length: 70.0
+    sparse_min_interval_distance: 0.5
+    post_max_trajectory_length: 100.0
+    post_min_trajectory_length: 70.0
+    post_sparse_min_interval_distance: 0.5
+    publish_debug_trajs: true

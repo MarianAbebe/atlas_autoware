@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>atlas_trajectory_generation_demo</name>
+  <version>0.1.0</version>
+  <description>Isolated pinned Autoware real-map path and velocity-profile validation.</description>
+  <maintainer email="engineering@roamrobotics.com">ROAM Atlas</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>autoware_motion_utils</depend>
+  <depend>autoware_lanelet2_utils</depend>
+  <depend>autoware_lanelet2_extension</depend>
+  <depend>autoware_map_msgs</depend>
+  <depend>autoware_internal_planning_msgs</depend>
+  <depend>autoware_planning_msgs</depend>
+  <depend>autoware_adapi_v1_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>visualization_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>lanelet2_core</depend>
+  <depend>lanelet2_routing</depend>
+  <exec_depend>atlas_map_integration_demo</exec_depend>
+  <exec_depend>autoware_path_generator</exec_depend>
+  <exec_depend>autoware_planning_topic_converter</exec_depend>
+  <exec_depend>autoware_velocity_smoother</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>python3-numpy</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

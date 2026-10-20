@@ -1,0 +1,65 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 10
+      Plane Cell Count: 100
+      Reference Frame: map
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Original research PCD
+      Enabled: true
+      Topic:
+        Value: /atlas_map_demo/pointcloud_map
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+      Style: Points
+      Size (Pixels): 2
+      Color Transformer: AxisColor
+      Axis: Z
+      Position Transformer: XYZ
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Autoware Lanelet2 roads
+      Enabled: true
+      Topic:
+        Value: /atlas_map_demo/road_markers
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Route endpoints and axes
+      Enabled: true
+      Topic:
+        Value: /atlas_map_demo/diagnostic_markers
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+    - Class: rviz_default_plugins/Path
+      Name: Validated Lanelet2 route
+      Enabled: true
+      Topic:
+        Value: /atlas_map_demo/route_path
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+      Color: 255; 20; 160
+      Line Style: Lines
+      Line Width: 0.5
+  Enabled: true
+  Global Options:
+    Fixed Frame: map
+    Background Color: 35; 35; 35
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 320
+      Focal Point: {X: 0, Y: 0, Z: 0}
+      Pitch: 1.3
+      Yaw: 0.0
+Window Geometry:
+  Width: 1200
+  Height: 800

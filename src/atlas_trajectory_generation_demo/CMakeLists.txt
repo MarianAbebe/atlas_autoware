@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.14)
+project(atlas_trajectory_generation_demo)
+find_package(ament_cmake REQUIRED)
+set(deps rclcpp autoware_motion_utils autoware_lanelet2_utils autoware_lanelet2_extension
+  autoware_map_msgs autoware_internal_planning_msgs autoware_planning_msgs autoware_adapi_v1_msgs
+  geometry_msgs nav_msgs visualization_msgs tf2_ros lanelet2_core lanelet2_routing)
+foreach(dep IN LISTS deps)
+  find_package(${dep} REQUIRED)
+endforeach()
+add_executable(trajectory_fixture src/trajectory_fixture.cpp)
+target_compile_features(trajectory_fixture PUBLIC cxx_std_17)
+ament_target_dependencies(trajectory_fixture ${deps})
+install(TARGETS trajectory_fixture DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS scripts/run_validation.py DESTINATION lib/${PROJECT_NAME})
+ament_package()
