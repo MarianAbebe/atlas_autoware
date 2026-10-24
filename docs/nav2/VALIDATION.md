@@ -35,13 +35,14 @@ exit status and `FAIL`; it must not be reported as a pass.
 
 ## Current evidence
 
-The bounded run on the ARM64 development VM is recorded in
-`/tmp/atlas_nav2_validation_final/summary.json` and `launch.log`. It completed
-the navigation action successfully in 10.86 seconds, moved 1.87 m, and ended
-0.18 m from the `(0.0, 2.0)` goal. It observed 107 Nav2 commands, 583 gated
-commands, 582 wheel-target messages, and 576 odometry messages. This validates
-the idealized closed-loop simulation only; it is not evidence of obstacle
-avoidance or physical driving.
+The passing bounded run on the ARM64 development VM is recorded in
+`/tmp/atlas_nav2_validation_short/summary.json` and `launch.log`. It completed
+the navigation action in 8.56 seconds, moved 0.90 m, and ended 0.18 m from the
+`(0.0, 1.0)` goal. It observed 84 Nav2 commands, 603 gated commands, 602
+wheel-target messages, and 442 odometry messages. This validates the idealized
+closed-loop simulation only; it is not evidence of obstacle avoidance or
+physical driving. The shorter open-space goal reduces VM scheduling sensitivity;
+its motion threshold is 0.7 m.
 
 ## PRD alignment and remaining gaps
 

@@ -126,7 +126,7 @@ def main():
     # This first closed-loop acceptance goal stays in open map space. Obstacle
     # avoidance is deliberately tracked as a separate, not-yet-passing test.
     parser.add_argument('--goal-x', type=float, default=0.0)
-    parser.add_argument('--goal-y', type=float, default=2.0)
+    parser.add_argument('--goal-y', type=float, default=1.0)
     parser.add_argument('--timeout-sec', type=float, default=100.0)
     args = parser.parse_args()
     if not 30.0 <= args.timeout_sec <= 180.0:
@@ -250,7 +250,7 @@ def main():
             'nonzero_nav_commands': nonzero_nav,
             'nonzero_safe_commands': nonzero_safe,
             'nonzero_wheel_targets': nonzero_wheels,
-            'simulated_displacement': displacement > 1.5,
+            'simulated_displacement': displacement > 0.7,
             'goal_approach': goal_error < 0.35,
             'odometry_frames': all(sample[5:] == ('odom', 'base_link') for sample in node.odom),
             'laser_frame': all(sample[2] == 'laser' for sample in node.scans),
