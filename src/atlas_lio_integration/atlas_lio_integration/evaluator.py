@@ -15,7 +15,20 @@ class Evaluator(Node):
  def result(self):
   if not self.errors:return {'result':'FAIL','reason':'no matched estimator odometry'}
   te=[x[0] for x in self.errors];oe=[x[1] for x in self.errors];duration=max(self.odom_times)-min(self.odom_times) if len(self.odom_times)>1 else 0
-  return {'result':'PASS' if all(math.isfinite(x) for x in te+oe) else 'FAIL','samples':len(te),'translation_rmse_m':math.sqrt(sum(x*x for x in te)/len(te)),'orientation_rmse_rad':math.sqrt(sum(x*x for x in oe)/len(oe)),'drift_m':te[-1]-te[0],'output_rate_hz':(len(self.odom_times)-1)/duration if duration>0 else 0}
+  translation_rmse = math.sqrt(sum(x*x for x in te)/len(te))
+  orientation_rmse = math.sqrt(sum(x*x for x in oe)/len(oe))
+  output_rate = (len(self.odom_times)-1)/duration if duration>0 else 0
+  valid = all(math.isfinite(x) for x in te+oe)
+  accurate = translation_rmse <= 0.50 and orientation_rmse <= 0.15
+  sufficient = len(te) >= 100 and output_rate > 0
+  return {
+   'result': 'PASS' if valid and accurate and sufficient else 'FAIL',
+   'samples': len(te),
+   'translation_rmse_m': translation_rmse,
+   'orientation_rmse_rad': orientation_rmse,
+   'drift_m': te[-1]-te[0],
+   'output_rate_hz': output_rate
+  }
 def main():
  rclpy.init();n=Evaluator();end=time.monotonic()+float(n.declare_parameter('duration_sec',15.0).value)
  while time.monotonic()<end:rclpy.spin_once(n,timeout_sec=.1)

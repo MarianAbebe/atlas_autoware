@@ -12,7 +12,7 @@ class LioHealth(Node):
  def tick(self):
   now=time.monotonic();a=DiagnosticArray();a.header.stamp=self.get_clock().now().to_msg()
   for k in ('lidar','imu','odom'):
-   age=now-self.seen[k] if k in self.seen else float('inf');s=DiagnosticStatus();s.name='atlas_lio/'+k;s.hardware_id='synthetic';s.level=DiagnosticStatus.OK if age<=self.timeout else DiagnosticStatus.ERROR;s.message='healthy' if s.level==0 else 'missing_or_stale';s.values=[KeyValue(key='age_sec',value='%.3f'%age)];a.status.append(s)
+   age=now-self.seen[k] if k in self.seen else float('inf');s=DiagnosticStatus();s.name='atlas_lio/'+k;s.hardware_id='synthetic';s.level=DiagnosticStatus.OK if age<=self.timeout else DiagnosticStatus.ERROR;s.message='healthy' if s.level==DiagnosticStatus.OK else 'missing_or_stale';s.values=[KeyValue(key='age_sec',value='%.3f'%age)];a.status.append(s)
   self.pub.publish(a)
 def main():
  rclpy.init();n=LioHealth()

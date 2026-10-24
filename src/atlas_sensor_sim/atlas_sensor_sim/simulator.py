@@ -27,7 +27,7 @@ class SensorSimulator(Node):
     def truth(self):
         x,y,yaw,_,_=self.state(); m=PoseStamped(); m.header.stamp=self.stamp(); m.header.frame_id='map'; m.pose.position.x=x;m.pose.position.y=y;m.pose.orientation.z=math.sin(yaw/2);m.pose.orientation.w=math.cos(yaw/2);self.pub['truth'].publish(m)
     def lidar(self):
-        if self.lidar_dropout:return
+        if self.get_parameter('lidar_dropout').value:return
         x,y,yaw,_,_=self.state(); pts=cloud_points(x,y,yaw,self.lidar_range,self.rng,self.lidar_noise); m=PointCloud2();m.header.stamp=self.stamp();m.header.frame_id='lidar_link';m.height=1;m.width=len(pts);m.fields=[PointField(name=n,offset=o,datatype=PointField.FLOAT32,count=1) for n,o in (('x',0),('y',4),('z',8),('intensity',12),('time',16))];m.is_bigendian=False;m.point_step=20;m.row_step=20*len(pts);m.is_dense=True;m.data=b''.join(struct.pack('<fffff',*q,1.0,float(i)*self.scan_period/max(1,len(pts)-1)) for i,q in enumerate(pts));self.pub['lidar'].publish(m)
     def imu(self):
         _,_,_,v,w=self.state();m=Imu();m.header.stamp=self.stamp();m.header.frame_id='imu_link';m.orientation_covariance[0]=-1.0;m.angular_velocity.z=w+self.imu_bias+self.rng.gauss(0,self.imu_noise);m.linear_acceleration.y=v*w+self.rng.gauss(0,self.imu_noise);m.linear_acceleration.z=9.80665+self.rng.gauss(0,self.imu_noise);m.angular_velocity_covariance[8]=self.imu_noise**2;m.linear_acceleration_covariance[0]=m.linear_acceleration_covariance[4]=m.linear_acceleration_covariance[8]=self.imu_noise**2;self.pub['imu'].publish(m)
