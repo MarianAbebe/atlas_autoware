@@ -1,0 +1,8 @@
+# Matches pinned FAST-LIO ROS2 port; values are provisional simulation calibration.
+lidar_topic: /atlas/lio/livox
+imu_topic: /atlas/sensors/imu/data
+odom_topic: /atlas/lio/odometry
+frame_id: odom
+child_frame_id: base_link
+extrinsic_T: [0.0, 0.0, 0.0]
+extrinsic_R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]

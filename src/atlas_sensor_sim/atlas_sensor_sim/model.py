@@ -30,17 +30,28 @@ def encoder_ticks(angle_rad, resolution):
     return round(angle_rad * int(resolution) / (2*math.pi))
 
 def cloud_points(x, y, yaw, max_range, rng, noise):
-    """Sparse rays against a 6 m square and two fixed pillars."""
+    """Static 3-D landmarks expressed in the instantaneous LiDAR frame.
+
+    Ordering is azimuth order, so callers can attach monotonically increasing
+    per-point offsets.  Unlike the old fixture, points are not world-frame
+    coordinates mislabeled as `lidar_link`.
+    """
     require_positive('lidar range', max_range)
-    points=[]
-    for i in range(48):
-        a = yaw + 2*math.pi*i/48
-        # deterministic radial synthetic environment, provides 3D structure
-        r = min(max_range, 3.0 + 0.7*math.sin(3*a) + 0.25*math.cos(7*a))
-        for z in (-0.15, 0.2, 0.55):
-            rr = max(0.1, r + rng.gauss(0, noise))
-            points.append((x + rr*math.cos(a), y + rr*math.sin(a), z + rng.gauss(0, noise)))
-    return points
+    world=[]
+    # Four walls, a vertical pillar, and an elevated crossbar create non-planar
+    # constraints during translation and yaw rotation.
+    for q in range(-24, 25, 2):
+        for z in (0.0, 0.5, 1.2, 2.0):
+            world.extend(((6.0,q/4,z),(-6.0,q/4,z),(q/4,6.0,z),(q/4,-6.0,z)))
+    for z in [i/5 for i in range(11)]:
+        for a in range(16): world.append((1.4+.35*math.cos(a*math.pi/8), 1.0+.35*math.sin(a*math.pi/8), z))
+    world.extend(((-2.0,q/5,1.8) for q in range(-10,11)))
+    c,s=math.cos(yaw),math.sin(yaw); points=[]
+    for wx,wy,wz in world:
+        dx,dy=wx-x,wy-y; lx,ly=c*dx+s*dy,-s*dx+c*dy
+        if .2 < math.hypot(lx,ly) <= max_range:
+            points.append((lx+rng.gauss(0,noise),ly+rng.gauss(0,noise),wz+rng.gauss(0,noise)))
+    return sorted(points, key=lambda p: math.atan2(p[1],p[0]))
 
 def stereo_pixels(width, height, disparity):
     if width <= 8 or height <= 8 or disparity <= 0 or disparity >= width: raise ValueError('invalid stereo dimensions/disparity')

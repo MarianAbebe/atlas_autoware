@@ -1,0 +1,3 @@
+#!/usr/bin/env python3
+from atlas_lio_integration.livox_adapter import main
+main()

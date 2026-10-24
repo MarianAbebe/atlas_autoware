@@ -2,8 +2,9 @@ atlas_sensor_simulator:
   ros__parameters:
     namespace: /atlas/sensors
     seed: 42
-    lidar_rate_hz: 5.0
-    imu_rate_hz: 50.0
+    lidar_rate_hz: 10.0
+    lidar_scan_period_sec: 0.1
+    imu_rate_hz: 200.0
     gnss_rate_hz: 5.0
     camera_rate_hz: 10.0
     wheel_rate_hz: 30.0
