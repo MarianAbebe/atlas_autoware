@@ -1,0 +1,133 @@
+{
+  "bag": "/home/marian/Downloads/engg_loading_dock_01.db3",
+  "transport": "registered ROS components, single process, intra-process communication disabled",
+  "time_contract": "explicit header-relative FLOAT32 seconds",
+  "samples": [
+    {
+      "stamp_sec": 1752868633,
+      "stamp_nanosec": 17206000,
+      "frame": "lidar_vlp16_points_link",
+      "input_points": 29184,
+      "output_points": 17297,
+      "discarded_nonfinite_xyz": 11887,
+      "reordered": true,
+      "time_ns_range": [
+        2304,
+        100838371
+      ],
+      "ring_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "xyz_bitwise_preserved": true,
+      "compact_bytes_preserved": true,
+      "maximum_time_rounding_error_ns": 0.49992942810058594,
+      "deskew_boundary": "pinned layout accepted; absent twist; unchanged; no compensation",
+      "ransac_sensor_frame": {
+        "input_points": 17297,
+        "output_points": 13739,
+        "removed_points": 3558,
+        "ordered_byte_subset": true,
+        "ground_semantics_verified": false
+      }
+    },
+    {
+      "stamp_sec": 1752868881,
+      "stamp_nanosec": 334336000,
+      "frame": "lidar_vlp16_points_link",
+      "input_points": 29184,
+      "output_points": 18681,
+      "discarded_nonfinite_xyz": 10503,
+      "reordered": true,
+      "time_ns_range": [
+        4608,
+        100839369
+      ],
+      "ring_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "xyz_bitwise_preserved": true,
+      "compact_bytes_preserved": true,
+      "maximum_time_rounding_error_ns": 0.49991607666015625,
+      "deskew_boundary": "pinned layout accepted; absent twist; unchanged; no compensation",
+      "ransac_sensor_frame": {
+        "input_points": 18681,
+        "output_points": 16105,
+        "removed_points": 2576,
+        "ordered_byte_subset": true,
+        "ground_semantics_verified": false
+      }
+    },
+    {
+      "stamp_sec": 1752869128,
+      "stamp_nanosec": 542008000,
+      "frame": "lidar_vlp16_points_link",
+      "input_points": 29184,
+      "output_points": 17019,
+      "discarded_nonfinite_xyz": 12165,
+      "reordered": true,
+      "time_ns_range": [
+        2304,
+        100832455
+      ],
+      "ring_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "xyz_bitwise_preserved": true,
+      "compact_bytes_preserved": true,
+      "maximum_time_rounding_error_ns": 0.4999837875366211,
+      "deskew_boundary": "pinned layout accepted; absent twist; unchanged; no compensation",
+      "ransac_sensor_frame": {
+        "input_points": 17019,
+        "output_points": 13844,
+        "removed_points": 3175,
+        "ordered_byte_subset": true,
+        "ground_semantics_verified": false
+      }
+    }
+  ]
+}

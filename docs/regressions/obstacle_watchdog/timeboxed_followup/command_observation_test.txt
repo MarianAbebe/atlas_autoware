@@ -1,0 +1,11 @@
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-22 03:19:22.532 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-22 03:19:22.532 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.032s
+
+OK
+Controlled backlog: published=30 relay_delivered=30 raw_observed=10; no shutdown involved

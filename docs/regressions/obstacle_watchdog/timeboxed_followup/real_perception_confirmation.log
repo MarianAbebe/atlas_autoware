@@ -1,0 +1,5 @@
+{"index": 0, "retained": 17297, "filtered": 13739, "clusters": {"filtered": 74, "bypass": 67}, "peak_rss_kib": 66244}
+{"index": 1, "retained": 19325, "filtered": 17603, "clusters": {"filtered": 47, "bypass": 44}, "peak_rss_kib": 67084}
+{"index": 2, "retained": 18681, "filtered": 16105, "clusters": {"filtered": 77, "bypass": 70}, "peak_rss_kib": 66808}
+{"index": 3, "retained": 16173, "filtered": 13905, "clusters": {"filtered": 103, "bypass": 93}, "peak_rss_kib": 66412}
+{"index": 4, "retained": 17019, "filtered": 13844, "clusters": {"filtered": 98, "bypass": 86}, "peak_rss_kib": 66532}

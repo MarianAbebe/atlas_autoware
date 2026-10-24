@@ -1,0 +1,387 @@
+{
+  "matched_acquisition": true,
+  "cloud_formats": {
+    "raw": {
+      "stamp": [
+        1792708118,
+        372099840
+      ],
+      "frame": "synthetic_lidar",
+      "points": 3969,
+      "height": 1,
+      "width": 3969,
+      "point_step": 26,
+      "row_step": 103194,
+      "bigendian": false,
+      "fields": [
+        {
+          "name": "x",
+          "offset": 0,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "y",
+          "offset": 4,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "z",
+          "offset": 8,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "intensity",
+          "offset": 12,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "tag",
+          "offset": 16,
+          "datatype": 2,
+          "count": 1
+        },
+        {
+          "name": "line",
+          "offset": 17,
+          "datatype": 2,
+          "count": 1
+        },
+        {
+          "name": "timestamp",
+          "offset": 18,
+          "datatype": 8,
+          "count": 1
+        }
+      ]
+    },
+    "extended": {
+      "stamp": [
+        1792708118,
+        372099840
+      ],
+      "frame": "synthetic_lidar",
+      "points": 3969,
+      "height": 1,
+      "width": 3969,
+      "point_step": 32,
+      "row_step": 127008,
+      "bigendian": false,
+      "fields": [
+        {
+          "name": "x",
+          "offset": 0,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "y",
+          "offset": 4,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "z",
+          "offset": 8,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "intensity",
+          "offset": 12,
+          "datatype": 2,
+          "count": 1
+        },
+        {
+          "name": "return_type",
+          "offset": 13,
+          "datatype": 2,
+          "count": 1
+        },
+        {
+          "name": "channel",
+          "offset": 14,
+          "datatype": 4,
+          "count": 1
+        },
+        {
+          "name": "azimuth",
+          "offset": 16,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "elevation",
+          "offset": 20,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "distance",
+          "offset": 24,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "time_stamp",
+          "offset": 28,
+          "datatype": 6,
+          "count": 1
+        }
+      ]
+    },
+    "deskewed": {
+      "stamp": [
+        1792708118,
+        372099840
+      ],
+      "frame": "synthetic_lidar",
+      "points": 3969,
+      "height": 1,
+      "width": 3969,
+      "point_step": 32,
+      "row_step": 127008,
+      "bigendian": false,
+      "fields": [
+        {
+          "name": "x",
+          "offset": 0,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "y",
+          "offset": 4,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "z",
+          "offset": 8,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "intensity",
+          "offset": 12,
+          "datatype": 2,
+          "count": 1
+        },
+        {
+          "name": "return_type",
+          "offset": 13,
+          "datatype": 2,
+          "count": 1
+        },
+        {
+          "name": "channel",
+          "offset": 14,
+          "datatype": 4,
+          "count": 1
+        },
+        {
+          "name": "azimuth",
+          "offset": 16,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "elevation",
+          "offset": 20,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "distance",
+          "offset": 24,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "time_stamp",
+          "offset": 28,
+          "datatype": 6,
+          "count": 1
+        }
+      ]
+    },
+    "compact": {
+      "stamp": [
+        1792708118,
+        372099840
+      ],
+      "frame": "synthetic_lidar",
+      "points": 3969,
+      "height": 1,
+      "width": 3969,
+      "point_step": 16,
+      "row_step": 63504,
+      "bigendian": false,
+      "fields": [
+        {
+          "name": "x",
+          "offset": 0,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "y",
+          "offset": 4,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "z",
+          "offset": 8,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "intensity",
+          "offset": 12,
+          "datatype": 2,
+          "count": 1
+        },
+        {
+          "name": "return_type",
+          "offset": 13,
+          "datatype": 2,
+          "count": 1
+        },
+        {
+          "name": "channel",
+          "offset": 14,
+          "datatype": 4,
+          "count": 1
+        }
+      ]
+    },
+    "ground": {
+      "stamp": [
+        1792708118,
+        372099840
+      ],
+      "frame": "synthetic_lidar",
+      "points": 1667,
+      "height": 1,
+      "width": 1667,
+      "point_step": 16,
+      "row_step": 26672,
+      "bigendian": false,
+      "fields": [
+        {
+          "name": "x",
+          "offset": 0,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "y",
+          "offset": 4,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "z",
+          "offset": 8,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "intensity",
+          "offset": 12,
+          "datatype": 2,
+          "count": 1
+        },
+        {
+          "name": "return_type",
+          "offset": 13,
+          "datatype": 2,
+          "count": 1
+        },
+        {
+          "name": "channel",
+          "offset": 14,
+          "datatype": 4,
+          "count": 1
+        }
+      ]
+    },
+    "clusters": {
+      "stamp": [
+        1792708118,
+        372099840
+      ],
+      "frame": "synthetic_lidar",
+      "points": 1667,
+      "height": 1,
+      "width": 1667,
+      "point_step": 16,
+      "row_step": 26672,
+      "bigendian": false,
+      "fields": [
+        {
+          "name": "x",
+          "offset": 0,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "y",
+          "offset": 4,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "z",
+          "offset": 8,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "rgb",
+          "offset": 12,
+          "datatype": 7,
+          "count": 1
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "planner": {
+      "obstacle_stop.obstacle_filtering.check_inside.pointcloud": {
+        "type": 1,
+        "bool_value": false,
+        "double_value": 0.0
+      }
+    },
+    "localization_watchdog": {
+      "freshness_sec": {
+        "type": 3,
+        "bool_value": false,
+        "double_value": 0.3
+      }
+    },
+    "obstacle_guard": {
+      "freshness_sec": {
+        "type": 3,
+        "bool_value": false,
+        "double_value": 0.3
+      }
+    },
+    "controller": {
+      "use_sim_time": {
+        "type": 1,
+        "bool_value": false,
+        "double_value": 0.0
+      }
+    }
+  },
+  "map_service_servers": [
+    "/atlas_loc/full_stack_scene"
+  ],
+  "passed": true
+}

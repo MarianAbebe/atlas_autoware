@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-root = Path('/home/marian/roam/atlas_autoware')
+root = Path(__file__).resolve().parents[3]
 evidence = root/'src/atlas_closed_loop_demo/results/current_audit'
 closure = Path('/tmp/atlas_closed_loop_closure.tsv')
 rows = [r.split('\t') for r in closure.read_text().splitlines()] if closure.exists() else []

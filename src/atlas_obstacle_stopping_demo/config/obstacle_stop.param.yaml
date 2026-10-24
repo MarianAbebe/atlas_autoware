@@ -1,0 +1,13 @@
+# Isolated provisional UGV test. No pinned configuration is modified.
+/**:
+  ros__parameters:
+    launch_modules: ["autoware::motion_velocity_planner::ObstacleStopModule"]
+    smooth_velocity_before_planning: true
+    obstacle_stop:
+      obstacle_filtering:
+        check_inside:
+          pointcloud: true
+      stop_planning:
+        stop_margin: 2.0
+        terminal_stop_margin: 1.0
+        min_behavior_stop_margin: 1.0

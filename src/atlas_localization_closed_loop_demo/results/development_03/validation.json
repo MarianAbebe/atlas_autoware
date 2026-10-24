@@ -1,0 +1,78 @@
+{
+  "passed": true,
+  "checks": {
+    "finite_states": true,
+    "finite_covariance": true,
+    "frames": true,
+    "quaternions": true,
+    "no_runtime_exception": true,
+    "launch_alive": true,
+    "bounded_cleanup": true,
+    "controller_odom_exclusively_ekf": true,
+    "truth_hidden_from_controller": true,
+    "ndt_pose_exclusive": true,
+    "ekf_receives_ndt": true,
+    "ndt_predictions_exclusively_ekf": true,
+    "speed_limit": true,
+    "actual_simulator_samples": true,
+    "scan_world_consistency": true,
+    "finite_scan_samples": true,
+    "bounded_control": true,
+    "acceleration_limit": true,
+    "localization_engaged": true,
+    "actual_motion": true,
+    "scans_evolve": true,
+    "matched_ndt": true,
+    "ndt_accuracy": true,
+    "ekf_accuracy": true,
+    "lateral_tracking": true,
+    "goal_and_ten_second_hold": true,
+    "nominal_not_latched": true
+  },
+  "failed_checks": [],
+  "metrics": {
+    "scenario": "nominal",
+    "termination": "goal_hold_completed",
+    "error": null,
+    "engaged": 2.4726526149970596,
+    "injected": null,
+    "cleanup_sec": 5.720370857998205,
+    "process_tree_peak_rss_kib": 381944,
+    "localization_errors": {
+      "ndt": {
+        "matched": 228,
+        "max_xy_m": 0.007347562459097545,
+        "rms_xy_m": 0.003111389538900629,
+        "max_yaw_rad": 0.0001035881741966218
+      },
+      "ekf": {
+        "matched": 1276,
+        "max_xy_m": 0.008633766455140439,
+        "rms_xy_m": 0.004629387536566597,
+        "max_yaw_rad": 2.3963708153066037e-05
+      }
+    },
+    "counts": {
+      "truth": 1370,
+      "ekf": 1369,
+      "ndt": 238,
+      "command": 910,
+      "gate": 851,
+      "scan": 244,
+      "ndt_ms": 238,
+      "ndt_score": 238,
+      "ndt_iterations": 238
+    },
+    "truth_distance_m": 7.923606534054854,
+    "final_goal_distance_m": 0.07644318982267201,
+    "max_lateral_error_m": 0.002984471184845461,
+    "max_speed_mps": 0.7828387490402816,
+    "scan_world_residual_m": 8.922998467103848e-07,
+    "scan_world_matched": 61,
+    "scan_sample_displacement_m": 7.923566796541047,
+    "max_acceleration_mps2": 0.3013286070637307,
+    "ndt_execution_ms_max": 13.321999549865723,
+    "ndt_score_min": 3.4753878116607666,
+    "ndt_iterations_max": 6
+  }
+}

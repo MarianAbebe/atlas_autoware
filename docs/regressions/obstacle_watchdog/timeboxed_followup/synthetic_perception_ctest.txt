@@ -1,0 +1,8 @@
+Internal ctest changing into directory: /tmp/atlas_real_perception_build
+Test project /tmp/atlas_real_perception_build
+    Start 1: synthetic_lidar_obstacle_detection
+1/1 Test #1: synthetic_lidar_obstacle_detection ...   Passed    0.41 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.41 sec

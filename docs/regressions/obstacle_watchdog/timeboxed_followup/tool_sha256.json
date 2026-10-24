@@ -1,0 +1,5 @@
+{
+  "scripts/watchdog_topic_probe.py": "e8ae46fbe1c3e9b129f8069ce1329f41615d1828cbea1448206a0c3cccfb68f3",
+  "scripts/test_watchdog_topic_probe.py": "6056a1ebaa1386680a19fc9c74c505a9d4768f6f3b7159c7a5dbaaa7910b3dc2",
+  "scripts/test_command_observation.py": "70625815285422783e8334dc530e8571396056fa5f5f21afb9f43f6819177c27"
+}

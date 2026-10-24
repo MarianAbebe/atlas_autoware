@@ -1,0 +1,78 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Fixed Frame: map
+    Background Color: 40; 40; 40
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 2
+      Plane Cell Count: 100
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Actual campus vector roads
+      Enabled: true
+      Topic:
+        Value: /atlas_map_demo/road_markers
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Synthetic NDT reference - NOT original campus PCD
+      Enabled: true
+      Topic:
+        Value: /atlas_loc/synthetic_map
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+      Size (Pixels): 2
+      Style: Points
+      Color Transformer: AxisColor
+      Axis: Z
+      Position Transformer: XYZ
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Actual pinned cluster membership
+      Enabled: true
+      Topic:
+        Value: /atlas_loc/clusters
+        Reliability Policy: Best Effort
+      Size (Pixels): 4
+      Style: Points
+      Color Transformer: RGB8
+      Position Transformer: XYZ
+    - Class: rviz_default_plugins/Path
+      Name: Campus route
+      Enabled: true
+      Topic:
+        Value: /atlas_loc/route_path
+        Durability Policy: Transient Local
+      Color: 100; 100; 255
+    - Class: rviz_default_plugins/Path
+      Name: Planned trajectory geometry - inspect velocities in ROS
+      Enabled: true
+      Topic:
+        Value: /atlas_loc/trajectory_visualization
+      Color: 0; 255; 100
+    - Class: rviz_default_plugins/Odometry
+      Name: EKF controller state
+      Enabled: true
+      Topic:
+        Value: /atlas_loc/ekf/ekf_odom
+      Keep: 30
+    - Class: rviz_default_plugins/TF
+      Name: Frame tree
+      Enabled: false
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 35
+      Pitch: 0.8
+      Yaw: 1.57
+      Focal Point:
+        X: 49
+        Y: 69
+        Z: 0
+Window Geometry:
+  Width: 1200
+  Height: 850

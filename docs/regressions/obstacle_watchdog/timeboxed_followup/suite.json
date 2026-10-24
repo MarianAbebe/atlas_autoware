@@ -1,0 +1,68 @@
+[
+  {
+    "scenario": "none",
+    "feedback_input": "odometry",
+    "exit_code": 1,
+    "log": "/tmp/atlas_watchdog_timebox_suite/20261022_030819_none_odometry.log"
+  },
+  {
+    "scenario": "ahead",
+    "feedback_input": "odometry",
+    "exit_code": 0,
+    "log": "/tmp/atlas_watchdog_timebox_suite/20261022_031033_ahead_odometry.log"
+  },
+  {
+    "scenario": "off_route",
+    "feedback_input": "odometry",
+    "exit_code": 0,
+    "log": "/tmp/atlas_watchdog_timebox_suite/20261022_031230_off_route_odometry.log"
+  },
+  {
+    "scenario": "stale_drop",
+    "feedback_input": "odometry",
+    "exit_code": 0,
+    "log": "/tmp/atlas_watchdog_timebox_suite/20261022_031412_stale_drop_odometry.log"
+  },
+  {
+    "scenario": "stale_freeze",
+    "feedback_input": "odometry",
+    "exit_code": 0,
+    "log": "/tmp/atlas_watchdog_timebox_suite/20261022_031448_stale_freeze_odometry.log"
+  },
+  {
+    "scenario": "feedback_drop",
+    "feedback_input": "odometry",
+    "exit_code": 0,
+    "log": "/tmp/atlas_watchdog_timebox_suite/20261022_031523_feedback_drop_odometry.log"
+  },
+  {
+    "scenario": "feedback_freeze",
+    "feedback_input": "odometry",
+    "exit_code": 0,
+    "log": "/tmp/atlas_watchdog_timebox_suite/20261022_031559_feedback_freeze_odometry.log"
+  },
+  {
+    "scenario": "feedback_drop",
+    "feedback_input": "steering",
+    "exit_code": 0,
+    "log": "/tmp/atlas_watchdog_timebox_suite/20261022_031639_feedback_drop_steering.log"
+  },
+  {
+    "scenario": "feedback_freeze",
+    "feedback_input": "steering",
+    "exit_code": 0,
+    "log": "/tmp/atlas_watchdog_timebox_suite/20261022_031714_feedback_freeze_steering.log"
+  },
+  {
+    "scenario": "feedback_drop",
+    "feedback_input": "command",
+    "exit_code": 0,
+    "log": "/tmp/atlas_watchdog_timebox_suite/20261022_031753_feedback_drop_command.log"
+  },
+  {
+    "scenario": "feedback_freeze",
+    "feedback_input": "command",
+    "exit_code": 0,
+    "log": "/tmp/atlas_watchdog_timebox_suite/20261022_031829_feedback_freeze_command.log"
+  }
+]

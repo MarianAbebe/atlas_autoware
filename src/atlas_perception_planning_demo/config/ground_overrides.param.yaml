@@ -1,0 +1,4 @@
+# Provisional planar synthetic scene, pinned algorithm unchanged.
+/**:
+  ros__parameters:
+    elevation_grid_mode: false

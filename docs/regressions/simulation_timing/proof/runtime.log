@@ -1,0 +1,31 @@
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-22 20:21:23.452 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-22 20:21:23.452 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+{
+  "/atlas_loc/sim/simple_planning_simulator": {
+    "use_sim_time": false
+  },
+  "/atlas_loc/controller": {
+    "use_sim_time": false
+  },
+  "/atlas_loc/gate/vehicle_cmd_gate": {
+    "use_sim_time": false
+  },
+  "/atlas_loc/ndt/ndt_scan_matcher": {
+    "use_sim_time": false
+  },
+  "/atlas_loc/ekf/ekf_localizer": {
+    "use_sim_time": false
+  },
+  "/atlas_loc/velocity_smoother": {
+    "use_sim_time": false
+  },
+  "/atlas_loc/localization_watchdog": {
+    "use_sim_time": false
+  },
+  "/atlas_loc/synthetic_sensor_fixture": {
+    "use_sim_time": false
+  }
+}

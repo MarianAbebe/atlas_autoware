@@ -1,0 +1,3 @@
+# Unified-diff evidence uses a leading space to encode empty context lines.
+docs/full_stack/localization_launch.diff -whitespace
+docs/regressions/localization_nominal_repro/validator_changes.diff -whitespace

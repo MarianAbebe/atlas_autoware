@@ -1,0 +1,172 @@
+{
+  "nodes": {
+    "/atlas_loc/sim/simple_planning_simulator": {
+      "use_sim_time": false
+    },
+    "/atlas_loc/controller": {
+      "use_sim_time": false
+    },
+    "/atlas_loc/gate/vehicle_cmd_gate": {
+      "use_sim_time": false
+    },
+    "/atlas_loc/ndt/ndt_scan_matcher": {
+      "use_sim_time": false
+    },
+    "/atlas_loc/ekf/ekf_localizer": {
+      "use_sim_time": false
+    },
+    "/atlas_loc/velocity_smoother": {
+      "use_sim_time": false
+    },
+    "/atlas_loc/localization_watchdog": {
+      "use_sim_time": false
+    },
+    "/atlas_loc/synthetic_sensor_fixture": {
+      "use_sim_time": false
+    }
+  },
+  "clock_publishers": [],
+  "endpoint_qos": {
+    "/atlas_loc/sim/output/odometry": {
+      "publishers": [
+        {
+          "node": "/atlas_loc/sim/simple_planning_simulator",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        }
+      ],
+      "subscribers": [
+        {
+          "node": "/timing_contract_audit",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        },
+        {
+          "node": "/atlas_loc/synthetic_sensor_fixture",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        },
+        {
+          "node": "/atlas_loc/localization_watchdog",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        }
+      ]
+    },
+    "/atlas_loc/ekf/ekf_odom": {
+      "publishers": [
+        {
+          "node": "/atlas_loc/ekf/ekf_localizer",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        }
+      ],
+      "subscribers": [
+        {
+          "node": "/atlas_loc/velocity_smoother",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        },
+        {
+          "node": "/atlas_loc/controller",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        },
+        {
+          "node": "/atlas_loc/gate/vehicle_cmd_gate",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        },
+        {
+          "node": "/atlas_loc/gate/vehicle_cmd_gate",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        },
+        {
+          "node": "/atlas_loc/localization_watchdog",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        }
+      ]
+    },
+    "/atlas_loc/ndt/ndt_pose_with_covariance": {
+      "publishers": [
+        {
+          "node": "/atlas_loc/ndt/ndt_scan_matcher",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        }
+      ],
+      "subscribers": [
+        {
+          "node": "/atlas_loc/ekf/ekf_localizer",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        },
+        {
+          "node": "/atlas_loc/localization_watchdog",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        }
+      ]
+    },
+    "/atlas_loc/sensors/points": {
+      "publishers": [
+        {
+          "node": "/atlas_loc/synthetic_sensor_fixture",
+          "depth": 0,
+          "reliability": "BEST_EFFORT",
+          "durability": "VOLATILE"
+        }
+      ],
+      "subscribers": [
+        {
+          "node": "/atlas_loc/ndt/ndt_scan_matcher",
+          "depth": 0,
+          "reliability": "BEST_EFFORT",
+          "durability": "VOLATILE"
+        }
+      ]
+    },
+    "/atlas_loc/control_cmd": {
+      "publishers": [
+        {
+          "node": "/atlas_loc/controller",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "TRANSIENT_LOCAL"
+        }
+      ],
+      "subscribers": [
+        {
+          "node": "/atlas_loc/gate/vehicle_cmd_gate",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        },
+        {
+          "node": "/atlas_loc/localization_watchdog",
+          "depth": 0,
+          "reliability": "RELIABLE",
+          "durability": "VOLATILE"
+        }
+      ]
+    }
+  },
+  "truth_samples": 8,
+  "maximum_observed_speed": 0.0,
+  "passed": true
+}

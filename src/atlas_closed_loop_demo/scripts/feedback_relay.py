@@ -18,6 +18,8 @@ from autoware_vehicle_msgs.msg import GearCommand, SteeringReport, Engage
 from autoware_adapi_v1_msgs.msg import OperationModeState
 from visualization_msgs.msg import MarkerArray, Marker
 from std_msgs.msg import String
+from command_recording import CommandJournal
+from std_srvs.srv import Trigger
 from rcl_interfaces.srv import SetParameters
 from rcl_interfaces.msg import Parameter, ParameterValue, ParameterType
 
@@ -38,6 +40,9 @@ class Relay(Node):
         self.gep=self.create_publisher(Engage,"gate/input/engage",10)
         self.odom=None; self.route=None; self.inject='live'; self.frozen=None; self.initialized=False
         self.fault_input='odometry'; self.originals={}; self.fault_snapshot=None
+        self.command_journal = CommandJournal() if self.declare_parameter('record_commands',False).value else None
+        if self.command_journal is not None:
+            self.create_service(Trigger, 'command_recording/snapshot', self.command_journal.snapshot)
         self.cp=self.create_publisher(Control,'control_cmd',10)
         self.create_subscription(Control,'controller_raw/control_cmd',lambda m:self.forward('command',m,self.cp),10)
         self.op=self.create_publisher(Odometry,'feedback/odometry',10)
@@ -70,6 +75,8 @@ class Relay(Node):
         self.fault_snapshot=copy.deepcopy(self.originals.get(self.fault_input))
         self.get_logger().warn('Fault injection: '+m.data+' '+self.fault_input+' (original stamps retained)')
     def forward(self,name,msg,publisher):
+        if name == 'command' and getattr(self, 'command_journal', None) is not None:
+            self.command_journal.record(msg)
         self.originals[name]=msg
         if self.inject=='live' or name!=self.fault_input:
             publisher.publish(msg)

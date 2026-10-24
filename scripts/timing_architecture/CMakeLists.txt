@@ -1,0 +1,16 @@
+cmake_minimum_required(VERSION 3.16)
+project(atlas_timing_probe LANGUAGES CXX)
+find_package(ament_cmake REQUIRED)
+foreach(dep rclcpp rclcpp_components class_loader ament_index_cpp rcl_yaml_param_parser
+    rosgraph_msgs nav_msgs autoware_control_msgs autoware_vehicle_msgs)
+  find_package(${dep} REQUIRED)
+endforeach()
+add_executable(pinned_step_probe pinned_step_probe.cpp)
+target_compile_features(pinned_step_probe PRIVATE cxx_std_17)
+target_compile_options(pinned_step_probe PRIVATE -Wall -Wextra -Wpedantic)
+ament_target_dependencies(pinned_step_probe rclcpp rclcpp_components class_loader
+  ament_index_cpp rcl_yaml_param_parser rosgraph_msgs nav_msgs autoware_control_msgs autoware_vehicle_msgs)
+find_package(autoware_utils_rclcpp REQUIRED)
+add_executable(polling_clock_probe polling_clock_probe.cpp)
+target_compile_features(polling_clock_probe PRIVATE cxx_std_17)
+ament_target_dependencies(polling_clock_probe rclcpp rosgraph_msgs nav_msgs autoware_utils_rclcpp)

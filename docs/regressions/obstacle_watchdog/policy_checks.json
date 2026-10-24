@@ -1,0 +1,12 @@
+[
+  {
+    "class_name": "Watchdog",
+    "stale_return_expression_unchanged": true,
+    "source_sha256": "bb40d40f71fd358d00f7249e93aa31ce08407bb772ea4fb263ab04bbffcea4a7"
+  },
+  {
+    "class_name": "Guard",
+    "stale_return_expression_unchanged": true,
+    "source_sha256": "914e21de80118d319cf483db55090bad0a2732b3bda59e17831b70cf1c7a3372"
+  }
+]

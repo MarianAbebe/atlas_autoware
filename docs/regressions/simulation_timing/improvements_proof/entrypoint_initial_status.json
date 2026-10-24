@@ -1,0 +1,8 @@
+{
+  "command_journal": 0,
+  "vehicle_default": 0,
+  "vehicle_fixed_500": 0,
+  "vehicle_fixed_0": 0,
+  "localization_watchdog": 1,
+  "fault_observation": 0
+}

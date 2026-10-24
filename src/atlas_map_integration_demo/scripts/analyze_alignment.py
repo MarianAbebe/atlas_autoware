@@ -2,6 +2,7 @@
 """Read-only map alignment diagnostics; no estimated transform is applied."""
 import argparse
 import json
+import os
 from pathlib import Path
 
 import numpy as np
@@ -12,7 +13,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('results_dir', type=Path)
     args = parser.parse_args()
-    with Path('/home/marian/Downloads/pointcloud_map_georeferenced.pcd').open('rb') as f:
+    map_dir = Path(os.environ.get('ATLAS_MAP_DIR', Path.home() / 'Downloads')).expanduser()
+    with (map_dir / 'pointcloud_map_georeferenced.pcd').open('rb') as f:
         while not f.readline().startswith(b'DATA '):
             pass
         xyz = np.fromfile(f, dtype='<f4').reshape(-1, 4)[:, :3]

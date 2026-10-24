@@ -1,13 +1,79 @@
-# Atlas ROS 2 workspace
+# ROAM Atlas Autonomy Workspace
 
-Atlas is an autonomous UGV developed by the ROAM student team. This repository
-contains Atlas-specific integration, configuration, descriptions, interfaces,
-and tooling for Ubuntu 22.04 and ROS 2 Humble.
+Atlas is the autonomous unmanned ground vehicle being developed by the ROAM
+student team. This repository contains the Atlas ROS 2 workspace and isolated
+experiments that connect pinned Autoware components to campus maps, a test
+vehicle simulator, and synthetic LiDAR fixtures. The validated driving work is
+simulation only; it is not a physical Atlas vehicle integration.
 
-Atlas packages remain scaffolds with workspace build/setup tooling. No robot
-functionality, sensor launch files, or numerical robot configuration is defined.
-Autoware will remain an upstream dependency; it is not forked, copied, cloned,
-or vendored here.
+The current operational entry point is the
+[Saturday team handoff](docs/handoff/README.md). Its synchronized stationary
+test exercised synthetic LiDAR, pinned preprocessing and clustering, NDT, EKF,
+planning, control, and both safety watchdogs while the simulator remained
+disengaged. Earlier isolated demos include engaged simulation runs, but engaged
+full-stack autonomy and physical vehicle operation are not currently verified.
+See the linked validation reports for exact scope, results, and failures.
+
+Autoware remains a separate upstream source checkout. It is not vendored here,
+and these demos do not modify the pinned source.
+
+## Autonomy pipeline and current evidence
+
+The campus-driving experiments connect the stages below:
+
+```text
+Lanelet2 map → route → path/trajectory → velocity profile
+  → pinned MPC/PID → command gate → simple planning simulator
+  → simulated odometry, steering and acceleration feedback
+```
+
+The integrated full-stack experiment uses simulator truth only to evolve the
+vehicle and generate synthetic sensors. NDT and EKF estimates—not truth
+odometry—feed the controller. Recorded LiDAR conversion and perception have also
+been tested separately, but the recording is not used in the closed loop and no
+real-data localization accuracy is claimed.
+
+| Demo | What was executed | Validation and reproduction |
+| --- | --- | --- |
+| [Campus map and routing](src/atlas_map_integration_demo/README.md) | Original Lanelet2 and PCD loaded; real route computed and checked | [Results](src/atlas_map_integration_demo/VALIDATION.md); [reproduction](src/atlas_map_integration_demo/README.md) |
+| [Trajectory generation](src/atlas_trajectory_generation_demo/README.md) | Pinned path generation, conversion and velocity smoothing; 35 checks | [Results](src/atlas_trajectory_generation_demo/VALIDATION.md); [reproduction](src/atlas_trajectory_generation_demo/README.md) |
+| [Vehicle motion bench](src/atlas_vehicle_motion_demo/README.md) | Pinned simulator responds to bounded synthetic actuation | [Results](src/atlas_vehicle_motion_demo/VALIDATION.md); [reproduction](src/atlas_vehicle_motion_demo/README.md) |
+| [Campus closed loop](src/atlas_closed_loop_demo/README.md) | Pinned MPC/PID follows the real-map route in simulation; terminal stop and six feedback interruption cases measured | [Results](src/atlas_closed_loop_demo/VALIDATION.md); [reproduction](src/atlas_closed_loop_demo/README.md) |
+| [Obstacle stopping](src/atlas_obstacle_stopping_demo/README.md) | Pinned planner stops for synthetic obstacles, handles clearance and stale-input faults | [Results](src/atlas_obstacle_stopping_demo/VALIDATION.md); [reproduction](src/atlas_obstacle_stopping_demo/README.md) |
+| [Perception to planning](src/atlas_perception_planning_demo/README.md) | Synthetic raw LiDAR runs through conversion, pinned deskew and ground filtering to obstacle planning | [Results](src/atlas_perception_planning_demo/VALIDATION.md); [reproduction](src/atlas_perception_planning_demo/README.md) |
+| [NDT localization test](src/atlas_ndt_localization_test/README.md) | Pinned NDT runs in direct and synthetic preprocessing-chain tests | Reproduction is in the README; no separate current validation report |
+| [Localization-driven simulation](src/atlas_localization_closed_loop_demo/README.md) | Isolated pinned NDT → EKF → MPC prototype completed one 8 m synthetic drive; freshness interruptions block repeatable nominal validation | [Results and blockers](src/atlas_localization_closed_loop_demo/VALIDATION.md) |
+| [Integrated full stack](src/atlas_full_stack_demo/README.md) | Synthetic LiDAR → perception/NDT → EKF → planning → control, with conservative watchdog gating | [Handoff validation](docs/handoff/VALIDATION.md) and [quick start](docs/handoff/QUICK_START.md) |
+| [LiDAR preprocessing and clustering](src/atlas_lidar_perception_test/README.md) | Atlas converters and pinned CPU clustering tested on synthetic scans | Reproduction and test results are in the README |
+| [Deskewer test](src/atlas_distortion_corrector_test/README.md) | Pinned deskew component exercised in synthetic component tests | Reproduction and test results are in the README |
+
+All driving and obstacle clearances use provisional ideal-model dimensions and
+dynamics. RViz runtime/topic checks have passed in some reports; rendered-image
+inspection is called out separately and remains unverified where stated. The
+research-data localization stage remains blocked on calibration/frame metadata,
+defensible initialization, and verified map registration. Read
+[`docs/handoff/QUICK_START.md`](docs/handoff/QUICK_START.md) for environment
+setup, build/cache details, verification commands, and known setup issues.
+
+## Repository map
+
+- `src/atlas_*`: Atlas scaffolds, hardware interfaces, and isolated tests/demos.
+- `src/atlas_map_integration_demo`, `atlas_trajectory_generation_demo`,
+  `atlas_closed_loop_demo`, `atlas_obstacle_stopping_demo`, and
+  `atlas_perception_planning_demo`: progressive campus simulation experiments.
+- `src/atlas_sensor_kit`, `atlas_distortion_corrector_test`,
+  `atlas_lidar_perception_test`, and `atlas_ndt_localization_test`: sensor data
+  conversion, pinned point-cloud components, and synthetic component tests.
+- `src/external/`: ignored third-party driver checkouts imported from
+  [`atlas_dependencies.repos`](atlas_dependencies.repos); never commit them.
+- `docs/`: development milestones and setup/integration documentation.
+- `.closed_loop_cache/`, `.obstacle_cache/`, `.perception_cache/`: ignored,
+  machine-local build and install prefixes used by recent experiments.
+
+Each demo's README contains its reproduction entry points and links to its
+`VALIDATION.md` when it has one. Validation reports distinguish executed checks,
+failures, and work that remains unverified. Older reports may reference
+temporary `/tmp` overlays that have since disappeared.
 
 ## Packages
 

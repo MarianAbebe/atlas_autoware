@@ -1,0 +1,62 @@
+[
+  {
+    "scenario": "ahead",
+    "feedback_input": "odometry",
+    "exit_code": 1,
+    "log": "/tmp/atlas_real_perception_obstacle_final/20261022_015221_ahead_odometry.log"
+  },
+  {
+    "scenario": "off_route",
+    "feedback_input": "odometry",
+    "exit_code": 1,
+    "log": "/tmp/atlas_real_perception_obstacle_final/20261022_015301_off_route_odometry.log"
+  },
+  {
+    "scenario": "stale_drop",
+    "feedback_input": "odometry",
+    "exit_code": 0,
+    "log": "/tmp/atlas_real_perception_obstacle_final/20261022_015335_stale_drop_odometry.log"
+  },
+  {
+    "scenario": "stale_freeze",
+    "feedback_input": "odometry",
+    "exit_code": 0,
+    "log": "/tmp/atlas_real_perception_obstacle_final/20261022_015412_stale_freeze_odometry.log"
+  },
+  {
+    "scenario": "feedback_drop",
+    "feedback_input": "odometry",
+    "exit_code": 0,
+    "log": "/tmp/atlas_real_perception_obstacle_final/20261022_015452_feedback_drop_odometry.log"
+  },
+  {
+    "scenario": "feedback_freeze",
+    "feedback_input": "odometry",
+    "exit_code": 0,
+    "log": "/tmp/atlas_real_perception_obstacle_final/20261022_015527_feedback_freeze_odometry.log"
+  },
+  {
+    "scenario": "feedback_drop",
+    "feedback_input": "steering",
+    "exit_code": 0,
+    "log": "/tmp/atlas_real_perception_obstacle_final/20261022_015604_feedback_drop_steering.log"
+  },
+  {
+    "scenario": "feedback_freeze",
+    "feedback_input": "steering",
+    "exit_code": 0,
+    "log": "/tmp/atlas_real_perception_obstacle_final/20261022_015639_feedback_freeze_steering.log"
+  },
+  {
+    "scenario": "feedback_drop",
+    "feedback_input": "command",
+    "exit_code": 0,
+    "log": "/tmp/atlas_real_perception_obstacle_final/20261022_015719_feedback_drop_command.log"
+  },
+  {
+    "scenario": "feedback_freeze",
+    "feedback_input": "command",
+    "exit_code": 0,
+    "log": "/tmp/atlas_real_perception_obstacle_final/20261022_015759_feedback_freeze_command.log"
+  }
+]

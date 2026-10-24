@@ -1,0 +1,303 @@
+[
+  {
+    "run": "run_20261022_030820_none_odometry",
+    "stamp": 1792638547.9152718,
+    "armed": false,
+    "latched": true,
+    "fault_stamp": 1792638547.848974,
+    "fault_inputs": [
+      "trajectory"
+    ],
+    "currently_stale": [
+      "trajectory"
+    ],
+    "stationary_since_monotonic": null,
+    "fault_input_health": {
+      "odometry": {
+        "source_stamp": 1792638547.551983,
+        "stamp_age_sec": 0.296917200088501,
+        "receipt_age_sec": 0.29500604100030614
+      },
+      "steering": {
+        "source_stamp": 1792638547.5522006,
+        "stamp_age_sec": 0.29669976234436035,
+        "receipt_age_sec": 0.29481949800174334
+      },
+      "acceleration": {
+        "source_stamp": 1792638547.5521567,
+        "stamp_age_sec": 0.29674363136291504,
+        "receipt_age_sec": 0.2947579140018206
+      },
+      "trajectory": {
+        "source_stamp": 1792638547.5117621,
+        "stamp_age_sec": 0.33713817596435547,
+        "receipt_age_sec": 0.330444424002053
+      },
+      "command": {
+        "source_stamp": 1792638547.5617259,
+        "stamp_age_sec": 0.2871744632720947,
+        "receipt_age_sec": 0.28380635999928927
+      }
+    },
+    "fault_tick_gap_sec": 0.2811340549997112,
+    "t": 47.29250734800007
+  },
+  {
+    "run": "run_20261022_031524_feedback_drop_odometry",
+    "stamp": 1792638944.8166747,
+    "armed": false,
+    "latched": true,
+    "fault_stamp": 1792638944.8037767,
+    "fault_inputs": [
+      "odometry"
+    ],
+    "currently_stale": [
+      "odometry"
+    ],
+    "stationary_since_monotonic": null,
+    "fault_input_health": {
+      "odometry": {
+        "source_stamp": 1792638944.498378,
+        "stamp_age_sec": 0.30538225173950195,
+        "receipt_age_sec": 0.303205023999908
+      },
+      "steering": {
+        "source_stamp": 1792638944.799133,
+        "stamp_age_sec": 0.004627227783203125,
+        "receipt_age_sec": 0.0033307689991488587
+      },
+      "acceleration": {
+        "source_stamp": 1792638944.7990968,
+        "stamp_age_sec": 0.0046634674072265625,
+        "receipt_age_sec": 0.003229936999559868
+      },
+      "trajectory": {
+        "source_stamp": 1792638944.7757125,
+        "stamp_age_sec": 0.028047800064086914,
+        "receipt_age_sec": 0.018090107001626166
+      },
+      "command": {
+        "source_stamp": 1792638944.7823253,
+        "stamp_age_sec": 0.021435022354125977,
+        "receipt_age_sec": 0.017368495999107836
+      }
+    },
+    "fault_tick_gap_sec": 0.017688198000541888,
+    "t": 20.072816003001208
+  },
+  {
+    "run": "run_20261022_031600_feedback_freeze_odometry",
+    "stamp": 1792638980.3542762,
+    "armed": false,
+    "latched": true,
+    "fault_stamp": 1792638980.34062,
+    "fault_inputs": [
+      "odometry"
+    ],
+    "currently_stale": [
+      "odometry"
+    ],
+    "stationary_since_monotonic": null,
+    "fault_input_health": {
+      "odometry": {
+        "source_stamp": 1792638980.0365388,
+        "stamp_age_sec": 0.3040640354156494,
+        "receipt_age_sec": 0.001303810000536032
+      },
+      "steering": {
+        "source_stamp": 1792638980.3373096,
+        "stamp_age_sec": 0.003293275833129883,
+        "receipt_age_sec": 0.0010820220013556536
+      },
+      "acceleration": {
+        "source_stamp": 1792638980.3372495,
+        "stamp_age_sec": 0.0033533573150634766,
+        "receipt_age_sec": 0.0010031489982793573
+      },
+      "trajectory": {
+        "source_stamp": 1792638980.301014,
+        "stamp_age_sec": 0.03958892822265625,
+        "receipt_age_sec": 0.03077607099839952
+      },
+      "command": {
+        "source_stamp": 1792638980.32402,
+        "stamp_age_sec": 0.016582965850830078,
+        "receipt_age_sec": 0.013974289999168832
+      }
+    },
+    "fault_tick_gap_sec": 0.020001140001113527,
+    "t": 19.666826164000668
+  },
+  {
+    "run": "run_20261022_031640_feedback_drop_steering",
+    "stamp": 1792639019.8420377,
+    "armed": false,
+    "latched": true,
+    "fault_stamp": 1792639019.8276832,
+    "fault_inputs": [
+      "steering"
+    ],
+    "currently_stale": [
+      "steering"
+    ],
+    "stationary_since_monotonic": null,
+    "fault_input_health": {
+      "odometry": {
+        "source_stamp": 1792639019.807548,
+        "stamp_age_sec": 0.020115375518798828,
+        "receipt_age_sec": 0.01842857000156073
+      },
+      "steering": {
+        "source_stamp": 1792639019.5077078,
+        "stamp_age_sec": 0.31995558738708496,
+        "receipt_age_sec": 0.31840847200146527
+      },
+      "acceleration": {
+        "source_stamp": 1792639019.8076346,
+        "stamp_age_sec": 0.02002882957458496,
+        "receipt_age_sec": 0.0178793700033566
+      },
+      "trajectory": {
+        "source_stamp": 1792639019.7595193,
+        "stamp_age_sec": 0.06814408302307129,
+        "receipt_age_sec": 0.05753938000270864
+      },
+      "command": {
+        "source_stamp": 1792639019.8092587,
+        "stamp_age_sec": 0.018404722213745117,
+        "receipt_age_sec": 0.014785297000344144
+      }
+    },
+    "fault_tick_gap_sec": 0.020025334000820294,
+    "t": 19.5081074669979
+  },
+  {
+    "run": "run_20261022_031715_feedback_freeze_steering",
+    "stamp": 1792639054.6036808,
+    "armed": false,
+    "latched": true,
+    "fault_stamp": 1792639054.5888603,
+    "fault_inputs": [
+      "steering"
+    ],
+    "currently_stale": [
+      "steering"
+    ],
+    "stationary_since_monotonic": null,
+    "fault_input_health": {
+      "odometry": {
+        "source_stamp": 1792639054.587265,
+        "stamp_age_sec": 0.0015788078308105469,
+        "receipt_age_sec": 0.000638407000224106
+      },
+      "steering": {
+        "source_stamp": 1792639054.287489,
+        "stamp_age_sec": 0.30135488510131836,
+        "receipt_age_sec": 0.013851078998413868
+      },
+      "acceleration": {
+        "source_stamp": 1792639054.58738,
+        "stamp_age_sec": 0.0014638900756835938,
+        "receipt_age_sec": 0.00025749599808477797
+      },
+      "trajectory": {
+        "source_stamp": 1792639054.566478,
+        "stamp_age_sec": 0.022365808486938477,
+        "receipt_age_sec": 0.01427073899685638
+      },
+      "command": {
+        "source_stamp": 1792639054.5687306,
+        "stamp_age_sec": 0.020113229751586914,
+        "receipt_age_sec": 0.013710455998079851
+      }
+    },
+    "fault_tick_gap_sec": 0.019906819001334952,
+    "t": 19.317711276999034
+  },
+  {
+    "run": "run_20261022_031754_feedback_drop_command",
+    "stamp": 1792639095.0512986,
+    "armed": false,
+    "latched": true,
+    "fault_stamp": 1792639095.037118,
+    "fault_inputs": [
+      "command"
+    ],
+    "currently_stale": [
+      "command"
+    ],
+    "stationary_since_monotonic": null,
+    "fault_input_health": {
+      "odometry": {
+        "source_stamp": 1792639095.0345657,
+        "stamp_age_sec": 0.0025360584259033203,
+        "receipt_age_sec": 0.0011491500008560251
+      },
+      "steering": {
+        "source_stamp": 1792639095.0348392,
+        "stamp_age_sec": 0.002262592315673828,
+        "receipt_age_sec": 0.0008688620000611991
+      },
+      "acceleration": {
+        "source_stamp": 1792639095.034788,
+        "stamp_age_sec": 0.002313852310180664,
+        "receipt_age_sec": 0.0007441140005539637
+      },
+      "trajectory": {
+        "source_stamp": 1792639094.9392061,
+        "stamp_age_sec": 0.09789562225341797,
+        "receipt_age_sec": 0.08720727000036277
+      },
+      "command": {
+        "source_stamp": 1792639094.7278936,
+        "stamp_age_sec": 0.3092081546783447,
+        "receipt_age_sec": 0.3067821719996573
+      }
+    },
+    "fault_tick_gap_sec": 0.01988951199746225,
+    "t": 20.021468136001204
+  },
+  {
+    "run": "run_20261022_031830_feedback_freeze_command",
+    "stamp": 1792639130.858896,
+    "armed": false,
+    "latched": true,
+    "fault_stamp": 1792639130.844124,
+    "fault_inputs": [
+      "command"
+    ],
+    "currently_stale": [
+      "command"
+    ],
+    "stationary_since_monotonic": null,
+    "fault_input_health": {
+      "odometry": {
+        "source_stamp": 1792639130.8399172,
+        "stamp_age_sec": 0.00418400764465332,
+        "receipt_age_sec": 0.0030002940002304967
+      },
+      "steering": {
+        "source_stamp": 1792639130.8400638,
+        "stamp_age_sec": 0.004037380218505859,
+        "receipt_age_sec": 0.002298845000041183
+      },
+      "acceleration": {
+        "source_stamp": 1792639130.8400228,
+        "stamp_age_sec": 0.004078388214111328,
+        "receipt_age_sec": 0.002448467999784043
+      },
+      "trajectory": {
+        "source_stamp": 1792639130.8177123,
+        "stamp_age_sec": 0.026388883590698242,
+        "receipt_age_sec": 0.017796976000681752
+      },
+      "command": {
+        "source_stamp": 1792639130.5382862,
+        "stamp_age_sec": 0.3058149814605713,
+        "receipt_age_sec": 0.0032928319997154176
+      }
+    },
+    "fault_tick_gap_sec": 0.01752035500248894,
+    "t": 19.552662903002783
+  }
+]

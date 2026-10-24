@@ -1,0 +1,77 @@
+{
+  "ekf/ekf_odom": {
+    "publishers": [
+      "/atlas_loc/ekf/ekf_localizer"
+    ],
+    "subscribers": [
+      "/atlas_loc/controller",
+      "/atlas_loc/gate/vehicle_cmd_gate",
+      "/atlas_loc/localization_watchdog",
+      "/atlas_loc/velocity_smoother",
+      "/independent_localization_evaluator"
+    ]
+  },
+  "ekf/ekf_pose_with_covariance": {
+    "publishers": [
+      "/atlas_loc/ekf/ekf_localizer"
+    ],
+    "subscribers": [
+      "/atlas_loc/ndt/ndt_scan_matcher"
+    ]
+  },
+  "sim/output/odometry": {
+    "publishers": [
+      "/atlas_loc/sim/simple_planning_simulator"
+    ],
+    "subscribers": [
+      "/atlas_loc/localization_watchdog",
+      "/atlas_loc/synthetic_sensor_fixture",
+      "/independent_localization_evaluator"
+    ]
+  },
+  "ndt/ndt_pose_with_covariance": {
+    "publishers": [
+      "/atlas_loc/ndt/ndt_scan_matcher"
+    ],
+    "subscribers": [
+      "/atlas_loc/ekf/ekf_localizer",
+      "/atlas_loc/localization_watchdog",
+      "/independent_localization_evaluator"
+    ]
+  },
+  "sensors/points": {
+    "publishers": [
+      "/atlas_loc/synthetic_sensor_fixture"
+    ],
+    "subscribers": [
+      "/atlas_loc/ndt/ndt_scan_matcher",
+      "/independent_localization_evaluator"
+    ]
+  },
+  "sensors/twist": {
+    "publishers": [
+      "/atlas_loc/synthetic_sensor_fixture"
+    ],
+    "subscribers": [
+      "/atlas_loc/ekf/ekf_localizer"
+    ]
+  },
+  "gated/control_cmd": {
+    "publishers": [
+      "/atlas_loc/gate/vehicle_cmd_gate"
+    ],
+    "subscribers": [
+      "/atlas_loc/sim/simple_planning_simulator",
+      "/independent_localization_evaluator"
+    ]
+  },
+  "controller_subscriptions": [
+    "/atlas_loc/controller/input/steering_offset_update",
+    "/atlas_loc/ekf/ekf_odom",
+    "/atlas_loc/operation_mode",
+    "/atlas_loc/sensors/acceleration",
+    "/atlas_loc/sim/output/steering",
+    "/atlas_loc/trajectory",
+    "/parameter_events"
+  ]
+}

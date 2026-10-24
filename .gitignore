@@ -1,15 +1,101 @@
 # Third-party source imported with atlas_dependencies.repos into src/.
 /src/external/
 
-# ROS 2 / colcon workspace artifacts.
-/build/
-/install/
-/log/
+# Python-generated files.
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# ROS 2 / colcon generated files
+# Machine-local assistant and credential-provider state.
+/.agents/
+/.aws/
+/.codex/
+
+# ROS 2 / colcon workspace artifacts.
 /build/
 /install/
 /log/
 /src/build/
 /src/install/
 /src/log/
+
+# Machine-local package overlays. These are preserved in the handoff backup,
+# not in Git.
+/.closed_loop_cache/
+/.obstacle_cache/
+/.perception_cache/
+/.localization_cache/
+/.full_stack_cache/
+
+# Raw rosbag and scheduler captures.
+*.db3
+*.mcap
+timing_bag*/
+scheduler_telemetry/
+
+# Localization result trees are generated. Retain only compact files referenced
+# by the package validation report.
+/src/atlas_localization_closed_loop_demo/results/*
+!/src/atlas_localization_closed_loop_demo/results/STATUS.json
+!/src/atlas_localization_closed_loop_demo/results/pinned_sources.json
+!/src/atlas_localization_closed_loop_demo/results/reused_configuration.json
+!/src/atlas_localization_closed_loop_demo/results/development_03/
+/src/atlas_localization_closed_loop_demo/results/development_03/*
+!/src/atlas_localization_closed_loop_demo/results/development_03/analysis.json
+!/src/atlas_localization_closed_loop_demo/results/development_03/validation.json
+!/src/atlas_localization_closed_loop_demo/results/final/
+/src/atlas_localization_closed_loop_demo/results/final/*
+!/src/atlas_localization_closed_loop_demo/results/final/suite.json
+!/src/atlas_localization_closed_loop_demo/results/final_no_scan_delay/
+/src/atlas_localization_closed_loop_demo/results/final_no_scan_delay/*
+!/src/atlas_localization_closed_loop_demo/results/final_no_scan_delay/suite.json
+!/src/atlas_localization_closed_loop_demo/results/final_no_scan_delay/nominal/
+/src/atlas_localization_closed_loop_demo/results/final_no_scan_delay/nominal/*
+!/src/atlas_localization_closed_loop_demo/results/final_no_scan_delay/nominal/graph.json
+!/src/atlas_localization_closed_loop_demo/results/final_no_scan_delay/drop_ekf/
+/src/atlas_localization_closed_loop_demo/results/final_no_scan_delay/drop_ekf/*
+!/src/atlas_localization_closed_loop_demo/results/final_no_scan_delay/drop_ekf/ordering_review.json
+!/src/atlas_localization_closed_loop_demo/results/ordering_fix_retest/
+/src/atlas_localization_closed_loop_demo/results/ordering_fix_retest/*
+!/src/atlas_localization_closed_loop_demo/results/ordering_fix_retest/validation.json
+!/src/atlas_localization_closed_loop_demo/results/regressions/
+/src/atlas_localization_closed_loop_demo/results/regressions/*
+!/src/atlas_localization_closed_loop_demo/results/regressions/summary.json
+!/src/atlas_localization_closed_loop_demo/results/regressions/closed_loop_faults/
+/src/atlas_localization_closed_loop_demo/results/regressions/closed_loop_faults/*
+!/src/atlas_localization_closed_loop_demo/results/regressions/closed_loop_faults/suite.json
+
+# Full-stack documentation keeps its report, compact summary, and explicitly
+# linked contract snapshots; bulk run exports remain in the verified backup.
+/docs/full_stack/contracts/
+/docs/full_stack/development/
+/docs/full_stack/original_localization_regression/
+/docs/full_stack/inspection/*
+!/docs/full_stack/inspection/contracts.json
+/docs/full_stack/manual/*
+!/docs/full_stack/manual/processes.json
+/docs/full_stack/validation/*/
+/docs/full_stack/*.log
+/docs/full_stack/validation/*.log
+
+# Localization regression reports retain their compact top-level summaries and
+# the three small fault-gap records linked by REPORT.md.
+/docs/regressions/localization_nominal_repro/*/
+!/docs/regressions/localization_nominal_repro/baseline_1/
+/docs/regressions/localization_nominal_repro/baseline_1/*
+!/docs/regressions/localization_nominal_repro/baseline_1/gap_analysis.json
+!/docs/regressions/localization_nominal_repro/baseline_1/fresh_sources_at_latch.json
+!/docs/regressions/localization_nominal_repro/after_1/
+/docs/regressions/localization_nominal_repro/after_1/*
+!/docs/regressions/localization_nominal_repro/after_1/gap_analysis.json
+
+# These contain repeated maps, trajectories, logs, and per-message exports. The
+# summaries directly under improvements_runs remain versionable.
+/docs/regressions/simulation_timing/improvements_runs/control/
+/docs/regressions/simulation_timing/improvements_runs/localization/
+/docs/regressions/simulation_timing/improvements_runs/obstacle/
+
+# Raw callback-hop export; the compact analysis remains alongside its report.
+/docs/regressions/obstacle_watchdog/timeboxed_followup/fault_hop_windows.csv

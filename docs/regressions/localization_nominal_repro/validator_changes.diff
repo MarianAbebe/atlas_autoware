@@ -1,0 +1,55 @@
+--- /tmp/atlas_loc_validator_before_repro.py	2026-10-22 21:13:41.545662690 +0000
++++ src/atlas_localization_closed_loop_demo/scripts/run_validation.py	2026-10-22 21:15:53.327320900 +0000
+@@ -24,6 +24,8 @@
+ from autoware_control_msgs.msg import Control
+ from autoware_internal_debug_msgs.msg import Float32Stamped, Int32Stamped
+ 
++from measurement_cadence import MeasurementCadence
++
+ NS = '/atlas_loc/'
+ ROOT = Path(__file__).resolve().parents[3]
+ 
+@@ -125,6 +127,8 @@
+     graph, events = {}, []
+     engaged = injected = recovered = hold = None
+     reason = 'timeout'
++    rss_cadence = MeasurementCadence(.5)
++    harness_work = []
+     peak_rss_kib = 0
+     process = None
+ 
+@@ -183,13 +187,16 @@
+                         latched=statuses[-1]['latched'] if statuses else None)),flush=True)
+                     last_progress = now
+                 if not graph and now > 5:
++                    work_start = time.monotonic()
+                     for topic in ['ekf/ekf_odom','ekf/ekf_pose_with_covariance', 'sim/output/odometry',
+                                   'ndt/ndt_pose_with_covariance','sensors/points','sensors/twist','gated/control_cmd']:
+                         graph[topic] = {kind: endpoints(topic,kind) for kind in ['publishers','subscribers']}
+                     graph['controller_subscriptions'] = [
+                         topic for topic, _types in node.get_subscriber_names_and_types_by_node('controller','/atlas_loc')]
++                    harness_work.append(dict(kind='graph', start=work_start-start, duration=time.monotonic()-work_start))
+                 # Read only the launched process tree; resource monitoring cannot alter inputs.
+-                if int(now*2) != int((now-.02)*2):
++                if rss_cadence.due(now):
++                    work_start = time.monotonic()
+                     try:
+                         total = 0
+                         for item in Path('/proc').glob('[0-9]*/status'):
+@@ -200,6 +207,7 @@
+                         peak_rss_kib = max(peak_rss_kib,total)
+                     except (OSError,ProcessLookupError):
+                         pass
++                    harness_work.append(dict(kind='rss', start=work_start-start, duration=time.monotonic()-work_start))
+                 if args.scenario.startswith('no_'):
+                     if now > 14:
+                         reason = 'unavailable_localization_observed'
+@@ -356,7 +364,7 @@
+     for name,data in rows.items():
+         with (args.output/(name+'.csv')).open('w') as stream:
+             csv.writer(stream).writerows(data)
+-    for name,data in [('graph',graph),('events',events),('safety',statuses),('scan_samples',scan_samples)]:
++    for name,data in [('graph',graph),('events',events),('safety',statuses),('scan_samples',scan_samples),('harness_work',harness_work)]:
+         (args.output/(name+'.json')).write_text(json.dumps(data,indent=2))
+     files = list((ROOT/'src/atlas_localization_closed_loop_demo').rglob('*.py')) + list((ROOT/'src/atlas_localization_closed_loop_demo').rglob('*.cpp'))
+     from ament_index_python.packages import get_package_share_directory, get_package_prefix

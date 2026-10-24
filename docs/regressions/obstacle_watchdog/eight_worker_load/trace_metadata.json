@@ -1,0 +1,30 @@
+{
+  "command": [
+    "bash",
+    "-c",
+    "source /opt/ros/humble/setup.bash\nsource .closed_loop_cache/install/setup.bash\nexport ROS_DOMAIN_ID=80 RCUTILS_COLORIZED_OUTPUT=0\n/usr/bin/python3 scripts/watchdog_topic_probe.py --output /tmp/atlas_watchdog_load_hops.csv --duration 65 > /tmp/atlas_watchdog_load_probe.log 2>&1 &\nprobe_pid=$!\nbash src/atlas_obstacle_stopping_demo/scripts/run_test.sh --scenario none --timeout 45 --results-root /tmp/atlas_watchdog_load_hops_runs\nresult=$?\nwait \"$probe_pid\"\nexit \"$result\""
+  ],
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "clock_ticks": 100,
+  "page_size": 4096,
+  "environment": {
+    "ROS_VERSION": "2",
+    "ROS_PYTHON_VERSION": "3",
+    "ROS_LOCALHOST_ONLY": "0",
+    "ROS_DISTRO": "humble"
+  },
+  "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/app-org.gnome.Terminal.slice/vte-spawn-279b3f0b-e88d-491d-b6b8-1b21d23953d1.scope\n",
+  "cpu_max": null,
+  "cpu_control": {
+    "workers": 8,
+    "delay_sec": 20.0,
+    "duration_sec": 8.0
+  }
+}

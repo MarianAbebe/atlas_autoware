@@ -1,0 +1,91 @@
+{
+  "pins": {
+    "/home/marian/roam/references/autoware": {
+      "head": "10718787ba6e28f038a0cb29ff99cc627b5abfd2",
+      "tracked_status": ""
+    },
+    "/home/marian/roam/references/autoware/src/core/autoware_core": {
+      "head": "f25f83c632c1984ec276c894c41857d4abc0dad8",
+      "tracked_status": ""
+    },
+    "/home/marian/roam/references/autoware/src/universe/autoware_universe": {
+      "head": "6e477c645efec33f7909095eea684474e97f5e3d",
+      "tracked_status": ""
+    },
+    "/home/marian/roam/references/autoware/src/core/autoware_simple_planning_simulator": {
+      "head": "82d2c93a28a25f8802e8f5a21b4ec850beea9080",
+      "tracked_status": ""
+    }
+  },
+  "preserved_preexisting_runtime_sha256": {
+    "/home/marian/roam/references/autoware/src/core/autoware_simple_planning_simulator/autoware_simple_planning_simulator/src/simple_planning_simulator/simple_planning_simulator_core.cpp": "675b0e4028817fb20769cda397cd1849b56ec6e43f6879160b85db7dd1e812ae",
+    "/home/marian/roam/references/autoware/src/core/autoware_simple_planning_simulator/autoware_simple_planning_simulator/include/autoware/simple_planning_simulator/simple_planning_simulator_core.hpp": "155e785be8c276ef5d85dac28f01b8283ff307dc3a4c69cedf642b4132ff2053",
+    "/home/marian/roam/atlas_autoware/src/atlas_closed_loop_demo/scripts/feedback_watchdog.py": "bb40d40f71fd358d00f7249e93aa31ce08407bb772ea4fb263ab04bbffcea4a7",
+    "/home/marian/roam/atlas_autoware/src/atlas_localization_closed_loop_demo/src/localization_fixture.cpp": "45a78044a95fc4eff46ca03cf42c01b93239e6061d04f0c39365074059e89772",
+    "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_simple_planning_simulator/lib/libautoware_simple_planning_simulator.so": "dc9388579ba7eec6b9f724368ff33914cf7929f73d93f19b4cf1ffdff0eadac8",
+    "/home/marian/roam/references/autoware/src/core/autoware_utils/autoware_utils_rclcpp/include/autoware_utils_rclcpp/polling_subscriber.hpp": "75c0842a3020ff7660c13b63c65d771eb16832093e96d8597f670a24678888f3",
+    "/home/marian/roam/references/autoware/src/universe/autoware_universe/control/autoware_trajectory_follower_node/src/controller_node.cpp": "0e5eb6c5dbd659960433b14667c6a7d5304c1226d3963aae10c2a24a42f511fc",
+    "/home/marian/roam/references/autoware/src/universe/autoware_universe/control/autoware_pid_longitudinal_controller/src/pid_longitudinal_controller.cpp": "39ebe06808cce4bcf6b3628009066a2dbd5028db7e94d90ec13ab780d51e2618",
+    "/home/marian/roam/references/autoware/src/universe/autoware_universe/control/autoware_pid_longitudinal_controller/src/smooth_stop.cpp": "159494ded8f9873336b7dc9c04becbf50ee594c56ca5aa5438b389794b75642d",
+    "/home/marian/roam/atlas_autoware/src/atlas_localization_closed_loop_demo/scripts/localization_watchdog.py": "896b7ac3f0b2130d2db94dd0d85784c82c23b97bd65614d39cbf638d59564cfc"
+  },
+  "driving_runtime_signatures_consistent": true,
+  "only_adapter_post_batch_change": "Context shutdown exception handling; active-context runtime errors still raise",
+  "source_sha256": {
+    "src/atlas_full_stack_demo/README.md": "81f65eefeb62e37d6fbd5f6af4190b5b378948ca872534b8bc67b1c1657bff0e",
+    "src/atlas_full_stack_demo/CMakeLists.txt": "8dca0d039e7ee8fb8c0beaaee9ae25e9e7d1d30552edc65871d65b73a6cc0ebe",
+    "src/atlas_full_stack_demo/package.xml": "ed720352ffa1c641597ef4ce6f97857891d5e5c32645b9addb13e39a64155e80",
+    "src/atlas_full_stack_demo/launch/full_stack.launch.py": "e8b8615c125042f4d59830da2af9e9fcd3e51cefca83ba4466ca4d3aec3c5215",
+    "src/atlas_full_stack_demo/config/full_stack.rviz": "fdc0f062ab9fbb40adf6270c08ec850063870a9a43c4a6ead9573494630d0465",
+    "src/atlas_full_stack_demo/config/object_only_stop.param.yaml": "4e867a52dbe031448079c8cce2f4bb49436cc2926d2867681a369af311b00641",
+    "src/atlas_full_stack_demo/scripts/manual_start.py": "81749d5a871b80b4684e6f32291c6b6b8facd373ea6760df609c718dd27c95cd",
+    "src/atlas_full_stack_demo/scripts/environment.sh": "473d4eab4a8ba6d5b8cd0a0c8a42d2ad72a1fb86fd9876c6b8e5e7dad7b7b846",
+    "src/atlas_full_stack_demo/scripts/run_test.sh": "372209a51b5edb063c0a0d8196221631bd294fe53169e76e3b1192be60e78b0e",
+    "src/atlas_full_stack_demo/scripts/summarize_results.py": "2b48daa8f8daebb08c65cd72f266599b1c81cf34d237d15c3585a9e660095dbf",
+    "src/atlas_full_stack_demo/scripts/run_validation.py": "f188fe5955d40e22954f332d34e184b874262d28df7678aabbce165e02e28c34",
+    "src/atlas_full_stack_demo/scripts/test_static_objects.py": "5d5d3d481b8202e8c22b69ffb88aa5f552e72f1d9e7b84cd6ed029dd39d8b89b",
+    "src/atlas_full_stack_demo/scripts/capture_contracts.py": "c2d31adbe0e4c778893372813d17c9a6f3af9a5ab135f123faccaed1fa801c5e",
+    "src/atlas_full_stack_demo/scripts/scene.py": "5cbfdb786c60c7d0cfef723e6ca492142c924ef0fc49c4d07a3a7b8a03ad00ad",
+    "src/atlas_full_stack_demo/scripts/build_demo.sh": "19d62cc23bd886c007232769944ad29aa86a633ccb55a426c02ceb97113dc62d",
+    "src/atlas_full_stack_demo/scripts/static_objects.py": "c3eab3e19969b70dd2bf8eb9d79d893948b7ac1bb7a0d2141ca7f8af24207450"
+  },
+  "installed_component_libraries_sha256": {
+    "autoware_ndt_scan_matcher": {
+      "/home/marian/roam/atlas_autoware/.localization_cache/install/autoware_ndt_scan_matcher/lib/libautoware_ndt_scan_matcher.so": "2313b4626724a8ec8901c97ec34b88f447dffb50f70845c12589b6f4a127c15a",
+      "/home/marian/roam/atlas_autoware/.localization_cache/install/autoware_ndt_scan_matcher/lib/libmultigrid_ndt_omp.so": "06352acf5bc38dfb6a92255c71e8c56d3487fd4fe5066d79651ca3b6681cbc3a"
+    },
+    "autoware_ekf_localizer": {
+      "/home/marian/roam/atlas_autoware/.localization_cache/install/autoware_ekf_localizer/lib/libautoware_ekf_localizer.so": "dd165a906ddfd2d85b4d14aa46a57952c1ced17d4221b3e045bc839ae42f031f"
+    },
+    "autoware_trajectory_follower_node": {
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_trajectory_follower_node/lib/libcontroller_node.so": "94a6e7a5ceb92a01d01adcd189d5589588546755c88fa47e2d1928f21cfb6500",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_trajectory_follower_node/lib/libsimple_trajectory_follower.so": "5e66c711287548b53eac47cefcfa42cd48579f5c7231cd92e1e51b7e6987458d"
+    },
+    "autoware_motion_velocity_planner": {
+      "/home/marian/roam/atlas_autoware/.obstacle_cache/install/autoware_motion_velocity_planner/lib/libautoware_motion_velocity_planner_lib.so": "7377bdf3557c00e266d9909a87cb9c45d25a41a7e33dda25fd507c025b9c02e0"
+    },
+    "autoware_ground_filter": {
+      "/home/marian/roam/atlas_autoware/.perception_cache/install/autoware_ground_filter/lib/libautoware_ground_filter.so": "1ffeaefb0250da4f763c12a7cc881753f47c52b4c25002a0055bcfa99f0fc7af"
+    },
+    "autoware_euclidean_cluster_object_detector": {
+      "/home/marian/roam/atlas_autoware/.full_stack_cache/cluster_install/lib/libautoware_euclidean_cluster_object_detector_node_core.so": "84cd086dc83338a5613ff0460e2b73334a032d670a73d06b926644e665e1be62",
+      "/home/marian/roam/atlas_autoware/.full_stack_cache/cluster_install/lib/libautoware_euclidean_cluster_object_detector_voxel_grid_node_core.so": "d69735e5c7a225701ac3a6676125228c998a56e2ad43ac7aa43b6d68d88e3914",
+      "/home/marian/roam/atlas_autoware/.full_stack_cache/cluster_install/lib/libautoware_euclidean_cluster_object_detector_lib.so": "d402858a2fc0b788738bca395bb263b5a0d2a214f2cf7a9c044274c758b3ba5f"
+    },
+    "atlas_sensor_kit": {
+      "/home/marian/roam/atlas_autoware/.perception_cache/atlas_install/atlas_sensor_kit/lib/libpointcloud_conversion.so": "ae1dd109f36e4ae383e64c6091db0835626c3df5e6d325833b2b8a494bb02e6c",
+      "/home/marian/roam/atlas_autoware/.perception_cache/atlas_install/atlas_sensor_kit/lib/libpointcloud_components.so": "f07e10c04435ae6347aa6dc9f93cce86d6ad5b2e1d47cb7ee6e8d497e3f22271"
+    },
+    "atlas_distortion_corrector_test": {
+      "/home/marian/roam/atlas_autoware/.perception_cache/atlas_install/atlas_distortion_corrector_test/lib/libpinned_distortion_support.so": "fcd7f7ce6d7d42787320ff95e1a98778f4eb6f830a2d03a4dfb27a55aca669c7",
+      "/home/marian/roam/atlas_autoware/.perception_cache/atlas_install/atlas_distortion_corrector_test/lib/libpinned_distortion_corrector.so": "a3e79c6bbb0a1133652b912b24366d8b5d91e40c57b4c1c310b33ac206e949d0"
+    }
+  },
+  "installed_atlas_nodes_match_source": true,
+  "original_maps_unchanged_sha256": {
+    "/home/marian/Downloads/finalMap_repaired.osm": "1e9360ea62b709271007d27672120b3d0040ebabc6667d646de68734b1702fee",
+    "/home/marian/Downloads/map_projector_info.yaml": "614af74d6aaefe052c435338b585797a451e7922efc290329374c2abd2b8992d",
+    "/home/marian/Downloads/pointcloud_map_georeferenced.pcd": "6121b6bf8df4324ab42286822f0e6f00c67ecc10daecf84d180129a6069ef9a3"
+  },
+  "completed_utc": "2026-10-22T22:37:49.298894+00:00"
+}

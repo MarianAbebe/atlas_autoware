@@ -26,6 +26,7 @@ class Watchdog(Node):
         self.arm_stability=self.declare_parameter("arm_stability_sec",1.0).value
         self.timeout=self.declare_parameter('freshness_sec',.3).value
         self.fault_at=None; self.fault_inputs=[]; self.stationary_since=None
+        self.input_health={};self.fault_health=None;self.last_tick=None;self.fault_tick_gap=None
         self.pub=self.create_publisher(Heartbeat,'gate/input/external_emergency_stop_heartbeat',10)
         self.status=self.create_publisher(String,'safety_status',10)
         for name,typ,topic in [('odometry',Odometry,'feedback/odometry'),('steering',SteeringReport,'feedback/steering'),('acceleration',AccelWithCovarianceStamped,'feedback/acceleration'),('trajectory',Trajectory,'trajectory'),('command',Control,'control_cmd')]:
@@ -47,6 +48,10 @@ class Watchdog(Node):
     def stale(self):
         now=self.get_clock().now().nanoseconds*1e-9
         mono=time.monotonic()
+        self.input_health={n:dict(source_stamp=self.stamps.get(n),
+            stamp_age_sec=now-self.stamps[n] if n in self.stamps else None,
+            receipt_age_sec=mono-self.receipts[n] if n in self.receipts else None)
+            for n in ['odometry','steering','acceleration','trajectory','command']}
         return [n for n in ['odometry','steering','acceleration','trajectory','command']
                 if n not in self.stamps or not 0<=now-self.stamps[n]<self.timeout
                 or mono-self.receipts[n]>=self.timeout]
@@ -61,6 +66,9 @@ class Watchdog(Node):
         return response
 
     def tick(self):
+        tick_now=time.monotonic()
+        tick_gap=tick_now-self.last_tick if self.last_tick is not None else None
+        self.last_tick=tick_now
         stale=self.stale()
         if not stale and not self.bad:
             if self.good_since is None:self.good_since=time.monotonic()
@@ -70,6 +78,7 @@ class Watchdog(Node):
             hb=Heartbeat();hb.ready=True;hb.stamp=self.get_clock().now().to_msg();self.pub.publish(hb)
         elif self.ready and not self.bad:
             self.bad=True;self.fault_at=self.get_clock().now().nanoseconds*1e-9;self.fault_inputs=stale
+            self.fault_health=self.input_health;self.fault_tick_gap=tick_gap
             self.get_logger().warn('LATCHED stale required input: '+','.join(stale)+'; heartbeat withheld; pinned gate must brake')
         if stale:self.good_since=None
         self.publish_status(stale)
@@ -78,7 +87,8 @@ class Watchdog(Node):
         msg=String();msg.data=json.dumps({'stamp':self.get_clock().now().nanoseconds*1e-9,
             'armed':self.ready and not self.bad,'latched':self.bad,'fault_stamp':self.fault_at,
             'fault_inputs':self.fault_inputs,'currently_stale':stale,
-            'stationary_since_monotonic':self.stationary_since})
+            'stationary_since_monotonic':self.stationary_since,
+            'fault_input_health':self.fault_health,'fault_tick_gap_sec':self.fault_tick_gap})
         self.status.publish(msg)
 
 

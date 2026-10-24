@@ -11,7 +11,10 @@ from launch_ros.descriptions import ComposableNode
 
 def generate_launch_description():
     share = get_package_share_directory('atlas_trajectory_generation_demo')
-    core = '/home/marian/roam/references/autoware/src/core/autoware_core/planning'
+    autoware_root = os.environ.get('ATLAS_AUTOWARE_ROOT')
+    if not autoware_root:
+        raise RuntimeError('Set ATLAS_AUTOWARE_ROOT to the pinned Autoware checkout before launch')
+    core = os.path.join(autoware_root, 'src/core/autoware_core/planning')
     vehicle = os.path.join(share, 'config', 'test_vehicle.param.yaml')
     overrides = os.path.join(share, 'config', 'planning_overrides.param.yaml')
     results = LaunchConfiguration('results_dir')

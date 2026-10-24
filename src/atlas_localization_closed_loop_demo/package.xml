@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>atlas_localization_closed_loop_demo</name><version>0.1.0</version>
+  <description>Isolated synthetic pinned NDT/EKF/MPC closed-loop contract test.</description>
+  <maintainer email="todo@example.com">ROAM</maintainer><license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend><depend>geometry_msgs</depend><depend>nav_msgs</depend>
+  <depend>sensor_msgs</depend><depend>std_msgs</depend><depend>std_srvs</depend>
+  <depend>autoware_map_msgs</depend><depend>autoware_control_msgs</depend>
+  <depend>autoware_planning_msgs</depend><depend>autoware_vehicle_msgs</depend>
+  <depend>autoware_adapi_v1_msgs</depend><depend>pcl_conversions</depend><depend>libpcl-all</depend><build_depend>libpcl-all-dev</build_depend><depend>tf2_ros</depend>
+  <exec_depend>atlas_closed_loop_demo</exec_depend><exec_depend>autoware_ndt_scan_matcher</exec_depend>
+  <exec_depend>autoware_ekf_localizer</exec_depend><exec_depend>autoware_trajectory_follower_node</exec_depend>
+  <exec_depend>autoware_vehicle_cmd_gate</exec_depend><exec_depend>autoware_simple_planning_simulator</exec_depend>
+  <exec_depend>autoware_velocity_smoother</exec_depend><exec_depend>ament_index_python</exec_depend><exec_depend>autoware_internal_debug_msgs</exec_depend><exec_depend>launch_ros</exec_depend><exec_depend>rclpy</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

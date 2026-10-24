@@ -1,0 +1,4 @@
+Recorded frame=lidar_vlp16_points_link points=29184 stride=22
+Rejected: expected unorganized cloud (height=1)
+Rejected: expected unorganized cloud (height=1)
+Expected incompatible-input rejections=2/2

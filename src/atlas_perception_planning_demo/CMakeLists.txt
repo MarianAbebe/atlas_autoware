@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.14)
+project(atlas_perception_planning_demo)
+find_package(ament_cmake REQUIRED)
+install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS scripts/raw_source.py scripts/perception_guard.py DESTINATION lib/${PROJECT_NAME})
+ament_package()

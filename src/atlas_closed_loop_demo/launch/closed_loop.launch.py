@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, GroupAction, IncludeLaunchDescription
@@ -12,7 +13,8 @@ from launch_ros.descriptions import ComposableNode
 
 def generate_launch_description():
     share = get_package_share_directory('atlas_closed_loop_demo')
-    core = '/home/marian/roam/references/autoware/src/core/autoware_core/planning'
+    autoware_root = Path(os.environ.get('ATLAS_AUTOWARE_ROOT', Path(__file__).resolve().parents[4] / 'references/autoware'))
+    core = str(autoware_root / 'src/core/autoware_core/planning')
     vehicle = os.path.join(share, 'config', 'test_vehicle.param.yaml')
     overrides = os.path.join(share, 'config', 'planning_overrides.param.yaml')
     results = LaunchConfiguration('results_dir')
@@ -54,7 +56,7 @@ def generate_launch_description():
                                 ('~/input/operation_mode_state', '/atlas_closed_loop/operation_mode'),
                                 ('~/input/trajectory', '/atlas_closed_loop/raw_trajectory'),
                                 ('~/output/trajectory', '/atlas_closed_loop/trajectory')])
-    control_root = '/home/marian/roam/references/autoware/src/universe/autoware_universe/control/autoware_trajectory_follower_node'
+    control_root = str(autoware_root / 'src/universe/autoware_universe/control/autoware_trajectory_follower_node')
     controller = Node(package='autoware_trajectory_follower_node', executable='controller_node_exe',
                       name='controller', namespace='/atlas_closed_loop', output='screen',
                       parameters=[control_root + '/param/trajectory_follower_node.param.yaml',
@@ -82,7 +84,7 @@ def generate_launch_description():
                         ('input/trajectory', '/atlas_closed_loop/trajectory')])])
     relay = Node(package='atlas_closed_loop_demo', executable='feedback_relay.py',
                  name='feedback_relay', namespace='/atlas_closed_loop', output='screen',
-                 parameters=[{'release_delay_sec': 8.0, 'require_safety': ParameterValue(LaunchConfiguration('gated'),value_type=bool)}])
+                 parameters=[{'record_commands': ParameterValue(LaunchConfiguration('record_commands'),value_type=bool), 'release_delay_sec': 8.0, 'require_safety': ParameterValue(LaunchConfiguration('gated'),value_type=bool)}])
     gate = Node(package='autoware_vehicle_cmd_gate', executable='vehicle_cmd_gate_exe',
                 name='vehicle_cmd_gate', namespace='/atlas_closed_loop/gate', output='screen',
                 condition=IfCondition(LaunchConfiguration('gated')),
@@ -105,6 +107,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('results_dir', default_value='/tmp/atlas_closed_loop_results/interactive'),
         DeclareLaunchArgument('gated',default_value='true'),
+        DeclareLaunchArgument('record_commands',default_value='false'),
         DeclareLaunchArgument('vehicle_model',default_value='IDEAL_STEER_ACC_GEARED'),
         DeclareLaunchArgument('planning_enabled', default_value='true'),
         DeclareLaunchArgument('launch_rviz', default_value='false'),

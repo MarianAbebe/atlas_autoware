@@ -102,3 +102,22 @@ Total: 17 distinct GTest cases, zero failures/errors/skips. Colcon reports 27
 entries because it also counts the ten CTest wrappers. All ten test logs were
 checked for duplicate plugin registration and DDS transport errors: none found.
 No upstream or production Atlas implementation was changed.
+
+## Bounded real-recording probes
+
+Synthetic scenarios above are unchanged. A new `real_cloud_deskew_boundary`
+executable accepts a converted cloud CDR and exercises the pinned algorithm's
+layout check and empty-motion-queue return. It deliberately avoids transform
+setup and must not be described as successful motion compensation.
+
+The optional `-DATLAS_REAL_GROUND_SMOKE=ON` builds `real_ground_smoke` from the
+unchanged pinned RANSAC node and preprocessing Filter sources. It needs the
+existing `message_filters`, `pcl_msgs`, `autoware_internal_msgs`, Boost thread and
+PCL filters/segmentation dependencies. It loads the registered RANSAC factory
+with the upstream parameter YAML and sets base/input/output frame to the actual
+recorded LiDAR frame. No vehicle geometry or physical TF is supplied. This tests
+sensor-z plane removal and metadata preservation; calibrated ground semantics
+are unverified. The flag defaults OFF, preserving the existing build closure.
+
+See [real conversion validation](../../docs/real_data/engg_loading_dock_01/CONVERSION.md)
+for the three-scan evidence, transport limitations and reproduction commands.

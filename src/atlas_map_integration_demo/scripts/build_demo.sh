@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 # Build only missing pinned packages; never invoke a package installer.
 set -eo pipefail
-cd /home/marian/roam/atlas_autoware
+atlas_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+cd "$atlas_root"
+export ATLAS_REPO_ROOT="$atlas_root"
+export ATLAS_AUTOWARE_ROOT="${ATLAS_AUTOWARE_ROOT:-$(cd "$atlas_root/.." && pwd)/references/autoware}"
 source /opt/ros/humble/setup.bash
 for atlas_overlay in /tmp/atlas_deskew_deps_install /tmp/atlas_ndt_install /tmp/atlas_vehicle_sim_install /tmp/atlas_map_upstream_install; do
   if [[ -f "$atlas_overlay/setup.bash" ]]; then
@@ -16,7 +19,7 @@ import os
 from pathlib import Path
 import subprocess
 
-reference = Path('/home/marian/roam/references/autoware')
+reference = Path(os.environ['ATLAS_AUTOWARE_ROOT'])
 pins = {reference: '10718787ba6e28f038a0cb29ff99cc627b5abfd2',
         reference / 'src/core/autoware_core': 'f25f83c632c1984ec276c894c41857d4abc0dad8',
         reference / 'src/core/autoware_lanelet2_extension': '4a3420d8cc19906e7739618f8a1686400f79b4ac'}

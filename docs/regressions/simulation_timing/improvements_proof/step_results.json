@@ -1,0 +1,47 @@
+{
+  "scope": "component timing proof only",
+  "full_loop_corrected": false,
+  "historical_root_cause_established": false,
+  "runs": {
+    "realtime_500": {
+      "mode": "realtime",
+      "wall_stall_sec": 0.5,
+      "state_dt_sec": 0.501524212,
+      "velocity_increment": 0.1003036272946405,
+      "samples": 11,
+      "final_x": 0.04653105376272213,
+      "final_vx": 0.1364273498329259,
+      "passed": true
+    },
+    "controlled_500": {
+      "mode": "controlled",
+      "wall_stall_sec": 0.5,
+      "state_dt_sec": 0.02,
+      "velocity_increment": 0.004000000059604644,
+      "samples": 22,
+      "final_x": 0.016000000238418577,
+      "final_vx": 0.0800000011920929,
+      "passed": true
+    },
+    "controlled_0": {
+      "mode": "controlled",
+      "wall_stall_sec": 0,
+      "state_dt_sec": 0.02,
+      "velocity_increment": 0.004000000059604644,
+      "samples": 22,
+      "final_x": 0.016000000238418577,
+      "final_vx": 0.0800000011920929,
+      "passed": true
+    }
+  },
+  "controlled_final_state_identical": true,
+  "polling_clock": {
+    "header_age_sec": 1,
+    "polling_metadata_age_sec": -1792701439.2260668,
+    "expected_cyclic_timeout": true,
+    "actual_comparison_timeout": false,
+    "mismatch_reproduced": true,
+    "unattached_ros_clock_uses_host_time": true
+  },
+  "passed": true
+}

@@ -1,0 +1,1509 @@
+{
+  "scope": "Fixed six-case full-stack batch; no reliability guarantee",
+  "counts": {
+    "clear": {
+      "passed": 2,
+      "total": 2
+    },
+    "localization_loss": {
+      "passed": 2,
+      "total": 2
+    },
+    "loss": {
+      "passed": 2,
+      "total": 2
+    },
+    "obstacle": {
+      "passed": 1,
+      "total": 2
+    }
+  },
+  "runs": {
+    "clear_1": {
+      "validation": {
+        "passed": true,
+        "checks": {
+          "no_runtime_error": true,
+          "all_stage_outputs": true,
+          "finite": true,
+          "engaged": true,
+          "mpc_exclusively_ekf": true,
+          "no_truth_fallback": true,
+          "ndt_from_preprocessing": true,
+          "detection_exclusively_cluster": true,
+          "objects_exclusively_adapter": true,
+          "plan_exclusively_pinned": true,
+          "ndt_converged": true,
+          "localization_accuracy": true,
+          "source_stamp_lineage": true,
+          "ndt_acquisition_lineage": true,
+          "predictions_from_real_detections": true,
+          "measured_positive_shapes": true,
+          "ekf_receives_ndt": true,
+          "planner_receives_objects": true,
+          "controller_receives_planned_trajectory": true,
+          "ground_exclusively_pinned": true,
+          "raw_exclusively_fixture": true,
+          "map_consistent_evolving_scans": true,
+          "no_child_exception_during_measurement": true,
+          "hold_complete": true,
+          "no_watchdog_latch": true,
+          "clear_has_no_spurious_early_stop": true
+        },
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "clear",
+          "termination": "stopped_hold_completed",
+          "error": null,
+          "engaged": 5.663339560000168,
+          "injected": null,
+          "peak_process_rss_kib": 1324860,
+          "localization_errors": {
+            "ndt": {
+              "matched": 352,
+              "max_xy_m": 0.09586372694707576,
+              "rms_xy_m": 0.08775001343299711
+            },
+            "ekf": {
+              "matched": 1758,
+              "max_xy_m": 0.09927727684357886,
+              "rms_xy_m": 0.08755683818287051
+            }
+          },
+          "final_goal_error_m": 0.10971688231393181,
+          "obstacle_clearance_m": null,
+          "scan_world_residual_m": 1.1716561731030093e-06,
+          "scan_sample_displacement_m": 15.944405468298926,
+          "max_tracking_sample_distance_m": 0.2585318385644018,
+          "counts": {
+            "truth": 1912,
+            "ekf": 1911,
+            "ndt": 374,
+            "command": 1239,
+            "gate": 1171,
+            "raw": 382,
+            "extended": 382,
+            "deskewed": 382,
+            "compact": 382,
+            "ground": 382,
+            "clusters": 382,
+            "detected": 382,
+            "predicted": 382,
+            "plan": 374,
+            "trajectory": 374,
+            "ndt_ms": 374,
+            "ndt_score": 374
+          },
+          "first_latch": null,
+          "first_matched_detection": null,
+          "first_stop_plan": null,
+          "stage_acquisition_age_max_sec": {
+            "raw": 0.03258562088012695,
+            "extended": 0.04131746292114258,
+            "deskewed": 0.04878354072570801,
+            "compact": 0.05342674255371094,
+            "ground": 0.056296586990356445
+          },
+          "detector_acquisition_age_max_sec": 0.0759420394897461,
+          "ndt_max_update_gap_sec": 0.10043716430664062
+        }
+      },
+      "additional_checks": {
+        "edge:lidar/raw->livox_converter": true,
+        "edge:lidar/extended->distortion_corrector": true,
+        "edge:lidar/deskewed->compact_converter": true,
+        "edge:lidar/compact->ndt/ndt_scan_matcher": true,
+        "edge:lidar/compact->ground_filter": true,
+        "edge:obstacles/pointcloud->euclidean_cluster": true,
+        "edge:clusters->static_objects_adapter": true,
+        "edge:obstacles/detected_objects->static_objects_adapter": true,
+        "edge:obstacles/predicted_objects->motion_velocity_planner": true,
+        "edge:obstacle_trajectory->velocity_smoother": true,
+        "edge:trajectory->controller": true,
+        "edge:ekf/ekf_odom->controller": true,
+        "edge:ndt/ndt_pose_with_covariance->ekf/ekf_localizer": true,
+        "edge:gated/control_cmd->sim/simple_planning_simulator": true,
+        "truth_not_estimator_controller_or_planner": true,
+        "conversion_keeps_point_count": true,
+        "conversion_keeps_sensor_frame": true,
+        "bounded_finite_control": true,
+        "bounded_actual_speed": true
+      },
+      "additional_checks_passed": true,
+      "matched_conversion_scans": 382,
+      "first_watchdog_latch": null,
+      "latency_sec": {
+        "acquisition_to_ndt_observer": {
+          "samples": 374,
+          "median": 0.03261665788340906,
+          "p95": 0.035309641315507144,
+          "maximum": 0.07096727421958349
+        },
+        "acquisition_to_detector_observer": {
+          "samples": 382,
+          "median": 0.032930731773376465,
+          "p95": 0.03536347150802612,
+          "maximum": 0.0759420394897461
+        },
+        "acquisition_to_static_objects_observer": {
+          "samples": 382,
+          "median": 0.03708517551422119,
+          "p95": 0.04004390239715576,
+          "maximum": 0.08002376556396484
+        }
+      },
+      "tracking": {
+        "max_distance_to_reference_polyline_m": 0.07428415778435393,
+        "rms_distance_to_reference_polyline_m": 0.06142251730994871
+      },
+      "last_accepted_ndt_age_at_measurement_end_sec": 0.03982663154602051
+    },
+    "clear_2": {
+      "validation": {
+        "passed": true,
+        "checks": {
+          "no_runtime_error": true,
+          "all_stage_outputs": true,
+          "finite": true,
+          "engaged": true,
+          "mpc_exclusively_ekf": true,
+          "no_truth_fallback": true,
+          "ndt_from_preprocessing": true,
+          "detection_exclusively_cluster": true,
+          "objects_exclusively_adapter": true,
+          "plan_exclusively_pinned": true,
+          "ndt_converged": true,
+          "localization_accuracy": true,
+          "source_stamp_lineage": true,
+          "ndt_acquisition_lineage": true,
+          "predictions_from_real_detections": true,
+          "measured_positive_shapes": true,
+          "ekf_receives_ndt": true,
+          "planner_receives_objects": true,
+          "controller_receives_planned_trajectory": true,
+          "ground_exclusively_pinned": true,
+          "raw_exclusively_fixture": true,
+          "map_consistent_evolving_scans": true,
+          "no_child_exception_during_measurement": true,
+          "hold_complete": true,
+          "no_watchdog_latch": true,
+          "clear_has_no_spurious_early_stop": true
+        },
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "clear",
+          "termination": "stopped_hold_completed",
+          "error": null,
+          "engaged": 5.92777446999753,
+          "injected": null,
+          "peak_process_rss_kib": 1271836,
+          "localization_errors": {
+            "ndt": {
+              "matched": 352,
+              "max_xy_m": 0.09437994223646055,
+              "rms_xy_m": 0.08570893457754405
+            },
+            "ekf": {
+              "matched": 1763,
+              "max_xy_m": 0.09745347586105145,
+              "rms_xy_m": 0.08604844995227445
+            }
+          },
+          "final_goal_error_m": 0.09340433010668536,
+          "obstacle_clearance_m": null,
+          "scan_world_residual_m": 1.2217146463323159e-06,
+          "scan_sample_displacement_m": 15.968738934038484,
+          "max_tracking_sample_distance_m": 0.25843017650845534,
+          "counts": {
+            "truth": 1920,
+            "ekf": 1919,
+            "ndt": 375,
+            "command": 1244,
+            "gate": 1175,
+            "raw": 383,
+            "extended": 383,
+            "deskewed": 383,
+            "compact": 383,
+            "ground": 383,
+            "clusters": 383,
+            "detected": 383,
+            "predicted": 383,
+            "plan": 375,
+            "trajectory": 375,
+            "ndt_ms": 375,
+            "ndt_score": 375
+          },
+          "first_latch": null,
+          "first_matched_detection": null,
+          "first_stop_plan": null,
+          "stage_acquisition_age_max_sec": {
+            "raw": 0.04356694221496582,
+            "extended": 0.043756961822509766,
+            "deskewed": 0.04891777038574219,
+            "compact": 0.05239748954772949,
+            "ground": 0.05569171905517578
+          },
+          "detector_acquisition_age_max_sec": 0.0741419792175293,
+          "ndt_max_update_gap_sec": 0.10058045387268066
+        }
+      },
+      "additional_checks": {
+        "edge:lidar/raw->livox_converter": true,
+        "edge:lidar/extended->distortion_corrector": true,
+        "edge:lidar/deskewed->compact_converter": true,
+        "edge:lidar/compact->ndt/ndt_scan_matcher": true,
+        "edge:lidar/compact->ground_filter": true,
+        "edge:obstacles/pointcloud->euclidean_cluster": true,
+        "edge:clusters->static_objects_adapter": true,
+        "edge:obstacles/detected_objects->static_objects_adapter": true,
+        "edge:obstacles/predicted_objects->motion_velocity_planner": true,
+        "edge:obstacle_trajectory->velocity_smoother": true,
+        "edge:trajectory->controller": true,
+        "edge:ekf/ekf_odom->controller": true,
+        "edge:ndt/ndt_pose_with_covariance->ekf/ekf_localizer": true,
+        "edge:gated/control_cmd->sim/simple_planning_simulator": true,
+        "truth_not_estimator_controller_or_planner": true,
+        "conversion_keeps_point_count": true,
+        "conversion_keeps_sensor_frame": true,
+        "bounded_finite_control": true,
+        "bounded_actual_speed": true
+      },
+      "additional_checks_passed": true,
+      "matched_conversion_scans": 383,
+      "first_watchdog_latch": null,
+      "latency_sec": {
+        "acquisition_to_ndt_observer": {
+          "samples": 375,
+          "median": 0.04121270848918357,
+          "p95": 0.044311076981102815,
+          "maximum": 0.055708749390760204
+        },
+        "acquisition_to_detector_observer": {
+          "samples": 383,
+          "median": 0.04155302047729492,
+          "p95": 0.04499850273132324,
+          "maximum": 0.0741419792175293
+        },
+        "acquisition_to_static_objects_observer": {
+          "samples": 383,
+          "median": 0.04583740234375,
+          "p95": 0.04978187084197998,
+          "maximum": 0.0787961483001709
+        }
+      },
+      "tracking": {
+        "max_distance_to_reference_polyline_m": 0.074479909250224,
+        "rms_distance_to_reference_polyline_m": 0.06162338432830638
+      },
+      "last_accepted_ndt_age_at_measurement_end_sec": 0.09949231147766113
+    },
+    "localization_loss_1": {
+      "validation": {
+        "passed": true,
+        "checks": {
+          "no_runtime_error": true,
+          "all_stage_outputs": true,
+          "finite": true,
+          "engaged": true,
+          "mpc_exclusively_ekf": true,
+          "no_truth_fallback": true,
+          "ndt_from_preprocessing": true,
+          "detection_exclusively_cluster": true,
+          "objects_exclusively_adapter": true,
+          "plan_exclusively_pinned": true,
+          "ndt_converged": true,
+          "localization_accuracy": true,
+          "source_stamp_lineage": true,
+          "ndt_acquisition_lineage": true,
+          "predictions_from_real_detections": true,
+          "measured_positive_shapes": true,
+          "ekf_receives_ndt": true,
+          "planner_receives_objects": true,
+          "controller_receives_planned_trajectory": true,
+          "ground_exclusively_pinned": true,
+          "raw_exclusively_fixture": true,
+          "map_consistent_evolving_scans": true,
+          "no_child_exception_during_measurement": true,
+          "loss_injected": true,
+          "loss_latched": true,
+          "accepted_ndt_became_stale": true,
+          "no_latch_before_injection": true,
+          "loss_stop": true,
+          "loss_observed": true,
+          "perception_continues_after_ndt_loss": true
+        },
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "localization_loss",
+          "termination": "loss_stop_observed",
+          "error": null,
+          "engaged": 7.40970575600295,
+          "injected": 11.673640319000697,
+          "peak_process_rss_kib": 1273280,
+          "localization_errors": {
+            "ndt": {
+              "matched": 43,
+              "max_xy_m": 0.07664567459702068,
+              "rms_xy_m": 0.07515203812548125
+            },
+            "ekf": {
+              "matched": 814,
+              "max_xy_m": 0.07764125493951876,
+              "rms_xy_m": 0.07618162462806745
+            }
+          },
+          "final_goal_error_m": 14.266225500476919,
+          "obstacle_clearance_m": null,
+          "scan_world_residual_m": 1.2976781840915254e-06,
+          "scan_sample_displacement_m": 1.8956130807447693,
+          "max_tracking_sample_distance_m": 0.05366997848130632,
+          "counts": {
+            "truth": 968,
+            "ekf": 968,
+            "ndt": 71,
+            "command": 611,
+            "gate": 505,
+            "raw": 193,
+            "extended": 193,
+            "deskewed": 193,
+            "compact": 193,
+            "ground": 193,
+            "clusters": 193,
+            "detected": 193,
+            "predicted": 193,
+            "plan": 185,
+            "trajectory": 185,
+            "ndt_ms": 71,
+            "ndt_score": 71
+          },
+          "first_latch": {
+            "stamp": 1792708001.1312249,
+            "armed": false,
+            "latched": true,
+            "fault_stamp": 1792708001.113919,
+            "fault_inputs": [
+              "ndt"
+            ],
+            "currently_stale": [
+              "ndt"
+            ],
+            "stationary_since_monotonic": null,
+            "fault_input_health": {
+              "odometry": {
+                "source_stamp": 1792708001.1057632,
+                "stamp_age_sec": 0.008134603500366211,
+                "receipt_age_sec": 0.004880398002569564
+              },
+              "steering": {
+                "source_stamp": 1792708001.0963082,
+                "stamp_age_sec": 0.017589569091796875,
+                "receipt_age_sec": 0.017065037001884775
+              },
+              "acceleration": {
+                "source_stamp": 1792708001.0962687,
+                "stamp_age_sec": 0.017629146575927734,
+                "receipt_age_sec": 0.01619354800277506
+              },
+              "trajectory": {
+                "source_stamp": 1792708001.1022792,
+                "stamp_age_sec": 0.011618614196777344,
+                "receipt_age_sec": 0.00521756000307505
+              },
+              "command": {
+                "source_stamp": 1792708001.1120913,
+                "stamp_age_sec": 0.001806497573852539,
+                "receipt_age_sec": 0.0001995390011870768
+              },
+              "ndt": {
+                "source_stamp": 1792708000.796147,
+                "stamp_age_sec": 0.3177659511566162,
+                "receipt_age_sec": 0.2825729249998403
+              }
+            },
+            "fault_tick_gap_sec": 0.020029375002195593,
+            "t": 11.9509332680027
+          },
+          "first_matched_detection": null,
+          "first_stop_plan": null,
+          "stage_acquisition_age_max_sec": {
+            "raw": 0.026339292526245117,
+            "extended": 0.027770280838012695,
+            "deskewed": 0.05510306358337402,
+            "compact": 0.057861328125,
+            "ground": 0.062219858169555664
+          },
+          "detector_acquisition_age_max_sec": 0.08079051971435547,
+          "ndt_max_update_gap_sec": 0.10154294967651367
+        }
+      },
+      "additional_checks": {
+        "edge:lidar/raw->livox_converter": true,
+        "edge:lidar/extended->distortion_corrector": true,
+        "edge:lidar/deskewed->compact_converter": true,
+        "edge:lidar/compact->ndt/ndt_scan_matcher": true,
+        "edge:lidar/compact->ground_filter": true,
+        "edge:obstacles/pointcloud->euclidean_cluster": true,
+        "edge:clusters->static_objects_adapter": true,
+        "edge:obstacles/detected_objects->static_objects_adapter": true,
+        "edge:obstacles/predicted_objects->motion_velocity_planner": true,
+        "edge:obstacle_trajectory->velocity_smoother": true,
+        "edge:trajectory->controller": true,
+        "edge:ekf/ekf_odom->controller": true,
+        "edge:ndt/ndt_pose_with_covariance->ekf/ekf_localizer": true,
+        "edge:gated/control_cmd->sim/simple_planning_simulator": true,
+        "truth_not_estimator_controller_or_planner": true,
+        "conversion_keeps_point_count": true,
+        "conversion_keeps_sensor_frame": true,
+        "bounded_finite_control": true,
+        "bounded_actual_speed": true,
+        "ekf_still_publishes_fresh_predictions": true,
+        "perception_available_at_measurement_end": true
+      },
+      "additional_checks_passed": true,
+      "matched_conversion_scans": 193,
+      "first_watchdog_latch": {
+        "stage": "localization",
+        "stamp": 1792708001.1312249,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792708001.113919,
+        "fault_inputs": [
+          "ndt"
+        ],
+        "currently_stale": [
+          "ndt"
+        ],
+        "stationary_since_monotonic": null,
+        "fault_input_health": {
+          "odometry": {
+            "source_stamp": 1792708001.1057632,
+            "stamp_age_sec": 0.008134603500366211,
+            "receipt_age_sec": 0.004880398002569564
+          },
+          "steering": {
+            "source_stamp": 1792708001.0963082,
+            "stamp_age_sec": 0.017589569091796875,
+            "receipt_age_sec": 0.017065037001884775
+          },
+          "acceleration": {
+            "source_stamp": 1792708001.0962687,
+            "stamp_age_sec": 0.017629146575927734,
+            "receipt_age_sec": 0.01619354800277506
+          },
+          "trajectory": {
+            "source_stamp": 1792708001.1022792,
+            "stamp_age_sec": 0.011618614196777344,
+            "receipt_age_sec": 0.00521756000307505
+          },
+          "command": {
+            "source_stamp": 1792708001.1120913,
+            "stamp_age_sec": 0.001806497573852539,
+            "receipt_age_sec": 0.0001995390011870768
+          },
+          "ndt": {
+            "source_stamp": 1792708000.796147,
+            "stamp_age_sec": 0.3177659511566162,
+            "receipt_age_sec": 0.2825729249998403
+          }
+        },
+        "fault_tick_gap_sec": 0.020029375002195593,
+        "t": 11.9509332680027
+      },
+      "latency_sec": {
+        "acquisition_to_ndt_observer": {
+          "samples": 71,
+          "median": 0.032962730816507246,
+          "p95": 0.03962261557535385,
+          "maximum": 0.05079705810567248
+        },
+        "acquisition_to_detector_observer": {
+          "samples": 193,
+          "median": 0.03318476676940918,
+          "p95": 0.03502969741821289,
+          "maximum": 0.08079051971435547
+        },
+        "acquisition_to_static_objects_observer": {
+          "samples": 193,
+          "median": 0.037328481674194336,
+          "p95": 0.03931813240051269,
+          "maximum": 0.08532381057739258
+        }
+      },
+      "tracking": {
+        "max_distance_to_reference_polyline_m": 0.02098465292030834,
+        "rms_distance_to_reference_polyline_m": 0.01753567285874719
+      },
+      "last_accepted_ndt_age_at_measurement_end_sec": 12.06002140045166
+    },
+    "localization_loss_2": {
+      "validation": {
+        "passed": true,
+        "checks": {
+          "no_runtime_error": true,
+          "all_stage_outputs": true,
+          "finite": true,
+          "engaged": true,
+          "mpc_exclusively_ekf": true,
+          "no_truth_fallback": true,
+          "ndt_from_preprocessing": true,
+          "detection_exclusively_cluster": true,
+          "objects_exclusively_adapter": true,
+          "plan_exclusively_pinned": true,
+          "ndt_converged": true,
+          "localization_accuracy": true,
+          "source_stamp_lineage": true,
+          "ndt_acquisition_lineage": true,
+          "predictions_from_real_detections": true,
+          "measured_positive_shapes": true,
+          "ekf_receives_ndt": true,
+          "planner_receives_objects": true,
+          "controller_receives_planned_trajectory": true,
+          "ground_exclusively_pinned": true,
+          "raw_exclusively_fixture": true,
+          "map_consistent_evolving_scans": true,
+          "no_child_exception_during_measurement": true,
+          "loss_injected": true,
+          "loss_latched": true,
+          "accepted_ndt_became_stale": true,
+          "no_latch_before_injection": true,
+          "loss_stop": true,
+          "loss_observed": true,
+          "perception_continues_after_ndt_loss": true
+        },
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "localization_loss",
+          "termination": "loss_stop_observed",
+          "error": null,
+          "engaged": 5.63530381000237,
+          "injected": 9.781847923000896,
+          "peak_process_rss_kib": 1274188,
+          "localization_errors": {
+            "ndt": {
+              "matched": 42,
+              "max_xy_m": 0.07664691938399801,
+              "rms_xy_m": 0.07518862041178813
+            },
+            "ekf": {
+              "matched": 807,
+              "max_xy_m": 0.07787675026342974,
+              "rms_xy_m": 0.07637666138384654
+            }
+          },
+          "final_goal_error_m": 14.245521639650018,
+          "obstacle_clearance_m": null,
+          "scan_world_residual_m": 1.245473121015207e-06,
+          "scan_sample_displacement_m": 1.916549051458478,
+          "max_tracking_sample_distance_m": 0.054203213785993985,
+          "counts": {
+            "truth": 966,
+            "ekf": 965,
+            "ndt": 63,
+            "command": 610,
+            "gate": 501,
+            "raw": 193,
+            "extended": 193,
+            "deskewed": 193,
+            "compact": 193,
+            "ground": 193,
+            "clusters": 192,
+            "detected": 192,
+            "predicted": 192,
+            "plan": 185,
+            "trajectory": 185,
+            "ndt_ms": 63,
+            "ndt_score": 63
+          },
+          "first_latch": {
+            "stamp": 1792708032.563211,
+            "armed": false,
+            "latched": true,
+            "fault_stamp": 1792708032.5461843,
+            "fault_inputs": [
+              "ndt"
+            ],
+            "currently_stale": [
+              "ndt"
+            ],
+            "stationary_since_monotonic": null,
+            "fault_input_health": {
+              "odometry": {
+                "source_stamp": 1792708032.5276518,
+                "stamp_age_sec": 0.018511295318603516,
+                "receipt_age_sec": 0.01793358099894249
+              },
+              "steering": {
+                "source_stamp": 1792708032.5413454,
+                "stamp_age_sec": 0.0048177242279052734,
+                "receipt_age_sec": 0.004363531999842962
+              },
+              "acceleration": {
+                "source_stamp": 1792708032.5412996,
+                "stamp_age_sec": 0.0048635005950927734,
+                "receipt_age_sec": 0.0030290479990071617
+              },
+              "trajectory": {
+                "source_stamp": 1792708032.4462473,
+                "stamp_age_sec": 0.09991574287414551,
+                "receipt_age_sec": 0.09385381500032963
+              },
+              "command": {
+                "source_stamp": 1792708032.5415735,
+                "stamp_age_sec": 0.004589557647705078,
+                "receipt_age_sec": 0.00293367400081479
+              },
+              "ndt": {
+                "source_stamp": 1792708032.2400382,
+                "stamp_age_sec": 0.3061399459838867,
+                "receipt_age_sec": 0.272177886999998
+              }
+            },
+            "fault_tick_gap_sec": 0.019790558999375207,
+            "t": 10.084565992001444
+          },
+          "first_matched_detection": null,
+          "first_stop_plan": null,
+          "stage_acquisition_age_max_sec": {
+            "raw": 0.023492813110351562,
+            "extended": 0.024196624755859375,
+            "deskewed": 0.03991436958312988,
+            "compact": 0.04561114311218262,
+            "ground": 0.048406362533569336
+          },
+          "detector_acquisition_age_max_sec": 0.0684516429901123,
+          "ndt_max_update_gap_sec": 0.10148763656616211
+        }
+      },
+      "additional_checks": {
+        "edge:lidar/raw->livox_converter": true,
+        "edge:lidar/extended->distortion_corrector": true,
+        "edge:lidar/deskewed->compact_converter": true,
+        "edge:lidar/compact->ndt/ndt_scan_matcher": true,
+        "edge:lidar/compact->ground_filter": true,
+        "edge:obstacles/pointcloud->euclidean_cluster": true,
+        "edge:clusters->static_objects_adapter": true,
+        "edge:obstacles/detected_objects->static_objects_adapter": true,
+        "edge:obstacles/predicted_objects->motion_velocity_planner": true,
+        "edge:obstacle_trajectory->velocity_smoother": true,
+        "edge:trajectory->controller": true,
+        "edge:ekf/ekf_odom->controller": true,
+        "edge:ndt/ndt_pose_with_covariance->ekf/ekf_localizer": true,
+        "edge:gated/control_cmd->sim/simple_planning_simulator": true,
+        "truth_not_estimator_controller_or_planner": true,
+        "conversion_keeps_point_count": true,
+        "conversion_keeps_sensor_frame": true,
+        "bounded_finite_control": true,
+        "bounded_actual_speed": true,
+        "ekf_still_publishes_fresh_predictions": true,
+        "perception_available_at_measurement_end": true
+      },
+      "additional_checks_passed": true,
+      "matched_conversion_scans": 193,
+      "first_watchdog_latch": {
+        "stage": "localization",
+        "stamp": 1792708032.563211,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792708032.5461843,
+        "fault_inputs": [
+          "ndt"
+        ],
+        "currently_stale": [
+          "ndt"
+        ],
+        "stationary_since_monotonic": null,
+        "fault_input_health": {
+          "odometry": {
+            "source_stamp": 1792708032.5276518,
+            "stamp_age_sec": 0.018511295318603516,
+            "receipt_age_sec": 0.01793358099894249
+          },
+          "steering": {
+            "source_stamp": 1792708032.5413454,
+            "stamp_age_sec": 0.0048177242279052734,
+            "receipt_age_sec": 0.004363531999842962
+          },
+          "acceleration": {
+            "source_stamp": 1792708032.5412996,
+            "stamp_age_sec": 0.0048635005950927734,
+            "receipt_age_sec": 0.0030290479990071617
+          },
+          "trajectory": {
+            "source_stamp": 1792708032.4462473,
+            "stamp_age_sec": 0.09991574287414551,
+            "receipt_age_sec": 0.09385381500032963
+          },
+          "command": {
+            "source_stamp": 1792708032.5415735,
+            "stamp_age_sec": 0.004589557647705078,
+            "receipt_age_sec": 0.00293367400081479
+          },
+          "ndt": {
+            "source_stamp": 1792708032.2400382,
+            "stamp_age_sec": 0.3061399459838867,
+            "receipt_age_sec": 0.272177886999998
+          }
+        },
+        "fault_tick_gap_sec": 0.019790558999375207,
+        "t": 10.084565992001444
+      },
+      "latency_sec": {
+        "acquisition_to_ndt_observer": {
+          "samples": 63,
+          "median": 0.03277893659833353,
+          "p95": 0.03644764951932302,
+          "maximum": 0.047846028639469296
+        },
+        "acquisition_to_detector_observer": {
+          "samples": 192,
+          "median": 0.03236114978790283,
+          "p95": 0.03515709638595581,
+          "maximum": 0.0684516429901123
+        },
+        "acquisition_to_static_objects_observer": {
+          "samples": 192,
+          "median": 0.03664827346801758,
+          "p95": 0.03888682126998901,
+          "maximum": 0.07365202903747559
+        }
+      },
+      "tracking": {
+        "max_distance_to_reference_polyline_m": 0.021364387185412132,
+        "rms_distance_to_reference_polyline_m": 0.017910222813241106
+      },
+      "last_accepted_ndt_age_at_measurement_end_sec": 12.021024227142334
+    },
+    "loss_1": {
+      "validation": {
+        "passed": true,
+        "checks": {
+          "no_runtime_error": true,
+          "all_stage_outputs": true,
+          "finite": true,
+          "engaged": true,
+          "mpc_exclusively_ekf": true,
+          "no_truth_fallback": true,
+          "ndt_from_preprocessing": true,
+          "detection_exclusively_cluster": true,
+          "objects_exclusively_adapter": true,
+          "plan_exclusively_pinned": true,
+          "ndt_converged": true,
+          "localization_accuracy": true,
+          "source_stamp_lineage": true,
+          "ndt_acquisition_lineage": true,
+          "predictions_from_real_detections": true,
+          "measured_positive_shapes": true,
+          "ekf_receives_ndt": true,
+          "planner_receives_objects": true,
+          "controller_receives_planned_trajectory": true,
+          "ground_exclusively_pinned": true,
+          "raw_exclusively_fixture": true,
+          "map_consistent_evolving_scans": true,
+          "no_child_exception_during_measurement": true,
+          "loss_injected": true,
+          "loss_latched": true,
+          "loss_stop": true,
+          "loss_observed": true
+        },
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "loss",
+          "termination": "loss_stop_observed",
+          "error": null,
+          "engaged": 6.42048969499956,
+          "injected": 10.51933469999858,
+          "peak_process_rss_kib": 1326208,
+          "localization_errors": {
+            "ndt": {
+              "matched": 41,
+              "max_xy_m": 0.07471743661233006,
+              "rms_xy_m": 0.07437219476115628
+            },
+            "ekf": {
+              "matched": 804,
+              "max_xy_m": 0.07720259650184563,
+              "rms_xy_m": 0.07578389419833614
+            }
+          },
+          "final_goal_error_m": 14.28223767107355,
+          "obstacle_clearance_m": null,
+          "scan_world_residual_m": 9.762965393823633e-07,
+          "scan_sample_displacement_m": 0.8994641157438295,
+          "max_tracking_sample_distance_m": 0.05327889638057571,
+          "counts": {
+            "truth": 978,
+            "ekf": 977,
+            "ndt": 70,
+            "command": 606,
+            "gate": 498,
+            "raw": 75,
+            "extended": 75,
+            "deskewed": 75,
+            "compact": 75,
+            "ground": 75,
+            "clusters": 75,
+            "detected": 75,
+            "predicted": 75,
+            "plan": 184,
+            "trajectory": 184,
+            "ndt_ms": 70,
+            "ndt_score": 70
+          },
+          "first_latch": {
+            "stamp": 1792707364.3648663,
+            "armed": false,
+            "latched": true,
+            "fault_stamp": 1792707364.3439865,
+            "fault_inputs": [
+              "ndt"
+            ],
+            "currently_stale": [
+              "ndt"
+            ],
+            "stationary_since_monotonic": null,
+            "fault_input_health": {
+              "odometry": {
+                "source_stamp": 1792707364.326922,
+                "stamp_age_sec": 0.017040491104125977,
+                "receipt_age_sec": 0.016396130002249265
+              },
+              "steering": {
+                "source_stamp": 1792707364.3360426,
+                "stamp_age_sec": 0.007919788360595703,
+                "receipt_age_sec": 0.007214974000817165
+              },
+              "acceleration": {
+                "source_stamp": 1792707364.3359306,
+                "stamp_age_sec": 0.008031845092773438,
+                "receipt_age_sec": 0.0062856330005161
+              },
+              "trajectory": {
+                "source_stamp": 1792707364.2427948,
+                "stamp_age_sec": 0.10116767883300781,
+                "receipt_age_sec": 0.09435424999901443
+              },
+              "command": {
+                "source_stamp": 1792707364.3182902,
+                "stamp_age_sec": 0.025672197341918945,
+                "receipt_age_sec": 0.024156608000339475
+              },
+              "ndt": {
+                "source_stamp": 1792707364.0359483,
+                "stamp_age_sec": 0.3080317974090576,
+                "receipt_age_sec": 0.274774976001936
+              }
+            },
+            "fault_tick_gap_sec": 0.01940002899937099,
+            "t": 10.768219596000563
+          },
+          "first_matched_detection": null,
+          "first_stop_plan": null,
+          "stage_acquisition_age_max_sec": {
+            "raw": 0.0469517707824707,
+            "extended": 0.04822874069213867,
+            "deskewed": 0.04840850830078125,
+            "compact": 0.0497589111328125,
+            "ground": 0.05114936828613281
+          },
+          "detector_acquisition_age_max_sec": 0.08474302291870117,
+          "ndt_max_update_gap_sec": 0.1015787124633789
+        }
+      },
+      "additional_checks": {
+        "edge:lidar/raw->livox_converter": true,
+        "edge:lidar/extended->distortion_corrector": true,
+        "edge:lidar/deskewed->compact_converter": true,
+        "edge:lidar/compact->ndt/ndt_scan_matcher": true,
+        "edge:lidar/compact->ground_filter": true,
+        "edge:obstacles/pointcloud->euclidean_cluster": true,
+        "edge:clusters->static_objects_adapter": true,
+        "edge:obstacles/detected_objects->static_objects_adapter": true,
+        "edge:obstacles/predicted_objects->motion_velocity_planner": true,
+        "edge:obstacle_trajectory->velocity_smoother": true,
+        "edge:trajectory->controller": true,
+        "edge:ekf/ekf_odom->controller": true,
+        "edge:ndt/ndt_pose_with_covariance->ekf/ekf_localizer": true,
+        "edge:gated/control_cmd->sim/simple_planning_simulator": true,
+        "truth_not_estimator_controller_or_planner": true,
+        "conversion_keeps_point_count": true,
+        "conversion_keeps_sensor_frame": true,
+        "bounded_finite_control": true,
+        "bounded_actual_speed": true
+      },
+      "additional_checks_passed": true,
+      "matched_conversion_scans": 75,
+      "first_watchdog_latch": {
+        "stage": "perception",
+        "stamp": 1792707364.33628,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792707364.33628,
+        "fault_inputs": [
+          "raw",
+          "extended",
+          "deskewed",
+          "compact",
+          "pointcloud",
+          "predicted_objects"
+        ],
+        "currently_stale": [
+          "raw",
+          "extended",
+          "deskewed",
+          "compact",
+          "pointcloud",
+          "predicted_objects"
+        ],
+        "t": 10.740052954999555
+      },
+      "latency_sec": {
+        "acquisition_to_ndt_observer": {
+          "samples": 70,
+          "median": 0.03525942755914002,
+          "p95": 0.0566714825483359,
+          "maximum": 0.10389184096493409
+        },
+        "acquisition_to_detector_observer": {
+          "samples": 75,
+          "median": 0.03612089157104492,
+          "p95": 0.05864937305450439,
+          "maximum": 0.08474302291870117
+        },
+        "acquisition_to_static_objects_observer": {
+          "samples": 75,
+          "median": 0.041017770767211914,
+          "p95": 0.0656706094741821,
+          "maximum": 0.10268926620483398
+        }
+      },
+      "tracking": {
+        "max_distance_to_reference_polyline_m": 0.020448376624005844,
+        "rms_distance_to_reference_polyline_m": 0.01720509140468214
+      },
+      "last_accepted_ndt_age_at_measurement_end_sec": 12.079437017440796
+    },
+    "loss_2": {
+      "validation": {
+        "passed": true,
+        "checks": {
+          "no_runtime_error": true,
+          "all_stage_outputs": true,
+          "finite": true,
+          "engaged": true,
+          "mpc_exclusively_ekf": true,
+          "no_truth_fallback": true,
+          "ndt_from_preprocessing": true,
+          "detection_exclusively_cluster": true,
+          "objects_exclusively_adapter": true,
+          "plan_exclusively_pinned": true,
+          "ndt_converged": true,
+          "localization_accuracy": true,
+          "source_stamp_lineage": true,
+          "ndt_acquisition_lineage": true,
+          "predictions_from_real_detections": true,
+          "measured_positive_shapes": true,
+          "ekf_receives_ndt": true,
+          "planner_receives_objects": true,
+          "controller_receives_planned_trajectory": true,
+          "ground_exclusively_pinned": true,
+          "raw_exclusively_fixture": true,
+          "map_consistent_evolving_scans": true,
+          "no_child_exception_during_measurement": true,
+          "loss_injected": true,
+          "loss_latched": true,
+          "loss_stop": true,
+          "loss_observed": true
+        },
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "loss",
+          "termination": "loss_stop_observed",
+          "error": null,
+          "engaged": 6.036440105999645,
+          "injected": 10.156751697999425,
+          "peak_process_rss_kib": 1327160,
+          "localization_errors": {
+            "ndt": {
+              "matched": 41,
+              "max_xy_m": 0.07657311584236018,
+              "rms_xy_m": 0.07529022237209859
+            },
+            "ekf": {
+              "matched": 803,
+              "max_xy_m": 0.07784506058883252,
+              "rms_xy_m": 0.07633437946520323
+            }
+          },
+          "final_goal_error_m": 14.263503749882025,
+          "obstacle_clearance_m": null,
+          "scan_world_residual_m": 1.1016524021962064e-06,
+          "scan_sample_displacement_m": 0.7978760534666638,
+          "max_tracking_sample_distance_m": 0.05390033203603621,
+          "counts": {
+            "truth": 960,
+            "ekf": 957,
+            "ndt": 67,
+            "command": 604,
+            "gate": 498,
+            "raw": 72,
+            "extended": 72,
+            "deskewed": 72,
+            "compact": 72,
+            "ground": 72,
+            "clusters": 72,
+            "detected": 72,
+            "predicted": 72,
+            "plan": 184,
+            "trajectory": 184,
+            "ndt_ms": 67,
+            "ndt_score": 67
+          },
+          "first_latch": {
+            "stamp": 1792707391.8363185,
+            "armed": false,
+            "latched": true,
+            "fault_stamp": 1792707391.8166592,
+            "fault_inputs": [
+              "ndt"
+            ],
+            "currently_stale": [
+              "ndt"
+            ],
+            "stationary_since_monotonic": null,
+            "fault_input_health": {
+              "odometry": {
+                "source_stamp": 1792707391.8020608,
+                "stamp_age_sec": 0.014575719833374023,
+                "receipt_age_sec": 0.013965877002192428
+              },
+              "steering": {
+                "source_stamp": 1792707391.7985477,
+                "stamp_age_sec": 0.018088817596435547,
+                "receipt_age_sec": 0.01773430400135112
+              },
+              "acceleration": {
+                "source_stamp": 1792707391.7984746,
+                "stamp_age_sec": 0.018162012100219727,
+                "receipt_age_sec": 0.016627475000859704
+              },
+              "trajectory": {
+                "source_stamp": 1792707391.805448,
+                "stamp_age_sec": 0.011188507080078125,
+                "receipt_age_sec": 0.004979250999895157
+              },
+              "command": {
+                "source_stamp": 1792707391.8010998,
+                "stamp_age_sec": 0.015536785125732422,
+                "receipt_age_sec": 0.013856007000867976
+              },
+              "ndt": {
+                "source_stamp": 1792707391.4983306,
+                "stamp_age_sec": 0.31832313537597656,
+                "receipt_age_sec": 0.2811077570004272
+              }
+            },
+            "fault_tick_gap_sec": 0.019912712999939686,
+            "t": 10.434101193997776
+          },
+          "first_matched_detection": null,
+          "first_stop_plan": null,
+          "stage_acquisition_age_max_sec": {
+            "raw": 0.036971092224121094,
+            "extended": 0.037165164947509766,
+            "deskewed": 0.04917502403259277,
+            "compact": 0.05326080322265625,
+            "ground": 0.056298017501831055
+          },
+          "detector_acquisition_age_max_sec": 0.07555985450744629,
+          "ndt_max_update_gap_sec": 0.10227227210998535
+        }
+      },
+      "additional_checks": {
+        "edge:lidar/raw->livox_converter": true,
+        "edge:lidar/extended->distortion_corrector": true,
+        "edge:lidar/deskewed->compact_converter": true,
+        "edge:lidar/compact->ndt/ndt_scan_matcher": true,
+        "edge:lidar/compact->ground_filter": true,
+        "edge:obstacles/pointcloud->euclidean_cluster": true,
+        "edge:clusters->static_objects_adapter": true,
+        "edge:obstacles/detected_objects->static_objects_adapter": true,
+        "edge:obstacles/predicted_objects->motion_velocity_planner": true,
+        "edge:obstacle_trajectory->velocity_smoother": true,
+        "edge:trajectory->controller": true,
+        "edge:ekf/ekf_odom->controller": true,
+        "edge:ndt/ndt_pose_with_covariance->ekf/ekf_localizer": true,
+        "edge:gated/control_cmd->sim/simple_planning_simulator": true,
+        "truth_not_estimator_controller_or_planner": true,
+        "conversion_keeps_point_count": true,
+        "conversion_keeps_sensor_frame": true,
+        "bounded_finite_control": true,
+        "bounded_actual_speed": true
+      },
+      "additional_checks_passed": true,
+      "matched_conversion_scans": 72,
+      "first_watchdog_latch": {
+        "stage": "perception",
+        "stamp": 1792707391.8121316,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792707391.8121316,
+        "fault_inputs": [
+          "raw",
+          "extended",
+          "deskewed",
+          "compact",
+          "pointcloud",
+          "predicted_objects"
+        ],
+        "currently_stale": [
+          "raw",
+          "extended",
+          "deskewed",
+          "compact",
+          "pointcloud",
+          "predicted_objects"
+        ],
+        "t": 10.411662836999312
+      },
+      "latency_sec": {
+        "acquisition_to_ndt_observer": {
+          "samples": 67,
+          "median": 0.03504859837994445,
+          "p95": 0.04271272068908728,
+          "maximum": 0.053066900556586916
+        },
+        "acquisition_to_detector_observer": {
+          "samples": 72,
+          "median": 0.0356442928314209,
+          "p95": 0.039516484737396246,
+          "maximum": 0.07555985450744629
+        },
+        "acquisition_to_static_objects_observer": {
+          "samples": 72,
+          "median": 0.03980660438537598,
+          "p95": 0.04512687921524049,
+          "maximum": 0.08119654655456543
+        }
+      },
+      "tracking": {
+        "max_distance_to_reference_polyline_m": 0.020929764759281922,
+        "rms_distance_to_reference_polyline_m": 0.01757335735104899
+      },
+      "last_accepted_ndt_age_at_measurement_end_sec": 12.060007572174072
+    },
+    "obstacle_1": {
+      "validation": {
+        "passed": true,
+        "checks": {
+          "no_runtime_error": true,
+          "all_stage_outputs": true,
+          "finite": true,
+          "engaged": true,
+          "mpc_exclusively_ekf": true,
+          "no_truth_fallback": true,
+          "ndt_from_preprocessing": true,
+          "detection_exclusively_cluster": true,
+          "objects_exclusively_adapter": true,
+          "plan_exclusively_pinned": true,
+          "ndt_converged": true,
+          "localization_accuracy": true,
+          "source_stamp_lineage": true,
+          "ndt_acquisition_lineage": true,
+          "predictions_from_real_detections": true,
+          "measured_positive_shapes": true,
+          "ekf_receives_ndt": true,
+          "planner_receives_objects": true,
+          "controller_receives_planned_trajectory": true,
+          "ground_exclusively_pinned": true,
+          "raw_exclusively_fixture": true,
+          "map_consistent_evolving_scans": true,
+          "no_child_exception_during_measurement": true,
+          "hold_complete": true,
+          "no_watchdog_latch": true,
+          "obstacle_detected": true,
+          "planner_inserted_stop": true,
+          "safe_clearance": true
+        },
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "obstacle",
+          "termination": "stopped_hold_completed",
+          "error": null,
+          "engaged": 6.275898776999384,
+          "injected": null,
+          "peak_process_rss_kib": 1327496,
+          "localization_errors": {
+            "ndt": {
+              "matched": 238,
+              "max_xy_m": 0.08188734588898036,
+              "rms_xy_m": 0.07897305329646552
+            },
+            "ekf": {
+              "matched": 1190,
+              "max_xy_m": 0.08426130158013394,
+              "rms_xy_m": 0.07967969474191415
+            }
+          },
+          "final_goal_error_m": 10.003935593917179,
+          "obstacle_clearance_m": 2.1035213486797386,
+          "scan_world_residual_m": 6.733213602896669e-07,
+          "scan_sample_displacement_m": 6.007415989784801,
+          "max_tracking_sample_distance_m": 0.07779266618190354,
+          "counts": {
+            "truth": 1347,
+            "ekf": 1346,
+            "ndt": 264,
+            "command": 861,
+            "gate": 793,
+            "raw": 269,
+            "extended": 269,
+            "deskewed": 269,
+            "compact": 269,
+            "ground": 269,
+            "clusters": 269,
+            "detected": 269,
+            "predicted": 269,
+            "plan": 261,
+            "trajectory": 261,
+            "ndt_ms": 264,
+            "ndt_score": 264
+          },
+          "first_latch": null,
+          "first_matched_detection": 3.295908554999187,
+          "first_stop_plan": 4.223774838999816,
+          "stage_acquisition_age_max_sec": {
+            "raw": 0.0358121395111084,
+            "extended": 0.036623239517211914,
+            "deskewed": 0.03728318214416504,
+            "compact": 0.04158306121826172,
+            "ground": 0.0438532829284668
+          },
+          "detector_acquisition_age_max_sec": 0.06944823265075684,
+          "ndt_max_update_gap_sec": 0.10068392753601074
+        }
+      },
+      "additional_checks": {
+        "edge:lidar/raw->livox_converter": true,
+        "edge:lidar/extended->distortion_corrector": true,
+        "edge:lidar/deskewed->compact_converter": true,
+        "edge:lidar/compact->ndt/ndt_scan_matcher": true,
+        "edge:lidar/compact->ground_filter": true,
+        "edge:obstacles/pointcloud->euclidean_cluster": true,
+        "edge:clusters->static_objects_adapter": true,
+        "edge:obstacles/detected_objects->static_objects_adapter": true,
+        "edge:obstacles/predicted_objects->motion_velocity_planner": true,
+        "edge:obstacle_trajectory->velocity_smoother": true,
+        "edge:trajectory->controller": true,
+        "edge:ekf/ekf_odom->controller": true,
+        "edge:ndt/ndt_pose_with_covariance->ekf/ekf_localizer": true,
+        "edge:gated/control_cmd->sim/simple_planning_simulator": true,
+        "truth_not_estimator_controller_or_planner": true,
+        "conversion_keeps_point_count": true,
+        "conversion_keeps_sensor_frame": true,
+        "bounded_finite_control": true,
+        "bounded_actual_speed": true
+      },
+      "additional_checks_passed": true,
+      "matched_conversion_scans": 269,
+      "first_watchdog_latch": null,
+      "latency_sec": {
+        "acquisition_to_ndt_observer": {
+          "samples": 264,
+          "median": 0.03462254099395068,
+          "p95": 0.0368120679677304,
+          "maximum": 0.0512753302573401
+        },
+        "acquisition_to_detector_observer": {
+          "samples": 269,
+          "median": 0.035762786865234375,
+          "p95": 0.03875017166137695,
+          "maximum": 0.06944823265075684
+        },
+        "acquisition_to_static_objects_observer": {
+          "samples": 269,
+          "median": 0.04082012176513672,
+          "p95": 0.044214391708374025,
+          "maximum": 0.07271194458007812
+        }
+      },
+      "tracking": {
+        "max_distance_to_reference_polyline_m": 0.060139403525986415,
+        "rms_distance_to_reference_polyline_m": 0.04967655432922371
+      },
+      "last_accepted_ndt_age_at_measurement_end_sec": 0.04001975059509277,
+      "first_observed_detection_to_first_observed_stop_plan_sec": 0.9278662840006291
+    },
+    "obstacle_2": {
+      "validation": {
+        "passed": false,
+        "checks": {
+          "no_runtime_error": true,
+          "all_stage_outputs": true,
+          "finite": true,
+          "engaged": true,
+          "mpc_exclusively_ekf": true,
+          "no_truth_fallback": true,
+          "ndt_from_preprocessing": true,
+          "detection_exclusively_cluster": true,
+          "objects_exclusively_adapter": true,
+          "plan_exclusively_pinned": true,
+          "ndt_converged": true,
+          "localization_accuracy": true,
+          "source_stamp_lineage": true,
+          "ndt_acquisition_lineage": true,
+          "predictions_from_real_detections": true,
+          "measured_positive_shapes": true,
+          "ekf_receives_ndt": true,
+          "planner_receives_objects": true,
+          "controller_receives_planned_trajectory": true,
+          "ground_exclusively_pinned": true,
+          "raw_exclusively_fixture": true,
+          "map_consistent_evolving_scans": false,
+          "no_child_exception_during_measurement": true,
+          "hold_complete": false,
+          "no_watchdog_latch": false,
+          "obstacle_detected": true,
+          "planner_inserted_stop": true,
+          "safe_clearance": true
+        },
+        "failed_checks": [
+          "map_consistent_evolving_scans",
+          "hold_complete",
+          "no_watchdog_latch"
+        ],
+        "metrics": {
+          "scenario": "obstacle",
+          "termination": "timeout",
+          "error": null,
+          "engaged": 6.397468368999398,
+          "injected": null,
+          "peak_process_rss_kib": 1274296,
+          "localization_errors": {
+            "ndt": {
+              "matched": 535,
+              "max_xy_m": 0.07708749003348872,
+              "rms_xy_m": 0.07530738841640555
+            },
+            "ekf": {
+              "matched": 2676,
+              "max_xy_m": 0.07529330314094734,
+              "rms_xy_m": 0.07527928434159106
+            }
+          },
+          "final_goal_error_m": 15.941386756921943,
+          "obstacle_clearance_m": 8.041396352374774,
+          "scan_world_residual_m": 5.167763018626069e-07,
+          "scan_sample_displacement_m": 0.0611783310497964,
+          "max_tracking_sample_distance_m": 0.029281598417899523,
+          "counts": {
+            "truth": 2831,
+            "ekf": 2831,
+            "ndt": 561,
+            "command": 1851,
+            "gate": 1609,
+            "raw": 566,
+            "extended": 566,
+            "deskewed": 566,
+            "compact": 566,
+            "ground": 566,
+            "clusters": 565,
+            "detected": 565,
+            "predicted": 565,
+            "plan": 559,
+            "trajectory": 559,
+            "ndt_ms": 561,
+            "ndt_score": 561
+          },
+          "first_latch": {
+            "stamp": 1792707194.6701121,
+            "armed": false,
+            "latched": true,
+            "fault_stamp": 1792707194.6701121,
+            "fault_inputs": [
+              "predicted_objects"
+            ],
+            "currently_stale": [
+              "predicted_objects"
+            ],
+            "t": 7.386954290999711
+          },
+          "first_matched_detection": 3.44660887200007,
+          "first_stop_plan": 4.3631098859987105,
+          "stage_acquisition_age_max_sec": {
+            "raw": 0.055980682373046875,
+            "extended": 0.05683541297912598,
+            "deskewed": 0.056998491287231445,
+            "compact": 0.05711627006530762,
+            "ground": 0.05722689628601074
+          },
+          "detector_acquisition_age_max_sec": 0.20524024963378906,
+          "ndt_max_update_gap_sec": 0.1999680995941162
+        }
+      },
+      "additional_checks": {
+        "edge:lidar/raw->livox_converter": true,
+        "edge:lidar/extended->distortion_corrector": true,
+        "edge:lidar/deskewed->compact_converter": true,
+        "edge:lidar/compact->ndt/ndt_scan_matcher": true,
+        "edge:lidar/compact->ground_filter": true,
+        "edge:obstacles/pointcloud->euclidean_cluster": true,
+        "edge:clusters->static_objects_adapter": true,
+        "edge:obstacles/detected_objects->static_objects_adapter": true,
+        "edge:obstacles/predicted_objects->motion_velocity_planner": true,
+        "edge:obstacle_trajectory->velocity_smoother": true,
+        "edge:trajectory->controller": true,
+        "edge:ekf/ekf_odom->controller": true,
+        "edge:ndt/ndt_pose_with_covariance->ekf/ekf_localizer": true,
+        "edge:gated/control_cmd->sim/simple_planning_simulator": true,
+        "truth_not_estimator_controller_or_planner": true,
+        "conversion_keeps_point_count": true,
+        "conversion_keeps_sensor_frame": true,
+        "bounded_finite_control": true,
+        "bounded_actual_speed": true
+      },
+      "additional_checks_passed": true,
+      "matched_conversion_scans": 566,
+      "first_watchdog_latch": {
+        "stage": "perception",
+        "stamp": 1792707194.6701121,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792707194.6701121,
+        "fault_inputs": [
+          "predicted_objects"
+        ],
+        "currently_stale": [
+          "predicted_objects"
+        ],
+        "t": 7.386954290999711
+      },
+      "latency_sec": {
+        "acquisition_to_ndt_observer": {
+          "samples": 561,
+          "median": 0.03872575638524722,
+          "p95": 0.043406425953435246,
+          "maximum": 0.21513947325729532
+        },
+        "acquisition_to_detector_observer": {
+          "samples": 565,
+          "median": 0.04073309898376465,
+          "p95": 0.04510235786437988,
+          "maximum": 0.20524024963378906
+        },
+        "acquisition_to_static_objects_observer": {
+          "samples": 565,
+          "median": 0.04589200019836426,
+          "p95": 0.04965057373046875,
+          "maximum": 0.2109208106994629
+        }
+      },
+      "tracking": {
+        "max_distance_to_reference_polyline_m": 7.334161420238872e-06,
+        "rms_distance_to_reference_polyline_m": 7.25458700456363e-06
+      },
+      "last_accepted_ndt_age_at_measurement_end_sec": 0.11999869346618652,
+      "first_observed_detection_to_first_observed_stop_plan_sec": 0.9165010139986407
+    }
+  },
+  "latency_scope": "Acquisition to this observer callback includes pipeline, transport and callback scheduling; stop reaction interval is not a traced causal duration."
+}

@@ -1,0 +1,773 @@
+{
+  "bag": "/home/marian/Downloads/engg_loading_dock_01.db3",
+  "start_ns": 1752868633000622336,
+  "end_ns": 1752869129514597888,
+  "duration_s": 496.513975552,
+  "schema": [
+    [
+      4,
+      "rosbags"
+    ]
+  ],
+  "topics": [
+    {
+      "id": 1,
+      "name": "/novatel/oem7/imu/data_raw",
+      "type": "sensor_msgs/msg/Imu",
+      "count": 62000,
+      "count_per_bag_second": 124.87060395645747
+    },
+    {
+      "id": 2,
+      "name": "/mcu_node/data_link/icm/data",
+      "type": "sensor_msgs/msg/Imu",
+      "count": 94760,
+      "count_per_bag_second": 190.85061985345018
+    },
+    {
+      "id": 3,
+      "name": "/xsens/imu/data",
+      "type": "sensor_msgs/msg/Imu",
+      "count": 198400,
+      "count_per_bag_second": 399.58593266066396
+    },
+    {
+      "id": 4,
+      "name": "/cam_0/image_raw",
+      "type": "sensor_msgs/msg/Image",
+      "count": 2480,
+      "count_per_bag_second": 4.994824158258299
+    },
+    {
+      "id": 5,
+      "name": "/cam_1/image_raw",
+      "type": "sensor_msgs/msg/Image",
+      "count": 2480,
+      "count_per_bag_second": 4.994824158258299
+    },
+    {
+      "id": 6,
+      "name": "/velodyne_packets",
+      "type": "velodyne_msgs/msg/VelodyneScan",
+      "count": 4918,
+      "count_per_bag_second": 9.905058552546095
+    },
+    {
+      "id": 7,
+      "name": "/velodyne_points",
+      "type": "sensor_msgs/msg/PointCloud2",
+      "count": 4918,
+      "count_per_bag_second": 9.905058552546095
+    }
+  ],
+  "samples": [
+    {
+      "topic": "/novatel/oem7/imu/data_raw",
+      "window_start_ns": 1752868633000622336,
+      "sampled": 125,
+      "frame": "imu_eg320_link",
+      "first_header_ns": 1752868633005645999,
+      "last_header_ns": 1752868633997649000,
+      "header_minus_storage_ns": [
+        -105,
+        128
+      ],
+      "header_monotonic": true,
+      "header_rate_hz": 124.99962185094236,
+      "orientation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angular_velocity": [
+        -0.0037816951394991347,
+        -0.004624596277153574,
+        0.000327726473216279
+      ],
+      "linear_acceleration": [
+        0.48954968583969116,
+        -0.04762321485977173,
+        9.822247625265504
+      ]
+    },
+    {
+      "topic": "/novatel/oem7/imu/data_raw",
+      "window_start_ns": 1752868881257610112,
+      "sampled": 125,
+      "frame": "imu_eg320_link",
+      "first_header_ns": 1752868881262045999,
+      "last_header_ns": 1752868882254045000,
+      "header_minus_storage_ns": [
+        -112,
+        119
+      ],
+      "header_monotonic": true,
+      "header_rate_hz": 125.00012588218323,
+      "orientation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angular_velocity": [
+        -0.00041453061105075777,
+        -0.041123280802026825,
+        0.10758383999607671
+      ],
+      "linear_acceleration": [
+        -0.4822506628034973,
+        -0.8699677095767213,
+        11.115399366748507
+      ]
+    },
+    {
+      "topic": "/novatel/oem7/imu/data_raw",
+      "window_start_ns": 1752869128514597888,
+      "sampled": 61,
+      "frame": "imu_eg320_link",
+      "first_header_ns": 1752869128518447000,
+      "last_header_ns": 1752869128998443000,
+      "header_minus_storage_ns": [
+        -104,
+        127
+      ],
+      "header_monotonic": true,
+      "header_rate_hz": 125.0010416753473,
+      "orientation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angular_velocity": [
+        -0.0033295415190966095,
+        -0.007550185261049221,
+        0.002010788888395684
+      ],
+      "linear_acceleration": [
+        0.1039357955873108,
+        -0.445167741187439,
+        9.836540679973908
+      ]
+    },
+    {
+      "topic": "/mcu_node/data_link/icm/data",
+      "window_start_ns": 1752868633000622336,
+      "sampled": 128,
+      "frame": "imu_icm20948_link",
+      "first_header_ns": 1752868633001164999,
+      "last_header_ns": 1752868633665946999,
+      "header_minus_storage_ns": [
+        -121,
+        127
+      ],
+      "header_monotonic": true,
+      "header_rate_hz": 191.04007027867783,
+      "orientation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angular_velocity": [
+        0.0026632018852978945,
+        -0.01651185192167759,
+        -0.005326403770595789
+      ],
+      "linear_acceleration": [
+        -0.12450483441352844,
+        0.0,
+        9.816727638244629
+      ]
+    },
+    {
+      "topic": "/mcu_node/data_link/icm/data",
+      "window_start_ns": 1752868881257610112,
+      "sampled": 128,
+      "frame": "imu_icm20948_link",
+      "first_header_ns": 1752868881261014999,
+      "last_header_ns": 1752868881925759000,
+      "header_minus_storage_ns": [
+        -121,
+        127
+      ],
+      "header_monotonic": true,
+      "header_rate_hz": 191.05099077080652,
+      "orientation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angular_velocity": [
+        0.055394597351551056,
+        -0.04420915246009827,
+        0.1400844156742096
+      ],
+      "linear_acceleration": [
+        -0.2968961298465729,
+        -0.7709722518920898,
+        10.286014556884766
+      ]
+    },
+    {
+      "topic": "/mcu_node/data_link/icm/data",
+      "window_start_ns": 1752869128514597888,
+      "sampled": 93,
+      "frame": "imu_icm20948_link",
+      "first_header_ns": 1752869128517038999,
+      "last_header_ns": 1752869128998605999,
+      "header_minus_storage_ns": [
+        -121,
+        127
+      ],
+      "header_monotonic": true,
+      "header_rate_hz": 191.04299090261583,
+      "orientation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angular_velocity": [
+        0.0074569652788341045,
+        -0.017044492065906525,
+        -0.010652807541191578
+      ],
+      "linear_acceleration": [
+        0.5411171317100525,
+        -0.39266908168792725,
+        9.65870189666748
+      ]
+    },
+    {
+      "topic": "/xsens/imu/data",
+      "window_start_ns": 1752868633000622336,
+      "sampled": 128,
+      "frame": "imu_mti680g_link",
+      "first_header_ns": 1752868633000622354,
+      "last_header_ns": 1752868633318124351,
+      "header_minus_storage_ns": [
+        -110,
+        127
+      ],
+      "header_monotonic": true,
+      "header_rate_hz": 399.99748411031254,
+      "orientation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angular_velocity": [
+        -4.023313522338867e-05,
+        -0.0007793309050612153,
+        -0.0025898218154907227
+      ],
+      "linear_acceleration": [
+        0.05159014835953713,
+        -0.14729566872119906,
+        9.88118648529053
+      ]
+    },
+    {
+      "topic": "/xsens/imu/data",
+      "window_start_ns": 1752868881257610112,
+      "sampled": 128,
+      "frame": "imu_mti680g_link",
+      "first_header_ns": 1752868881258120527,
+      "last_header_ns": 1752868881575619523,
+      "header_minus_storage_ns": [
+        -125,
+        111
+      ],
+      "header_monotonic": true,
+      "header_rate_hz": 400.0012648858896,
+      "orientation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angular_velocity": [
+        0.04828796535730362,
+        0.024951253086328506,
+        0.13305918872356418
+      ],
+      "linear_acceleration": [
+        -0.5065882205963135,
+        -0.31017059087753296,
+        9.369307518005373
+      ]
+    },
+    {
+      "topic": "/xsens/imu/data",
+      "window_start_ns": 1752869128514597888,
+      "sampled": 128,
+      "frame": "imu_mti680g_link",
+      "first_header_ns": 1752869128515615639,
+      "last_header_ns": 1752869128833115635,
+      "header_minus_storage_ns": [
+        -109,
+        119
+      ],
+      "header_monotonic": true,
+      "header_rate_hz": 400.00000503937014,
+      "orientation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "orientation_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "angular_velocity": [
+        0.004414469003677368,
+        -0.0006854534731246532,
+        -0.0018000602722167969
+      ],
+      "linear_acceleration": [
+        -0.3165561258792878,
+        0.18409493565559387,
+        9.85293197631836
+      ]
+    },
+    {
+      "topic": "/velodyne_points",
+      "window_start_ns": 1752868633000622336,
+      "sampled": 1,
+      "frame": "lidar_vlp16_points_link",
+      "first_header_ns": 1752868633017206000,
+      "last_header_ns": 1752868633017206000,
+      "header_minus_storage_ns": [
+        -16,
+        -16
+      ],
+      "header_monotonic": true,
+      "height": 1824,
+      "width": 16,
+      "points": 29184,
+      "point_step": 22,
+      "row_step": 352,
+      "data_bytes": 642048,
+      "is_dense": false,
+      "is_bigendian": false,
+      "fields": [
+        {
+          "name": "x",
+          "offset": 0,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "y",
+          "offset": 4,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "z",
+          "offset": 8,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "intensity",
+          "offset": 12,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "ring",
+          "offset": 16,
+          "datatype": 4,
+          "count": 1
+        },
+        {
+          "name": "time",
+          "offset": 18,
+          "datatype": 7,
+          "count": 1
+        }
+      ],
+      "finite_xyz": 17297,
+      "ranges": {
+        "x": [
+          -85.99871826171875,
+          79.89611053466797
+        ],
+        "y": [
+          -41.972450256347656,
+          102.62312316894531
+        ],
+        "z": [
+          -1.7359426021575928,
+          22.918996810913086
+        ],
+        "intensity": [
+          1.0,
+          227.0
+        ],
+        "ring": [
+          0.0,
+          15.0
+        ],
+        "time": [
+          0.0,
+          0.10083837062120438
+        ]
+      },
+      "first_points": [
+        {
+          "x": null,
+          "y": null,
+          "z": null,
+          "intensity": null,
+          "ring": 0.0,
+          "time": 0.0
+        },
+        {
+          "x": null,
+          "y": null,
+          "z": null,
+          "intensity": null,
+          "ring": 1.0,
+          "time": 4.607999926520279e-06
+        },
+        {
+          "x": null,
+          "y": null,
+          "z": null,
+          "intensity": null,
+          "ring": 2.0,
+          "time": 9.215999853040557e-06
+        }
+      ],
+      "time_decreases_in_storage_order": 1824
+    },
+    {
+      "topic": "/velodyne_points",
+      "window_start_ns": 1752868881257610112,
+      "sampled": 1,
+      "frame": "lidar_vlp16_points_link",
+      "first_header_ns": 1752868881334336000,
+      "last_header_ns": 1752868881334336000,
+      "header_minus_storage_ns": [
+        0,
+        0
+      ],
+      "header_monotonic": true,
+      "height": 1824,
+      "width": 16,
+      "points": 29184,
+      "point_step": 22,
+      "row_step": 352,
+      "data_bytes": 642048,
+      "is_dense": false,
+      "is_bigendian": false,
+      "fields": [
+        {
+          "name": "x",
+          "offset": 0,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "y",
+          "offset": 4,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "z",
+          "offset": 8,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "intensity",
+          "offset": 12,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "ring",
+          "offset": 16,
+          "datatype": 4,
+          "count": 1
+        },
+        {
+          "name": "time",
+          "offset": 18,
+          "datatype": 7,
+          "count": 1
+        }
+      ],
+      "finite_xyz": 18681,
+      "ranges": {
+        "x": [
+          -33.70985412597656,
+          104.8767318725586
+        ],
+        "y": [
+          -70.92684936523438,
+          89.00119018554688
+        ],
+        "z": [
+          -1.277503490447998,
+          20.28266716003418
+        ],
+        "intensity": [
+          0.0,
+          227.0
+        ],
+        "ring": [
+          0.0,
+          15.0
+        ],
+        "time": [
+          0.0,
+          0.10083936899900436
+        ]
+      },
+      "first_points": [
+        {
+          "x": null,
+          "y": null,
+          "z": null,
+          "intensity": null,
+          "ring": 0.0,
+          "time": 0.0
+        },
+        {
+          "x": -2.6910462379455566,
+          "y": 3.991142988204956,
+          "z": -1.1013569831848145,
+          "intensity": 5.0,
+          "ring": 1.0,
+          "time": 4.607999926520279e-06
+        },
+        {
+          "x": -3.1522223949432373,
+          "y": 4.676882743835449,
+          "z": -1.0880558490753174,
+          "intensity": 6.0,
+          "ring": 2.0,
+          "time": 9.215999853040557e-06
+        }
+      ],
+      "time_decreases_in_storage_order": 1824
+    },
+    {
+      "topic": "/velodyne_points",
+      "window_start_ns": 1752869128514597888,
+      "sampled": 1,
+      "frame": "lidar_vlp16_points_link",
+      "first_header_ns": 1752869128542008000,
+      "last_header_ns": 1752869128542008000,
+      "header_minus_storage_ns": [
+        -64,
+        -64
+      ],
+      "header_monotonic": true,
+      "height": 1824,
+      "width": 16,
+      "points": 29184,
+      "point_step": 22,
+      "row_step": 352,
+      "data_bytes": 642048,
+      "is_dense": false,
+      "is_bigendian": false,
+      "fields": [
+        {
+          "name": "x",
+          "offset": 0,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "y",
+          "offset": 4,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "z",
+          "offset": 8,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "intensity",
+          "offset": 12,
+          "datatype": 7,
+          "count": 1
+        },
+        {
+          "name": "ring",
+          "offset": 16,
+          "datatype": 4,
+          "count": 1
+        },
+        {
+          "name": "time",
+          "offset": 18,
+          "datatype": 7,
+          "count": 1
+        }
+      ],
+      "finite_xyz": 17019,
+      "ranges": {
+        "x": [
+          -62.192596435546875,
+          85.52959442138672
+        ],
+        "y": [
+          -97.3272705078125,
+          99.51937103271484
+        ],
+        "z": [
+          -2.19124436378479,
+          16.993513107299805
+        ],
+        "intensity": [
+          0.0,
+          252.0
+        ],
+        "ring": [
+          0.0,
+          15.0
+        ],
+        "time": [
+          0.0,
+          0.10083936899900436
+        ]
+      },
+      "first_points": [
+        {
+          "x": null,
+          "y": null,
+          "z": null,
+          "intensity": null,
+          "ring": 0.0,
+          "time": 0.0
+        },
+        {
+          "x": null,
+          "y": null,
+          "z": null,
+          "intensity": null,
+          "ring": 1.0,
+          "time": 4.607999926520279e-06
+        },
+        {
+          "x": null,
+          "y": null,
+          "z": null,
+          "intensity": null,
+          "ring": 2.0,
+          "time": 9.215999853040557e-06
+        }
+      ],
+      "time_decreases_in_storage_order": 1824
+    }
+  ]
+}

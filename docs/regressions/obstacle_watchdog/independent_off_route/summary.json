@@ -1,0 +1,40 @@
+{
+  "name": "independent_off_route",
+  "scenario": "off_route",
+  "feedback_input": "odometry",
+  "passed": true,
+  "failed_checks": [],
+  "raw_recording": "/tmp/atlas_watchdog_diagnosis_runs/run_20261022_022805_off_route_odometry",
+  "checks": {
+    "launch_alive_during_measurement": true,
+    "bounded_cleanup": true,
+    "no_map_changes": true,
+    "actual_motion": true,
+    "actual_planner_output": true,
+    "actual_controller_feedback": true,
+    "pinned_planner_exclusive_output": true,
+    "pinned_gate_exclusive_simulator_command": true,
+    "synthetic_perception_only": true,
+    "controller_consumes_final_smoother": true,
+    "delivered_commands_match_pinned_controller": true,
+    "speed_limit": true,
+    "acceleration_limit": true,
+    "tracking": true,
+    "validated_initial_trajectory": true,
+    "completed_route": true,
+    "nominal_safety_not_latched": true,
+    "terminal_hold": true,
+    "no_off_route_false_stop": true,
+    "plugin_loaded": true,
+    "no_crash": true
+  },
+  "first_base_safety_latch": null,
+  "first_safety_latch": null,
+  "runtime_summary": {
+    "max_sampling_gap_sec": 0.036676272999102366,
+    "realtime_minus_monotonic_range_sec": 0.00012159347534179688,
+    "maximum_observed_global_cpu_busy_percent": 93.04635761589404,
+    "minimum_mem_available_kib": 1167704,
+    "cpu_control_events": []
+  }
+}

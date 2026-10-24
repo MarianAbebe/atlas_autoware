@@ -1,0 +1,28 @@
+{
+  "after_2": {
+    "rates_hz": {
+      "ndt": 8.819310933063962,
+      "ekf": 49.892530058291314,
+      "command": 33.26079395902434,
+      "scan": 8.810730535031146
+    },
+    "process_tree_peak_rss_kib": 382980,
+    "ndt_execution_ms_max": 99.9749984741211,
+    "max_lateral_error_m": 0.0029985147690467784,
+    "max_speed_mps": 0.7510538015667215,
+    "max_acceleration_mps2": 0.29447912535483994
+  },
+  "after_3": {
+    "rates_hz": {
+      "ndt": 8.895824879623309,
+      "ekf": 50.000649305121144,
+      "command": 33.332885713831836,
+      "scan": 8.897870446262186
+    },
+    "process_tree_peak_rss_kib": 382820,
+    "ndt_execution_ms_max": 16.030000686645508,
+    "max_lateral_error_m": 0.0030738360834163814,
+    "max_speed_mps": 0.7544016464266907,
+    "max_acceleration_mps2": 0.25612217740490584
+  }
+}

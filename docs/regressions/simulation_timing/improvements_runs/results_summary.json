@@ -1,0 +1,1916 @@
+{
+  "obstacle": {
+    "passed": 11,
+    "total": 11,
+    "scenarios": [
+      {
+        "path": "obstacle/run_20261022_203744_none_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "none",
+          "feedback_input": "odometry",
+          "termination_reason": "terminal_hold_completed",
+          "injection_request_sec": null,
+          "clearance_or_recovery_request_sec": null,
+          "shutdown_sec": 6.112126391999482,
+          "total_distance_m": 69.76380007604173,
+          "final_goal_distance_m": 0.01482781821172721,
+          "max_speed_mps": 0.9999260603502891,
+          "max_acceleration_mps2": 0.23725033237147,
+          "max_deceleration_mps2": -0.2901472679626786,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.006615922195520961,
+          "rms_lateral_error_m": 0.0011163237280485427,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.30205724185826,
+          "terminal_hold_sec": 10.059686275002605,
+          "terminal_creep_m": 0.0
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 3138,
+          "independent_raw_rows": 3137,
+          "measured_delivered_rows": 3137,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": null
+      },
+      {
+        "path": "obstacle/run_20261022_203931_ahead_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "ahead",
+          "feedback_input": "odometry",
+          "termination_reason": "terminal_hold_completed",
+          "injection_request_sec": 19.606673613001476,
+          "clearance_or_recovery_request_sec": 39.36573503800173,
+          "shutdown_sec": 6.095048106999457,
+          "total_distance_m": 69.79124174563746,
+          "final_goal_distance_m": 0.01261581802776527,
+          "max_speed_mps": 0.9995773383020417,
+          "max_acceleration_mps2": 0.23708704986549514,
+          "max_deceleration_mps2": -0.3106822635713616,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.006655986078976973,
+          "rms_lateral_error_m": 0.0010332171954471536,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.31575688325398,
+          "terminal_hold_sec": 10.061442066999007,
+          "terminal_creep_m": 0.0,
+          "initial_obstacle_center_distance_m": 14.848968234998976,
+          "initial_obstacle_clearance_m": 12.947172618219655,
+          "minimum_obstacle_clearance_m": 1.9738548141113001,
+          "stopped_obstacle_clearance_m": 1.9738548141113001,
+          "planning_response_latency_sec": 0.7353688579969457,
+          "obstacle_hold_sec": 5.060046216000046,
+          "obstacle_hold_max_speed_mps": 0.0,
+          "obstacle_hold_creep_m": 0.0,
+          "stopping_distance_m": 10.975099797023324,
+          "resumption_latency_sec": 3.060646355999779,
+          "resumption_15s_travel_m": 7.228031135995948,
+          "first_obstacle_cloud_receipt_sec": 19.640766728000017,
+          "cloud_to_planning_response_sec": 0.7012757429984049,
+          "inserted_stop_point_map": [
+            57.61449816420331,
+            69.11897888593379,
+            -0.0006570024220158166
+          ],
+          "raw_speed_near_inserted_stop_mps": 13.88888931274414
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 3680,
+          "independent_raw_rows": 3679,
+          "measured_delivered_rows": 3679,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": null
+      },
+      {
+        "path": "obstacle/run_20261022_204134_off_route_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "off_route",
+          "feedback_input": "odometry",
+          "termination_reason": "terminal_hold_completed",
+          "injection_request_sec": 19.13138538400017,
+          "clearance_or_recovery_request_sec": null,
+          "shutdown_sec": 6.043897619001655,
+          "total_distance_m": 69.82296266743575,
+          "final_goal_distance_m": 0.04433626060479962,
+          "max_speed_mps": 0.9999263155929138,
+          "max_acceleration_mps2": 0.23741601193895176,
+          "max_deceleration_mps2": -0.3120298395995539,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.006667380592718418,
+          "rms_lateral_error_m": 0.0011145971893364165,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.33365814214234,
+          "terminal_hold_sec": 10.060191022999788,
+          "terminal_creep_m": 0.0,
+          "off_route_false_stop_duration_sec": 0.0
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 3151,
+          "independent_raw_rows": 3151,
+          "measured_delivered_rows": 3150,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": null
+      },
+      {
+        "path": "obstacle/run_20261022_204320_stale_drop_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "stale_drop",
+          "feedback_input": "odometry",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.155439316997217,
+          "clearance_or_recovery_request_sec": 27.15593734799768,
+          "shutdown_sec": 6.684415632997116,
+          "total_distance_m": 5.969027681222599,
+          "final_goal_distance_m": 63.807042241162975,
+          "max_speed_mps": 0.7465094415227749,
+          "max_acceleration_mps2": 0.23639901372792577,
+          "max_deceleration_mps2": -0.5002240694237291,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.001109294889804597,
+          "rms_lateral_error_m": 0.0007083069943362112,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.334960505083515,
+          "detection_latency_sec": 0.2851526410013321,
+          "stopping_distance_m": 0.9539349002176234,
+          "stop_settling_sec": 2.0615827330002503,
+          "recovery_hold_sec": 5.081879579000088,
+          "recovery_creep_m": 0.0
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 960,
+          "independent_raw_rows": 959,
+          "measured_delivered_rows": 959,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792701819.8501205,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792701819.8501205,
+          "fault_inputs": [
+            "pointcloud"
+          ],
+          "currently_stale": [
+            "pointcloud"
+          ],
+          "fault_input_health": {
+            "pointcloud": {
+              "source_stamp": 1792701819.5404403,
+              "stamp_age_sec": 0.3096597194671631,
+              "receipt_age_sec": 0.3088993469973502
+            },
+            "predicted_objects": {
+              "source_stamp": 1792701819.8398097,
+              "stamp_age_sec": 0.010290384292602539,
+              "receipt_age_sec": 0.009893734997604042
+            },
+            "base_heartbeat": {
+              "source_stamp": 1792701819.833473,
+              "stamp_age_sec": 0.016627073287963867,
+              "receipt_age_sec": 0.01621240399981616
+            },
+            "base_status": {
+              "source_stamp": 1792701819.8335397,
+              "stamp_age_sec": 0.01656031608581543,
+              "receipt_age_sec": 0.01615861199752544
+            }
+          },
+          "t": 19.44059195799855
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_204401_stale_freeze_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "stale_freeze",
+          "feedback_input": "odometry",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.119329461002053,
+          "clearance_or_recovery_request_sec": 27.11946650900063,
+          "shutdown_sec": 5.827680468999461,
+          "total_distance_m": 6.046712997416202,
+          "final_goal_distance_m": 63.72936054915164,
+          "max_speed_mps": 0.7637959528966847,
+          "max_acceleration_mps2": 0.24408861668135176,
+          "max_deceleration_mps2": -0.5000923190114376,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0013220728480549874,
+          "rms_lateral_error_m": 0.0008405056249722739,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.26890538970776,
+          "detection_latency_sec": 0.30545690299913986,
+          "stopping_distance_m": 1.0190199276712786,
+          "stop_settling_sec": 2.1396217689980404,
+          "recovery_hold_sec": 5.079557372999261,
+          "recovery_creep_m": 0.0
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 953,
+          "independent_raw_rows": 953,
+          "measured_delivered_rows": 953,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792701860.539161,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792701860.539161,
+          "fault_inputs": [
+            "pointcloud"
+          ],
+          "currently_stale": [
+            "pointcloud"
+          ],
+          "fault_input_health": {
+            "pointcloud": {
+              "source_stamp": 1792701860.2206888,
+              "stamp_age_sec": 0.31845569610595703,
+              "receipt_age_sec": 0.017908191999595147
+            },
+            "predicted_objects": {
+              "source_stamp": 1792701860.5206752,
+              "stamp_age_sec": 0.01846933364868164,
+              "receipt_age_sec": 0.017846441001893254
+            },
+            "base_heartbeat": {
+              "source_stamp": 1792701860.5187078,
+              "stamp_age_sec": 0.020436763763427734,
+              "receipt_age_sec": 0.01960708100159536
+            },
+            "base_status": {
+              "source_stamp": 1792701860.5188143,
+              "stamp_age_sec": 0.020330190658569336,
+              "receipt_age_sec": 0.019567289000406163
+            }
+          },
+          "t": 19.424786364001193
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_204440_feedback_drop_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_drop",
+          "feedback_input": "odometry",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.385130534999917,
+          "clearance_or_recovery_request_sec": 27.385368281997216,
+          "shutdown_sec": 5.598225844998524,
+          "total_distance_m": 6.118733142642853,
+          "final_goal_distance_m": 63.65734449775436,
+          "max_speed_mps": 0.8030669372886711,
+          "max_acceleration_mps2": 0.26414491895545056,
+          "max_deceleration_mps2": -0.5002411545727145,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0014663549186752457,
+          "rms_lateral_error_m": 0.0009505840903834686,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.33797114132942,
+          "detection_latency_sec": 0.3274265269974421,
+          "stopping_distance_m": 1.1024648693394692,
+          "stop_settling_sec": 2.219516086999647,
+          "recovery_hold_sec": 5.079917639999621,
+          "recovery_creep_m": 0.0
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 908,
+          "independent_raw_rows": 908,
+          "measured_delivered_rows": 908,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792701900.5414326,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792701900.5277352,
+          "fault_inputs": [
+            "odometry"
+          ],
+          "currently_stale": [
+            "odometry"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792701900.217727,
+              "stamp_age_sec": 0.30999326705932617,
+              "receipt_age_sec": 0.3079232119998778
+            },
+            "steering": {
+              "source_stamp": 1792701900.517884,
+              "stamp_age_sec": 0.009836196899414062,
+              "receipt_age_sec": 0.008785418998741079
+            },
+            "acceleration": {
+              "source_stamp": 1792701900.5178592,
+              "stamp_age_sec": 0.009860992431640625,
+              "receipt_age_sec": 0.00869416799832834
+            },
+            "trajectory": {
+              "source_stamp": 1792701900.437569,
+              "stamp_age_sec": 0.09015130996704102,
+              "receipt_age_sec": 0.08246080499884556
+            },
+            "command": {
+              "source_stamp": 1792701900.5196698,
+              "stamp_age_sec": 0.00805044174194336,
+              "receipt_age_sec": 0.005735472997912439
+            }
+          },
+          "fault_tick_gap_sec": 0.019427480998274405,
+          "t": 19.71255706199736
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_204520_feedback_freeze_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_freeze",
+          "feedback_input": "odometry",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.205413547999342,
+          "clearance_or_recovery_request_sec": 27.206150004996744,
+          "shutdown_sec": 1.728527513998415,
+          "total_distance_m": 6.033752786089341,
+          "final_goal_distance_m": 63.74232088079917,
+          "max_speed_mps": 0.7551516972832473,
+          "max_acceleration_mps2": 0.2377923121481403,
+          "max_deceleration_mps2": -0.5044072188775695,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0012142105997241534,
+          "rms_lateral_error_m": 0.0007702679245563792,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.334645757220734,
+          "detection_latency_sec": 0.3200089689999004,
+          "stopping_distance_m": 1.0152134479783133,
+          "stop_settling_sec": 2.140568931998132,
+          "recovery_hold_sec": 5.0804572950000875,
+          "recovery_creep_m": 0.0
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 964,
+          "independent_raw_rows": 964,
+          "measured_delivered_rows": 964,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792701940.0598013,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792701940.044175,
+          "fault_inputs": [
+            "odometry"
+          ],
+          "currently_stale": [
+            "odometry"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792701939.7398577,
+              "stamp_age_sec": 0.30429863929748535,
+              "receipt_age_sec": 0.0018627699973876588
+            },
+            "steering": {
+              "source_stamp": 1792701940.040886,
+              "stamp_age_sec": 0.003270387649536133,
+              "receipt_age_sec": 0.001598558999830857
+            },
+            "acceleration": {
+              "source_stamp": 1792701940.0406559,
+              "stamp_age_sec": 0.0035004615783691406,
+              "receipt_age_sec": 0.0017813949998526368
+            },
+            "trajectory": {
+              "source_stamp": 1792701939.9899592,
+              "stamp_age_sec": 0.054197072982788086,
+              "receipt_age_sec": 0.046128424000926316
+            },
+            "command": {
+              "source_stamp": 1792701940.0339053,
+              "stamp_age_sec": 0.010251045227050781,
+              "receipt_age_sec": 0.00724341299792286
+            }
+          },
+          "fault_tick_gap_sec": 0.019931303002522327,
+          "t": 19.525422516999242
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_204556_feedback_drop_steering/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_drop",
+          "feedback_input": "steering",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.516861486998096,
+          "clearance_or_recovery_request_sec": 27.516884263000975,
+          "shutdown_sec": 0.8163531520003744,
+          "total_distance_m": 6.050360963158537,
+          "final_goal_distance_m": 63.72571281740606,
+          "max_speed_mps": 0.7560679686779641,
+          "max_acceleration_mps2": 0.23734746117769884,
+          "max_deceleration_mps2": -0.5005556144266301,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.001326511513933432,
+          "rms_lateral_error_m": 0.0008448051458114192,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.29620724685898,
+          "detection_latency_sec": 0.3277482690027682,
+          "stopping_distance_m": 1.0325005833179315,
+          "stop_settling_sec": 2.1611778149999736,
+          "recovery_hold_sec": 5.079855831001623,
+          "recovery_creep_m": 0.0
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 947,
+          "independent_raw_rows": 947,
+          "measured_delivered_rows": 947,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792701976.0660663,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792701976.0507805,
+          "fault_inputs": [
+            "steering"
+          ],
+          "currently_stale": [
+            "steering"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792701976.0393054,
+              "stamp_age_sec": 0.011458873748779297,
+              "receipt_age_sec": 0.009885077000944875
+            },
+            "steering": {
+              "source_stamp": 1792701975.7383058,
+              "stamp_age_sec": 0.31245851516723633,
+              "receipt_age_sec": 0.31089090000023134
+            },
+            "acceleration": {
+              "source_stamp": 1792701976.0394714,
+              "stamp_age_sec": 0.01129293441772461,
+              "receipt_age_sec": 0.009603990001778584
+            },
+            "trajectory": {
+              "source_stamp": 1792701976.022288,
+              "stamp_age_sec": 0.028476238250732422,
+              "receipt_age_sec": 0.0216560520020721
+            },
+            "command": {
+              "source_stamp": 1792701976.0473056,
+              "stamp_age_sec": 0.003458738327026367,
+              "receipt_age_sec": 0.0012870569989900105
+            }
+          },
+          "fault_tick_gap_sec": 0.020021406999148894,
+          "t": 19.844609756000864
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_204631_feedback_freeze_steering/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_freeze",
+          "feedback_input": "steering",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.17180294499849,
+          "clearance_or_recovery_request_sec": 27.17183421899972,
+          "shutdown_sec": 0.6844425550007145,
+          "total_distance_m": 6.029092334536406,
+          "final_goal_distance_m": 63.746980508175504,
+          "max_speed_mps": 0.7496602412197403,
+          "max_acceleration_mps2": 0.23809227029834956,
+          "max_deceleration_mps2": -0.5001136408414389,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0012592947627909704,
+          "rms_lateral_error_m": 0.0007980012203696074,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.333665757325726,
+          "detection_latency_sec": 0.3234646880009677,
+          "stopping_distance_m": 1.0038721615338595,
+          "stop_settling_sec": 2.1193572459997085,
+          "recovery_hold_sec": 5.080682825002441,
+          "recovery_creep_m": 0.0
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 964,
+          "independent_raw_rows": 964,
+          "measured_delivered_rows": 964,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792702010.7523136,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702010.738954,
+          "fault_inputs": [
+            "steering"
+          ],
+          "currently_stale": [
+            "steering"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702010.7269871,
+              "stamp_age_sec": 0.011950492858886719,
+              "receipt_age_sec": 0.010881682999752229
+            },
+            "steering": {
+              "source_stamp": 1792702010.4272466,
+              "stamp_age_sec": 0.3116910457611084,
+              "receipt_age_sec": 0.01072409699918353
+            },
+            "acceleration": {
+              "source_stamp": 1792702010.727043,
+              "stamp_age_sec": 0.011894702911376953,
+              "receipt_age_sec": 0.010616388000926236
+            },
+            "trajectory": {
+              "source_stamp": 1792702010.72099,
+              "stamp_age_sec": 0.017947673797607422,
+              "receipt_age_sec": 0.011359439002262661
+            },
+            "command": {
+              "source_stamp": 1792702010.7233489,
+              "stamp_age_sec": 0.015588760375976562,
+              "receipt_age_sec": 0.010539928000071086
+            }
+          },
+          "fault_tick_gap_sec": 0.019530918998498237,
+          "t": 19.495267632999457
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_204705_feedback_drop_command/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_drop",
+          "feedback_input": "command",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 18.808412316000613,
+          "clearance_or_recovery_request_sec": 26.80859396100277,
+          "shutdown_sec": 0.9798887649994867,
+          "total_distance_m": 6.143534648573927,
+          "final_goal_distance_m": 63.632546254652524,
+          "max_speed_mps": 0.8102213836214192,
+          "max_acceleration_mps2": 0.26281251917591564,
+          "max_deceleration_mps2": -0.5003021001524607,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.001346627982218113,
+          "rms_lateral_error_m": 0.0008524191408235197,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.267833078262,
+          "detection_latency_sec": 0.28868898500149953,
+          "stopping_distance_m": 1.118479742568665,
+          "stop_settling_sec": 2.2200945020013023,
+          "recovery_hold_sec": 5.0799303430030704,
+          "recovery_creep_m": 0.0
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 956,
+          "independent_raw_rows": 956,
+          "measured_delivered_rows": 689,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792702044.8823388,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702044.8687236,
+          "fault_inputs": [
+            "command"
+          ],
+          "currently_stale": [
+            "command"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702044.8532422,
+              "stamp_age_sec": 0.015469074249267578,
+              "receipt_age_sec": 0.014379947999259457
+            },
+            "steering": {
+              "source_stamp": 1792702044.8534665,
+              "stamp_age_sec": 0.015244722366333008,
+              "receipt_age_sec": 0.014012359999469481
+            },
+            "acceleration": {
+              "source_stamp": 1792702044.8533702,
+              "stamp_age_sec": 0.015341043472290039,
+              "receipt_age_sec": 0.014157903999148402
+            },
+            "trajectory": {
+              "source_stamp": 1792702044.8338256,
+              "stamp_age_sec": 0.03488564491271973,
+              "receipt_age_sec": 0.027903760001208866
+            },
+            "command": {
+              "source_stamp": 1792702044.565433,
+              "stamp_age_sec": 0.30327820777893066,
+              "receipt_age_sec": 0.3012008660007268
+            }
+          },
+          "fault_tick_gap_sec": 0.019986441999208182,
+          "t": 19.097101301002112
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_204740_feedback_freeze_command/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_freeze",
+          "feedback_input": "command",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.036948000000848,
+          "clearance_or_recovery_request_sec": 27.037568953001028,
+          "shutdown_sec": 0.8338652769998589,
+          "total_distance_m": 6.022348205778268,
+          "final_goal_distance_m": 63.75372647070565,
+          "max_speed_mps": 0.7499730569268962,
+          "max_acceleration_mps2": 0.23817895636493958,
+          "max_deceleration_mps2": -0.5013667493069391,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0010374285017994741,
+          "rms_lateral_error_m": 0.0006611923352717462,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.30834785913523,
+          "detection_latency_sec": 0.3182535310006642,
+          "stopping_distance_m": 1.0041729588293098,
+          "stop_settling_sec": 2.1204556390002836,
+          "recovery_hold_sec": 5.079171887002303,
+          "recovery_creep_m": 0.0
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 966,
+          "independent_raw_rows": 966,
+          "measured_delivered_rows": 966,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792702079.5304894,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702079.5111248,
+          "fault_inputs": [
+            "command"
+          ],
+          "currently_stale": [
+            "command"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702079.492287,
+              "stamp_age_sec": 0.018821001052856445,
+              "receipt_age_sec": 0.01725529399845982
+            },
+            "steering": {
+              "source_stamp": 1792702079.4926507,
+              "stamp_age_sec": 0.01845717430114746,
+              "receipt_age_sec": 0.01689599699966493
+            },
+            "acceleration": {
+              "source_stamp": 1792702079.4925995,
+              "stamp_age_sec": 0.018508434295654297,
+              "receipt_age_sec": 0.017046165998181095
+            },
+            "trajectory": {
+              "source_stamp": 1792702079.5018353,
+              "stamp_age_sec": 0.009272575378417969,
+              "receipt_age_sec": 0.00034796399995684624
+            },
+            "command": {
+              "source_stamp": 1792702079.2036788,
+              "stamp_age_sec": 0.30742907524108887,
+              "receipt_age_sec": 0.035113638998154784
+            }
+          },
+          "fault_tick_gap_sec": 0.0235662199993385,
+          "t": 19.355201531001512
+        }
+      }
+    ]
+  },
+  "control": {
+    "passed": 7,
+    "total": 7,
+    "scenarios": [
+      {
+        "path": "control/closed_loop_faults/run_20261022_205020_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 31.947747309000988,
+          "fault": "drop",
+          "fault_injected_at_sec": 12.186568967998028,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "odometry",
+          "fault_restored_at_sec": 20.186950749997777,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.3400901684916269,
+          "final_distance_to_goal_m": 68.43568856688263,
+          "max_lateral_error_m": 0.0004855562343696539,
+          "rms_lateral_error_m": 0.0001388082150827919,
+          "max_heading_error_rad": 0.0047454531809496495,
+          "max_actual_speed_mps": 0.600910583723438,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.2389224179510149,
+          "max_actual_deceleration_mps2": -0.5001699650475955,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 967,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.6721796673504683,
+          "fault_start_speed_mps": 0.5061377987732391,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 0,
+          "fault_feedback_unique_stamps": 0,
+          "fault_detection_latency_sec": 0.3007361888885498,
+          "fault_stop_settling_sec": 1.7808665550001024,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 967,
+          "tf_matched_odometry_samples": 967,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.009047508239746094,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 589,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 31.15447755236098,
+          "controller_command_hz": 33.33335166676502,
+          "controller_commands": 631,
+          "delivered_command_hz": 33.86111183180298,
+          "max_command_steering_rad": 0.0006787257734686136,
+          "shutdown_sigterm_escalations": 1,
+          "shutdown_duration_sec": 6.673162699997192,
+          "gate_filter_limit_events": 5,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0
+          ],
+          "controller_vs_live_speed_rms_mps": 0.0019173882109229088
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 752,
+          "independent_raw_rows": 631,
+          "measured_delivered_rows": 631,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792702232.8068755,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702232.7928433,
+          "fault_inputs": [
+            "odometry"
+          ],
+          "currently_stale": [
+            "odometry"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702232.4915445,
+              "stamp_age_sec": 0.30127954483032227,
+              "receipt_age_sec": 0.299608574998274
+            },
+            "steering": {
+              "source_stamp": 1792702232.772385,
+              "stamp_age_sec": 0.02043914794921875,
+              "receipt_age_sec": 0.0187427890014078
+            },
+            "acceleration": {
+              "source_stamp": 1792702232.7723475,
+              "stamp_age_sec": 0.020476579666137695,
+              "receipt_age_sec": 0.01866337100000237
+            },
+            "trajectory": {
+              "source_stamp": 1792702232.730577,
+              "stamp_age_sec": 0.06224703788757324,
+              "receipt_age_sec": 0.055367393000778975
+            },
+            "command": {
+              "source_stamp": 1792702232.7887802,
+              "stamp_age_sec": 0.0040438175201416016,
+              "receipt_age_sec": 0.0011997709989373107
+            }
+          },
+          "fault_tick_gap_sec": 0.019677389002026757,
+          "t": 12.502156283000659
+        }
+      },
+      {
+        "path": "control/closed_loop_faults/run_20261022_205100_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 31.96609433499907,
+          "fault": "freeze",
+          "fault_injected_at_sec": 12.213733314998535,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "odometry",
+          "fault_restored_at_sec": 20.214926061998995,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.3451008845482009,
+          "final_distance_to_goal_m": 68.43067813172829,
+          "max_lateral_error_m": 0.0004854754765194935,
+          "rms_lateral_error_m": 0.00013883515020434456,
+          "max_heading_error_rad": 0.004745453180941892,
+          "max_actual_speed_mps": 0.6008561472887549,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.23623773739399295,
+          "max_actual_deceleration_mps2": -0.500169339261487,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 960,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.672523721613367,
+          "fault_start_speed_mps": 0.5073724672865848,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 300,
+          "fault_feedback_unique_stamps": 1,
+          "fault_detection_latency_sec": 0.30327415466308594,
+          "fault_stop_settling_sec": 1.7802563420009392,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 959,
+          "tf_matched_odometry_samples": 959,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.004011869430541992,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 582,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 31.14085474659235,
+          "controller_command_hz": 27.838026059629946,
+          "controller_commands": 624,
+          "delivered_command_hz": 27.84046264747692,
+          "max_command_steering_rad": 0.0006785403238609433,
+          "shutdown_sigterm_escalations": 1,
+          "shutdown_duration_sec": 6.621793472997524,
+          "gate_filter_limit_events": 5,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0,
+            2
+          ],
+          "controller_vs_live_speed_rms_mps": 0.0019985606582264754
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 752,
+          "independent_raw_rows": 624,
+          "measured_delivered_rows": 624,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792702273.571206,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702273.5560188,
+          "fault_inputs": [
+            "odometry"
+          ],
+          "currently_stale": [
+            "odometry"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702273.25145,
+              "stamp_age_sec": 0.3045516014099121,
+              "receipt_age_sec": 0.003323935998196248
+            },
+            "steering": {
+              "source_stamp": 1792702273.5515823,
+              "stamp_age_sec": 0.0044193267822265625,
+              "receipt_age_sec": 0.003142433000903111
+            },
+            "acceleration": {
+              "source_stamp": 1792702273.5515544,
+              "stamp_age_sec": 0.004447221755981445,
+              "receipt_age_sec": 0.0030704729979333933
+            },
+            "trajectory": {
+              "source_stamp": 1792702273.4817526,
+              "stamp_age_sec": 0.0742490291595459,
+              "receipt_age_sec": 0.06831441699978313
+            },
+            "command": {
+              "source_stamp": 1792702273.5480418,
+              "stamp_age_sec": 0.007959842681884766,
+              "receipt_age_sec": 0.0057170219988620374
+            }
+          },
+          "fault_tick_gap_sec": 0.020490584000071976,
+          "t": 12.532679900999938
+        }
+      },
+      {
+        "path": "control/closed_loop_faults/run_20261022_205141_drop_steering_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 31.224448095999833,
+          "fault": "drop",
+          "fault_injected_at_sec": 12.167212098000164,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "steering",
+          "fault_restored_at_sec": 20.167235993998474,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.3454898907267152,
+          "final_distance_to_goal_m": 68.4302892714916,
+          "max_lateral_error_m": 0.00048574694593204673,
+          "rms_lateral_error_m": 0.00014486262262014738,
+          "max_heading_error_rad": 0.0047454531809496495,
+          "max_actual_speed_mps": 0.5900814583854822,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.23719067877758035,
+          "max_actual_deceleration_mps2": -0.5004136994715944,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 928,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.6795966857941778,
+          "fault_start_speed_mps": 0.5049803728064423,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 0,
+          "fault_feedback_unique_stamps": 0,
+          "fault_detection_latency_sec": 0.3121926784515381,
+          "fault_stop_settling_sec": 1.8001675959967542,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 926,
+          "tf_matched_odometry_samples": 926,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.006941318511962891,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 577,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 31.137100198844625,
+          "controller_command_hz": 33.33343780090683,
+          "controller_commands": 617,
+          "delivered_command_hz": 33.82545114605125,
+          "max_command_steering_rad": 0.0006795388180762529,
+          "shutdown_sigterm_escalations": 1,
+          "shutdown_duration_sec": 6.056607490998431,
+          "gate_filter_limit_events": 5,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0
+          ],
+          "controller_vs_live_speed_rms_mps": 0.002184634405145241
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 726,
+          "independent_raw_rows": 617,
+          "measured_delivered_rows": 617,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792702314.3030005,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702314.286187,
+          "fault_inputs": [
+            "steering"
+          ],
+          "currently_stale": [
+            "steering"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702314.2733133,
+              "stamp_age_sec": 0.012854576110839844,
+              "receipt_age_sec": 0.011685096000292106
+            },
+            "steering": {
+              "source_stamp": 1792702313.9735444,
+              "stamp_age_sec": 0.3126235008239746,
+              "receipt_age_sec": 0.311031756002194
+            },
+            "acceleration": {
+              "source_stamp": 1792702314.273436,
+              "stamp_age_sec": 0.012731790542602539,
+              "receipt_age_sec": 0.011610386001848383
+            },
+            "trajectory": {
+              "source_stamp": 1792702314.257219,
+              "stamp_age_sec": 0.02894878387451172,
+              "receipt_age_sec": 0.022105668002041057
+            },
+            "command": {
+              "source_stamp": 1792702314.2820475,
+              "stamp_age_sec": 0.004120349884033203,
+              "receipt_age_sec": 0.0020099130015296396
+            }
+          },
+          "fault_tick_gap_sec": 0.019750831997953355,
+          "t": 12.497013584998058
+        }
+      },
+      {
+        "path": "control/closed_loop_faults/run_20261022_205221_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 26.07847364999907,
+          "fault": "freeze",
+          "fault_injected_at_sec": 12.17065122799977,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "steering",
+          "fault_restored_at_sec": 20.170890395998867,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.3318357668393048,
+          "final_distance_to_goal_m": 68.44394249032261,
+          "max_lateral_error_m": 0.0004856265265379289,
+          "rms_lateral_error_m": 0.00014070884719996821,
+          "max_heading_error_rad": 0.0047454531809496495,
+          "max_actual_speed_mps": 0.5876828529702504,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.2358576578321939,
+          "max_actual_deceleration_mps2": -0.5001255076349145,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 948,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.6648101085981679,
+          "fault_start_speed_mps": 0.5050676226788626,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 299,
+          "fault_feedback_unique_stamps": 1,
+          "fault_detection_latency_sec": 0.31189846992492676,
+          "fault_stop_settling_sec": 1.7797329429995443,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 947,
+          "tf_matched_odometry_samples": 947,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.0008723735809326172,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 593,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 31.19321755784254,
+          "controller_command_hz": 33.33310105024031,
+          "controller_commands": 635,
+          "delivered_command_hz": 33.85517922140213,
+          "max_command_steering_rad": 0.0006783197750337422,
+          "shutdown_sigterm_escalations": 0,
+          "shutdown_duration_sec": 0.9075573190020805,
+          "gate_filter_limit_events": 5,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0
+          ],
+          "controller_vs_live_speed_rms_mps": 0.0018253236289889811
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 749,
+          "independent_raw_rows": 635,
+          "measured_delivered_rows": 635,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792702354.3220508,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702354.3071423,
+          "fault_inputs": [
+            "steering"
+          ],
+          "currently_stale": [
+            "steering"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702354.2940383,
+              "stamp_age_sec": 0.013083457946777344,
+              "receipt_age_sec": 0.011590559002797818
+            },
+            "steering": {
+              "source_stamp": 1792702353.9942446,
+              "stamp_age_sec": 0.31287717819213867,
+              "receipt_age_sec": 0.011346305000188295
+            },
+            "acceleration": {
+              "source_stamp": 1792702354.2943091,
+              "stamp_age_sec": 0.012812614440917969,
+              "receipt_age_sec": 0.011511599001096329
+            },
+            "trajectory": {
+              "source_stamp": 1792702354.2453854,
+              "stamp_age_sec": 0.061736345291137695,
+              "receipt_age_sec": 0.0553921620012261
+            },
+            "command": {
+              "source_stamp": 1792702354.2901564,
+              "stamp_age_sec": 0.016965389251708984,
+              "receipt_age_sec": 0.01489816500179586
+            }
+          },
+          "fault_tick_gap_sec": 0.02052565000121831,
+          "t": 12.499248331998388
+        }
+      },
+      {
+        "path": "control/closed_loop_faults/run_20261022_205256_drop_command_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 31.1435486770024,
+          "fault": "drop",
+          "fault_injected_at_sec": 12.399614447000204,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "command",
+          "fault_restored_at_sec": 20.404082387001836,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.358833414471541,
+          "final_distance_to_goal_m": 68.41694653359743,
+          "max_lateral_error_m": 0.0004859080048138315,
+          "rms_lateral_error_m": 0.00014423530907097911,
+          "max_heading_error_rad": 0.0047454531809496495,
+          "max_actual_speed_mps": 0.6163585566558304,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.23676219074088356,
+          "max_actual_deceleration_mps2": -0.5006505931697052,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 931,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.6935276576529453,
+          "fault_start_speed_mps": 0.5044274715029973,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 0,
+          "fault_feedback_unique_stamps": 0,
+          "fault_detection_latency_sec": 0.28397583961486816,
+          "fault_stop_settling_sec": 1.8104958520016226,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 929,
+          "tf_matched_odometry_samples": 929,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.0008537769317626953,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 563,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 30.094760213956842,
+          "controller_command_hz": 33.333415298160006,
+          "controller_commands": 624,
+          "delivered_command_hz": 19.330161181341083,
+          "max_command_steering_rad": 0.0006774688372388482,
+          "shutdown_sigterm_escalations": 1,
+          "shutdown_duration_sec": 5.72476373599784,
+          "gate_filter_limit_events": 5,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0
+          ],
+          "controller_vs_live_speed_rms_mps": 0.0019727484390584028
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 693,
+          "independent_raw_rows": 624,
+          "measured_delivered_rows": 357,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792702389.2312887,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702389.2176924,
+          "fault_inputs": [
+            "command"
+          ],
+          "currently_stale": [
+            "command"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702389.2043133,
+              "stamp_age_sec": 0.013357162475585938,
+              "receipt_age_sec": 0.01200744699963252
+            },
+            "steering": {
+              "source_stamp": 1792702389.2045848,
+              "stamp_age_sec": 0.013085603713989258,
+              "receipt_age_sec": 0.011756316998798866
+            },
+            "acceleration": {
+              "source_stamp": 1792702389.204433,
+              "stamp_age_sec": 0.013237476348876953,
+              "receipt_age_sec": 0.01168744100141339
+            },
+            "trajectory": {
+              "source_stamp": 1792702389.119297,
+              "stamp_age_sec": 0.0983734130859375,
+              "receipt_age_sec": 0.09156007300043711
+            },
+            "command": {
+              "source_stamp": 1792702388.9051208,
+              "stamp_age_sec": 0.3125495910644531,
+              "receipt_age_sec": 0.3106838099993183
+            }
+          },
+          "fault_tick_gap_sec": 0.01900075400044443,
+          "t": 12.698693984999409
+        }
+      },
+      {
+        "path": "control/closed_loop_faults/run_20261022_205336_freeze_command_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 27.049403010998503,
+          "fault": "freeze",
+          "fault_injected_at_sec": 12.20284361299855,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "command",
+          "fault_restored_at_sec": 20.203131726997526,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.3560764985185918,
+          "final_distance_to_goal_m": 68.4197032786571,
+          "max_lateral_error_m": 0.00048599781193795703,
+          "rms_lateral_error_m": 0.00014110578330899656,
+          "max_heading_error_rad": 0.0047454531809496495,
+          "max_actual_speed_mps": 0.6153577316130459,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.23782277216523814,
+          "max_actual_deceleration_mps2": -0.5062188265892459,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 971,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.6911405985146885,
+          "fault_start_speed_mps": 0.5043849311044487,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 200,
+          "fault_feedback_unique_stamps": 1,
+          "fault_detection_latency_sec": 0.3089432716369629,
+          "fault_stop_settling_sec": 1.8239732740003092,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 970,
+          "tf_matched_odometry_samples": 970,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.003961324691772461,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 609,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 31.215970918166803,
+          "controller_command_hz": 33.33333532525721,
+          "controller_commands": 650,
+          "delivered_command_hz": 33.808616536801175,
+          "max_command_steering_rad": 0.0006791664054617286,
+          "shutdown_sigterm_escalations": 0,
+          "shutdown_duration_sec": 1.8460205369992764,
+          "gate_filter_limit_events": 4,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0
+          ],
+          "controller_vs_live_speed_rms_mps": 0.0017994934826314896
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 750,
+          "independent_raw_rows": 650,
+          "measured_delivered_rows": 650,
+          "delivered_missing_from_independent_raw": 0
+        },
+        "first_latch": {
+          "stamp": 1792702428.8654616,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702428.851025,
+          "fault_inputs": [
+            "command"
+          ],
+          "currently_stale": [
+            "command"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702428.8406236,
+              "stamp_age_sec": 0.010381937026977539,
+              "receipt_age_sec": 0.008036330000322778
+            },
+            "steering": {
+              "source_stamp": 1792702428.8407044,
+              "stamp_age_sec": 0.01030111312866211,
+              "receipt_age_sec": 0.00798203799786279
+            },
+            "acceleration": {
+              "source_stamp": 1792702428.840674,
+              "stamp_age_sec": 0.01033163070678711,
+              "receipt_age_sec": 0.007913703000667738
+            },
+            "trajectory": {
+              "source_stamp": 1792702428.749604,
+              "stamp_age_sec": 0.10140156745910645,
+              "receipt_age_sec": 0.09205020900117233
+            },
+            "command": {
+              "source_stamp": 1792702428.5388052,
+              "stamp_age_sec": 0.31220030784606934,
+              "receipt_age_sec": 0.007835534997866489
+            }
+          },
+          "fault_tick_gap_sec": 0.020124867998674745,
+          "t": 12.526926883998385
+        }
+      },
+      {
+        "path": "control/closed_loop_nominal/run_20261022_204827_none_odometry_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "terminal_hold_completed",
+          "runtime_sec": 103.84734225499778,
+          "fault": "none",
+          "fault_injected_at_sec": null,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "odometry",
+          "fault_restored_at_sec": null,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 69.84478030263922,
+          "final_distance_to_goal_m": 0.06615309282174028,
+          "max_lateral_error_m": 0.006530999415860404,
+          "rms_lateral_error_m": 0.0011280060524884853,
+          "max_heading_error_rad": 0.008870086047494148,
+          "max_actual_speed_mps": 0.9999306532871027,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.24156534832156984,
+          "max_actual_deceleration_mps2": -0.31153086453388473,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 4531,
+          "terminal_hold_sec": 10.060757776998798,
+          "terminal_stopping_accuracy_m": 0.06615309282174028,
+          "terminal_5s_max_abs_speed_mps": 0.0,
+          "terminal_5s_displacement_m": 0.0,
+          "terminal_hold_max_speed_mps": 0.0,
+          "terminal_hold_creep_m": 0.0,
+          "stop_settling_sec": 0.1597774620022392,
+          "positive_acceleration_commands_during_hold": 0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 4519,
+          "tf_matched_odometry_samples": 4519,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.001703023910522461,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 3043,
+          "gate_command_min_acceleration_mps2": -0.3115675747394562,
+          "gate_command_hz": 33.21300614006819,
+          "controller_command_hz": 33.33310576779361,
+          "controller_commands": 3054,
+          "delivered_command_hz": 33.38803638668815,
+          "max_command_steering_rad": 0.00945559423416853,
+          "shutdown_sigterm_escalations": 1,
+          "shutdown_duration_sec": 6.272292081001069,
+          "gate_filter_limit_events": 14,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0,
+            1,
+            2
+          ],
+          "controller_vs_live_speed_rms_mps": 0.0017776933079188286
+        },
+        "recording": {
+          "passed": true,
+          "reason": "all_delivered_recorded",
+          "journal_rows": 3166,
+          "independent_raw_rows": 3054,
+          "measured_delivered_rows": 3050,
+          "delivered_missing_from_independent_raw": 1
+        },
+        "first_latch": null
+      }
+    ]
+  },
+  "localization": {
+    "passed": 4,
+    "total": 5,
+    "scenarios": [
+      {
+        "path": "localization/drop_ekf/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "drop_ekf",
+          "termination": "fault_stop_observed",
+          "error": null,
+          "engaged": 2.3958736899985524,
+          "injected": 5.399410452999291,
+          "cleanup_sec": 0.4687363449993427,
+          "process_tree_peak_rss_kib": 382692,
+          "localization_errors": {
+            "ndt": {
+              "matched": 28,
+              "max_xy_m": 0.006894669356292506,
+              "rms_xy_m": 0.004293267462802958,
+              "max_yaw_rad": 6.590676226002909e-05
+            },
+            "ekf": {
+              "matched": 151,
+              "max_xy_m": 0.00966510536487672,
+              "rms_xy_m": 0.005260748393979825,
+              "max_yaw_rad": 3.0942079992366886e-05
+            }
+          },
+          "counts": {
+            "truth": 940,
+            "ekf": 240,
+            "ndt": 38,
+            "command": 624,
+            "gate": 523,
+            "scan": 168,
+            "ndt_ms": 38,
+            "ndt_score": 38,
+            "ndt_iterations": 38
+          },
+          "truth_distance_m": 1.3690104799455864,
+          "final_goal_distance_m": 6.630989927374418,
+          "max_lateral_error_m": 0.0008476935248040718,
+          "max_speed_mps": 0.6174185318701031,
+          "scan_world_residual_m": 8.978620062981613e-07,
+          "scan_world_matched": 42,
+          "scan_sample_displacement_m": 1.3932699039976766,
+          "max_acceleration_mps2": 0.5060657608199348,
+          "ndt_execution_ms_max": 13.050999641418457,
+          "ndt_score_min": 3.475435733795166,
+          "ndt_iterations_max": 6
+        },
+        "first_latch": {
+          "stamp": 1792702536.3170812,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702536.304602,
+          "fault_inputs": [
+            "odometry",
+            "ndt"
+          ],
+          "currently_stale": [
+            "odometry",
+            "ndt"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702535.9964104,
+              "stamp_age_sec": 0.30817222595214844,
+              "receipt_age_sec": 0.30665679999947315
+            },
+            "steering": {
+              "source_stamp": 1792702536.2929351,
+              "stamp_age_sec": 0.011647462844848633,
+              "receipt_age_sec": 0.011213323999982094
+            },
+            "acceleration": {
+              "source_stamp": 1792702536.2928643,
+              "stamp_age_sec": 0.011718273162841797,
+              "receipt_age_sec": 0.010858690999157261
+            },
+            "trajectory": {
+              "source_stamp": 1792702536.227982,
+              "stamp_age_sec": 0.07660055160522461,
+              "receipt_age_sec": 0.07289802500235965
+            },
+            "command": {
+              "source_stamp": 1792702536.287798,
+              "stamp_age_sec": 0.01678466796875,
+              "receipt_age_sec": 0.015357705000496935
+            },
+            "ndt": {
+              "source_stamp": 1792702535.9921386,
+              "stamp_age_sec": 0.31245851516723633,
+              "receipt_age_sec": 0.2915022669985774
+            }
+          },
+          "fault_tick_gap_sec": 0.020134849000896793,
+          "t": 5.719528417997935
+        }
+      },
+      {
+        "path": "localization/drop_ndt/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "drop_ndt",
+          "termination": "fault_stop_observed",
+          "error": null,
+          "engaged": 3.571759976002795,
+          "injected": 6.582384050001565,
+          "cleanup_sec": 1.328024327998719,
+          "process_tree_peak_rss_kib": 383248,
+          "localization_errors": {
+            "ndt": {
+              "matched": 80,
+              "max_xy_m": 0.005758407821794707,
+              "rms_xy_m": 0.003566990229798239,
+              "max_yaw_rad": 4.520772546086451e-05
+            },
+            "ekf": {
+              "matched": 850,
+              "max_xy_m": 0.0061998618443687,
+              "rms_xy_m": 0.004838295839543161,
+              "max_yaw_rad": 8.70800027125607e-06
+            }
+          },
+          "counts": {
+            "truth": 1000,
+            "ekf": 998,
+            "ndt": 99,
+            "command": 663,
+            "gate": 557,
+            "scan": 106,
+            "ndt_ms": 99,
+            "ndt_score": 99,
+            "ndt_iterations": 99
+          },
+          "truth_distance_m": 1.4541301734154717,
+          "final_goal_distance_m": 6.545870210945009,
+          "max_lateral_error_m": 0.0008556393543415197,
+          "max_speed_mps": 0.6253323057218821,
+          "scan_world_residual_m": 8.150175219045076e-07,
+          "scan_world_matched": 28,
+          "scan_sample_displacement_m": 1.474942358410949,
+          "max_acceleration_mps2": 0.500419378591314,
+          "ndt_execution_ms_max": 13.133000373840332,
+          "ndt_score_min": 3.4754467010498047,
+          "ndt_iterations_max": 6
+        },
+        "first_latch": {
+          "stamp": 1792702514.2635565,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702514.2499216,
+          "fault_inputs": [
+            "ndt"
+          ],
+          "currently_stale": [
+            "ndt"
+          ],
+          "stationary_since_monotonic": null,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702514.2486973,
+              "stamp_age_sec": 0.0012001991271972656,
+              "receipt_age_sec": 0.00020837999909417704
+            },
+            "steering": {
+              "source_stamp": 1792702514.2470262,
+              "stamp_age_sec": 0.002871274948120117,
+              "receipt_age_sec": 0.0026989329999196343
+            },
+            "acceleration": {
+              "source_stamp": 1792702514.2466264,
+              "stamp_age_sec": 0.0032711029052734375,
+              "receipt_age_sec": 0.00262268100050278
+            },
+            "trajectory": {
+              "source_stamp": 1792702514.1697686,
+              "stamp_age_sec": 0.08012890815734863,
+              "receipt_age_sec": 0.07607912000094075
+            },
+            "command": {
+              "source_stamp": 1792702514.2292397,
+              "stamp_age_sec": 0.020657777786254883,
+              "receipt_age_sec": 0.018764191001537256
+            },
+            "ndt": {
+              "source_stamp": 1792702513.9487574,
+              "stamp_age_sec": 0.3011586666107178,
+              "receipt_age_sec": 0.29468256500331336
+            }
+          },
+          "fault_tick_gap_sec": 0.01982129699899815,
+          "t": 6.8444780460013135
+        }
+      },
+      {
+        "path": "localization/no_ekf/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "no_ekf",
+          "termination": "unavailable_localization_observed",
+          "error": null,
+          "engaged": null,
+          "injected": null,
+          "cleanup_sec": 5.693540952997864,
+          "process_tree_peak_rss_kib": 373548,
+          "localization_errors": {
+            "ndt": {
+              "matched": 0,
+              "max_xy_m": null,
+              "rms_xy_m": null,
+              "max_yaw_rad": null
+            },
+            "ekf": {
+              "matched": 0,
+              "max_xy_m": null,
+              "rms_xy_m": null,
+              "max_yaw_rad": null
+            }
+          },
+          "counts": {
+            "truth": 671,
+            "ekf": 0,
+            "ndt": 0,
+            "command": 0,
+            "gate": 0,
+            "scan": 120,
+            "ndt_ms": 0,
+            "ndt_score": 0,
+            "ndt_iterations": 0
+          },
+          "truth_distance_m": 0.0,
+          "final_goal_distance_m": 8.0,
+          "max_lateral_error_m": 0.0,
+          "max_speed_mps": 0.0,
+          "scan_world_residual_m": 0.0,
+          "scan_world_matched": 30,
+          "scan_sample_displacement_m": 0.0,
+          "max_acceleration_mps2": 0.0,
+          "ndt_execution_ms_max": null,
+          "ndt_score_min": null,
+          "ndt_iterations_max": null
+        },
+        "first_latch": null
+      },
+      {
+        "path": "localization/no_ndt/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "no_ndt",
+          "termination": "unavailable_localization_observed",
+          "error": null,
+          "engaged": null,
+          "injected": null,
+          "cleanup_sec": 5.745216970000911,
+          "process_tree_peak_rss_kib": 378108,
+          "localization_errors": {
+            "ndt": {
+              "matched": 0,
+              "max_xy_m": null,
+              "rms_xy_m": null,
+              "max_yaw_rad": null
+            },
+            "ekf": {
+              "matched": 0,
+              "max_xy_m": null,
+              "rms_xy_m": null,
+              "max_yaw_rad": null
+            }
+          },
+          "counts": {
+            "truth": 669,
+            "ekf": 668,
+            "ndt": 0,
+            "command": 445,
+            "gate": 0,
+            "scan": 120,
+            "ndt_ms": 0,
+            "ndt_score": 0,
+            "ndt_iterations": 0
+          },
+          "truth_distance_m": 0.0,
+          "final_goal_distance_m": 8.0,
+          "max_lateral_error_m": 0.0,
+          "max_speed_mps": 0.0,
+          "scan_world_residual_m": 0.0,
+          "scan_world_matched": 30,
+          "scan_sample_displacement_m": 0.0,
+          "max_acceleration_mps2": 0.0,
+          "ndt_execution_ms_max": null,
+          "ndt_score_min": null,
+          "ndt_iterations_max": null
+        },
+        "first_latch": null
+      },
+      {
+        "path": "localization/nominal/validation.json",
+        "passed": false,
+        "failed_checks": [
+          "localization_engaged",
+          "actual_motion",
+          "scans_evolve",
+          "ndt_accuracy",
+          "ekf_accuracy",
+          "lateral_tracking",
+          "goal_and_ten_second_hold",
+          "nominal_not_latched",
+          "terminal_no_creep",
+          "terminal_commands"
+        ],
+        "metrics": {
+          "scenario": "nominal",
+          "termination": "timeout",
+          "error": null,
+          "engaged": null,
+          "injected": null,
+          "cleanup_sec": 5.8043527900008485,
+          "process_tree_peak_rss_kib": 383628,
+          "localization_errors": {
+            "ndt": {
+              "matched": 0,
+              "max_xy_m": null,
+              "rms_xy_m": null,
+              "max_yaw_rad": null
+            },
+            "ekf": {
+              "matched": 0,
+              "max_xy_m": null,
+              "rms_xy_m": null,
+              "max_yaw_rad": null
+            }
+          },
+          "counts": {
+            "truth": 2719,
+            "ekf": 2718,
+            "ndt": 481,
+            "command": 1811,
+            "gate": 1580,
+            "scan": 488,
+            "ndt_ms": 481,
+            "ndt_score": 481,
+            "ndt_iterations": 481
+          },
+          "truth_distance_m": 0.0,
+          "final_goal_distance_m": 8.0,
+          "max_lateral_error_m": 0.0,
+          "max_speed_mps": 0.0,
+          "scan_world_residual_m": 0.0,
+          "scan_world_matched": 122,
+          "scan_sample_displacement_m": 0.0,
+          "max_acceleration_mps2": 0.0,
+          "ndt_execution_ms_max": 27.343000411987305,
+          "ndt_score_min": 3.475510835647583,
+          "ndt_iterations_max": 6
+        },
+        "first_latch": {
+          "stamp": 1792702449.0601132,
+          "armed": false,
+          "latched": true,
+          "fault_stamp": 1792702448.9820087,
+          "fault_inputs": [
+            "odometry",
+            "steering",
+            "acceleration",
+            "trajectory",
+            "command",
+            "ndt"
+          ],
+          "currently_stale": [],
+          "stationary_since_monotonic": 26781.8486402,
+          "fault_input_health": {
+            "odometry": {
+              "source_stamp": 1792702448.648178,
+              "stamp_age_sec": 0.33379530906677246,
+              "receipt_age_sec": 0.33255876900147996
+            },
+            "steering": {
+              "source_stamp": 1792702448.6439366,
+              "stamp_age_sec": 0.33803677558898926,
+              "receipt_age_sec": 0.3369042750018707
+            },
+            "acceleration": {
+              "source_stamp": 1792702448.643889,
+              "stamp_age_sec": 0.33808445930480957,
+              "receipt_age_sec": 0.3368107729984331
+            },
+            "trajectory": {
+              "source_stamp": 1792702448.593109,
+              "stamp_age_sec": 0.38886451721191406,
+              "receipt_age_sec": 0.38452079800117644
+            },
+            "command": {
+              "source_stamp": 1792702448.6406887,
+              "stamp_age_sec": 0.34128475189208984,
+              "receipt_age_sec": 0.3398645029992622
+            },
+            "ndt": {
+              "source_stamp": 1792702448.5837703,
+              "stamp_age_sec": 0.39823150634765625,
+              "receipt_age_sec": 0.38314422800249304
+            }
+          },
+          "fault_tick_gap_sec": 0.3411746960009623,
+          "t": 3.8981035480028368
+        }
+      }
+    ]
+  }
+}

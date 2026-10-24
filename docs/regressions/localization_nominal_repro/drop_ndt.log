@@ -1,0 +1,98 @@
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-22 21:18:03.069 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-22 21:18:03.069 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+{"elapsed": 5.000488638001116, "scenario": "drop_ndt", "counts": {"truth": 217, "ekf": 216, "ndt": 32}, "x": 100.34437567271559, "speed": 0.41063152876884235, "latched": false}
+{"elapsed": 10.004941125000187, "scenario": "drop_ndt", "counts": {"truth": 467, "ekf": 467, "ndt": 37}, "x": 101.33454620618434, "speed": 0.0, "latched": true}
+{"elapsed": 15.008133343002555, "scenario": "drop_ndt", "counts": {"truth": 717, "ekf": 717, "ndt": 50}, "x": 101.33454620618434, "speed": 0.0, "latched": true}
+{
+  "passed": true,
+  "checks": {
+    "finite_states": true,
+    "finite_covariance": true,
+    "frames": true,
+    "quaternions": true,
+    "no_runtime_exception": true,
+    "launch_alive": true,
+    "bounded_cleanup": true,
+    "controller_odom_exclusively_ekf": true,
+    "truth_hidden_from_controller": true,
+    "ndt_pose_exclusive": true,
+    "ekf_receives_ndt": true,
+    "ndt_predictions_exclusively_ekf": true,
+    "speed_limit": true,
+    "actual_simulator_samples": true,
+    "scans_exclusive_fixture": true,
+    "ndt_receives_generated_scans": true,
+    "simulator_exclusive_gate": true,
+    "scan_world_consistency": true,
+    "finite_scan_samples": true,
+    "bounded_control": true,
+    "acceleration_limit": true,
+    "timestamps_nondecreasing": true,
+    "timestamps_positive": true,
+    "localization_engaged": true,
+    "actual_motion": true,
+    "scans_evolve": true,
+    "matched_ndt": true,
+    "ndt_convergence": true,
+    "ndt_accuracy": true,
+    "ekf_accuracy": true,
+    "lateral_tracking": true,
+    "fault_injected": true,
+    "expected_latch": true,
+    "no_unrequested_latch_before_injection": true,
+    "latch_latency": true,
+    "bounded_stop": true,
+    "final_stopped": true,
+    "no_auto_rearm": true,
+    "completed_fault_observation": true
+  },
+  "failed_checks": [],
+  "metrics": {
+    "scenario": "drop_ndt",
+    "termination": "fault_stop_observed",
+    "error": null,
+    "engaged": 2.5560174090023793,
+    "injected": 5.564300961003028,
+    "cleanup_sec": 0.36804307300189976,
+    "process_tree_peak_rss_kib": 383584,
+    "localization_errors": {
+      "ndt": {
+        "matched": 79,
+        "max_xy_m": 0.0060658803787203164,
+        "rms_xy_m": 0.0035040930663453166,
+        "max_yaw_rad": 6.14668264534273e-05
+      },
+      "ekf": {
+        "matched": 851,
+        "max_xy_m": 0.009417748966026271,
+        "rms_xy_m": 0.005311220868573207,
+        "max_yaw_rad": 2.0750375243802136e-05
+      }
+    },
+    "counts": {
+      "truth": 945,
+      "ekf": 945,
+      "ndt": 89,
+      "command": 629,
+      "gate": 522,
+      "scan": 96,
+      "ndt_ms": 89,
+      "ndt_score": 89,
+      "ndt_iterations": 89
+    },
+    "truth_distance_m": 1.3345464761363777,
+    "final_goal_distance_m": 6.665453835118578,
+    "max_lateral_error_m": 0.0007420279047778422,
+    "max_speed_mps": 0.6168913178316444,
+    "scan_world_residual_m": 9.472797420996903e-07,
+    "scan_world_matched": 24,
+    "scan_sample_displacement_m": 1.354754468807242,
+    "max_acceleration_mps2": 0.5008589864913011,
+    "ndt_execution_ms_max": 16.30699920654297,
+    "ndt_score_min": 3.4753060340881348,
+    "ndt_iterations_max": 6
+  }
+}

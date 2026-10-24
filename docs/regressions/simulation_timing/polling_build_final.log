@@ -1,0 +1,5 @@
+[ 50%] Built target pinned_step_probe
+Consolidate compiler generated dependencies of target polling_clock_probe
+[ 75%] Building CXX object CMakeFiles/polling_clock_probe.dir/polling_clock_probe.cpp.o
+[100%] Linking CXX executable polling_clock_probe
+[100%] Built target polling_clock_probe

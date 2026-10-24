@@ -1,0 +1,20 @@
+
+>>> [rcutils|error_handling.c:108] rcutils_set_error_state()
+This error state is being overwritten:
+
+  'Handle's typesupport identifier (rosidl_typesupport_cpp) is not supported by this library, at ./src/type_support_dispatch.hpp:111'
+
+with this new error message:
+
+  'Expected lexeme type (19) not found, search ended at index 28, at ./src/rcl/lexer_lookahead.c:239'
+
+rcutils_reset_error() should be called after error handling to avoid this.
+<<<
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-22 02:54:52.504 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[37;1m2026-10-22 02:54:52.504 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-22 02:54:52.504 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[INFO] [1792637692.524220114] [atlas_real_perception.velodyne_to_extended]: Converted 19325 points; discarded nonfinite XYZ: 9859; reordered: yes

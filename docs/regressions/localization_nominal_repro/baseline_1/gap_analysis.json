@@ -1,0 +1,50 @@
+{
+  "truth": {
+    "source_gap": 0.021251916885375977,
+    "receipt_gap": 0.020845637998718303,
+    "previous_stamp": 1792703626.4714012,
+    "next_stamp": 1792703626.4926531,
+    "previous_receipt": 3.682857760999468,
+    "next_receipt": 3.7037033989981865
+  },
+  "ekf": {
+    "source_gap": 0.021355390548706055,
+    "receipt_gap": 0.021419148997665616,
+    "previous_stamp": 1792703626.5703905,
+    "next_stamp": 1792703626.5917459,
+    "previous_receipt": 3.7814992620005796,
+    "next_receipt": 3.8029184109982452
+  },
+  "ndt": {
+    "source_gap": 0.12016129493713379,
+    "receipt_gap": 0.11859139799707918,
+    "previous_stamp": 1792703626.3312154,
+    "next_stamp": 1792703626.4513767,
+    "previous_receipt": 3.5536681990015495,
+    "next_receipt": 3.6722595969986287
+  },
+  "command": {
+    "source_gap": 0.031184673309326172,
+    "receipt_gap": 0.03113690200189012,
+    "previous_stamp": 1792703626.537386,
+    "next_stamp": 1792703626.5685706,
+    "previous_receipt": 3.7493538739981886,
+    "next_receipt": 3.7804907760000788
+  },
+  "scan": {
+    "source_gap": 0.12016129493713379,
+    "receipt_gap": 0.11976545799916494,
+    "previous_stamp": 1792703626.3312154,
+    "next_stamp": 1792703626.4513767,
+    "previous_receipt": 3.548321995000151,
+    "next_receipt": 3.668087452999316
+  },
+  "gate": {
+    "source_gap": 0.03406190872192383,
+    "receipt_gap": 0.033521187000587815,
+    "previous_stamp": 1792703626.8468292,
+    "next_stamp": 1792703626.880891,
+    "previous_receipt": 4.0582587019998755,
+    "next_receipt": 4.091779889000463
+  }
+}

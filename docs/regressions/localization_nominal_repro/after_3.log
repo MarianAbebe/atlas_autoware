@@ -1,0 +1,96 @@
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-22 21:17:32.568 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-22 21:17:32.568 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+{"elapsed": 5.008771748998697, "scenario": "nominal", "counts": {"truth": 217, "ekf": 216, "ndt": 33}, "x": 100.34841478040315, "speed": 0.38082030579835335, "latched": false}
+{"elapsed": 10.013323131999641, "scenario": "nominal", "counts": {"truth": 468, "ekf": 466, "ndt": 78}, "x": 103.24564049100898, "speed": 0.6032460613951378, "latched": false}
+{"elapsed": 15.015475444000913, "scenario": "nominal", "counts": {"truth": 718, "ekf": 716, "ndt": 122}, "x": 106.73024409661474, "speed": 0.6424021639333015, "latched": false}
+{"elapsed": 20.016679451000527, "scenario": "nominal", "counts": {"truth": 968, "ekf": 967, "ndt": 166}, "x": 107.92342072613093, "speed": 0.0, "latched": false}
+{"elapsed": 25.019414017999225, "scenario": "nominal", "counts": {"truth": 1218, "ekf": 1217, "ndt": 210}, "x": 107.92342072613093, "speed": 0.0, "latched": false}
+{
+  "passed": true,
+  "checks": {
+    "finite_states": true,
+    "finite_covariance": true,
+    "frames": true,
+    "quaternions": true,
+    "no_runtime_exception": true,
+    "launch_alive": true,
+    "bounded_cleanup": true,
+    "controller_odom_exclusively_ekf": true,
+    "truth_hidden_from_controller": true,
+    "ndt_pose_exclusive": true,
+    "ekf_receives_ndt": true,
+    "ndt_predictions_exclusively_ekf": true,
+    "speed_limit": true,
+    "actual_simulator_samples": true,
+    "scans_exclusive_fixture": true,
+    "ndt_receives_generated_scans": true,
+    "simulator_exclusive_gate": true,
+    "scan_world_consistency": true,
+    "finite_scan_samples": true,
+    "bounded_control": true,
+    "acceleration_limit": true,
+    "timestamps_nondecreasing": true,
+    "timestamps_positive": true,
+    "localization_engaged": true,
+    "actual_motion": true,
+    "scans_evolve": true,
+    "matched_ndt": true,
+    "ndt_convergence": true,
+    "ndt_accuracy": true,
+    "ekf_accuracy": true,
+    "lateral_tracking": true,
+    "goal_and_ten_second_hold": true,
+    "nominal_not_latched": true,
+    "terminal_no_creep": true,
+    "terminal_commands": true
+  },
+  "failed_checks": [],
+  "metrics": {
+    "scenario": "nominal",
+    "termination": "goal_hold_completed",
+    "error": null,
+    "engaged": 2.4791140369998175,
+    "injected": null,
+    "cleanup_sec": 0.41747722499712836,
+    "process_tree_peak_rss_kib": 382820,
+    "localization_errors": {
+      "ndt": {
+        "matched": 231,
+        "max_xy_m": 0.008046760738772136,
+        "rms_xy_m": 0.0044541388738460475,
+        "max_yaw_rad": 0.00012109073190983116
+      },
+      "ekf": {
+        "matched": 1303,
+        "max_xy_m": 0.009547038361391424,
+        "rms_xy_m": 0.006035846404806732,
+        "max_yaw_rad": 3.0797164492470856e-05
+      }
+    },
+    "counts": {
+      "truth": 1395,
+      "ekf": 1393,
+      "ndt": 241,
+      "command": 926,
+      "gate": 869,
+      "scan": 248,
+      "ndt_ms": 241,
+      "ndt_score": 241,
+      "ndt_iterations": 241
+    },
+    "truth_distance_m": 7.9234219470624945,
+    "final_goal_distance_m": 0.07662688189431924,
+    "max_lateral_error_m": 0.0030738360834163814,
+    "max_speed_mps": 0.7544016464266907,
+    "scan_world_residual_m": 9.149673668584601e-07,
+    "scan_world_matched": 62,
+    "scan_sample_displacement_m": 7.923372844142486,
+    "max_acceleration_mps2": 0.25612217740490584,
+    "ndt_execution_ms_max": 16.030000686645508,
+    "ndt_score_min": 3.47529673576355,
+    "ndt_iterations_max": 6
+  }
+}

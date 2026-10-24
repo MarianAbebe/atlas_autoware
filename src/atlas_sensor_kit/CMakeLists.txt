@@ -28,6 +28,10 @@ rclcpp_components_register_node(pointcloud_components
   PLUGIN "atlas_sensor_kit::ExtendedToCompactComponent"
   EXECUTABLE extended_to_compact_node)
 
+rclcpp_components_register_node(pointcloud_components
+  PLUGIN "atlas_sensor_kit::VelodyneToExtendedComponent"
+  EXECUTABLE velodyne_to_extended_node)
+
 install(TARGETS pointcloud_conversion pointcloud_components
   EXPORT export_pointcloud_conversion
   ARCHIVE DESTINATION lib LIBRARY DESTINATION lib RUNTIME DESTINATION bin)
@@ -41,6 +45,14 @@ endif()
 if(BUILD_TESTING)
   find_package(ament_cmake_gtest REQUIRED)
   find_package(class_loader REQUIRED)
+  add_executable(real_cloud_smoke test/real_cloud_smoke.cpp)
+  ament_target_dependencies(real_cloud_smoke rclcpp rclcpp_components sensor_msgs class_loader)
+  target_compile_features(real_cloud_smoke PRIVATE cxx_std_17)
+  target_compile_definitions(real_cloud_smoke PRIVATE
+    ATLAS_COMPONENT_LIBRARY="$<TARGET_FILE:pointcloud_components>")
+  add_dependencies(real_cloud_smoke pointcloud_components)
+  ament_add_gtest(test_velodyne_conversion test/test_velodyne_conversion.cpp)
+  target_link_libraries(test_velodyne_conversion pointcloud_conversion)
   ament_add_gtest(test_pointcloud_conversion test/test_pointcloud_conversion.cpp)
   target_link_libraries(test_pointcloud_conversion pointcloud_conversion)
   ament_add_gtest(test_pointcloud_components test/test_pointcloud_components.cpp TIMEOUT 30)

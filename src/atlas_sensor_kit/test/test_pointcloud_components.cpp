@@ -90,6 +90,18 @@ protected:
   rclcpp::Context::SharedPtr context_;
 };
 
+TEST_F(ComponentIntegration, VelodyneRequiresExplicitTimeContract)
+{
+  class_loader::ClassLoader loader(ATLAS_COMPONENT_LIBRARY);
+  auto factory = loader.createInstance<rclcpp_components::NodeFactory>(
+    "rclcpp_components::NodeFactoryTemplate<atlas_sensor_kit::VelodyneToExtendedComponent>");
+  rclcpp::NodeOptions options;
+  options.context(context_).use_intra_process_comms(false);
+  EXPECT_THROW(factory->create_node_instance(options), std::invalid_argument);
+  options.parameter_overrides({rclcpp::Parameter("time_is_relative_seconds", true)});
+  EXPECT_NO_THROW(factory->create_node_instance(options));
+}
+
 TEST_F(ComponentIntegration, RegisteredComponentsConvertThroughRosTopics)
 {
   // Load the actual registered factories; do not call conversion functions directly.

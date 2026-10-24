@@ -1,0 +1,33 @@
+{
+  "milestone_complete": false,
+  "reason": "Retained nominal localization loop and existing control regressions fail; no safety relaxation or truth fallback.",
+  "highest_completed_drive": "development_03 (earlier 40ms-wait fixture), eight metres with ten-second stopped hold",
+  "retained_nominal": "final_no_scan_delay/nominal: FAIL",
+  "ndt_regressions": "2/2 PASS",
+  "deterministic_tests": "8/8 PASS",
+  "existing_closed_loop_regressions": "3/7 PASS",
+  "corrected_ekf_shutdown_retest": "PASS",
+  "earlier_failures_preserved": [
+    "development_01",
+    "development_02",
+    "final",
+    "final_no_scan_delay"
+  ],
+  "runtime_sources_sha256": {
+    "src/atlas_localization_closed_loop_demo/README.md": "e44a7b810129817687df85147190c93dcfc4ed14c8ee26eb89b37b986b37c2ac",
+    "src/atlas_localization_closed_loop_demo/VALIDATION.md": "788391db7871d52fd685b8adac0d0420a5d61a7ef98d21ce1d861e6c48d529bd",
+    "src/atlas_localization_closed_loop_demo/CMakeLists.txt": "1ff82551ca50e60e2708e08fd50afec01e17de39a7987f7cd371935719039423",
+    "src/atlas_localization_closed_loop_demo/package.xml": "f4a5dae22eb12f0c04d5ecba1de96c55033ff22ff0e0e825a37bf8c3076cf06e",
+    "src/atlas_localization_closed_loop_demo/src/localization_fixture.cpp": "45a78044a95fc4eff46ca03cf42c01b93239e6061d04f0c39365074059e89772",
+    "src/atlas_localization_closed_loop_demo/launch/localization_loop.launch.py": "2bda89f73165972efcfc4bddfeaaeb45d159d2b026d0768e2294b57e34b16211",
+    "src/atlas_localization_closed_loop_demo/scripts/localization_watchdog.py": "896b7ac3f0b2130d2db94dd0d85784c82c23b97bd65614d39cbf638d59564cfc",
+    "src/atlas_localization_closed_loop_demo/scripts/run_test.sh": "80d08f1533ee18110ccf47beed617de5afffbf516591ca0c26c870a0eb5998b2",
+    "src/atlas_localization_closed_loop_demo/scripts/run_regressions.sh": "9b98768198616adb05b6fc137ed5e1b826f11780e5d185e141e0b10634d0e34a",
+    "src/atlas_localization_closed_loop_demo/scripts/test_fault_observation.py": "a7ada61f1631a02afbca5ad06b5ba7e3b342cb928a424112704a8fd7f80b13e5",
+    "src/atlas_localization_closed_loop_demo/scripts/run_validation.py": "f9d1c42f66239a4bad655395f8a2c0b6ae90d9611bea8cbe93cdbc538a82976f",
+    "src/atlas_localization_closed_loop_demo/scripts/analyze_results.py": "3b721bcfb870bc81b522d8469bec9bed292bb4f30ac4d8c9fcc122ff4ac55e6a",
+    "src/atlas_localization_closed_loop_demo/scripts/build_demo.sh": "12952682130187a4fab96b05959052f6c08dfcd6d49c368ace178bc60cc55ba6",
+    "src/atlas_localization_closed_loop_demo/scripts/test_localization_watchdog.py": "5bc35f43023128b178325b37eb3f96ab16d50b53e434800a63e10a638d41ae82",
+    "src/atlas_localization_closed_loop_demo/scripts/run_suite.py": "4f5c393d42aa30297ca82b713c8e35eb84c5d7327ad8fb9183f5a78a18af893a"
+  }
+}

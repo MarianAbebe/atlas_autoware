@@ -1,0 +1,39 @@
+{
+  "name": "latest_sample_probe",
+  "scenario": "none",
+  "feedback_input": "odometry",
+  "passed": true,
+  "failed_checks": [],
+  "raw_recording": "/tmp/atlas_watchdog_hops_runs/run_20261022_024942_none_odometry",
+  "checks": {
+    "launch_alive_during_measurement": true,
+    "bounded_cleanup": true,
+    "no_map_changes": true,
+    "actual_motion": true,
+    "actual_planner_output": true,
+    "actual_controller_feedback": true,
+    "pinned_planner_exclusive_output": true,
+    "pinned_gate_exclusive_simulator_command": true,
+    "synthetic_perception_only": true,
+    "controller_consumes_final_smoother": true,
+    "delivered_commands_match_pinned_controller": true,
+    "speed_limit": true,
+    "acceleration_limit": true,
+    "tracking": true,
+    "validated_initial_trajectory": true,
+    "completed_route": true,
+    "nominal_safety_not_latched": true,
+    "terminal_hold": true,
+    "plugin_loaded": true,
+    "no_crash": true
+  },
+  "first_base_safety_latch": null,
+  "first_safety_latch": null,
+  "runtime_summary": {
+    "max_sampling_gap_sec": 0.03864028899988625,
+    "realtime_minus_monotonic_range_sec": 0.0003075599670410156,
+    "maximum_observed_global_cpu_busy_percent": 91.41914191419141,
+    "minimum_mem_available_kib": 1410324,
+    "cpu_control_events": []
+  }
+}

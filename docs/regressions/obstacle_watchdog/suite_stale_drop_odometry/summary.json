@@ -1,0 +1,69 @@
+{
+  "name": "suite_stale_drop_odometry",
+  "scenario": "stale_drop",
+  "feedback_input": "odometry",
+  "passed": true,
+  "failed_checks": [],
+  "raw_recording": "/tmp/atlas_watchdog_serial_suite/run_20261022_023656_stale_drop_odometry",
+  "checks": {
+    "launch_alive_during_measurement": true,
+    "bounded_cleanup": true,
+    "no_map_changes": true,
+    "actual_motion": true,
+    "actual_planner_output": true,
+    "actual_controller_feedback": true,
+    "pinned_planner_exclusive_output": true,
+    "pinned_gate_exclusive_simulator_command": true,
+    "synthetic_perception_only": true,
+    "controller_consumes_final_smoother": true,
+    "delivered_commands_match_pinned_controller": true,
+    "speed_limit": true,
+    "acceleration_limit": true,
+    "tracking": true,
+    "validated_initial_trajectory": true,
+    "fault_detected": true,
+    "actual_fault_stop": true,
+    "no_automatic_rearm": true,
+    "invalid_rearm_refused": true,
+    "completed_fault_observation": true,
+    "fresh_perception_restored": true,
+    "plugin_loaded": true,
+    "no_crash": true
+  },
+  "first_base_safety_latch": null,
+  "first_safety_latch": {
+    "stamp": 1792636637.6862752,
+    "armed": false,
+    "latched": true,
+    "fault_stamp": 1792636637.6862752,
+    "fault_inputs": [
+      "pointcloud"
+    ],
+    "currently_stale": [
+      "pointcloud"
+    ],
+    "fault_input_health": {
+      "pointcloud": {
+        "source_stamp": 1792636637.3822768,
+        "stamp_age_sec": 0.303971529006958,
+        "receipt_age_sec": 0.3025164059981762
+      },
+      "predicted_objects": {
+        "source_stamp": 1792636637.6819623,
+        "stamp_age_sec": 0.004286050796508789,
+        "receipt_age_sec": 0.0035910170008719433
+      },
+      "base_heartbeat": {
+        "source_stamp": 1792636637.670037,
+        "stamp_age_sec": 0.016211271286010742,
+        "receipt_age_sec": 0.014495151001028717
+      },
+      "base_status": {
+        "source_stamp": 1792636637.6701283,
+        "stamp_age_sec": 0.016119956970214844,
+        "receipt_age_sec": 0.014407192000362556
+      }
+    },
+    "t": 20.629469619998417
+  }
+}

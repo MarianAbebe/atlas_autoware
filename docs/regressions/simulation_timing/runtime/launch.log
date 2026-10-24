@@ -1,0 +1,88 @@
+[INFO] [launch]: All log files can be found below /home/marian/.ros/log/2026-10-22-20-18-14-822989-marianlinux-63
+[INFO] [launch]: Default logging verbosity is set to INFO
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-22 20:18:14.922 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-22 20:18:14.922 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[INFO] [component_container-1]: process started with pid [76]
+[INFO] [autoware_ndt_scan_matcher_node-2]: process started with pid [78]
+[INFO] [autoware_ekf_localizer_node-3]: process started with pid [80]
+[INFO] [localization_fixture-4]: process started with pid [82]
+[INFO] [velocity_smoother_node-5]: process started with pid [84]
+[INFO] [controller_node_exe-6]: process started with pid [96]
+[INFO] [vehicle_cmd_gate_exe-7]: process started with pid [100]
+[INFO] [localization_watchdog.py-8]: process started with pid [105]
+[component_container-1] [37;1m2026-10-22 20:18:14.976 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[component_container-1] [37;1m2026-10-22 20:18:14.976 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[autoware_ekf_localizer_node-3] [37;1m2026-10-22 20:18:14.992 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[autoware_ekf_localizer_node-3] [37;1m2026-10-22 20:18:14.993 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[component_container-1] getifaddrs: Operation not permitted
+[component_container-1] getifaddrs: Operation not permitted
+[component_container-1] getifaddrs: Operation not permitted
+[autoware_ndt_scan_matcher_node-2] getifaddrs: Operation not permitted
+[autoware_ndt_scan_matcher_node-2] getifaddrs: Operation not permitted
+[autoware_ekf_localizer_node-3] getifaddrs: Operation not permitted
+[autoware_ekf_localizer_node-3] getifaddrs: Operation not permitted
+[autoware_ekf_localizer_node-3] getifaddrs: Operation not permitted
+[autoware_ndt_scan_matcher_node-2] getifaddrs: Operation not permitted
+[localization_fixture-4] getifaddrs: Operation not permitted
+[localization_fixture-4] getifaddrs: Operation not permitted
+[localization_fixture-4] getifaddrs: Operation not permitted
+[autoware_ndt_scan_matcher_node-2] [37;1m2026-10-22 20:18:15.005 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[localization_fixture-4] [37;1m2026-10-22 20:18:15.006 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[localization_fixture-4] [37;1m2026-10-22 20:18:15.006 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[autoware_ndt_scan_matcher_node-2] [37;1m2026-10-22 20:18:15.005 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[velocity_smoother_node-5] getifaddrs: Operation not permitted
+[velocity_smoother_node-5] getifaddrs: Operation not permitted
+[velocity_smoother_node-5] getifaddrs: Operation not permitted
+[controller_node_exe-6] getifaddrs: Operation not permitted
+[controller_node_exe-6] getifaddrs: Operation not permitted
+[controller_node_exe-6] getifaddrs: Operation not permitted
+[controller_node_exe-6] [37;1m2026-10-22 20:18:15.024 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[controller_node_exe-6] [37;1m2026-10-22 20:18:15.024 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[vehicle_cmd_gate_exe-7] getifaddrs: Operation not permitted
+[vehicle_cmd_gate_exe-7] getifaddrs: Operation not permitted
+[vehicle_cmd_gate_exe-7] getifaddrs: Operation not permitted
+[velocity_smoother_node-5] [37;1m2026-10-22 20:18:15.022 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[velocity_smoother_node-5] [37;1m2026-10-22 20:18:15.022 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[vehicle_cmd_gate_exe-7] [37;1m2026-10-22 20:18:15.031 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[vehicle_cmd_gate_exe-7] [37;1m2026-10-22 20:18:15.031 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[autoware_ekf_localizer_node-3] [WARN] [1792700295.063518543] [atlas_loc.ekf.ekf_localizer]: The node is not activated. Provide initial pose to pose_initializer
+[controller_node_exe-6] [INFO] [1792700295.149929903] [atlas_loc.controller]: Waiting for acceleration data
+[controller_node_exe-6] [INFO] [1792700295.150042941] [atlas_loc.controller]: Control is skipped since input data is not ready.
+[vehicle_cmd_gate_exe-7] [WARN] [1792700295.180626761] [atlas_loc.gate.vehicle_cmd_gate]: external_emergency_stop_heartbeat_received_time_ is false
+[vehicle_cmd_gate_exe-7] [INFO] [1792700295.180708175] [atlas_loc.gate.vehicle_cmd_gate]: waiting topics...
+[component_container-1] [INFO] [1792700295.206226593] [atlas_loc.sim.simulator_container]: Load Library: /home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_simple_planning_simulator/lib/libautoware_simple_planning_simulator.so
+[component_container-1] [INFO] [1792700295.222509343] [atlas_loc.sim.simulator_container]: Found class: rclcpp_components::NodeFactoryTemplate<autoware::simulator::simple_planning_simulator::SimplePlanningSimulator>
+[component_container-1] [INFO] [1792700295.222558091] [atlas_loc.sim.simulator_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<autoware::simulator::simple_planning_simulator::SimplePlanningSimulator>
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/atlas_loc/sim/simple_planning_simulator' in container '/atlas_loc/sim/simulator_container'
+[localization_watchdog.py-8] getifaddrs: Operation not permitted
+[localization_watchdog.py-8] getifaddrs: Operation not permitted
+[localization_watchdog.py-8] getifaddrs: Operation not permitted
+[localization_watchdog.py-8] [37;1m2026-10-22 20:18:15.292 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[localization_watchdog.py-8] [37;1m2026-10-22 20:18:15.292 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [localization_watchdog.py-8]: sending signal 'SIGINT' to process[localization_watchdog.py-8]
+[INFO] [vehicle_cmd_gate_exe-7]: sending signal 'SIGINT' to process[vehicle_cmd_gate_exe-7]
+[INFO] [controller_node_exe-6]: sending signal 'SIGINT' to process[controller_node_exe-6]
+[INFO] [velocity_smoother_node-5]: sending signal 'SIGINT' to process[velocity_smoother_node-5]
+[INFO] [localization_fixture-4]: sending signal 'SIGINT' to process[localization_fixture-4]
+[INFO] [autoware_ekf_localizer_node-3]: sending signal 'SIGINT' to process[autoware_ekf_localizer_node-3]
+[INFO] [autoware_ndt_scan_matcher_node-2]: sending signal 'SIGINT' to process[autoware_ndt_scan_matcher_node-2]
+[INFO] [component_container-1]: sending signal 'SIGINT' to process[component_container-1]
+[controller_node_exe-6] [INFO] [1792700296.267782854] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[vehicle_cmd_gate_exe-7] [INFO] [1792700296.267815270] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[velocity_smoother_node-5] [INFO] [1792700296.268934688] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[autoware_ekf_localizer_node-3] [INFO] [1792700296.270021025] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[autoware_ndt_scan_matcher_node-2] [INFO] [1792700296.270525923] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[localization_fixture-4] [INFO] [1792700296.271169984] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[component_container-1] [INFO] [1792700296.272136991] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [controller_node_exe-6]: process has finished cleanly [pid 96]
+[INFO] [velocity_smoother_node-5]: process has finished cleanly [pid 84]
+[INFO] [autoware_ndt_scan_matcher_node-2]: process has finished cleanly [pid 78]
+[INFO] [autoware_ekf_localizer_node-3]: process has finished cleanly [pid 80]
+[INFO] [localization_fixture-4]: process has finished cleanly [pid 82]
+[INFO] [component_container-1]: process has finished cleanly [pid 76]
+[INFO] [vehicle_cmd_gate_exe-7]: process has finished cleanly [pid 100]
+[INFO] [localization_watchdog.py-8]: process has finished cleanly [pid 105]

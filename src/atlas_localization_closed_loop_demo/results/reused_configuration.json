@@ -1,0 +1,26 @@
+{
+  "src/atlas_closed_loop_demo/config/gate.param.yaml": {
+    "sha256": "f37796a9513d6279d6290578c96d03aa76d5a9c0ab8a2158d83e928b6648da20",
+    "installed_identical": true
+  },
+  "src/atlas_closed_loop_demo/config/simulator.param.yaml": {
+    "sha256": "99bca1689b213301f8afd48c5529caa10467f0226428e8fe3cc1b09df2ce2568",
+    "installed_identical": true
+  },
+  "src/atlas_closed_loop_demo/config/controller_overrides.param.yaml": {
+    "sha256": "9f89f33db983e5d37f0a5e8f66b6a1170c34804c635bfb450456dad35163e98d",
+    "installed_identical": true
+  },
+  "src/atlas_closed_loop_demo/config/test_vehicle.param.yaml": {
+    "sha256": "a83bfa56db4d0e7e92a9a7b57eb88e4edb78ec35f8c2cc49007e9eb63d098d11",
+    "installed_identical": true
+  },
+  "src/atlas_closed_loop_demo/config/planning_overrides.param.yaml": {
+    "sha256": "6f856662453033acb99f9fb9d9967a19337c0445f8b8de7f794d4d11dc831bd6",
+    "installed_identical": true
+  },
+  "src/atlas_closed_loop_demo/scripts/feedback_watchdog.py": {
+    "sha256": "bb40d40f71fd358d00f7249e93aa31ce08407bb772ea4fb263ab04bbffcea4a7",
+    "installed_identical": true
+  }
+}

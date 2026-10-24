@@ -1,0 +1,41 @@
+--- /tmp/atlas_loc_launch_before_full.py	2026-10-22 22:02:38.409322306 +0000
++++ src/atlas_localization_closed_loop_demo/launch/localization_loop.launch.py	2026-10-22 22:11:08.993076937 +0000
+@@ -6,7 +6,7 @@
+ from launch_ros.descriptions import ComposableNode
+ 
+ 
+-def generate_launch_description():
++def generate_launch_description(include_fixture=True, ndt_points=None, smoother_input=None, watchdog_outputs=None):
+     ns = '/atlas_loc'
+     old = Path(share('atlas_closed_loop_demo')) / 'config'
+     control = Path(share('autoware_trajectory_follower_node')) / 'param'
+@@ -28,7 +28,7 @@
+         parameters=[share('autoware_ndt_scan_matcher')+'/config/ndt_scan_matcher.param.yaml',
+                     {'ndt.num_threads': 1, 'dynamic_map_loading.publish_loaded_map': True}],
+         remappings=[('pcd_loader_service', '/pcd_loader_service'),
+-                    ('points_raw', ns+'/sensors/points'),
++                    ('points_raw', ndt_points or ns+'/sensors/points'),
+                     ('ekf_pose_with_covariance', ns+'/ekf/ekf_pose_with_covariance')])
+     ekf = Node(package='autoware_ekf_localizer', executable='autoware_ekf_localizer_node',
+         name='ekf_localizer', namespace=ns+'/ekf', output='screen',
+@@ -58,7 +58,7 @@
+         remappings=[('/localization/kinematic_state', ns+'/ekf/ekf_odom'),
+                     ('~/input/acceleration', ns+'/sensors/acceleration'),
+                     ('~/input/operation_mode_state', ns+'/operation_mode'),
+-                    ('~/input/trajectory', ns+'/raw_trajectory'),
++                    ('~/input/trajectory', smoother_input or ns+'/raw_trajectory'),
+                     ('~/output/trajectory', ns+'/trajectory')])
+     gate = Node(package='autoware_vehicle_cmd_gate', executable='vehicle_cmd_gate_exe',
+         name='vehicle_cmd_gate', namespace=ns+'/gate', output='screen',
+@@ -72,9 +72,9 @@
+                     ('output/control_cmd', ns+'/gated/control_cmd')])
+     watchdog = Node(package='atlas_localization_closed_loop_demo', executable='localization_watchdog.py',
+         name='localization_watchdog', namespace=ns, output='screen',
+-        remappings=[('feedback/odometry', ns+'/ekf/ekf_odom'),
++        remappings=(watchdog_outputs or []) + [('feedback/odometry', ns+'/ekf/ekf_odom'),
+                     ('feedback/acceleration', ns+'/sensors/acceleration'),
+                     ('feedback/steering', ns+'/sim/output/steering')])
+     fixture = Node(package='atlas_localization_closed_loop_demo', executable='localization_fixture',
+                    output='screen')
+-    return LaunchDescription([simulator, ndt, ekf, fixture, smoother, controller, gate, watchdog])
++    return LaunchDescription([simulator, ndt, ekf] + ([fixture] if include_fixture else []) + [smoother, controller, gate, watchdog])

@@ -60,3 +60,32 @@ the hold interval, the demo keeps publishing new deterministic scans so RViz
 can discover and display the point clouds and detected-center markers.
 
 No physical sensor calibration or hardware-specific parameters are used.
+
+## Recorded Velodyne perception
+
+`real_lidar_perception_probe` (built with BUILD_TESTING) loads the separate
+Velodyne converter, compact converter, pinned RANSAC component and pinned
+EuclideanClusterNode. It accepts one actual cloud CDR and an output directory,
+forwards the actual component outputs in bounded stages, and writes serialized
+outputs plus steady-clock latency and Linux RSS measurements. It publishes no
+motion, TF or simulator input. `ATLAS_RANSAC_LIBRARY` selects the already-built
+pinned library from the previous real-data milestone.
+
+The automated five-timestamp driver reads only small indexed cloud samples:
+
+```bash
+# Source the prefixes documented in the report, then:
+/usr/bin/python3 scripts/validate_real_lidar_perception.py \
+  /home/marian/Downloads/engg_loading_dock_01.db3 \
+  --probe /tmp/atlas_real_perception_build/real_lidar_perception_probe \
+  --output-dir /tmp/atlas_real_perception_results
+```
+
+Use a fresh output directory. Both sensor-z plane-filtered and unfiltered
+clustering paths are tested with identical pinned clustering settings. Ground
+orientation remains unverified. Real clusters are point groups, not confirmed
+obstacles. The earlier synthetic test above is preserved as a separate CTest.
+
+[Real-data results and reproduction](../../docs/real_data/engg_loading_dock_01/PERCEPTION.md)
+include cluster sizes/centroids/bounds, measured latency/resources, and regression
+status. No recorded detections are connected to the moving simulator.

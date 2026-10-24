@@ -1,0 +1,35 @@
+{
+  "runs": {
+    "realtime_500": {
+      "mode": "realtime",
+      "wall_stall_sec": 0.5,
+      "state_dt_sec": 0.503090017,
+      "velocity_increment": 0.10060763009917051,
+      "samples": 11,
+      "final_x": 0.04659359027426667,
+      "final_vx": 0.13651899643429155,
+      "passed": true
+    },
+    "controlled_500": {
+      "mode": "controlled",
+      "wall_stall_sec": 0.5,
+      "state_dt_sec": 0.02,
+      "velocity_increment": 0.004000000059604644,
+      "samples": 22,
+      "final_x": 0.016000000238418577,
+      "final_vx": 0.0800000011920929,
+      "passed": true
+    },
+    "controlled_0": {
+      "mode": "controlled",
+      "wall_stall_sec": 0,
+      "state_dt_sec": 0.02,
+      "velocity_increment": 0.004000000059604644,
+      "samples": 22,
+      "final_x": 0.016000000238418577,
+      "final_vx": 0.0800000011920929,
+      "passed": true
+    }
+  },
+  "controlled_final_state_identical": true
+}

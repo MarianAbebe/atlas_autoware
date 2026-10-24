@@ -1,0 +1,394 @@
+{
+  "total": 11,
+  "passed": 8,
+  "failed": 3,
+  "cases": [
+    {
+      "scenario": "none",
+      "feedback_input": "odometry",
+      "passed": false,
+      "failed_checks": [
+        "delivered_commands_match_pinned_controller",
+        "acceleration_limit",
+        "completed_route",
+        "nominal_safety_not_latched",
+        "terminal_hold"
+      ],
+      "raw_recording": "/tmp/atlas_real_perception_obstacle_final/run_20261022_014934_none_odometry",
+      "thresholds_unchanged": true,
+      "source_hashes_match_current": true,
+      "first_base_safety_latch": {
+        "stamp": 1792633815.2914653,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792633815.0291722,
+        "fault_inputs": [
+          "odometry",
+          "steering",
+          "acceleration",
+          "trajectory",
+          "command"
+        ],
+        "currently_stale": [
+          "odometry",
+          "steering",
+          "acceleration",
+          "trajectory",
+          "command"
+        ],
+        "stationary_since_monotonic": null,
+        "t": 40.50279612700069
+      },
+      "first_safety_latch": {
+        "stamp": 1792633815.0382242,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792633815.0382242,
+        "fault_inputs": [
+          "pointcloud",
+          "predicted_objects",
+          "base_heartbeat",
+          "base_status"
+        ],
+        "currently_stale": [
+          "pointcloud",
+          "predicted_objects",
+          "base_heartbeat",
+          "base_status"
+        ],
+        "t": 40.44648384700122
+      }
+    },
+    {
+      "scenario": "ahead",
+      "feedback_input": "odometry",
+      "passed": false,
+      "failed_checks": [
+        "actual_motion",
+        "delivered_commands_match_pinned_controller",
+        "completed_route",
+        "nominal_safety_not_latched",
+        "terminal_hold",
+        "obstacle_injected"
+      ],
+      "raw_recording": "/tmp/atlas_real_perception_obstacle_final/run_20261022_015224_ahead_odometry",
+      "thresholds_unchanged": true,
+      "source_hashes_match_current": true,
+      "first_base_safety_latch": {
+        "stamp": 1792633965.0159204,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792633964.7916443,
+        "fault_inputs": [
+          "steering",
+          "acceleration"
+        ],
+        "currently_stale": [
+          "steering",
+          "acceleration"
+        ],
+        "stationary_since_monotonic": 14178.303487966,
+        "t": 20.622423651000645
+      },
+      "first_safety_latch": null
+    },
+    {
+      "scenario": "off_route",
+      "feedback_input": "odometry",
+      "passed": false,
+      "failed_checks": [
+        "actual_motion",
+        "completed_route",
+        "nominal_safety_not_latched",
+        "terminal_hold",
+        "no_off_route_false_stop"
+      ],
+      "raw_recording": "/tmp/atlas_real_perception_obstacle_final/run_20261022_015302_off_route_odometry",
+      "thresholds_unchanged": true,
+      "source_hashes_match_current": true,
+      "first_base_safety_latch": {
+        "stamp": 1792633994.6348584,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792633994.4874868,
+        "fault_inputs": [
+          "odometry",
+          "steering",
+          "acceleration",
+          "command"
+        ],
+        "currently_stale": [
+          "odometry",
+          "steering",
+          "acceleration",
+          "command"
+        ],
+        "stationary_since_monotonic": 14211.845265283,
+        "t": 11.63641410299897
+      },
+      "first_safety_latch": null
+    },
+    {
+      "scenario": "stale_drop",
+      "feedback_input": "odometry",
+      "passed": true,
+      "failed_checks": [],
+      "raw_recording": "/tmp/atlas_real_perception_obstacle_final/run_20261022_015337_stale_drop_odometry",
+      "thresholds_unchanged": true,
+      "source_hashes_match_current": true,
+      "first_base_safety_latch": null,
+      "first_safety_latch": {
+        "stamp": 1792634037.8571835,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634037.8571835,
+        "fault_inputs": [
+          "pointcloud"
+        ],
+        "currently_stale": [
+          "pointcloud"
+        ],
+        "t": 20.628657577000922
+      }
+    },
+    {
+      "scenario": "stale_freeze",
+      "feedback_input": "odometry",
+      "passed": true,
+      "failed_checks": [],
+      "raw_recording": "/tmp/atlas_real_perception_obstacle_final/run_20261022_015413_stale_freeze_odometry",
+      "thresholds_unchanged": true,
+      "source_hashes_match_current": true,
+      "first_base_safety_latch": null,
+      "first_safety_latch": {
+        "stamp": 1792634073.2539792,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634073.2539792,
+        "fault_inputs": [
+          "pointcloud"
+        ],
+        "currently_stale": [
+          "pointcloud"
+        ],
+        "t": 19.52801426699989
+      }
+    },
+    {
+      "scenario": "feedback_drop",
+      "feedback_input": "odometry",
+      "passed": true,
+      "failed_checks": [],
+      "raw_recording": "/tmp/atlas_real_perception_obstacle_final/run_20261022_015453_feedback_drop_odometry",
+      "thresholds_unchanged": true,
+      "source_hashes_match_current": true,
+      "first_base_safety_latch": {
+        "stamp": 1792634112.6330237,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634112.5878062,
+        "fault_inputs": [
+          "odometry"
+        ],
+        "currently_stale": [
+          "odometry"
+        ],
+        "stationary_since_monotonic": null,
+        "t": 19.39580834700064
+      },
+      "first_safety_latch": {
+        "stamp": 1792634112.6408823,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634112.6408823,
+        "fault_inputs": [
+          "base_authorization"
+        ],
+        "currently_stale": [
+          "base_authorization"
+        ],
+        "t": 19.403386751000653
+      }
+    },
+    {
+      "scenario": "feedback_freeze",
+      "feedback_input": "odometry",
+      "passed": true,
+      "failed_checks": [],
+      "raw_recording": "/tmp/atlas_real_perception_obstacle_final/run_20261022_015528_feedback_freeze_odometry",
+      "thresholds_unchanged": true,
+      "source_hashes_match_current": true,
+      "first_base_safety_latch": {
+        "stamp": 1792634149.7467508,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634149.7175624,
+        "fault_inputs": [
+          "odometry"
+        ],
+        "currently_stale": [
+          "odometry"
+        ],
+        "stationary_since_monotonic": null,
+        "t": 21.195262395998725
+      },
+      "first_safety_latch": {
+        "stamp": 1792634149.7554648,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634149.7554648,
+        "fault_inputs": [
+          "base_authorization"
+        ],
+        "currently_stale": [
+          "base_authorization"
+        ],
+        "t": 21.20025746200008
+      }
+    },
+    {
+      "scenario": "feedback_drop",
+      "feedback_input": "steering",
+      "passed": true,
+      "failed_checks": [],
+      "raw_recording": "/tmp/atlas_real_perception_obstacle_final/run_20261022_015605_feedback_drop_steering",
+      "thresholds_unchanged": true,
+      "source_hashes_match_current": true,
+      "first_base_safety_latch": {
+        "stamp": 1792634185.338259,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634185.3188574,
+        "fault_inputs": [
+          "steering"
+        ],
+        "currently_stale": [
+          "steering"
+        ],
+        "stationary_since_monotonic": null,
+        "t": 20.179715840000426
+      },
+      "first_safety_latch": {
+        "stamp": 1792634185.3585644,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634185.3585644,
+        "fault_inputs": [
+          "base_authorization"
+        ],
+        "currently_stale": [
+          "base_authorization"
+        ],
+        "t": 20.199971120000555
+      }
+    },
+    {
+      "scenario": "feedback_freeze",
+      "feedback_input": "steering",
+      "passed": true,
+      "failed_checks": [],
+      "raw_recording": "/tmp/atlas_real_perception_obstacle_final/run_20261022_015640_feedback_freeze_steering",
+      "thresholds_unchanged": true,
+      "source_hashes_match_current": true,
+      "first_base_safety_latch": {
+        "stamp": 1792634220.7760968,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634220.7563744,
+        "fault_inputs": [
+          "steering"
+        ],
+        "currently_stale": [
+          "steering"
+        ],
+        "stationary_since_monotonic": null,
+        "t": 20.068782184000156
+      },
+      "first_safety_latch": {
+        "stamp": 1792634220.787763,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634220.787763,
+        "fault_inputs": [
+          "base_authorization"
+        ],
+        "currently_stale": [
+          "base_authorization"
+        ],
+        "t": 20.080669842000134
+      }
+    },
+    {
+      "scenario": "feedback_drop",
+      "feedback_input": "command",
+      "passed": true,
+      "failed_checks": [],
+      "raw_recording": "/tmp/atlas_real_perception_obstacle_final/run_20261022_015720_feedback_drop_command",
+      "thresholds_unchanged": true,
+      "source_hashes_match_current": true,
+      "first_base_safety_latch": {
+        "stamp": 1792634260.4753442,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634260.4534643,
+        "fault_inputs": [
+          "command"
+        ],
+        "currently_stale": [
+          "command"
+        ],
+        "stationary_since_monotonic": null,
+        "t": 19.45575879199896
+      },
+      "first_safety_latch": {
+        "stamp": 1792634260.4896505,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634260.4896505,
+        "fault_inputs": [
+          "base_authorization"
+        ],
+        "currently_stale": [
+          "base_authorization"
+        ],
+        "t": 19.47022010099863
+      }
+    },
+    {
+      "scenario": "feedback_freeze",
+      "feedback_input": "command",
+      "passed": true,
+      "failed_checks": [],
+      "raw_recording": "/tmp/atlas_real_perception_obstacle_final/run_20261022_015800_feedback_freeze_command",
+      "thresholds_unchanged": true,
+      "source_hashes_match_current": true,
+      "first_base_safety_latch": {
+        "stamp": 1792634299.4313068,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634299.4063103,
+        "fault_inputs": [
+          "command"
+        ],
+        "currently_stale": [
+          "command"
+        ],
+        "stationary_since_monotonic": null,
+        "t": 19.054273629999443
+      },
+      "first_safety_latch": {
+        "stamp": 1792634299.4401836,
+        "armed": false,
+        "latched": true,
+        "fault_stamp": 1792634299.4401836,
+        "fault_inputs": [
+          "base_authorization"
+        ],
+        "currently_stale": [
+          "base_authorization"
+        ],
+        "t": 19.063257239999075
+      }
+    }
+  ]
+}

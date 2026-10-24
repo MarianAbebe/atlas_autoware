@@ -1,0 +1,21 @@
+{
+  "cpu_isolation": true,
+  "original_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "observer_cpus": [
+    5
+  ],
+  "runtime_cpus": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ]
+}

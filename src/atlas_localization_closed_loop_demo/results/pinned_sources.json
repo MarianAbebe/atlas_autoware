@@ -1,0 +1,18 @@
+{
+  "/home/marian/roam/references/autoware": {
+    "HEAD": "10718787ba6e28f038a0cb29ff99cc627b5abfd2",
+    "status": ""
+  },
+  "/home/marian/roam/references/autoware/src/core/autoware_core": {
+    "HEAD": "f25f83c632c1984ec276c894c41857d4abc0dad8",
+    "status": ""
+  },
+  "/home/marian/roam/references/autoware/src/universe/autoware_universe": {
+    "HEAD": "6e477c645efec33f7909095eea684474e97f5e3d",
+    "status": ""
+  },
+  "/home/marian/roam/references/autoware/src/core/autoware_simple_planning_simulator": {
+    "HEAD": "82d2c93a28a25f8802e8f5a21b4ec850beea9080",
+    "status": ""
+  }
+}

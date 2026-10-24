@@ -1,0 +1,10 @@
+{
+  "runtime_audit": 0,
+  "build": 0,
+  "clock_contracts": 0,
+  "observation_before": 0,
+  "observation_after": 0,
+  "polling_clock_mismatch_probe": 0,
+  "controlled_final_state_comparison": 0,
+  "full_loop_corrected": false
+}

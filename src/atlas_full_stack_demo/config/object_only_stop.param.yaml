@@ -1,0 +1,8 @@
+# Causal integration experiment: only detector-derived objects may request a stop.
+# The real filtered cloud remains connected and freshness-monitored.
+/**:
+  ros__parameters:
+    obstacle_stop:
+      obstacle_filtering:
+        check_inside:
+          pointcloud: false

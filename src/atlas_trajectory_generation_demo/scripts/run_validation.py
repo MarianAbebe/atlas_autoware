@@ -38,7 +38,8 @@ def main():
     root = Path('/tmp/atlas_trajectory_results')
     run = root / (time.strftime('run_%Y%m%d_%H%M%S') + ('_route_only' if args.route_only else ''))
     run.mkdir(parents=True)
-    originals = [Path('/home/marian/Downloads') / f for f in
+    map_dir = Path(os.environ.get('ATLAS_MAP_DIR', Path.home() / 'Downloads')).expanduser()
+    originals = [map_dir / f for f in
                  ['finalMap_repaired.osm', 'map_projector_info.yaml', 'pointcloud_map_georeferenced.pcd']]
     hashes = {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in originals}
     rclpy.init()

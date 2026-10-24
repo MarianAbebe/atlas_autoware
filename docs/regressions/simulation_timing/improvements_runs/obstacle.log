@@ -1,0 +1,12 @@
+{"scenario": "none", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/simulation_timing/improvements_runs/obstacle/20261022_203743_none_odometry.log"}
+{"scenario": "ahead", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/simulation_timing/improvements_runs/obstacle/20261022_203929_ahead_odometry.log"}
+{"scenario": "off_route", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/simulation_timing/improvements_runs/obstacle/20261022_204133_off_route_odometry.log"}
+{"scenario": "stale_drop", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/simulation_timing/improvements_runs/obstacle/20261022_204319_stale_drop_odometry.log"}
+{"scenario": "stale_freeze", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/simulation_timing/improvements_runs/obstacle/20261022_204359_stale_freeze_odometry.log"}
+{"scenario": "feedback_drop", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/simulation_timing/improvements_runs/obstacle/20261022_204439_feedback_drop_odometry.log"}
+{"scenario": "feedback_freeze", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/simulation_timing/improvements_runs/obstacle/20261022_204519_feedback_freeze_odometry.log"}
+{"scenario": "feedback_drop", "feedback_input": "steering", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/simulation_timing/improvements_runs/obstacle/20261022_204555_feedback_drop_steering.log"}
+{"scenario": "feedback_freeze", "feedback_input": "steering", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/simulation_timing/improvements_runs/obstacle/20261022_204630_feedback_freeze_steering.log"}
+{"scenario": "feedback_drop", "feedback_input": "command", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/simulation_timing/improvements_runs/obstacle/20261022_204704_feedback_drop_command.log"}
+{"scenario": "feedback_freeze", "feedback_input": "command", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/simulation_timing/improvements_runs/obstacle/20261022_204739_feedback_freeze_command.log"}
+PASS: 11 recordings, 264 recorded checks; raw distance, source/configuration, graph, thresholds and log consistency verified.

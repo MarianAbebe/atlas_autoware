@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 # Audit the full closure, never install system packages, and build only missing packages.
 set -eo pipefail
-cd /home/marian/roam/atlas_autoware
-source /opt/ros/humble/setup.bash
-source /tmp/atlas_map_upstream_install/setup.bash
-source /tmp/atlas_map_demo_install/setup.bash
+atlas_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+cd "$atlas_root"
+source src/atlas_full_stack_demo/scripts/environment.sh
+for atlas_overlay in /tmp/atlas_map_upstream_install /tmp/atlas_map_demo_install; do
+  [[ -f "$atlas_overlay/setup.bash" ]] && source "$atlas_overlay/setup.bash"
+done
 if [[ -f /tmp/atlas_trajectory_upstream_install/setup.bash ]]; then
   source /tmp/atlas_trajectory_upstream_install/setup.bash
 fi
@@ -16,7 +18,7 @@ import os
 from pathlib import Path
 import subprocess
 
-ref = Path('/home/marian/roam/references/autoware')
+ref = Path(os.environ['ATLAS_AUTOWARE_ROOT'])
 for repo, commit in [(ref, '10718787ba6e28f038a0cb29ff99cc627b5abfd2'),
                      (ref / 'src/core/autoware_core', 'f25f83c632c1984ec276c894c41857d4abc0dad8')]:
     if subprocess.check_output(['git', '-C', str(repo), 'rev-parse', 'HEAD'], text=True).strip() != commit:

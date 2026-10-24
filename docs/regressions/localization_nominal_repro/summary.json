@@ -1,0 +1,1699 @@
+{
+  "baseline_1": {
+    "passed": false,
+    "failed_checks": [
+      "localization_engaged",
+      "actual_motion",
+      "scans_evolve",
+      "ndt_accuracy",
+      "ekf_accuracy",
+      "lateral_tracking",
+      "goal_and_ten_second_hold",
+      "nominal_not_latched",
+      "terminal_no_creep",
+      "terminal_commands"
+    ],
+    "metrics": {
+      "scenario": "nominal",
+      "termination": "timeout",
+      "error": null,
+      "engaged": null,
+      "injected": null,
+      "cleanup_sec": 1.0239132800015796,
+      "process_tree_peak_rss_kib": 383884,
+      "localization_errors": {
+        "ndt": {
+          "matched": 0,
+          "max_xy_m": null,
+          "rms_xy_m": null,
+          "max_yaw_rad": null
+        },
+        "ekf": {
+          "matched": 0,
+          "max_xy_m": null,
+          "rms_xy_m": null,
+          "max_yaw_rad": null
+        }
+      },
+      "counts": {
+        "truth": 2707,
+        "ekf": 2708,
+        "ndt": 475,
+        "command": 1801,
+        "gate": 1576,
+        "scan": 482,
+        "ndt_ms": 475,
+        "ndt_score": 475,
+        "ndt_iterations": 475
+      },
+      "truth_distance_m": 0.0,
+      "final_goal_distance_m": 8.0,
+      "max_lateral_error_m": 0.0,
+      "max_speed_mps": 0.0,
+      "scan_world_residual_m": 0.0,
+      "scan_world_matched": 121,
+      "scan_sample_displacement_m": 0.0,
+      "max_acceleration_mps2": 0.0,
+      "ndt_execution_ms_max": 14.630000114440918,
+      "ndt_score_min": 3.475426197052002,
+      "ndt_iterations_max": 6
+    },
+    "first_latch": {
+      "stamp": 1792703626.6943107,
+      "armed": false,
+      "latched": true,
+      "fault_stamp": 1792703626.606444,
+      "fault_inputs": [
+        "odometry",
+        "steering",
+        "acceleration",
+        "trajectory",
+        "command",
+        "ndt"
+      ],
+      "currently_stale": [],
+      "stationary_since_monotonic": 27959.577938394,
+      "fault_input_health": {
+        "odometry": {
+          "source_stamp": 1792703626.271227,
+          "stamp_age_sec": 0.3352010250091553,
+          "receipt_age_sec": 0.3340627700017649
+        },
+        "steering": {
+          "source_stamp": 1792703626.271623,
+          "stamp_age_sec": 0.3348050117492676,
+          "receipt_age_sec": 0.3339834830003383
+        },
+        "acceleration": {
+          "source_stamp": 1792703626.2715576,
+          "stamp_age_sec": 0.3348703384399414,
+          "receipt_age_sec": 0.333482093999919
+        },
+        "trajectory": {
+          "source_stamp": 1792703626.2169368,
+          "stamp_age_sec": 0.38949108123779297,
+          "receipt_age_sec": 0.3854802589994506
+        },
+        "command": {
+          "source_stamp": 1792703626.2671926,
+          "stamp_age_sec": 0.3392353057861328,
+          "receipt_age_sec": 0.33692373699886957
+        },
+        "ndt": {
+          "source_stamp": 1792703626.2111948,
+          "stamp_age_sec": 0.3952443599700928,
+          "receipt_age_sec": 0.3837029819987947
+        }
+      },
+      "fault_tick_gap_sec": 0.33231382500162,
+      "t": 3.9053948250002577
+    },
+    "recording_span_sec": 54.238779808998515,
+    "rss_samples": 595,
+    "rss_duration_total_sec": 0.27979037300974596,
+    "rss_duration_max_sec": 0.0028373859968269244,
+    "graph_duration_sec": 0.0011916840012418106,
+    "provenance_checks": {
+      "controller_odom_exclusively_ekf": true,
+      "truth_hidden_from_controller": true,
+      "ndt_pose_exclusive": true,
+      "ekf_receives_ndt": true,
+      "ndt_predictions_exclusively_ekf": true,
+      "scans_exclusive_fixture": true,
+      "ndt_receives_generated_scans": true,
+      "simulator_exclusive_gate": true
+    }
+  },
+  "baseline_2": {
+    "passed": true,
+    "failed_checks": [],
+    "metrics": {
+      "scenario": "nominal",
+      "termination": "goal_hold_completed",
+      "error": null,
+      "engaged": 2.502525832998799,
+      "injected": null,
+      "cleanup_sec": 0.7676157719979528,
+      "process_tree_peak_rss_kib": 382600,
+      "localization_errors": {
+        "ndt": {
+          "matched": 228,
+          "max_xy_m": 0.0076575988613241395,
+          "rms_xy_m": 0.004541860381192387,
+          "max_yaw_rad": 5.006923052620007e-05
+        },
+        "ekf": {
+          "matched": 1286,
+          "max_xy_m": 0.009396286326896021,
+          "rms_xy_m": 0.00618778463900087,
+          "max_yaw_rad": 2.1025036923647096e-05
+        }
+      },
+      "counts": {
+        "truth": 1379,
+        "ekf": 1377,
+        "ndt": 238,
+        "command": 914,
+        "gate": 858,
+        "scan": 245,
+        "ndt_ms": 238,
+        "ndt_score": 238,
+        "ndt_iterations": 238
+      },
+      "truth_distance_m": 7.945570725042862,
+      "final_goal_distance_m": 0.054497886893021,
+      "max_lateral_error_m": 0.0029853281534997222,
+      "max_speed_mps": 0.7648657191383312,
+      "scan_world_residual_m": 9.173934252497289e-07,
+      "scan_world_matched": 62,
+      "scan_sample_displacement_m": 7.945532747691676,
+      "max_acceleration_mps2": 0.30530862202186815,
+      "ndt_execution_ms_max": 25.211999893188477,
+      "ndt_score_min": 3.475447177886963,
+      "ndt_iterations_max": 6
+    },
+    "first_latch": null,
+    "recording_span_sec": 27.560550947000593,
+    "rss_samples": 293,
+    "rss_duration_total_sec": 0.14596069100298337,
+    "rss_duration_max_sec": 0.003816522999841254,
+    "graph_duration_sec": 0.0010743230013758875,
+    "provenance_checks": {
+      "controller_odom_exclusively_ekf": true,
+      "truth_hidden_from_controller": true,
+      "ndt_pose_exclusive": true,
+      "ekf_receives_ndt": true,
+      "ndt_predictions_exclusively_ekf": true,
+      "scans_exclusive_fixture": true,
+      "ndt_receives_generated_scans": true,
+      "simulator_exclusive_gate": true
+    }
+  },
+  "after_1": {
+    "passed": false,
+    "failed_checks": [
+      "goal_and_ten_second_hold",
+      "nominal_not_latched",
+      "terminal_no_creep",
+      "terminal_commands"
+    ],
+    "metrics": {
+      "scenario": "nominal",
+      "termination": "timeout",
+      "error": null,
+      "engaged": 2.5223036719980882,
+      "injected": null,
+      "cleanup_sec": 5.9275286459997005,
+      "process_tree_peak_rss_kib": 382532,
+      "localization_errors": {
+        "ndt": {
+          "matched": 463,
+          "max_xy_m": 0.0047739371548449995,
+          "rms_xy_m": 0.0035347849667975574,
+          "max_yaw_rad": 0.00033955530857003184
+        },
+        "ekf": {
+          "matched": 2616,
+          "max_xy_m": 0.008728156472576748,
+          "rms_xy_m": 0.0038008850855608045,
+          "max_yaw_rad": 7.849761466101964e-06
+        }
+      },
+      "counts": {
+        "truth": 2705,
+        "ekf": 2706,
+        "ndt": 473,
+        "command": 1801,
+        "gate": 1611,
+        "scan": 479,
+        "ndt_ms": 473,
+        "ndt_score": 473,
+        "ndt_iterations": 473
+      },
+      "truth_distance_m": 7.018387289353476,
+      "final_goal_distance_m": 0.9816179813800376,
+      "max_lateral_error_m": 0.002995814031933719,
+      "max_speed_mps": 0.7603299736289367,
+      "scan_world_residual_m": 9.162278234185089e-07,
+      "scan_world_matched": 121,
+      "scan_sample_displacement_m": 7.018346895888568,
+      "max_acceleration_mps2": 0.5113371860658913,
+      "ndt_execution_ms_max": 24.41200065612793,
+      "ndt_score_min": 3.417452812194824,
+      "ndt_iterations_max": 6
+    },
+    "first_latch": {
+      "stamp": 1792703768.8969476,
+      "armed": false,
+      "latched": true,
+      "fault_stamp": 1792703768.8784268,
+      "fault_inputs": [
+        "ndt"
+      ],
+      "currently_stale": [
+        "ndt"
+      ],
+      "stationary_since_monotonic": null,
+      "fault_input_health": {
+        "odometry": {
+          "source_stamp": 1792703768.8575473,
+          "stamp_age_sec": 0.020845651626586914,
+          "receipt_age_sec": 0.019701139997778228
+        },
+        "steering": {
+          "source_stamp": 1792703768.8640723,
+          "stamp_age_sec": 0.014320611953735352,
+          "receipt_age_sec": 0.013524216999940109
+        },
+        "acceleration": {
+          "source_stamp": 1792703768.864021,
+          "stamp_age_sec": 0.014371871948242188,
+          "receipt_age_sec": 0.013115315996401478
+        },
+        "trajectory": {
+          "source_stamp": 1792703768.8211055,
+          "stamp_age_sec": 0.05728745460510254,
+          "receipt_age_sec": 0.04457203399942955
+        },
+        "command": {
+          "source_stamp": 1792703768.8606112,
+          "stamp_age_sec": 0.017781734466552734,
+          "receipt_age_sec": 0.01502378299846896
+        },
+        "ndt": {
+          "source_stamp": 1792703768.56395,
+          "stamp_age_sec": 0.3144712448120117,
+          "receipt_age_sec": 0.2888519410007575
+        }
+      },
+      "fault_tick_gap_sec": 0.020111832000111463,
+      "t": 14.301806555999065
+    },
+    "recording_span_sec": 54.23959989300056,
+    "rss_samples": 108,
+    "rss_duration_total_sec": 0.07162530999266892,
+    "rss_duration_max_sec": 0.0016710150011931546,
+    "graph_duration_sec": 0.0010217089984507766,
+    "provenance_checks": {
+      "controller_odom_exclusively_ekf": true,
+      "truth_hidden_from_controller": true,
+      "ndt_pose_exclusive": true,
+      "ekf_receives_ndt": true,
+      "ndt_predictions_exclusively_ekf": true,
+      "scans_exclusive_fixture": true,
+      "ndt_receives_generated_scans": true,
+      "simulator_exclusive_gate": true
+    }
+  },
+  "after_2": {
+    "passed": true,
+    "failed_checks": [],
+    "metrics": {
+      "scenario": "nominal",
+      "termination": "goal_hold_completed",
+      "error": null,
+      "engaged": 2.638393518001976,
+      "injected": null,
+      "cleanup_sec": 5.456772638000984,
+      "process_tree_peak_rss_kib": 382980,
+      "localization_errors": {
+        "ndt": {
+          "matched": 227,
+          "max_xy_m": 0.007812451648360326,
+          "rms_xy_m": 0.004174601969900064,
+          "max_yaw_rad": 0.00012799591441787508
+        },
+        "ekf": {
+          "matched": 1284,
+          "max_xy_m": 0.009193198317100663,
+          "rms_xy_m": 0.005769578009230638,
+          "max_yaw_rad": 2.808978086927097e-05
+        }
+      },
+      "counts": {
+        "truth": 1381,
+        "ekf": 1380,
+        "ndt": 237,
+        "command": 918,
+        "gate": 856,
+        "scan": 244,
+        "ndt_ms": 237,
+        "ndt_score": 237,
+        "ndt_iterations": 237
+      },
+      "truth_distance_m": 7.894484728490393,
+      "final_goal_distance_m": 0.10555178935968444,
+      "max_lateral_error_m": 0.0029985147690467784,
+      "max_speed_mps": 0.7510538015667215,
+      "scan_world_residual_m": 8.773380272803011e-07,
+      "scan_world_matched": 61,
+      "scan_sample_displacement_m": 7.894443985398543,
+      "max_acceleration_mps2": 0.29447912535483994,
+      "ndt_execution_ms_max": 99.9749984741211,
+      "ndt_score_min": 3.475369453430176,
+      "ndt_iterations_max": 6
+    },
+    "first_latch": null,
+    "recording_span_sec": 27.65882873999726,
+    "rss_samples": 56,
+    "rss_duration_total_sec": 0.04086482900311239,
+    "rss_duration_max_sec": 0.002332128002308309,
+    "graph_duration_sec": 0.0011245860005146824,
+    "provenance_checks": {
+      "controller_odom_exclusively_ekf": true,
+      "truth_hidden_from_controller": true,
+      "ndt_pose_exclusive": true,
+      "ekf_receives_ndt": true,
+      "ndt_predictions_exclusively_ekf": true,
+      "scans_exclusive_fixture": true,
+      "ndt_receives_generated_scans": true,
+      "simulator_exclusive_gate": true
+    }
+  },
+  "after_3": {
+    "passed": true,
+    "failed_checks": [],
+    "metrics": {
+      "scenario": "nominal",
+      "termination": "goal_hold_completed",
+      "error": null,
+      "engaged": 2.4791140369998175,
+      "injected": null,
+      "cleanup_sec": 0.41747722499712836,
+      "process_tree_peak_rss_kib": 382820,
+      "localization_errors": {
+        "ndt": {
+          "matched": 231,
+          "max_xy_m": 0.008046760738772136,
+          "rms_xy_m": 0.0044541388738460475,
+          "max_yaw_rad": 0.00012109073190983116
+        },
+        "ekf": {
+          "matched": 1303,
+          "max_xy_m": 0.009547038361391424,
+          "rms_xy_m": 0.006035846404806732,
+          "max_yaw_rad": 3.0797164492470856e-05
+        }
+      },
+      "counts": {
+        "truth": 1395,
+        "ekf": 1393,
+        "ndt": 241,
+        "command": 926,
+        "gate": 869,
+        "scan": 248,
+        "ndt_ms": 241,
+        "ndt_score": 241,
+        "ndt_iterations": 241
+      },
+      "truth_distance_m": 7.9234219470624945,
+      "final_goal_distance_m": 0.07662688189431924,
+      "max_lateral_error_m": 0.0030738360834163814,
+      "max_speed_mps": 0.7544016464266907,
+      "scan_world_residual_m": 9.149673668584601e-07,
+      "scan_world_matched": 62,
+      "scan_sample_displacement_m": 7.923372844142486,
+      "max_acceleration_mps2": 0.25612217740490584,
+      "ndt_execution_ms_max": 16.030000686645508,
+      "ndt_score_min": 3.47529673576355,
+      "ndt_iterations_max": 6
+    },
+    "first_latch": null,
+    "recording_span_sec": 27.879612257998815,
+    "rss_samples": 56,
+    "rss_duration_total_sec": 0.03898004801158095,
+    "rss_duration_max_sec": 0.0017132400025730021,
+    "graph_duration_sec": 0.000997176997771021,
+    "provenance_checks": {
+      "controller_odom_exclusively_ekf": true,
+      "truth_hidden_from_controller": true,
+      "ndt_pose_exclusive": true,
+      "ekf_receives_ndt": true,
+      "ndt_predictions_exclusively_ekf": true,
+      "scans_exclusive_fixture": true,
+      "ndt_receives_generated_scans": true,
+      "simulator_exclusive_gate": true
+    }
+  },
+  "drop_ndt": {
+    "passed": true,
+    "failed_checks": [],
+    "metrics": {
+      "scenario": "drop_ndt",
+      "termination": "fault_stop_observed",
+      "error": null,
+      "engaged": 2.5560174090023793,
+      "injected": 5.564300961003028,
+      "cleanup_sec": 0.36804307300189976,
+      "process_tree_peak_rss_kib": 383584,
+      "localization_errors": {
+        "ndt": {
+          "matched": 79,
+          "max_xy_m": 0.0060658803787203164,
+          "rms_xy_m": 0.0035040930663453166,
+          "max_yaw_rad": 6.14668264534273e-05
+        },
+        "ekf": {
+          "matched": 851,
+          "max_xy_m": 0.009417748966026271,
+          "rms_xy_m": 0.005311220868573207,
+          "max_yaw_rad": 2.0750375243802136e-05
+        }
+      },
+      "counts": {
+        "truth": 945,
+        "ekf": 945,
+        "ndt": 89,
+        "command": 629,
+        "gate": 522,
+        "scan": 96,
+        "ndt_ms": 89,
+        "ndt_score": 89,
+        "ndt_iterations": 89
+      },
+      "truth_distance_m": 1.3345464761363777,
+      "final_goal_distance_m": 6.665453835118578,
+      "max_lateral_error_m": 0.0007420279047778422,
+      "max_speed_mps": 0.6168913178316444,
+      "scan_world_residual_m": 9.472797420996903e-07,
+      "scan_world_matched": 24,
+      "scan_sample_displacement_m": 1.354754468807242,
+      "max_acceleration_mps2": 0.5008589864913011,
+      "ndt_execution_ms_max": 16.30699920654297,
+      "ndt_score_min": 3.4753060340881348,
+      "ndt_iterations_max": 6
+    },
+    "first_latch": {
+      "stamp": 1792703888.944654,
+      "armed": false,
+      "latched": true,
+      "fault_stamp": 1792703888.9272172,
+      "fault_inputs": [
+        "ndt"
+      ],
+      "currently_stale": [
+        "ndt"
+      ],
+      "stationary_since_monotonic": null,
+      "fault_input_health": {
+        "odometry": {
+          "source_stamp": 1792703888.917101,
+          "stamp_age_sec": 0.010090827941894531,
+          "receipt_age_sec": 0.009089401999517577
+        },
+        "steering": {
+          "source_stamp": 1792703888.924206,
+          "stamp_age_sec": 0.002985715866088867,
+          "receipt_age_sec": 0.0020832730006077327
+        },
+        "acceleration": {
+          "source_stamp": 1792703888.9241493,
+          "stamp_age_sec": 0.003042459487915039,
+          "receipt_age_sec": 0.0020020250012748875
+        },
+        "trajectory": {
+          "source_stamp": 1792703888.8664393,
+          "stamp_age_sec": 0.06075239181518555,
+          "receipt_age_sec": 0.056386693999229465
+        },
+        "command": {
+          "source_stamp": 1792703888.9016309,
+          "stamp_age_sec": 0.025560855865478516,
+          "receipt_age_sec": 0.023721893998299493
+        },
+        "ndt": {
+          "source_stamp": 1792703888.6240168,
+          "stamp_age_sec": 0.3031942844390869,
+          "receipt_age_sec": 0.2944857750007941
+        }
+      },
+      "fault_tick_gap_sec": 0.02003800100283115,
+      "t": 5.8524470450029185
+    },
+    "recording_span_sec": 18.87892970500252,
+    "rss_samples": 38,
+    "rss_duration_total_sec": 0.025343939989397768,
+    "rss_duration_max_sec": 0.0010961760017380584,
+    "graph_duration_sec": 0.0009465969997108914,
+    "provenance_checks": {
+      "controller_odom_exclusively_ekf": true,
+      "truth_hidden_from_controller": true,
+      "ndt_pose_exclusive": true,
+      "ekf_receives_ndt": true,
+      "ndt_predictions_exclusively_ekf": true,
+      "scans_exclusive_fixture": true,
+      "ndt_receives_generated_scans": true,
+      "simulator_exclusive_gate": true
+    }
+  },
+  "drop_ekf": {
+    "passed": false,
+    "failed_checks": [
+      "localization_engaged",
+      "actual_motion",
+      "scans_evolve",
+      "ndt_accuracy",
+      "ekf_accuracy",
+      "lateral_tracking",
+      "fault_injected",
+      "expected_latch",
+      "no_unrequested_latch_before_injection",
+      "latch_latency",
+      "bounded_stop",
+      "final_stopped",
+      "no_auto_rearm",
+      "completed_fault_observation"
+    ],
+    "metrics": {
+      "scenario": "drop_ekf",
+      "termination": "timeout",
+      "error": null,
+      "engaged": null,
+      "injected": null,
+      "cleanup_sec": 1.0732529800006887,
+      "process_tree_peak_rss_kib": 383124,
+      "localization_errors": {
+        "ndt": {
+          "matched": 0,
+          "max_xy_m": null,
+          "rms_xy_m": null,
+          "max_yaw_rad": null
+        },
+        "ekf": {
+          "matched": 0,
+          "max_xy_m": null,
+          "rms_xy_m": null,
+          "max_yaw_rad": null
+        }
+      },
+      "counts": {
+        "truth": 2705,
+        "ekf": 2709,
+        "ndt": 477,
+        "command": 1802,
+        "gate": 1575,
+        "scan": 484,
+        "ndt_ms": 477,
+        "ndt_score": 477,
+        "ndt_iterations": 477
+      },
+      "truth_distance_m": 0.0,
+      "final_goal_distance_m": 8.0,
+      "max_lateral_error_m": 0.0,
+      "max_speed_mps": 0.0,
+      "scan_world_residual_m": 0.0,
+      "scan_world_matched": 121,
+      "scan_sample_displacement_m": 0.0,
+      "max_acceleration_mps2": 0.0,
+      "ndt_execution_ms_max": 61.707000732421875,
+      "ndt_score_min": 3.4158098697662354,
+      "ndt_iterations_max": 6
+    },
+    "first_latch": {
+      "stamp": 1792703908.455424,
+      "armed": false,
+      "latched": true,
+      "fault_stamp": 1792703908.3701544,
+      "fault_inputs": [
+        "odometry",
+        "steering",
+        "acceleration",
+        "trajectory",
+        "command",
+        "ndt"
+      ],
+      "currently_stale": [],
+      "stationary_since_monotonic": 28241.202211513,
+      "fault_input_health": {
+        "odometry": {
+          "source_stamp": 1792703908.028028,
+          "stamp_age_sec": 0.3421010971069336,
+          "receipt_age_sec": 0.3408327750003082
+        },
+        "steering": {
+          "source_stamp": 1792703908.0180726,
+          "stamp_age_sec": 0.35205650329589844,
+          "receipt_age_sec": 0.3518337630011956
+        },
+        "acceleration": {
+          "source_stamp": 1792703908.0180037,
+          "stamp_age_sec": 0.3521254062652588,
+          "receipt_age_sec": 0.35147235600015847
+        },
+        "trajectory": {
+          "source_stamp": 1792703907.925406,
+          "stamp_age_sec": 0.44472312927246094,
+          "receipt_age_sec": 0.4401114920001419
+        },
+        "command": {
+          "source_stamp": 1792703908.013819,
+          "stamp_age_sec": 0.3563101291656494,
+          "receipt_age_sec": 0.35420469800010324
+        },
+        "ndt": {
+          "source_stamp": 1792703907.9178677,
+          "stamp_age_sec": 0.45228004455566406,
+          "receipt_age_sec": 0.43895648200123105
+        }
+      },
+      "fault_tick_gap_sec": 0.33473815099932835,
+      "t": 3.901343330002419
+    },
+    "recording_span_sec": 54.320225553001364,
+    "rss_samples": 108,
+    "rss_duration_total_sec": 0.0871707919795881,
+    "rss_duration_max_sec": 0.004639501999918139,
+    "graph_duration_sec": 0.0010787200008053333,
+    "provenance_checks": {
+      "controller_odom_exclusively_ekf": true,
+      "truth_hidden_from_controller": true,
+      "ndt_pose_exclusive": true,
+      "ekf_receives_ndt": true,
+      "ndt_predictions_exclusively_ekf": true,
+      "scans_exclusive_fixture": true,
+      "ndt_receives_generated_scans": true,
+      "simulator_exclusive_gate": true
+    }
+  },
+  "no_ndt": {
+    "passed": true,
+    "failed_checks": [],
+    "metrics": {
+      "scenario": "no_ndt",
+      "termination": "unavailable_localization_observed",
+      "error": null,
+      "engaged": null,
+      "injected": null,
+      "cleanup_sec": 0.97014127500006,
+      "process_tree_peak_rss_kib": 378704,
+      "localization_errors": {
+        "ndt": {
+          "matched": 0,
+          "max_xy_m": null,
+          "rms_xy_m": null,
+          "max_yaw_rad": null
+        },
+        "ekf": {
+          "matched": 0,
+          "max_xy_m": null,
+          "rms_xy_m": null,
+          "max_yaw_rad": null
+        }
+      },
+      "counts": {
+        "truth": 665,
+        "ekf": 664,
+        "ndt": 0,
+        "command": 441,
+        "gate": 0,
+        "scan": 119,
+        "ndt_ms": 0,
+        "ndt_score": 0,
+        "ndt_iterations": 0
+      },
+      "truth_distance_m": 0.0,
+      "final_goal_distance_m": 8.0,
+      "max_lateral_error_m": 0.0,
+      "max_speed_mps": 0.0,
+      "scan_world_residual_m": 0.0,
+      "scan_world_matched": 30,
+      "scan_sample_displacement_m": 0.0,
+      "max_acceleration_mps2": 0.0,
+      "ndt_execution_ms_max": null,
+      "ndt_score_min": null,
+      "ndt_iterations_max": null
+    },
+    "first_latch": null,
+    "recording_span_sec": 13.280099363997579,
+    "rss_samples": 27,
+    "rss_duration_total_sec": 0.021380498990765773,
+    "rss_duration_max_sec": 0.0018551239991211332,
+    "graph_duration_sec": 0.0010408919988549314,
+    "provenance_checks": {
+      "controller_odom_exclusively_ekf": true,
+      "truth_hidden_from_controller": true,
+      "ndt_pose_exclusive": true,
+      "ekf_receives_ndt": true,
+      "ndt_predictions_exclusively_ekf": true,
+      "scans_exclusive_fixture": true,
+      "ndt_receives_generated_scans": true,
+      "simulator_exclusive_gate": true
+    }
+  },
+  "no_ekf": {
+    "passed": true,
+    "failed_checks": [],
+    "metrics": {
+      "scenario": "no_ekf",
+      "termination": "unavailable_localization_observed",
+      "error": null,
+      "engaged": null,
+      "injected": null,
+      "cleanup_sec": 0.9245330759986246,
+      "process_tree_peak_rss_kib": 373520,
+      "localization_errors": {
+        "ndt": {
+          "matched": 0,
+          "max_xy_m": null,
+          "rms_xy_m": null,
+          "max_yaw_rad": null
+        },
+        "ekf": {
+          "matched": 0,
+          "max_xy_m": null,
+          "rms_xy_m": null,
+          "max_yaw_rad": null
+        }
+      },
+      "counts": {
+        "truth": 666,
+        "ekf": 0,
+        "ndt": 0,
+        "command": 0,
+        "gate": 0,
+        "scan": 118,
+        "ndt_ms": 0,
+        "ndt_score": 0,
+        "ndt_iterations": 0
+      },
+      "truth_distance_m": 0.0,
+      "final_goal_distance_m": 8.0,
+      "max_lateral_error_m": 0.0,
+      "max_speed_mps": 0.0,
+      "scan_world_residual_m": 0.0,
+      "scan_world_matched": 30,
+      "scan_sample_displacement_m": 0.0,
+      "max_acceleration_mps2": 0.0,
+      "ndt_execution_ms_max": null,
+      "ndt_score_min": null,
+      "ndt_iterations_max": null
+    },
+    "first_latch": null,
+    "recording_span_sec": 13.300673982997978,
+    "rss_samples": 27,
+    "rss_duration_total_sec": 0.019081202994129853,
+    "rss_duration_max_sec": 0.0014529260006383993,
+    "graph_duration_sec": 0.0009865200008789543,
+    "provenance_checks": {
+      "controller_odom_exclusively_ekf": true,
+      "truth_hidden_from_controller": true,
+      "ndt_pose_exclusive": true,
+      "ekf_receives_ndt": true,
+      "ndt_predictions_exclusively_ekf": true,
+      "scans_exclusive_fixture": true,
+      "ndt_receives_generated_scans": true,
+      "simulator_exclusive_gate": true
+    }
+  },
+  "drop_ekf_repeat": {
+    "passed": true,
+    "failed_checks": [],
+    "metrics": {
+      "scenario": "drop_ekf",
+      "termination": "fault_stop_observed",
+      "error": null,
+      "engaged": 2.643859537998651,
+      "injected": 5.643894628999988,
+      "cleanup_sec": 1.28146740900047,
+      "process_tree_peak_rss_kib": 383108,
+      "localization_errors": {
+        "ndt": {
+          "matched": 28,
+          "max_xy_m": 0.007109248965054997,
+          "rms_xy_m": 0.00420730853324425,
+          "max_yaw_rad": 9.996676938646513e-05
+        },
+        "ekf": {
+          "matched": 150,
+          "max_xy_m": 0.00930390068506099,
+          "rms_xy_m": 0.00519843471045595,
+          "max_yaw_rad": 3.118443510642052e-05
+        }
+      },
+      "counts": {
+        "truth": 949,
+        "ekf": 248,
+        "ndt": 38,
+        "command": 632,
+        "gate": 523,
+        "scan": 171,
+        "ndt_ms": 38,
+        "ndt_score": 38,
+        "ndt_iterations": 38
+      },
+      "truth_distance_m": 1.4133282975921422,
+      "final_goal_distance_m": 6.586672121056974,
+      "max_lateral_error_m": 0.000871937267632461,
+      "max_speed_mps": 0.6366015009299563,
+      "scan_world_residual_m": 9.356512671484484e-07,
+      "scan_world_matched": 43,
+      "scan_sample_displacement_m": 1.4375934778880362,
+      "max_acceleration_mps2": 0.5001166581993046,
+      "ndt_execution_ms_max": 16.12299919128418,
+      "ndt_score_min": 3.4753501415252686,
+      "ndt_iterations_max": 6
+    },
+    "first_latch": {
+      "stamp": 1792704985.446695,
+      "armed": false,
+      "latched": true,
+      "fault_stamp": 1792704985.4297953,
+      "fault_inputs": [
+        "odometry"
+      ],
+      "currently_stale": [
+        "odometry"
+      ],
+      "stationary_since_monotonic": null,
+      "fault_input_health": {
+        "odometry": {
+          "source_stamp": 1792704985.1168447,
+          "stamp_age_sec": 0.3129308223724365,
+          "receipt_age_sec": 0.31228716199984774
+        },
+        "steering": {
+          "source_stamp": 1792704985.4257479,
+          "stamp_age_sec": 0.004027605056762695,
+          "receipt_age_sec": 0.0037448550028784666
+        },
+        "acceleration": {
+          "source_stamp": 1792704985.425713,
+          "stamp_age_sec": 0.0040624141693115234,
+          "receipt_age_sec": 0.0033713110024109483
+        },
+        "trajectory": {
+          "source_stamp": 1792704985.3868017,
+          "stamp_age_sec": 0.04297375679016113,
+          "receipt_age_sec": 0.03850317400065251
+        },
+        "command": {
+          "source_stamp": 1792704985.4096398,
+          "stamp_age_sec": 0.02013564109802246,
+          "receipt_age_sec": 0.01864723000107915
+        },
+        "ndt": {
+          "source_stamp": 1792704985.185546,
+          "stamp_age_sec": 0.24424362182617188,
+          "receipt_age_sec": 0.23456981100025587
+        }
+      },
+      "fault_tick_gap_sec": 0.02003615300054662,
+      "t": 5.960756732998561
+    },
+    "recording_span_sec": 18.959504573998856,
+    "rss_samples": 38,
+    "rss_duration_total_sec": 0.02383326097697136,
+    "rss_duration_max_sec": 0.0009781720000319183,
+    "graph_duration_sec": 0.001033505999657791,
+    "provenance_checks": {
+      "controller_odom_exclusively_ekf": true,
+      "truth_hidden_from_controller": true,
+      "ndt_pose_exclusive": true,
+      "ekf_receives_ndt": true,
+      "ndt_predictions_exclusively_ekf": true,
+      "scans_exclusive_fixture": true,
+      "ndt_receives_generated_scans": true,
+      "simulator_exclusive_gate": true
+    }
+  },
+  "obstacle": {
+    "passed": 10,
+    "total": 11,
+    "rows": [
+      {
+        "path": "obstacle/run_20261022_211955_none_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "none",
+          "feedback_input": "odometry",
+          "termination_reason": "terminal_hold_completed",
+          "injection_request_sec": null,
+          "clearance_or_recovery_request_sec": null,
+          "shutdown_sec": 6.5322101449964975,
+          "total_distance_m": 69.81524423366116,
+          "final_goal_distance_m": 0.036618298607600304,
+          "max_speed_mps": 0.9999265000425883,
+          "max_acceleration_mps2": 0.23744841276677056,
+          "max_deceleration_mps2": -0.3246665482501884,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.006655611661568913,
+          "rms_lateral_error_m": 0.0011177875010914746,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.33636230851715,
+          "terminal_hold_sec": 10.060417312997743,
+          "terminal_creep_m": 0.0
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_212143_ahead_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "ahead",
+          "feedback_input": "odometry",
+          "termination_reason": "terminal_hold_completed",
+          "injection_request_sec": 18.87430453399793,
+          "clearance_or_recovery_request_sec": 38.294293662998825,
+          "shutdown_sec": 6.314565919001325,
+          "total_distance_m": 69.78384757543658,
+          "final_goal_distance_m": 0.005223069040482233,
+          "max_speed_mps": 0.9996095789235462,
+          "max_acceleration_mps2": 0.2638061800455426,
+          "max_deceleration_mps2": -0.31302949908137634,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.006639978072263923,
+          "rms_lateral_error_m": 0.0010287255538774015,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.32608803639579,
+          "terminal_hold_sec": 10.060368696998921,
+          "terminal_creep_m": 0.0,
+          "initial_obstacle_center_distance_m": 14.848877259219357,
+          "initial_obstacle_clearance_m": 12.947082157104704,
+          "minimum_obstacle_clearance_m": 1.9306925883772394,
+          "stopped_obstacle_clearance_m": 1.9306925883772394,
+          "planning_response_latency_sec": 0.5246736450026219,
+          "obstacle_hold_sec": 5.059773444998427,
+          "obstacle_hold_max_speed_mps": 0.0008059214301543915,
+          "obstacle_hold_creep_m": 0.0,
+          "stopping_distance_m": 11.018172092869573,
+          "resumption_latency_sec": 3.1798738079996838,
+          "resumption_15s_travel_m": 7.254073086898298,
+          "first_obstacle_cloud_receipt_sec": 18.891118995998113,
+          "cloud_to_planning_response_sec": 0.5078591830024379,
+          "inserted_stop_point_map": [
+            57.61449871353284,
+            69.11897888876972,
+            -0.0006570024279685732
+          ],
+          "raw_speed_near_inserted_stop_mps": 13.88888931274414
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_212345_off_route_odometry/validation.json",
+        "passed": false,
+        "failed_checks": [
+          "completed_route",
+          "nominal_safety_not_latched",
+          "terminal_hold"
+        ],
+        "metrics": {
+          "scenario": "off_route",
+          "feedback_input": "odometry",
+          "termination_reason": "timeout",
+          "injection_request_sec": 19.092810027999803,
+          "clearance_or_recovery_request_sec": null,
+          "shutdown_sec": 1.4861294100010127,
+          "total_distance_m": 68.71092778960791,
+          "final_goal_distance_m": 1.0676990800969004,
+          "max_speed_mps": 0.999946943577328,
+          "max_acceleration_mps2": 0.2553417496787536,
+          "max_deceleration_mps2": -0.5001673794794685,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.006605531921453422,
+          "rms_lateral_error_m": 0.0009755976295503158,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.252022255311374,
+          "terminal_hold_sec": 0.0,
+          "terminal_creep_m": 0.0,
+          "off_route_false_stop_duration_sec": 0.0
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_212554_stale_drop_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "stale_drop",
+          "feedback_input": "odometry",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.54591697000069,
+          "clearance_or_recovery_request_sec": 27.54617998899994,
+          "shutdown_sec": 1.0048101360007422,
+          "total_distance_m": 6.002835103724606,
+          "final_goal_distance_m": 63.77323651645176,
+          "max_speed_mps": 0.7483812634065606,
+          "max_acceleration_mps2": 0.23584784627292046,
+          "max_deceleration_mps2": -0.5011182366229185,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0011827798084774986,
+          "rms_lateral_error_m": 0.0007574698933883343,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.345146387025814,
+          "detection_latency_sec": 0.3031028619989229,
+          "stopping_distance_m": 0.9866770248270837,
+          "stop_settling_sec": 2.0990717979984765,
+          "recovery_hold_sec": 5.079016894000233,
+          "recovery_creep_m": 0.0
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_212630_stale_freeze_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "stale_freeze",
+          "feedback_input": "odometry",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.505118543998833,
+          "clearance_or_recovery_request_sec": 27.505497573001776,
+          "shutdown_sec": 1.6593967499975406,
+          "total_distance_m": 5.983075679194542,
+          "final_goal_distance_m": 63.79299500420141,
+          "max_speed_mps": 0.7474829673629168,
+          "max_acceleration_mps2": 0.23726843916754653,
+          "max_deceleration_mps2": -0.5187112543423554,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0011343803337524915,
+          "rms_lateral_error_m": 0.000724647750057685,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.19472072040459,
+          "detection_latency_sec": 0.2640810379998584,
+          "stopping_distance_m": 0.9558814573790748,
+          "stop_settling_sec": 2.0591588410024997,
+          "recovery_hold_sec": 5.0718891989999975,
+          "recovery_creep_m": 0.0
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_212706_feedback_drop_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_drop",
+          "feedback_input": "odometry",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 20.068549323001207,
+          "clearance_or_recovery_request_sec": 28.06894461000047,
+          "shutdown_sec": 0.8847975440003211,
+          "total_distance_m": 6.170831359706073,
+          "final_goal_distance_m": 63.605248746204246,
+          "max_speed_mps": 0.8097233176835934,
+          "max_acceleration_mps2": 0.2579146733185702,
+          "max_deceleration_mps2": -0.5010821798356108,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0016298565556705196,
+          "rms_lateral_error_m": 0.0010289332838302502,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.27285884769819,
+          "detection_latency_sec": 0.32245791599780205,
+          "stopping_distance_m": 1.1481584819317172,
+          "stop_settling_sec": 2.260598125998513,
+          "recovery_hold_sec": 5.08095965299799,
+          "recovery_creep_m": 0.0
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_212743_feedback_freeze_odometry/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_freeze",
+          "feedback_input": "odometry",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.522079974001826,
+          "clearance_or_recovery_request_sec": 27.52347620400178,
+          "shutdown_sec": 0.9443249110008765,
+          "total_distance_m": 6.036627021322386,
+          "final_goal_distance_m": 63.73944687095391,
+          "max_speed_mps": 0.7557098332107007,
+          "max_acceleration_mps2": 0.23638455382079712,
+          "max_deceleration_mps2": -0.500056489883792,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0012144611811244228,
+          "rms_lateral_error_m": 0.0007736220238613467,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.29909498470449,
+          "detection_latency_sec": 0.322698201998719,
+          "stopping_distance_m": 1.0157771842513696,
+          "stop_settling_sec": 2.138432120998914,
+          "recovery_hold_sec": 5.079895727001713,
+          "recovery_creep_m": 0.0
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_212818_feedback_drop_steering/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_drop",
+          "feedback_input": "steering",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.465872904998832,
+          "clearance_or_recovery_request_sec": 27.466218025998387,
+          "shutdown_sec": 1.0043816910001624,
+          "total_distance_m": 6.073189891449111,
+          "final_goal_distance_m": 63.70288511419706,
+          "max_speed_mps": 0.7646326198358628,
+          "max_acceleration_mps2": 0.2386220689898764,
+          "max_deceleration_mps2": -0.5007412077008442,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0013783018481935314,
+          "rms_lateral_error_m": 0.0008743902138300057,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.33493020347893,
+          "detection_latency_sec": 0.33401920100004645,
+          "stopping_distance_m": 1.0501133767676247,
+          "stop_settling_sec": 2.180616404999455,
+          "recovery_hold_sec": 5.059399874000519,
+          "recovery_creep_m": 0.0
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_212854_feedback_freeze_steering/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_freeze",
+          "feedback_input": "steering",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 20.400599176999094,
+          "clearance_or_recovery_request_sec": 28.400968138997996,
+          "shutdown_sec": 5.818080711997027,
+          "total_distance_m": 6.152914196053409,
+          "final_goal_distance_m": 63.62316430838234,
+          "max_speed_mps": 0.8079796606618477,
+          "max_acceleration_mps2": 0.2611898884136233,
+          "max_deceleration_mps2": -0.5007837545881815,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0016473255097200481,
+          "rms_lateral_error_m": 0.0010517261127583476,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.277557710585285,
+          "detection_latency_sec": 0.331052178000391,
+          "stopping_distance_m": 1.12951567159286,
+          "stop_settling_sec": 2.2395206069995766,
+          "recovery_hold_sec": 5.079989426998509,
+          "recovery_creep_m": 0.0
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_212935_feedback_drop_command/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_drop",
+          "feedback_input": "command",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.40846488399984,
+          "clearance_or_recovery_request_sec": 27.408554090001417,
+          "shutdown_sec": 0.9139054530023714,
+          "total_distance_m": 6.017641964698839,
+          "final_goal_distance_m": 63.75843247838771,
+          "max_speed_mps": 0.7495978933438011,
+          "max_acceleration_mps2": 0.23731192705532048,
+          "max_deceleration_mps2": -0.5001677472151851,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.001025045455667162,
+          "rms_lateral_error_m": 0.00065627322094205,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.33787450747293,
+          "detection_latency_sec": 0.30130480799925863,
+          "stopping_distance_m": 0.9901143580172107,
+          "stop_settling_sec": 2.0984409829979995,
+          "recovery_hold_sec": 5.081769822001661,
+          "recovery_creep_m": 0.0
+        }
+      },
+      {
+        "path": "obstacle/run_20261022_213011_feedback_freeze_command/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "scenario": "feedback_freeze",
+          "feedback_input": "command",
+          "termination_reason": "fault_recovery_observed",
+          "injection_request_sec": 19.50939611799913,
+          "clearance_or_recovery_request_sec": 27.510467394000443,
+          "shutdown_sec": 0.6478122959997563,
+          "total_distance_m": 6.030685140262762,
+          "final_goal_distance_m": 63.74538992772859,
+          "max_speed_mps": 0.750395110814904,
+          "max_acceleration_mps2": 0.23805831164194677,
+          "max_deceleration_mps2": -0.5001212619810546,
+          "final_speed_mps": 0.0,
+          "max_lateral_error_m": 0.0010612421960747099,
+          "rms_lateral_error_m": 0.0006962792710850655,
+          "initial_trajectory_points": 226,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "controller_command_hz": 33.34314934285296,
+          "detection_latency_sec": 0.30928097200012417,
+          "stopping_distance_m": 1.0051779273379973,
+          "stop_settling_sec": 2.1190038849999837,
+          "recovery_hold_sec": 5.080327644998761,
+          "recovery_creep_m": 0.0
+        }
+      }
+    ]
+  },
+  "control": {
+    "passed": 7,
+    "total": 7,
+    "rows": [
+      {
+        "path": "control/closed_loop_faults/run_20261022_213251_drop_odometry_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 26.130120031000843,
+          "fault": "drop",
+          "fault_injected_at_sec": 12.147399536999728,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "odometry",
+          "fault_restored_at_sec": 20.160453959000733,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.3334985628488907,
+          "final_distance_to_goal_m": 68.4422798565326,
+          "max_lateral_error_m": 0.00048590896913753326,
+          "rms_lateral_error_m": 0.00014428810456364335,
+          "max_heading_error_rad": 0.0047454531809496495,
+          "max_actual_speed_mps": 0.5989825029771922,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.23700132184293726,
+          "max_actual_deceleration_mps2": -0.5002390525378608,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 926,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.6686572997074536,
+          "fault_start_speed_mps": 0.5041644657421898,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 0,
+          "fault_feedback_unique_stamps": 0,
+          "fault_detection_latency_sec": 0.2950315475463867,
+          "fault_stop_settling_sec": 1.7747566570033086,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 925,
+          "tf_matched_odometry_samples": 925,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.0008518695831298828,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 579,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 31.11485390009906,
+          "controller_command_hz": 33.33420217379063,
+          "controller_commands": 621,
+          "delivered_command_hz": 33.852494327285086,
+          "max_command_steering_rad": 0.0006781053962185979,
+          "shutdown_sigterm_escalations": 0,
+          "shutdown_duration_sec": 0.969591725999635,
+          "gate_filter_limit_events": 5,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0
+          ],
+          "controller_vs_live_speed_rms_mps": 0.002051809226573093
+        }
+      },
+      {
+        "path": "control/closed_loop_faults/run_20261022_213326_freeze_odometry_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 26.047145374999673,
+          "fault": "freeze",
+          "fault_injected_at_sec": 12.109484289001557,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "odometry",
+          "fault_restored_at_sec": 20.109631103001448,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.3345248300308374,
+          "final_distance_to_goal_m": 68.44125361389038,
+          "max_lateral_error_m": 0.0004859390063571227,
+          "rms_lateral_error_m": 0.00014265222349009972,
+          "max_heading_error_rad": 0.0047454531809496495,
+          "max_actual_speed_mps": 0.5990992592627082,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.23680631135615804,
+          "max_actual_deceleration_mps2": -0.5000908710896025,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 933,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.6695211590733051,
+          "fault_start_speed_mps": 0.5041550868135929,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 300,
+          "fault_feedback_unique_stamps": 1,
+          "fault_detection_latency_sec": 0.2996683120727539,
+          "fault_stop_settling_sec": 1.7795078859999194,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 931,
+          "tf_matched_odometry_samples": 931,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.0005037784576416016,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 583,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 31.140108365337685,
+          "controller_command_hz": 33.33348696458878,
+          "controller_commands": 625,
+          "delivered_command_hz": 33.79367610743691,
+          "max_command_steering_rad": 0.0006779780960641801,
+          "shutdown_sigterm_escalations": 0,
+          "shutdown_duration_sec": 0.9326710430032108,
+          "gate_filter_limit_events": 4,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0
+          ],
+          "controller_vs_live_speed_rms_mps": 0.001723211717347987
+        }
+      },
+      {
+        "path": "control/closed_loop_faults/run_20261022_213401_drop_steering_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 30.98885059999884,
+          "fault": "drop",
+          "fault_injected_at_sec": 12.107365635998576,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "steering",
+          "fault_restored_at_sec": 20.112935306999134,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.3347536325054654,
+          "final_distance_to_goal_m": 68.44102484930477,
+          "max_lateral_error_m": 0.00048576436354144144,
+          "rms_lateral_error_m": 0.00014343266723714526,
+          "max_heading_error_rad": 0.0047454531809496495,
+          "max_actual_speed_mps": 0.589467856042622,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.23883406189030698,
+          "max_actual_deceleration_mps2": -0.5019393738718299,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 931,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.6681051776105409,
+          "fault_start_speed_mps": 0.5064982172744792,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 0,
+          "fault_feedback_unique_stamps": 0,
+          "fault_detection_latency_sec": 0.30358242988586426,
+          "fault_stop_settling_sec": 1.7774469980031427,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 931,
+          "tf_matched_odometry_samples": 931,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.002794504165649414,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 584,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 31.163227420875597,
+          "controller_command_hz": 33.33603697351785,
+          "controller_commands": 624,
+          "delivered_command_hz": 33.84188987082417,
+          "max_command_steering_rad": 0.0006779551040381193,
+          "shutdown_sigterm_escalations": 2,
+          "shutdown_duration_sec": 5.8757850250003685,
+          "gate_filter_limit_events": 5,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0
+          ],
+          "controller_vs_live_speed_rms_mps": 0.002080906325776012
+        }
+      },
+      {
+        "path": "control/closed_loop_faults/run_20261022_213441_freeze_steering_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 26.113412025999423,
+          "fault": "freeze",
+          "fault_injected_at_sec": 12.23918891199719,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "steering",
+          "fault_restored_at_sec": 20.239240004997555,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.3476370786600382,
+          "final_distance_to_goal_m": 68.42814210389484,
+          "max_lateral_error_m": 0.0004855807275700919,
+          "rms_lateral_error_m": 0.000141677314682133,
+          "max_heading_error_rad": 0.0047454531809496495,
+          "max_actual_speed_mps": 0.5902717290923317,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.23636434252560143,
+          "max_actual_deceleration_mps2": -0.5001117451284718,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 927,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.6801044517590696,
+          "fault_start_speed_mps": 0.5055381960853951,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 300,
+          "fault_feedback_unique_stamps": 1,
+          "fault_detection_latency_sec": 0.31571197509765625,
+          "fault_stop_settling_sec": 1.8006714069997543,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 926,
+          "tf_matched_odometry_samples": 926,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.0006604194641113281,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 581,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 31.162206144575844,
+          "controller_command_hz": 33.33072520398222,
+          "controller_commands": 621,
+          "delivered_command_hz": 33.84119024776981,
+          "max_command_steering_rad": 0.0006788066821172833,
+          "shutdown_sigterm_escalations": 0,
+          "shutdown_duration_sec": 0.8675307269986661,
+          "gate_filter_limit_events": 5,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0
+          ],
+          "controller_vs_live_speed_rms_mps": 0.0019612819973933216
+        }
+      },
+      {
+        "path": "control/closed_loop_faults/run_20261022_213516_drop_command_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 26.033470743997896,
+          "fault": "drop",
+          "fault_injected_at_sec": 12.152659888997732,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "command",
+          "fault_restored_at_sec": 20.153071900000214,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.3712612129706347,
+          "final_distance_to_goal_m": 68.4045194612693,
+          "max_lateral_error_m": 0.0004860462544411675,
+          "rms_lateral_error_m": 0.0001436473771332369,
+          "max_heading_error_rad": 0.0047454531809496495,
+          "max_actual_speed_mps": 0.6179897172161846,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.23674800612070204,
+          "max_actual_deceleration_mps2": -0.5000821829106692,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 932,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.697234688361684,
+          "fault_start_speed_mps": 0.507565661155045,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 0,
+          "fault_feedback_unique_stamps": 0,
+          "fault_detection_latency_sec": 0.29320669174194336,
+          "fault_stop_settling_sec": 1.8265505630006373,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 930,
+          "tf_matched_odometry_samples": 930,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.0005824565887451172,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 563,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 30.08731500845788,
+          "controller_command_hz": 33.33140073687606,
+          "controller_commands": 624,
+          "delivered_command_hz": 19.332664177151035,
+          "max_command_steering_rad": 0.000677493866533041,
+          "shutdown_sigterm_escalations": 0,
+          "shutdown_duration_sec": 0.8803430160005519,
+          "gate_filter_limit_events": 5,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0
+          ],
+          "controller_vs_live_speed_rms_mps": 0.0019212144467725455
+        }
+      },
+      {
+        "path": "control/closed_loop_faults/run_20261022_213550_freeze_command_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "fault_and_recovery_window_completed",
+          "runtime_sec": 26.02354621199993,
+          "fault": "freeze",
+          "fault_injected_at_sec": 12.120620637000684,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "command",
+          "fault_restored_at_sec": 20.134490286000073,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 1.3595106906934622,
+          "final_distance_to_goal_m": 68.41626932047231,
+          "max_lateral_error_m": 0.0004857934743720119,
+          "rms_lateral_error_m": 0.0001450552394607988,
+          "max_heading_error_rad": 0.0047454531809496495,
+          "max_actual_speed_mps": 0.6161761199208837,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.23609151590500974,
+          "max_actual_deceleration_mps2": -0.5007291481074234,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 929,
+          "terminal_hold_sec": 0,
+          "fault_distance_travelled_m": 0.6928334956458184,
+          "fault_start_speed_mps": 0.5048911845646415,
+          "fault_end_speed_mps": 0.0,
+          "fault_feedback_samples": 200,
+          "fault_feedback_unique_stamps": 1,
+          "fault_detection_latency_sec": 0.29399609565734863,
+          "fault_stop_settling_sec": 1.8198923540003307,
+          "fault_final_3s_max_abs_speed_mps": 0.0,
+          "fault_final_3s_displacement_m": 0.0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 927,
+          "tf_matched_odometry_samples": 927,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.0006995201110839844,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 581,
+          "gate_command_min_acceleration_mps2": -0.5,
+          "gate_command_hz": 31.14494918661911,
+          "controller_command_hz": 33.33333611467036,
+          "controller_commands": 622,
+          "delivered_command_hz": 33.84401445084187,
+          "max_command_steering_rad": 0.0006782932905480266,
+          "shutdown_sigterm_escalations": 0,
+          "shutdown_duration_sec": 0.8828159449985833,
+          "gate_filter_limit_events": 5,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0
+          ],
+          "controller_vs_live_speed_rms_mps": 0.0018268425236582183
+        }
+      },
+      {
+        "path": "control/closed_loop_nominal/run_20261022_213057_none_odometry_IDEAL_STEER_ACC_GEARED_gated/validation.json",
+        "passed": true,
+        "failed_checks": [],
+        "metrics": {
+          "termination_reason": "terminal_hold_completed",
+          "runtime_sec": 103.96807080000144,
+          "fault": "none",
+          "fault_injected_at_sec": null,
+          "gated": true,
+          "vehicle_model": "IDEAL_STEER_ACC_GEARED",
+          "fault_input": "odometry",
+          "fault_restored_at_sec": null,
+          "route_length_m": 69.77868082882111,
+          "initial_trajectory_length_m": 70.27868968703338,
+          "initial_trajectory_points": 226,
+          "lateral_error_reference": "initial pinned smoothed trajectory, perpendicular segment distance",
+          "initial_recorded_start_gap_m": 0.0,
+          "total_distance_m": 69.75406348073861,
+          "final_distance_to_goal_m": 0.024563294224722684,
+          "max_lateral_error_m": 0.006662883064610909,
+          "rms_lateral_error_m": 0.001137918989951209,
+          "max_heading_error_rad": 0.00887051956093874,
+          "max_actual_speed_mps": 0.9999260904571391,
+          "min_actual_speed_mps": 0.0,
+          "max_actual_acceleration_mps2": 0.23778011858553924,
+          "max_actual_deceleration_mps2": -0.31028424763024165,
+          "final_speed_mps": 0.0,
+          "odometry_samples": 4486,
+          "terminal_hold_sec": 10.116311244000826,
+          "terminal_stopping_accuracy_m": 0.024563294224722684,
+          "terminal_5s_max_abs_speed_mps": 0.0,
+          "terminal_5s_displacement_m": 0.0,
+          "terminal_hold_max_speed_mps": 0.0,
+          "terminal_hold_creep_m": 0.0,
+          "stop_settling_sec": 0.052737816997250775,
+          "positive_acceleration_commands_during_hold": 0,
+          "unexpected_motion_after_stop_m": 0.0,
+          "tf_samples": 4474,
+          "tf_matched_odometry_samples": 4472,
+          "tf_max_xy_residual_m": 0.0,
+          "tf_max_stamp_offset_sec": 0.002249002456665039,
+          "tf_max_yaw_residual_rad": 0.0,
+          "gate_commands": 3016,
+          "gate_command_min_acceleration_mps2": -0.31025397777557373,
+          "gate_command_hz": 33.08098588330006,
+          "controller_command_hz": 33.22362276426038,
+          "controller_commands": 3029,
+          "delivered_command_hz": 33.24824486596418,
+          "max_command_steering_rad": 0.009447379037737846,
+          "shutdown_sigterm_escalations": 1,
+          "shutdown_duration_sec": 5.965793778999796,
+          "gate_filter_limit_events": 17,
+          "dds_transport_error_lines": 22,
+          "controller_states_observed": [
+            0,
+            1,
+            2
+          ],
+          "controller_vs_live_speed_rms_mps": 0.0015546725398754087
+        }
+      }
+    ]
+  }
+}

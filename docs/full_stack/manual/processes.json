@@ -1,0 +1,309 @@
+[
+  {
+    "pid": 136,
+    "argv": [
+      "/usr/bin/python3",
+      "/opt/ros/humble/bin/ros2",
+      "launch",
+      "atlas_full_stack_demo",
+      "full_stack.launch.py",
+      "obstacle:=true",
+      "results_dir:=/home/marian/roam/atlas_autoware/docs/full_stack/manual"
+    ]
+  },
+  {
+    "pid": 162,
+    "argv": [
+      "/opt/ros/humble/lib/rclcpp_components/component_container",
+      "--ros-args",
+      "-r",
+      "__node:=simulator_container",
+      "-r",
+      "__ns:=/atlas_loc/sim"
+    ]
+  },
+  {
+    "pid": 164,
+    "argv": [
+      "/home/marian/roam/atlas_autoware/.localization_cache/install/autoware_ndt_scan_matcher/lib/autoware_ndt_scan_matcher/autoware_ndt_scan_matcher_node",
+      "--ros-args",
+      "-r",
+      "__node:=ndt_scan_matcher",
+      "-r",
+      "__ns:=/atlas_loc/ndt",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.localization_cache/install/autoware_ndt_scan_matcher/share/autoware_ndt_scan_matcher/config/ndt_scan_matcher.param.yaml",
+      "--params-file",
+      "/tmp/launch_params_aasveohr",
+      "-r",
+      "pcd_loader_service:=/pcd_loader_service",
+      "-r",
+      "points_raw:=/atlas_loc/lidar/compact",
+      "-r",
+      "ekf_pose_with_covariance:=/atlas_loc/ekf/ekf_pose_with_covariance"
+    ]
+  },
+  {
+    "pid": 166,
+    "argv": [
+      "/home/marian/roam/atlas_autoware/.localization_cache/install/autoware_ekf_localizer/lib/autoware_ekf_localizer/autoware_ekf_localizer_node",
+      "--ros-args",
+      "-r",
+      "__node:=ekf_localizer",
+      "-r",
+      "__ns:=/atlas_loc/ekf",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.localization_cache/install/autoware_ekf_localizer/share/autoware_ekf_localizer/config/ekf_localizer.param.yaml",
+      "-r",
+      "initialpose:=/atlas_loc/bootstrap",
+      "-r",
+      "in_pose_with_covariance:=/atlas_loc/ndt/ndt_pose_with_covariance",
+      "-r",
+      "in_twist_with_covariance:=/atlas_loc/sensors/twist"
+    ]
+  },
+  {
+    "pid": 168,
+    "argv": [
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_velocity_smoother/lib/autoware_velocity_smoother/velocity_smoother_node",
+      "--ros-args",
+      "-r",
+      "__node:=velocity_smoother",
+      "-r",
+      "__ns:=/atlas_loc",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_velocity_smoother/share/autoware_velocity_smoother/config/default_common.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_velocity_smoother/share/autoware_velocity_smoother/config/default_velocity_smoother.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_velocity_smoother/share/autoware_velocity_smoother/config/Analytical.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/demo_install/atlas_closed_loop_demo/share/atlas_closed_loop_demo/config/test_vehicle.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/demo_install/atlas_closed_loop_demo/share/atlas_closed_loop_demo/config/planning_overrides.param.yaml",
+      "--params-file",
+      "/tmp/launch_params_5b4lt8fn",
+      "-r",
+      "/localization/kinematic_state:=/atlas_loc/ekf/ekf_odom",
+      "-r",
+      "~/input/acceleration:=/atlas_loc/sensors/acceleration",
+      "-r",
+      "~/input/operation_mode_state:=/atlas_loc/operation_mode",
+      "-r",
+      "~/input/trajectory:=/atlas_loc/obstacle_trajectory",
+      "-r",
+      "~/output/trajectory:=/atlas_loc/trajectory"
+    ]
+  },
+  {
+    "pid": 170,
+    "argv": [
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_trajectory_follower_node/lib/autoware_trajectory_follower_node/controller_node_exe",
+      "--ros-args",
+      "-r",
+      "__node:=controller",
+      "-r",
+      "__ns:=/atlas_loc",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_trajectory_follower_node/share/autoware_trajectory_follower_node/param/trajectory_follower_node.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_trajectory_follower_node/share/autoware_trajectory_follower_node/param/lateral/mpc.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_trajectory_follower_node/share/autoware_trajectory_follower_node/param/longitudinal/pid.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/demo_install/atlas_closed_loop_demo/share/atlas_closed_loop_demo/config/test_vehicle.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/demo_install/atlas_closed_loop_demo/share/atlas_closed_loop_demo/config/controller_overrides.param.yaml",
+      "--params-file",
+      "/tmp/launch_params_4bygh40w",
+      "-r",
+      "~/input/reference_trajectory:=/atlas_loc/trajectory",
+      "-r",
+      "~/input/current_odometry:=/atlas_loc/ekf/ekf_odom",
+      "-r",
+      "~/input/current_accel:=/atlas_loc/sensors/acceleration",
+      "-r",
+      "~/input/current_steering:=/atlas_loc/sim/output/steering",
+      "-r",
+      "~/input/current_operation_mode:=/atlas_loc/operation_mode",
+      "-r",
+      "~/output/control_cmd:=/atlas_loc/control_cmd"
+    ]
+  },
+  {
+    "pid": 172,
+    "argv": [
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/install/autoware_vehicle_cmd_gate/lib/autoware_vehicle_cmd_gate/vehicle_cmd_gate_exe",
+      "--ros-args",
+      "-r",
+      "__node:=vehicle_cmd_gate",
+      "-r",
+      "__ns:=/atlas_loc/gate",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/demo_install/atlas_closed_loop_demo/share/atlas_closed_loop_demo/config/test_vehicle.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/demo_install/atlas_closed_loop_demo/share/atlas_closed_loop_demo/config/gate.param.yaml",
+      "-r",
+      "/localization/kinematic_state:=/atlas_loc/ekf/ekf_odom",
+      "-r",
+      "input/acceleration:=/atlas_loc/sensors/acceleration",
+      "-r",
+      "input/steering:=/atlas_loc/sim/output/steering",
+      "-r",
+      "input/operation_mode:=/atlas_loc/operation_mode",
+      "-r",
+      "input/auto/control_cmd:=/atlas_loc/control_cmd",
+      "-r",
+      "input/auto/gear_cmd:=/atlas_loc/auto_gear",
+      "-r",
+      "output/control_cmd:=/atlas_loc/gated/control_cmd"
+    ]
+  },
+  {
+    "pid": 190,
+    "argv": [
+      "python3",
+      "/home/marian/roam/atlas_autoware/.localization_cache/demo_install/atlas_localization_closed_loop_demo/lib/atlas_localization_closed_loop_demo/localization_watchdog.py",
+      "--ros-args",
+      "-r",
+      "__node:=localization_watchdog",
+      "-r",
+      "__ns:=/atlas_loc",
+      "-r",
+      "gate/input/external_emergency_stop_heartbeat:=/atlas_loc/base_safety_heartbeat",
+      "-r",
+      "safety_status:=/atlas_loc/base_safety_status",
+      "-r",
+      "feedback/odometry:=/atlas_loc/ekf/ekf_odom",
+      "-r",
+      "feedback/acceleration:=/atlas_loc/sensors/acceleration",
+      "-r",
+      "feedback/steering:=/atlas_loc/sim/output/steering"
+    ]
+  },
+  {
+    "pid": 204,
+    "argv": [
+      "/opt/ros/humble/lib/rclcpp_components/component_container",
+      "--ros-args",
+      "-r",
+      "__node:=map_container",
+      "-r",
+      "__ns:=/atlas_map_demo"
+    ]
+  },
+  {
+    "pid": 207,
+    "argv": [
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/demo_install/atlas_map_integration_demo/lib/atlas_map_integration_demo/map_routing_probe",
+      "--ros-args",
+      "-r",
+      "__node:=map_routing_probe",
+      "-r",
+      "__ns:=/atlas_map_demo",
+      "--params-file",
+      "/tmp/launch_params_x725g4sf"
+    ]
+  },
+  {
+    "pid": 230,
+    "argv": [
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/demo_install/atlas_closed_loop_demo/lib/atlas_closed_loop_demo/route_adapter",
+      "--ros-args",
+      "-r",
+      "__node:=route_adapter",
+      "-r",
+      "__ns:=/atlas_loc",
+      "--params-file",
+      "/tmp/launch_params_p3fvtdey"
+    ]
+  },
+  {
+    "pid": 243,
+    "argv": [
+      "python3",
+      "/home/marian/roam/atlas_autoware/.full_stack_cache/install/atlas_full_stack_demo/lib/atlas_full_stack_demo/scene.py",
+      "--ros-args",
+      "--params-file",
+      "/tmp/launch_params_v39oavdc"
+    ]
+  },
+  {
+    "pid": 252,
+    "argv": [
+      "python3",
+      "/home/marian/roam/atlas_autoware/.full_stack_cache/install/atlas_full_stack_demo/lib/atlas_full_stack_demo/static_objects.py",
+      "--ros-args"
+    ]
+  },
+  {
+    "pid": 256,
+    "argv": [
+      "python3",
+      "/home/marian/roam/atlas_autoware/.perception_cache/demo_install/atlas_perception_planning_demo/lib/atlas_perception_planning_demo/perception_guard.py",
+      "--ros-args",
+      "-r",
+      "__node:=obstacle_guard",
+      "-r",
+      "__ns:=/atlas_loc"
+    ]
+  },
+  {
+    "pid": 259,
+    "argv": [
+      "/opt/ros/humble/lib/rclcpp_components/component_container",
+      "--ros-args",
+      "-r",
+      "__node:=perception_container",
+      "-r",
+      "__ns:=/atlas_loc"
+    ]
+  },
+  {
+    "pid": 262,
+    "argv": [
+      "/home/marian/roam/atlas_autoware/.obstacle_cache/install/autoware_motion_velocity_planner/lib/autoware_motion_velocity_planner/autoware_motion_velocity_planner_node",
+      "--ros-args",
+      "-r",
+      "__node:=motion_velocity_planner",
+      "-r",
+      "__ns:=/atlas_loc",
+      "--params-file",
+      "/home/marian/roam/references/autoware/src/core/autoware_core/planning/autoware_core_planning/config/common.param.yaml",
+      "--params-file",
+      "/home/marian/roam/references/autoware/src/core/autoware_core/planning/autoware_core_planning/config/nearest_search.param.yaml",
+      "--params-file",
+      "/home/marian/roam/references/autoware/src/core/autoware_core/planning/autoware_velocity_smoother/config/default_common.param.yaml",
+      "--params-file",
+      "/home/marian/roam/references/autoware/src/core/autoware_core/planning/autoware_velocity_smoother/config/default_velocity_smoother.param.yaml",
+      "--params-file",
+      "/home/marian/roam/references/autoware/src/core/autoware_core/planning/autoware_velocity_smoother/config/Analytical.param.yaml",
+      "--params-file",
+      "/home/marian/roam/references/autoware/src/core/autoware_core/planning/motion_velocity_planner/autoware_motion_velocity_planner/config/motion_velocity_planner.param.yaml",
+      "--params-file",
+      "/home/marian/roam/references/autoware/src/core/autoware_core/planning/motion_velocity_planner/autoware_motion_velocity_obstacle_stop_module/config/obstacle_stop.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/demo_install/atlas_closed_loop_demo/share/atlas_closed_loop_demo/config/test_vehicle.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.closed_loop_cache/demo_install/atlas_closed_loop_demo/share/atlas_closed_loop_demo/config/planning_overrides.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.obstacle_cache/demo_install/atlas_obstacle_stopping_demo/share/atlas_obstacle_stopping_demo/config/obstacle_stop.param.yaml",
+      "--params-file",
+      "/home/marian/roam/atlas_autoware/.full_stack_cache/install/atlas_full_stack_demo/share/atlas_full_stack_demo/config/object_only_stop.param.yaml",
+      "-r",
+      "~/input/trajectory:=/atlas_loc/raw_trajectory",
+      "-r",
+      "~/input/vector_map:=/atlas_map_demo/vector_map",
+      "-r",
+      "~/input/vehicle_odometry:=/atlas_loc/ekf/ekf_odom",
+      "-r",
+      "~/input/accel:=/atlas_loc/sensors/acceleration",
+      "-r",
+      "~/input/dynamic_objects:=/atlas_loc/obstacles/predicted_objects",
+      "-r",
+      "~/input/no_ground_pointcloud:=/atlas_loc/obstacles/pointcloud",
+      "-r",
+      "~/output/trajectory:=/atlas_loc/obstacle_trajectory"
+    ]
+  }
+]

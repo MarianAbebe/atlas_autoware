@@ -1,0 +1,38 @@
+[
+  {
+    "input": "odometry",
+    "fault": "drop",
+    "exit_code": 0,
+    "log": "src/atlas_localization_closed_loop_demo/results/regressions/closed_loop_faults/odometry_drop.log"
+  },
+  {
+    "input": "odometry",
+    "fault": "freeze",
+    "exit_code": 1,
+    "log": "src/atlas_localization_closed_loop_demo/results/regressions/closed_loop_faults/odometry_freeze.log"
+  },
+  {
+    "input": "steering",
+    "fault": "drop",
+    "exit_code": 0,
+    "log": "src/atlas_localization_closed_loop_demo/results/regressions/closed_loop_faults/steering_drop.log"
+  },
+  {
+    "input": "steering",
+    "fault": "freeze",
+    "exit_code": 1,
+    "log": "src/atlas_localization_closed_loop_demo/results/regressions/closed_loop_faults/steering_freeze.log"
+  },
+  {
+    "input": "command",
+    "fault": "drop",
+    "exit_code": 0,
+    "log": "src/atlas_localization_closed_loop_demo/results/regressions/closed_loop_faults/command_drop.log"
+  },
+  {
+    "input": "command",
+    "fault": "freeze",
+    "exit_code": 1,
+    "log": "src/atlas_localization_closed_loop_demo/results/regressions/closed_loop_faults/command_freeze.log"
+  }
+]

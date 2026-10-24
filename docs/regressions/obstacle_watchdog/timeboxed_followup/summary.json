@@ -1,0 +1,61 @@
+[
+  {
+    "run": "run_20261022_030820_none_odometry",
+    "passed": false,
+    "failed_checks": [
+      "completed_route",
+      "nominal_safety_not_latched",
+      "terminal_hold"
+    ]
+  },
+  {
+    "run": "run_20261022_031034_ahead_odometry",
+    "passed": true,
+    "failed_checks": []
+  },
+  {
+    "run": "run_20261022_031231_off_route_odometry",
+    "passed": true,
+    "failed_checks": []
+  },
+  {
+    "run": "run_20261022_031413_stale_drop_odometry",
+    "passed": true,
+    "failed_checks": []
+  },
+  {
+    "run": "run_20261022_031449_stale_freeze_odometry",
+    "passed": true,
+    "failed_checks": []
+  },
+  {
+    "run": "run_20261022_031524_feedback_drop_odometry",
+    "passed": true,
+    "failed_checks": []
+  },
+  {
+    "run": "run_20261022_031600_feedback_freeze_odometry",
+    "passed": true,
+    "failed_checks": []
+  },
+  {
+    "run": "run_20261022_031640_feedback_drop_steering",
+    "passed": true,
+    "failed_checks": []
+  },
+  {
+    "run": "run_20261022_031715_feedback_freeze_steering",
+    "passed": true,
+    "failed_checks": []
+  },
+  {
+    "run": "run_20261022_031754_feedback_drop_command",
+    "passed": true,
+    "failed_checks": []
+  },
+  {
+    "run": "run_20261022_031830_feedback_freeze_command",
+    "passed": true,
+    "failed_checks": []
+  }
+]

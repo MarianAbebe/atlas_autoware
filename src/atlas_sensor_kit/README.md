@@ -20,16 +20,17 @@ on the Raspberry Pi. No sensor networking, TF, launch wiring, or deskew is confi
 | Plugin | Standalone executable | Conversion |
 | --- | --- | --- |
 | `atlas_sensor_kit::LivoxToExtendedComponent` | `livox_to_extended_node` | Livox PointCloud2 → XYZIRCAEDT |
+| `atlas_sensor_kit::VelodyneToExtendedComponent` | `velodyne_to_extended_node` | Organized Velodyne PointCloud2 → XYZIRCAEDT |
 | `atlas_sensor_kit::ExtendedToCompactComponent` | `extended_to_compact_node` | XYZIRCAEDT → XYZIRC |
 
-Both use private `~/input/pointcloud` and `~/output/pointcloud` ports with
+All use private `~/input/pointcloud` and `~/output/pointcloud` ports with
 SensorDataQoS. Malformed clouds are dropped with a throttled ROS error explaining
 the cause. Pure functions in `pointcloud_conversion.hpp` throw `ConversionError`
 and never modify input. A failed conversion publishes no partial output.
 
 ## Contracts and policies
 
-Inputs must be little-endian, unorganized (`height=1`), with exact field order,
+The original Livox and extended/compact inputs must be little-endian, unorganized (`height=1`), with exact field order,
 names, types, count=1, offsets, stride, row size, and data size. Empty clouds with
 height=1 and complete field metadata are supported. Padding, extra fields, big-endian
 data, and negative/non-normalized header stamps are rejected. The implementation
@@ -52,7 +53,7 @@ Livox intensity: finite values are clamped to [0,255], then rounded to nearest
 integer (halfway values round upward after clamping). NaN and either infinity
 become zero. Livox XYZ must be finite and calculated distance must fit FLOAT32.
 
-Metadata is explicitly provisional: `channel=0`, `return_type=0` (Autoware INVALID).
+Livox metadata is explicitly provisional: `channel=0`, `return_type=0` (Autoware INVALID).
 Neither Livox tag nor generated line is interpreted as Autoware metadata.
 Tag and line are dropped without tag filtering. This policy is not suitable for
 ring-based algorithms without further sensor-specific validation.
@@ -135,3 +136,67 @@ domain 177 and test-only remappings isolate the synthetic graph. Identical messa
 are retried every 100 ms until both outputs arrive to tolerate best-effort startup
 loss. These tests do not validate DDS performance, hardware clocks, extrinsics, or
 actual deskew/CenterPoint execution.
+
+## Organized Velodyne input
+
+`velodyne_relative_seconds_to_extended` is a separate pure function returning
+`VelodyneConversion {cloud, discarded_nonfinite_xyz, reordered}`. Existing Livox
+and compact contracts are unchanged. The new component requires the explicit
+parameter `time_is_relative_seconds:=true`; startup fails without that opt-in.
+This specifies the meaning of the input `time` field, rather than inferring units
+from values. Decoder provenance and hardware clock synchronization still need
+confirmation before physical deskew.
+
+Required scalar fields are FLOAT32 `x`, `y`, `z`, `intensity`, `time`, and UINT16
+`ring`. Fields may appear in any order at arbitrary nonoverlapping offsets within
+`point_step`. Organized and unorganized input, unaligned scalars, point/row
+padding, additional fields, and either message endianness are supported. The
+output host must be little endian. Required duplicate/missing fields, incorrect
+types/counts, overlapping/out-of-bounds required fields, zero height/point stride,
+short row strides and any mismatch between `row_step * height` and data length
+are rejected. Width zero is supported with valid metadata.
+
+Every `(row,column)` position is visited using the declared strides. Nonfinite
+XYZ slots alone are discarded and counted; the component logs the count on every
+successful cloud. All retained XYZ values preserve their FLOAT32 bits. Retained
+points with negative/nonfinite/unrepresentable time, or distance overflowing
+FLOAT32, reject the complete cloud. No partial result is published. Invalid time
+or intensity on an already discarded XYZ slot is not used.
+
+The output is dense, unorganized 32-byte XYZIRCAEDT in the original frame with
+an unchanged header. `ring` is copied exactly to UINT16 `channel`, including
+values outside VLP-16's 0–15 range. Return type is unknown/INVALID (0), never
+inferred from ring. Intensity uses the existing clamp/round/nonfinite-to-zero
+policy. Cartesian coordinates are not rotated or translated. Polar fields are
+computed from those coordinates using the existing mathematical convention;
+they do not establish calibrated sensor azimuth conventions.
+
+Retained points are **stable-sorted by original FLOAT32 time**. The pinned
+Autoware deskewer advances motion iterators and integrates point-to-point time
+differences in storage order, so unordered input would be incorrect. Equal times
+retain original row/column order. `reordered` reports whether retained order
+changed. Organization and original point indices are not preserved in the fixed
+upstream output interface.
+
+Relative seconds become UINT32 `time_stamp` nanoseconds, rounded to nearest
+(half upward). Additional quantization is at most 0.5 ns; precision already lost
+in source FLOAT32 time cannot be recovered. The fixed downstream interface
+cannot retain the original FLOAT32 `time` field. Header nanoseconds plus point
+offset must also fit UINT32, guarding the pinned deskewer's addition. No time
+origin shift, header restamp or correction is performed. The compact converter
+preserves XYZ/intensity/return/channel but necessarily removes per-point timing;
+connect deskew before compact conversion when motion/TF are available.
+
+Example (format conversion only):
+
+```bash
+ros2 run atlas_sensor_kit velodyne_to_extended_node --ros-args \
+  -p time_is_relative_seconds:=true \
+  -r '~/input/pointcloud:=/velodyne_points' \
+  -r '~/output/pointcloud:=/atlas/velodyne/extended'
+```
+
+Real-recording evidence, regression results and reproduction commands are in
+[CONVERSION.md](../../docs/real_data/engg_loading_dock_01/CONVERSION.md).
+Parsing and layout acceptance do not establish motion compensation, physical
+calibration, ground segmentation quality, or localization accuracy.

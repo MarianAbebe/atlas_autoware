@@ -1,0 +1,32 @@
+{
+  "vehicle_default": {
+    "mode": "realtime",
+    "wall_stall_sec": 0.5,
+    "state_dt_sec": 0.503080626,
+    "velocity_increment": 0.10061049309921316,
+    "samples": 11,
+    "final_x": 0.0466829181093329,
+    "final_vx": 0.13664979883624065,
+    "passed": true
+  },
+  "vehicle_fixed_500": {
+    "mode": "controlled",
+    "wall_stall_sec": 0.5,
+    "state_dt_sec": 0.02,
+    "velocity_increment": 0.004000000059604644,
+    "samples": 22,
+    "final_x": 0.016000000238418577,
+    "final_vx": 0.0800000011920929,
+    "passed": true
+  },
+  "vehicle_fixed_0": {
+    "mode": "controlled",
+    "wall_stall_sec": 0,
+    "state_dt_sec": 0.02,
+    "velocity_increment": 0.004000000059604644,
+    "samples": 22,
+    "final_x": 0.016000000238418577,
+    "final_vx": 0.0800000011920929,
+    "passed": true
+  }
+}

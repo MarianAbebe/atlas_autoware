@@ -1,0 +1,27 @@
+{
+  "truth": {
+    "last_source_before_fault": 1792703626.5918195,
+    "source_age_at_fault": 0.014624357223510742,
+    "validator_receipt_sec": 3.802785875999689
+  },
+  "ekf": {
+    "last_source_before_fault": 1792703626.5917459,
+    "source_age_at_fault": 0.014698028564453125,
+    "validator_receipt_sec": 3.8029184109982452
+  },
+  "ndt": {
+    "last_source_before_fault": 1792703626.571378,
+    "source_age_at_fault": 0.03506588935852051,
+    "validator_receipt_sec": 3.792352911998023
+  },
+  "command": {
+    "last_source_before_fault": 1792703626.5974762,
+    "source_age_at_fault": 0.00896763801574707,
+    "validator_receipt_sec": 3.8093524299983983
+  },
+  "scan": {
+    "last_source_before_fault": 1792703626.571378,
+    "source_age_at_fault": 0.03506588935852051,
+    "validator_receipt_sec": 3.7881016889987222
+  }
+}

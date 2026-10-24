@@ -1,0 +1,11 @@
+{"scenario": "none", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/localization_nominal_repro/obstacle/20261022_211954_none_odometry.log"}
+{"scenario": "ahead", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/localization_nominal_repro/obstacle/20261022_212141_ahead_odometry.log"}
+{"scenario": "off_route", "feedback_input": "odometry", "exit_code": 1, "log": "/home/marian/roam/atlas_autoware/docs/regressions/localization_nominal_repro/obstacle/20261022_212344_off_route_odometry.log"}
+{"scenario": "stale_drop", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/localization_nominal_repro/obstacle/20261022_212553_stale_drop_odometry.log"}
+{"scenario": "stale_freeze", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/localization_nominal_repro/obstacle/20261022_212629_stale_freeze_odometry.log"}
+{"scenario": "feedback_drop", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/localization_nominal_repro/obstacle/20261022_212705_feedback_drop_odometry.log"}
+{"scenario": "feedback_freeze", "feedback_input": "odometry", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/localization_nominal_repro/obstacle/20261022_212741_feedback_freeze_odometry.log"}
+{"scenario": "feedback_drop", "feedback_input": "steering", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/localization_nominal_repro/obstacle/20261022_212817_feedback_drop_steering.log"}
+{"scenario": "feedback_freeze", "feedback_input": "steering", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/localization_nominal_repro/obstacle/20261022_212853_feedback_freeze_steering.log"}
+{"scenario": "feedback_drop", "feedback_input": "command", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/localization_nominal_repro/obstacle/20261022_212934_feedback_drop_command.log"}
+{"scenario": "feedback_freeze", "feedback_input": "command", "exit_code": 0, "log": "/home/marian/roam/atlas_autoware/docs/regressions/localization_nominal_repro/obstacle/20261022_213009_feedback_freeze_command.log"}

@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.14)
+project(atlas_obstacle_stopping_demo)
+find_package(ament_cmake REQUIRED)
+install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
+install(PROGRAMS scripts/obstacle_source.py scripts/obstacle_guard.py DESTINATION lib/${PROJECT_NAME})
+ament_package()

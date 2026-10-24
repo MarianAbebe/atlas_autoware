@@ -1,0 +1,110 @@
+{
+  "name": "suite_feedback_drop_steering",
+  "scenario": "feedback_drop",
+  "feedback_input": "steering",
+  "passed": true,
+  "failed_checks": [],
+  "raw_recording": "/tmp/atlas_watchdog_serial_suite/run_20261022_023946_feedback_drop_steering",
+  "checks": {
+    "launch_alive_during_measurement": true,
+    "bounded_cleanup": true,
+    "no_map_changes": true,
+    "actual_motion": true,
+    "actual_planner_output": true,
+    "actual_controller_feedback": true,
+    "pinned_planner_exclusive_output": true,
+    "pinned_gate_exclusive_simulator_command": true,
+    "synthetic_perception_only": true,
+    "controller_consumes_final_smoother": true,
+    "delivered_commands_match_pinned_controller": true,
+    "speed_limit": true,
+    "acceleration_limit": true,
+    "tracking": true,
+    "validated_initial_trajectory": true,
+    "fault_detected": true,
+    "actual_fault_stop": true,
+    "no_automatic_rearm": true,
+    "invalid_rearm_refused": true,
+    "completed_fault_observation": true,
+    "fresh_feedback_restored": true,
+    "plugin_loaded": true,
+    "no_crash": true
+  },
+  "first_base_safety_latch": {
+    "stamp": 1792636808.5148184,
+    "armed": false,
+    "latched": true,
+    "fault_stamp": 1792636808.4762092,
+    "fault_inputs": [
+      "steering"
+    ],
+    "currently_stale": [
+      "steering"
+    ],
+    "stationary_since_monotonic": null,
+    "fault_input_health": {
+      "odometry": {
+        "source_stamp": 1792636808.453344,
+        "stamp_age_sec": 0.0227963924407959,
+        "receipt_age_sec": 0.0195822940004291
+      },
+      "steering": {
+        "source_stamp": 1792636808.1738286,
+        "stamp_age_sec": 0.30231189727783203,
+        "receipt_age_sec": 0.29694241600009263
+      },
+      "acceleration": {
+        "source_stamp": 1792636808.453782,
+        "stamp_age_sec": 0.022358417510986328,
+        "receipt_age_sec": 0.019477710000501247
+      },
+      "trajectory": {
+        "source_stamp": 1792636808.4605842,
+        "stamp_age_sec": 0.01555633544921875,
+        "receipt_age_sec": 0.004076801000337582
+      },
+      "command": {
+        "source_stamp": 1792636808.471097,
+        "stamp_age_sec": 0.005043506622314453,
+        "receipt_age_sec": 0.0009416270004294347
+      }
+    },
+    "fault_tick_gap_sec": 0.02006191899999976,
+    "t": 22.060352257001796
+  },
+  "first_safety_latch": {
+    "stamp": 1792636808.516014,
+    "armed": false,
+    "latched": true,
+    "fault_stamp": 1792636808.516014,
+    "fault_inputs": [
+      "base_authorization"
+    ],
+    "currently_stale": [
+      "base_authorization"
+    ],
+    "fault_input_health": {
+      "pointcloud": {
+        "source_stamp": 1792636808.488471,
+        "stamp_age_sec": 0.02750396728515625,
+        "receipt_age_sec": 0.02591272500285413
+      },
+      "predicted_objects": {
+        "source_stamp": 1792636808.488471,
+        "stamp_age_sec": 0.02750396728515625,
+        "receipt_age_sec": 0.02579001600315678
+      },
+      "base_heartbeat": {
+        "source_stamp": 1792636808.4561138,
+        "stamp_age_sec": 0.059861183166503906,
+        "receipt_age_sec": 0.05949121700177784
+      },
+      "base_status": {
+        "source_stamp": 1792636808.5148184,
+        "stamp_age_sec": 0.0011565685272216797,
+        "receipt_age_sec": 0.0006425020001188386
+      }
+    },
+    "t": 22.06292234600187
+  }
+}

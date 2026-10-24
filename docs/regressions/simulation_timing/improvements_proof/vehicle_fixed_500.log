@@ -1,0 +1,6 @@
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-22 20:56:48.844 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-22 20:56:48.844 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+ATLAS_TIMING_RESULT {"mode":"controlled","wall_stall_sec":0.5,"state_dt_sec":0.02,"velocity_increment":0.0040000000596046442,"samples":22,"final_x":0.016000000238418577,"final_vx":0.080000001192092898,"passed":true}

@@ -2,7 +2,7 @@
 <package format="3">
   <name>atlas_distortion_corrector_test</name>
   <version>0.1.0</version>
-  <description>Hardware-free tests of unchanged pinned Autoware distortion correction.</description>
+  <description>Synthetic and bounded real-data validation of unchanged pinned Autoware preprocessing.</description>
   <maintainer email="maintainers@roam.local">ROAM Atlas</maintainer>
   <license>Apache-2.0</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
@@ -15,5 +15,10 @@
   <depend>pcl_ros</depend><depend>sophus</depend><depend>point_cloud_msg_wrapper</depend>
   <test_depend>ament_cmake_gtest</test_depend>
   <test_depend>atlas_sensor_kit</test_depend>
+  <!-- Optional ATLAS_REAL_GROUND_SMOKE dependencies. -->
+  <test_depend>message_filters</test_depend>
+  <test_depend>pcl_msgs</test_depend>
+  <test_depend>autoware_internal_msgs</test_depend>
+  <test_depend>boost</test_depend>
   <export><build_type>ament_cmake</build_type></export>
 </package>

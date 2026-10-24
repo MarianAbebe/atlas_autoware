@@ -1,0 +1,106 @@
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-22 21:15:54.571 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-22 21:15:54.571 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+{"elapsed": 5.002267112999107, "scenario": "nominal", "counts": {"truth": 213, "ekf": 213, "ndt": 32}, "x": 100.35250428414018, "speed": 0.40204774628599893, "latched": false}
+{"elapsed": 10.002283535999595, "scenario": "nominal", "counts": {"truth": 463, "ekf": 463, "ndt": 76}, "x": 103.30401427782563, "speed": 0.6188649255924729, "latched": false}
+{"elapsed": 15.002588349998405, "scenario": "nominal", "counts": {"truth": 706, "ekf": 706, "ndt": 119}, "x": 106.79213589859766, "speed": 0.4756873443598684, "latched": true}
+{"elapsed": 20.008936226000515, "scenario": "nominal", "counts": {"truth": 957, "ekf": 956, "ndt": 164}, "x": 107.01838617443146, "speed": 0.0, "latched": true}
+{"elapsed": 25.019486758999847, "scenario": "nominal", "counts": {"truth": 1206, "ekf": 1206, "ndt": 209}, "x": 107.01838617443146, "speed": 0.0, "latched": true}
+{"elapsed": 30.02185994499814, "scenario": "nominal", "counts": {"truth": 1456, "ekf": 1456, "ndt": 253}, "x": 107.01838617443146, "speed": 0.0, "latched": true}
+{"elapsed": 35.02232222100065, "scenario": "nominal", "counts": {"truth": 1706, "ekf": 1707, "ndt": 297}, "x": 107.01838617443146, "speed": 0.0, "latched": true}
+{"elapsed": 40.02346988299905, "scenario": "nominal", "counts": {"truth": 1956, "ekf": 1957, "ndt": 341}, "x": 107.01838617443146, "speed": 0.0, "latched": true}
+{"elapsed": 45.0237905469985, "scenario": "nominal", "counts": {"truth": 2206, "ekf": 2207, "ndt": 386}, "x": 107.01838617443146, "speed": 0.0, "latched": true}
+{"elapsed": 50.026503950000915, "scenario": "nominal", "counts": {"truth": 2456, "ekf": 2457, "ndt": 429}, "x": 107.01838617443146, "speed": 0.0, "latched": true}
+{
+  "passed": false,
+  "checks": {
+    "finite_states": true,
+    "finite_covariance": true,
+    "frames": true,
+    "quaternions": true,
+    "no_runtime_exception": true,
+    "launch_alive": true,
+    "bounded_cleanup": true,
+    "controller_odom_exclusively_ekf": true,
+    "truth_hidden_from_controller": true,
+    "ndt_pose_exclusive": true,
+    "ekf_receives_ndt": true,
+    "ndt_predictions_exclusively_ekf": true,
+    "speed_limit": true,
+    "actual_simulator_samples": true,
+    "scans_exclusive_fixture": true,
+    "ndt_receives_generated_scans": true,
+    "simulator_exclusive_gate": true,
+    "scan_world_consistency": true,
+    "finite_scan_samples": true,
+    "bounded_control": true,
+    "acceleration_limit": true,
+    "timestamps_nondecreasing": true,
+    "timestamps_positive": true,
+    "localization_engaged": true,
+    "actual_motion": true,
+    "scans_evolve": true,
+    "matched_ndt": true,
+    "ndt_convergence": true,
+    "ndt_accuracy": true,
+    "ekf_accuracy": true,
+    "lateral_tracking": true,
+    "goal_and_ten_second_hold": false,
+    "nominal_not_latched": false,
+    "terminal_no_creep": false,
+    "terminal_commands": false
+  },
+  "failed_checks": [
+    "goal_and_ten_second_hold",
+    "nominal_not_latched",
+    "terminal_no_creep",
+    "terminal_commands"
+  ],
+  "metrics": {
+    "scenario": "nominal",
+    "termination": "timeout",
+    "error": null,
+    "engaged": 2.5223036719980882,
+    "injected": null,
+    "cleanup_sec": 5.9275286459997005,
+    "process_tree_peak_rss_kib": 382532,
+    "localization_errors": {
+      "ndt": {
+        "matched": 463,
+        "max_xy_m": 0.0047739371548449995,
+        "rms_xy_m": 0.0035347849667975574,
+        "max_yaw_rad": 0.00033955530857003184
+      },
+      "ekf": {
+        "matched": 2616,
+        "max_xy_m": 0.008728156472576748,
+        "rms_xy_m": 0.0038008850855608045,
+        "max_yaw_rad": 7.849761466101964e-06
+      }
+    },
+    "counts": {
+      "truth": 2705,
+      "ekf": 2706,
+      "ndt": 473,
+      "command": 1801,
+      "gate": 1611,
+      "scan": 479,
+      "ndt_ms": 473,
+      "ndt_score": 473,
+      "ndt_iterations": 473
+    },
+    "truth_distance_m": 7.018387289353476,
+    "final_goal_distance_m": 0.9816179813800376,
+    "max_lateral_error_m": 0.002995814031933719,
+    "max_speed_mps": 0.7603299736289367,
+    "scan_world_residual_m": 9.162278234185089e-07,
+    "scan_world_matched": 121,
+    "scan_sample_displacement_m": 7.018346895888568,
+    "max_acceleration_mps2": 0.5113371860658913,
+    "ndt_execution_ms_max": 24.41200065612793,
+    "ndt_score_min": 3.417452812194824,
+    "ndt_iterations_max": 6
+  }
+}

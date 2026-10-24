@@ -1,0 +1,30 @@
+{
+  "command": [
+    "bash",
+    "src/atlas_obstacle_stopping_demo/scripts/run_test.sh",
+    "--scenario",
+    "none",
+    "--results-root",
+    "/tmp/atlas_watchdog_capped_independent"
+  ],
+  "affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "clock_ticks": 100,
+  "page_size": 4096,
+  "environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "ROS_VERSION": "2",
+    "ROS_PYTHON_VERSION": "3",
+    "ROS_LOCALHOST_ONLY": "0",
+    "ROS_DISTRO": "humble"
+  },
+  "cgroup": "0::/user.slice/user-1000.slice/user@1000.service/app.slice/app-org.gnome.Terminal.slice/vte-spawn-279b3f0b-e88d-491d-b6b8-1b21d23953d1.scope\n",
+  "cpu_max": null
+}

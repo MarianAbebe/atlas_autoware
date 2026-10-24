@@ -1,0 +1,22 @@
+Internal ctest changing into directory: /tmp/atlas_velodyne_build/atlas_distortion_corrector_test
+Test project /tmp/atlas_velodyne_build/atlas_distortion_corrector_test
+    Start 1: deskew_Forward
+1/8 Test #1: deskew_Forward ...................   Passed    0.32 sec
+    Start 2: deskew_Zero
+2/8 Test #2: deskew_Zero ......................   Passed    0.24 sec
+    Start 3: deskew_Missing
+3/8 Test #3: deskew_Missing ...................   Passed    0.23 sec
+    Start 4: deskew_Stale
+4/8 Test #4: deskew_Stale .....................   Passed    0.23 sec
+    Start 5: chain_Forward
+5/8 Test #5: chain_Forward ....................   Passed    0.26 sec
+    Start 6: chain_Zero
+6/8 Test #6: chain_Zero .......................   Passed    0.26 sec
+    Start 7: chain_Missing
+7/8 Test #7: chain_Missing ....................   Passed    0.27 sec
+    Start 8: chain_Stale
+8/8 Test #8: chain_Stale ......................   Passed    0.32 sec
+
+100% tests passed, 0 tests failed out of 8
+
+Total Test time (real) =   2.14 sec

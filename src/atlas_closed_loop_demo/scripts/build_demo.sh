@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 # Audit the full closure, never install system packages, and build only missing packages.
 set -eo pipefail
-cd /home/marian/roam/atlas_autoware
+atlas_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+cd "$atlas_root"
+export ATLAS_REPO_ROOT="$atlas_root"
+export ATLAS_AUTOWARE_ROOT="${ATLAS_AUTOWARE_ROOT:-$(cd "$atlas_root/.." && pwd)/references/autoware}"
 trap 'python3 src/atlas_closed_loop_demo/scripts/build_status.py' EXIT
 source /opt/ros/humble/setup.bash
 # Keep this test's caches across reboot; reuse older overlays when present.
 export ENABLE_AGNOCAST=0
-for atlas_overlay in /tmp/atlas_map_upstream_install /tmp/atlas_map_demo_install /tmp/atlas_trajectory_upstream_install /tmp/atlas_closed_loop_upstream_install /home/marian/roam/atlas_autoware/.closed_loop_cache/install; do
+for atlas_overlay in /tmp/atlas_map_upstream_install /tmp/atlas_map_demo_install /tmp/atlas_trajectory_upstream_install /tmp/atlas_closed_loop_upstream_install "$atlas_root/.closed_loop_cache/install"; do
   if [[ -f "$atlas_overlay/setup.bash" ]]; then source "$atlas_overlay/setup.bash"; fi
 done
 export CMAKE_BUILD_PARALLEL_LEVEL=2
@@ -17,7 +20,7 @@ import os
 from pathlib import Path
 import subprocess
 
-ref = Path('/home/marian/roam/references/autoware')
+ref = Path(os.environ['ATLAS_AUTOWARE_ROOT'])
 for repo, commit in [(ref, '10718787ba6e28f038a0cb29ff99cc627b5abfd2'),
                      (ref / 'src/core/autoware_core', 'f25f83c632c1984ec276c894c41857d4abc0dad8'),
                      (ref / 'src/universe/autoware_universe', '6e477c645efec33f7909095eea684474e97f5e3d'),
@@ -65,21 +68,22 @@ Path('/tmp/atlas_closed_loop_closure.tsv').write_text(listing)
 Path('/tmp/atlas_closed_loop_selection.json').write_text(json.dumps({'cached': cached, 'missing': missing}))
 print('Reuse:', cached, '\nBuild:', missing, flush=True)
 if missing:
-    subprocess.run(['python3', 'src/atlas_closed_loop_demo/scripts/colcon_sync_io.py', '--log-base', '/home/marian/roam/atlas_autoware/.closed_loop_cache/log', 'build',
+    cache = Path(os.environ['ATLAS_REPO_ROOT']) / '.closed_loop_cache'
+    subprocess.run(['python3', 'src/atlas_closed_loop_demo/scripts/colcon_sync_io.py', '--log-base', str(cache/'log'), 'build',
                     '--base-paths', *bases, '--packages-select', *missing,
                     '--packages-ignore', *sorted(set(byname) - needed),
                     '--packages-skip-build-finished', '--executor', 'sequential',
-                    '--build-base', '/home/marian/roam/atlas_autoware/.closed_loop_cache/build',
-                    '--install-base', '/home/marian/roam/atlas_autoware/.closed_loop_cache/install',
+                    '--build-base', str(cache/'build'),
+                    '--install-base', str(cache/'install'),
                     '--event-handlers', 'console_direct+', 'status-', '--cmake-args',
                     '-DBUILD_TESTING=OFF', '-DCMAKE_BUILD_TYPE=Release',
                     '-DCMAKE_SHARED_LINKER_FLAGS=-fuse-ld=gold', '-DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=gold'], check=True)
 PY
-source /home/marian/roam/atlas_autoware/.closed_loop_cache/install/setup.bash
-python3 src/atlas_closed_loop_demo/scripts/colcon_sync_io.py --log-base /home/marian/roam/atlas_autoware/.closed_loop_cache/demo_log build \
+source "$atlas_root/.closed_loop_cache/install/setup.bash"
+python3 src/atlas_closed_loop_demo/scripts/colcon_sync_io.py --log-base "$atlas_root/.closed_loop_cache/demo_log" build \
   --base-paths src/atlas_map_integration_demo src/atlas_closed_loop_demo \
-  --build-base /home/marian/roam/atlas_autoware/.closed_loop_cache/demo_build \
-  --install-base /home/marian/roam/atlas_autoware/.closed_loop_cache/demo_install \
+  --build-base "$atlas_root/.closed_loop_cache/demo_build" \
+  --install-base "$atlas_root/.closed_loop_cache/demo_install" \
   --executor sequential --event-handlers console_direct+ \
   --cmake-args -DBUILD_TESTING=OFF -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_SHARED_LINKER_FLAGS=-fuse-ld=gold -DCMAKE_EXE_LINKER_FLAGS=-fuse-ld=gold

@@ -1,0 +1,149 @@
+[
+  {
+    "scenario": "none",
+    "feedback_input": "odometry",
+    "passed": true,
+    "failed_checks": [],
+    "recording_barrier": true,
+    "journal_rows": 3138,
+    "first_latch": null
+  },
+  {
+    "scenario": "ahead",
+    "feedback_input": "odometry",
+    "passed": true,
+    "failed_checks": [],
+    "recording_barrier": true,
+    "journal_rows": 3680,
+    "first_latch": null
+  },
+  {
+    "scenario": "off_route",
+    "feedback_input": "odometry",
+    "passed": true,
+    "failed_checks": [],
+    "recording_barrier": true,
+    "journal_rows": 3151,
+    "first_latch": null
+  },
+  {
+    "scenario": "stale_drop",
+    "feedback_input": "odometry",
+    "passed": true,
+    "failed_checks": [],
+    "recording_barrier": true,
+    "journal_rows": 960,
+    "first_latch": {
+      "t": 19.44059195799855,
+      "stamp": 1792701819.8501205,
+      "fault_inputs": [
+        "pointcloud"
+      ]
+    }
+  },
+  {
+    "scenario": "stale_freeze",
+    "feedback_input": "odometry",
+    "passed": true,
+    "failed_checks": [],
+    "recording_barrier": true,
+    "journal_rows": 953,
+    "first_latch": {
+      "t": 19.424786364001193,
+      "stamp": 1792701860.539161,
+      "fault_inputs": [
+        "pointcloud"
+      ]
+    }
+  },
+  {
+    "scenario": "feedback_drop",
+    "feedback_input": "odometry",
+    "passed": true,
+    "failed_checks": [],
+    "recording_barrier": true,
+    "journal_rows": 908,
+    "first_latch": {
+      "t": 19.71255706199736,
+      "stamp": 1792701900.5414326,
+      "fault_inputs": [
+        "odometry"
+      ]
+    }
+  },
+  {
+    "scenario": "feedback_freeze",
+    "feedback_input": "odometry",
+    "passed": true,
+    "failed_checks": [],
+    "recording_barrier": true,
+    "journal_rows": 964,
+    "first_latch": {
+      "t": 19.525422516999242,
+      "stamp": 1792701940.0598013,
+      "fault_inputs": [
+        "odometry"
+      ]
+    }
+  },
+  {
+    "scenario": "feedback_drop",
+    "feedback_input": "steering",
+    "passed": true,
+    "failed_checks": [],
+    "recording_barrier": true,
+    "journal_rows": 947,
+    "first_latch": {
+      "t": 19.844609756000864,
+      "stamp": 1792701976.0660663,
+      "fault_inputs": [
+        "steering"
+      ]
+    }
+  },
+  {
+    "scenario": "feedback_freeze",
+    "feedback_input": "steering",
+    "passed": true,
+    "failed_checks": [],
+    "recording_barrier": true,
+    "journal_rows": 964,
+    "first_latch": {
+      "t": 19.495267632999457,
+      "stamp": 1792702010.7523136,
+      "fault_inputs": [
+        "steering"
+      ]
+    }
+  },
+  {
+    "scenario": "feedback_drop",
+    "feedback_input": "command",
+    "passed": true,
+    "failed_checks": [],
+    "recording_barrier": true,
+    "journal_rows": 956,
+    "first_latch": {
+      "t": 19.097101301002112,
+      "stamp": 1792702044.8823388,
+      "fault_inputs": [
+        "command"
+      ]
+    }
+  },
+  {
+    "scenario": "feedback_freeze",
+    "feedback_input": "command",
+    "passed": true,
+    "failed_checks": [],
+    "recording_barrier": true,
+    "journal_rows": 966,
+    "first_latch": {
+      "t": 19.355201531001512,
+      "stamp": 1792702079.5304894,
+      "fault_inputs": [
+        "command"
+      ]
+    }
+  }
+]

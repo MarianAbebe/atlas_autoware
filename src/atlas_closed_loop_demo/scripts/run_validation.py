@@ -20,6 +20,8 @@ from std_srvs.srv import Trigger
 from composition_interfaces.srv import ListNodes, UnloadNode
 
 
+from command_recording import recording_barrier
+
 def stamp(s):return s.sec+s.nanosec*1e-9
 def yaw(q):return math.atan2(2*(q.w*q.z+q.x*q.y),1-2*(q.y*q.y+q.z*q.z))
 def wrap(a):return math.atan2(math.sin(a),math.cos(a))
@@ -36,7 +38,7 @@ def project(x,y,poly):
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--fault',choices=['none','drop','freeze'],default='none')
     parser.add_argument('--gated',action='store_true',default=True);parser.add_argument('--ungated-baseline',dest='gated',action='store_false');parser.add_argument('--vehicle-model',choices=['IDEAL_STEER_ACC','IDEAL_STEER_ACC_GEARED'],default='IDEAL_STEER_ACC_GEARED');
-    parser.add_argument('--results-root',type=Path,default=Path('/home/marian/roam/atlas_autoware/src/atlas_closed_loop_demo/results/current_runs'));parser.add_argument('--no-rviz',action='store_true',default=True);parser.add_argument('--rviz',dest='no_rviz',action='store_false');parser.add_argument('--timeout',type=float,default=180.)
+    parser.add_argument('--results-root',type=Path,default=Path(__file__).resolve().parents[1]/'results/current_runs');parser.add_argument('--no-rviz',action='store_true',default=True);parser.add_argument('--rviz',dest='no_rviz',action='store_false');parser.add_argument('--timeout',type=float,default=180.)
     parser.add_argument('--fault-input',choices=['odometry','steering','command'],default='odometry')
     args=parser.parse_args()
     limits=json.loads((Path(__file__).resolve().parents[1]/'results/safety_validation/thresholds.json').read_text())
@@ -46,6 +48,8 @@ def main():
     (run/'source_sha256.json').write_text(json.dumps({str(p.relative_to(demo)):hashlib.sha256(p.read_bytes()).hexdigest() for directory in ['scripts','config','launch'] for p in (demo/directory).glob('*') if p.is_file()},indent=2))
     rclpy.init();node=rclpy.create_node('closed_loop_validation')
     latched=QoSProfile(depth=1,durability=DurabilityPolicy.TRANSIENT_LOCAL)
+    command_recording_client=node.create_client(Trigger,'/atlas_closed_loop/command_recording/snapshot')
+    recording_result=dict(passed=False, reason='not_completed', rows=[])
     capturing=True
     latest={};odom=[];commands=[];gate_commands=[];feedback=[];raw_commands=[];steering_feedback=[];safety=[];trajectories=[];diagnostics=[];tf=[];subscribers=set();first={}
     start=time.monotonic();last_progress=0.;last_graph=0.;fault_at=None;stop_at=None;reason='timeout';started=False;fault_restore_at=None;fault_ros_stamp=None;near_stop_at=None;stop_ros_stamp=None
@@ -98,12 +102,13 @@ def main():
     inject=node.create_publisher(String,'/atlas_closed_loop/inject_feedback',10)
     shutdown_relay=node.create_publisher(String,'/atlas_closed_loop/test_shutdown',10)
     abort=node.create_publisher(Engage,'/atlas_closed_loop/sim/input/engage',10)
-    originals=[Path('/home/marian/Downloads')/f for f in ['finalMap_repaired.osm','map_projector_info.yaml','pointcloud_map_georeferenced.pcd']]
+    map_dir=Path(os.environ.get('ATLAS_MAP_DIR',Path.home()/'Downloads')).expanduser()
+    originals=[map_dir/f for f in ['finalMap_repaired.osm','map_projector_info.yaml','pointcloud_map_georeferenced.pcd']]
     hashes={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in originals}
     env=dict(os.environ,ROS_LOG_DIR=str(run/'ros_logs'),QT_QPA_PLATFORM='xcb',RCUTILS_COLORIZED_OUTPUT='0')
     nodes=set();alive=False;graph={};debug=[]
     with (run/'runtime.log').open('w') as log:
-      process=subprocess.Popen(['ros2','launch','atlas_closed_loop_demo','closed_loop.launch.py',f'results_dir:={run}',f'launch_rviz:={str(not args.no_rviz).lower()}',f'gated:={str(args.gated).lower()}',f'vehicle_model:={args.vehicle_model}'],stdout=log,stderr=subprocess.STDOUT,env=env,start_new_session=True)
+      process=subprocess.Popen(['ros2','launch','atlas_closed_loop_demo','closed_loop.launch.py',f'results_dir:={run}',f'launch_rviz:={str(not args.no_rviz).lower()}',f'gated:={str(args.gated).lower()}', 'record_commands:=true',f'vehicle_model:={args.vehicle_model}'],stdout=log,stderr=subprocess.STDOUT,env=env,start_new_session=True)
       try:
         while time.monotonic()-start<args.timeout and process.poll() is None:
             rclpy.spin_once(node,timeout_sec=.02)
@@ -152,6 +157,8 @@ def main():
         # Harness abort pauses integration; never counted as a controlled stop.
         engage=Engage();engage.stamp=node.get_clock().now().to_msg();engage.engage=False
         abort.publish(engage)
+        recording_result=recording_barrier(node,command_recording_client,commands)
+        (run/'command_recording.json').write_text(json.dumps(recording_result,indent=2))
         shutdown_relay.publish(String(data='measurement_complete'))
         cleanup_start=time.monotonic()
         while time.monotonic()-cleanup_start<.3:rclpy.spin_once(node,timeout_sec=.02)
@@ -296,9 +303,9 @@ def main():
     else:
         checks['controller_exclusive_command_source']=graph.get('/atlas_closed_loop/control_cmd',{}).get('publishers')==['/atlas_closed_loop/feedback_relay'] and '/atlas_closed_loop/sim/simple_planning_simulator' in graph.get('/atlas_closed_loop/control_cmd',{}).get('subscribers',[])
     checks['pinned_controller_command_origin']=graph.get('/atlas_closed_loop/controller_raw/control_cmd',{}).get('publishers')==['/atlas_closed_loop/controller']
-    if raw_commands:
-        raw_payloads={tuple(c[1:]) for c in raw_commands}
-        checks['relay_never_generates_commands']=all(tuple(c[1:]) in raw_payloads for c in commands)
+    checks['command_recording_barrier']=recording_result['passed']
+    raw_payloads={tuple(c[1:]) for c in recording_result['rows']}
+    checks['relay_never_generates_commands']=bool(commands) and all(tuple(c[1:]) in raw_payloads for c in commands)
     checks['live_feedback_topology']=all('/atlas_closed_loop/controller' in graph.get(t,{}).get('subscribers',[]) for t in ['/atlas_closed_loop/feedback/odometry','/atlas_closed_loop/feedback/steering','/atlas_closed_loop/feedback/acceleration'])
     checks['no_controller_emergency']=checks['no_controller_emergency'] and not any(d['state']==3 for d in debug)
     metrics['controller_states_observed']=sorted({d['state'] for d in debug})

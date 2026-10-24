@@ -26,7 +26,8 @@ def main():
     args = parser.parse_args()
     result_dir = Path('/tmp/atlas_map_demo_results') / time.strftime('run_%Y%m%d_%H%M%S')
     result_dir.mkdir(parents=True)
-    originals = [Path('/home/marian/Downloads') / f for f in
+    map_dir = Path(os.environ.get('ATLAS_MAP_DIR', Path.home() / 'Downloads')).expanduser()
+    originals = [map_dir / f for f in
                  ['finalMap_repaired.osm', 'pointcloud_map_georeferenced.pcd', 'map_projector_info.yaml']]
     hashes = {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in originals}
     rclpy.init()
