@@ -6,18 +6,15 @@ from nav_msgs.msg import Odometry
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
 
-
-def occupied(x, y):
-    """World geometry shared with the checked-in map: walls and central block."""
-    if x <= -1.85 or x >= 5.85 or y <= -2.85 or y >= 2.85:
-        return True
-    return 1.75 <= x <= 2.25 and -0.70 <= y <= 0.70
+from .world import occupied, rectangles
 
 
 class SyntheticLaser(Node):
     def __init__(self):
         super().__init__('synthetic_laser')
         self.pose = None
+        self.scenario = self.declare_parameter('scenario', 'open').value
+        rectangles(self.scenario)
         self.publisher = self.create_publisher(LaserScan, '/atlas_nav2/scan', 10)
         self.create_subscription(Odometry, '/atlas_nav2/odom', self.on_odom, 20)
         self.timer = self.create_timer(0.10, self.tick)
@@ -49,7 +46,7 @@ class SyntheticLaser(Node):
             while distance < scan.range_max:
                 sx = x + 0.20 * math.cos(yaw) + distance * math.cos(angle)
                 sy = y + 0.20 * math.sin(yaw) + distance * math.sin(angle)
-                if occupied(sx, sy):
+                if occupied(sx, sy, self.scenario):
                     break
                 distance += 0.04
             ranges.append(min(distance, scan.range_max))

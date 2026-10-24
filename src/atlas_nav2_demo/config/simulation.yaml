@@ -17,3 +17,4 @@ skid_steer_simulator:
     track_width: 0.60
     target_timeout_sec: 0.30
     update_rate_hz: 50.0
+    robot_radius: 0.32

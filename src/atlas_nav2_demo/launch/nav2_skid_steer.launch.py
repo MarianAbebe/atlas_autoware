@@ -13,6 +13,7 @@ def generate_launch_description():
     nav2_params = LaunchConfiguration('nav2_params')
     simulation_params = LaunchConfiguration('simulation_params')
     map_yaml = LaunchConfiguration('map')
+    scenario = LaunchConfiguration('scenario')
     nav2_nodes = [
         Node(package='nav2_map_server', executable='map_server', name='map_server',
              output='screen', parameters=[nav2_params, {'yaml_filename': map_yaml}]),
@@ -35,14 +36,16 @@ def generate_launch_description():
         Node(package='atlas_nav2_demo', executable='wheel_mixer', name='wheel_mixer',
              output='screen', parameters=[simulation_params]),
         Node(package='atlas_nav2_demo', executable='skid_steer_simulator',
-             name='skid_steer_simulator', output='screen', parameters=[simulation_params]),
+             name='skid_steer_simulator', output='screen',
+             parameters=[simulation_params, {'scenario': scenario}]),
         Node(package='atlas_nav2_demo', executable='synthetic_laser',
-             name='synthetic_laser', output='screen'),
+             name='synthetic_laser', output='screen', parameters=[{'scenario': scenario}]),
     ]
     return LaunchDescription([
         DeclareLaunchArgument('nav2_params', default_value=str(share / 'config/nav2_params.yaml')),
         DeclareLaunchArgument('simulation_params', default_value=str(share / 'config/simulation.yaml')),
         DeclareLaunchArgument('map', default_value=str(share / 'maps/synthetic_map.yaml')),
+        DeclareLaunchArgument('scenario', default_value='open'),
         *simulation_nodes,
         *nav2_nodes,
     ])

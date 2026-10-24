@@ -44,6 +44,38 @@ closed-loop simulation only; it is not evidence of obstacle avoidance or
 physical driving. The shorter open-space goal reduces VM scheduling sensitivity;
 its motion threshold is 0.7 m.
 
+## Deterministic obstacle scenarios
+
+Run the focused scenarios after building and sourcing the overlay:
+
+```bash
+ros2 run atlas_nav2_demo validate_closed_loop.py --scenario avoidable \
+  --output /tmp/atlas_nav2_avoidable
+ros2 run atlas_nav2_demo validate_closed_loop.py --scenario blocked \
+  --output /tmp/atlas_nav2_blocked
+```
+
+`avoidable` uses a 0.50 m-wide rectangle on the direct route to `(4.5, 0.0)`.
+The shared geometry is used by the map, LiDAR, collision guard, and validator;
+the validator requires LiDAR detection, non-empty local costmap obstacle cells,
+a lateral detour, at least 0.02 m footprint clearance, and goal success.
+The passing ARM64 run is `/tmp/atlas_nav2_avoidable_final`: it reached the goal
+in 14.86 s with 0.272 m minimum clearance and a local-costmap peak of 456 cells.
+
+`blocked` uses a wall connected to both map boundaries. It requires Nav2 to
+reject or fail the goal, LiDAR/costmap detection, collision clearance, and a
+zero safe command after failure. It additionally injects one simulation-only
+fresh command and requires the gate to zero it after the 0.25 s freshness limit.
+The passing ARM64 run is `/tmp/atlas_nav2_blocked_pass_2`: Nav2 returned status
+6 (aborted), the minimum clearance was 1.427 m, the costmap peak was 360 cells,
+and stale output was zeroed. Recovery behavior moved 0.306 m laterally but did
+not approach or cross the wall.
+
+The earlier obstacle attempt was invalid because it checked only the final
+rolling costmap grid, after the robot had left the obstacle, and the ideal
+simulator did not enforce collision geometry. The new tests retain full
+time-series costmap observation and prevent integration through obstacles.
+
 ## PRD alignment and remaining gaps
 
 This milestone implements Nav2 planning/control interfaces and a four-wheel

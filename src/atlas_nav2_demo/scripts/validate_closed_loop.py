@@ -24,6 +24,8 @@ from sensor_msgs.msg import JointState, LaserScan
 from std_msgs.msg import String
 from std_srvs.srv import SetBool
 from tf2_ros import Buffer, TransformListener
+from ament_index_python.packages import get_package_share_directory
+from atlas_nav2_demo.world import clearance
 
 
 class Monitor(Node):
@@ -32,6 +34,7 @@ class Monitor(Node):
         transient = QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL,
                                reliability=ReliabilityPolicy.RELIABLE)
         self.map = self.global_costmap = self.local_costmap = None
+        self.local_costmap_peak = 0
         self.odom = []
         self.nav_commands = []
         self.safe_commands = []
@@ -41,8 +44,7 @@ class Monitor(Node):
         self.create_subscription(OccupancyGrid, '/map', lambda m: setattr(self, 'map', m), transient)
         self.create_subscription(OccupancyGrid, '/global_costmap/costmap',
                                  lambda m: setattr(self, 'global_costmap', m), 10)
-        self.create_subscription(OccupancyGrid, '/local_costmap/costmap',
-                                 lambda m: setattr(self, 'local_costmap', m), 10)
+        self.create_subscription(OccupancyGrid, '/local_costmap/costmap', self.on_local_costmap, 10)
         self.create_subscription(Odometry, '/atlas_nav2/odom', self.on_odom, 50)
         self.create_subscription(Twist, '/atlas_nav2/cmd_vel_nav',
                                  lambda m: self.nav_commands.append(self.twist(m)), 50)
@@ -56,6 +58,7 @@ class Monitor(Node):
         self.tf_listener = TransformListener(self.tf_buffer, self)
         self.navigator = ActionClient(self, NavigateToPose, '/navigate_to_pose')
         self.enable = self.create_client(SetBool, '/safety_gate/enable')
+        self.nav_injector = self.create_publisher(Twist, '/atlas_nav2/cmd_vel_nav', 10)
         self.lifecycle = {name: self.create_client(GetState, f'/{name}/get_state') for name in (
             'map_server', 'planner_server', 'controller_server', 'behavior_server', 'bt_navigator')}
 
@@ -78,6 +81,14 @@ class Monitor(Node):
             self.safety.append((time.monotonic(), json.loads(msg.data)))
         except ValueError:
             self.safety.append((time.monotonic(), {'invalid_json': True}))
+
+    def on_local_costmap(self, msg):
+        self.local_costmap = msg
+        # CostmapPublisher exposes unsigned cost values through signed int8
+        # OccupancyGrid data: lethal 254 is observed as -2. Unknown is -1.
+        self.local_costmap_peak = max(
+            self.local_costmap_peak,
+            sum(value not in (0, -1) for value in msg.data))
 
 
 def spin_until(node, predicate, timeout, launch):
@@ -123,10 +134,9 @@ def stop_group(proc):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output', type=Path, required=True)
-    # This first closed-loop acceptance goal stays in open map space. Obstacle
-    # avoidance is deliberately tracked as a separate, not-yet-passing test.
-    parser.add_argument('--goal-x', type=float, default=0.0)
-    parser.add_argument('--goal-y', type=float, default=1.0)
+    parser.add_argument('--scenario', choices=('open', 'avoidable', 'blocked'), default='open')
+    parser.add_argument('--goal-x', type=float)
+    parser.add_argument('--goal-y', type=float)
     parser.add_argument('--timeout-sec', type=float, default=100.0)
     args = parser.parse_args()
     if not 30.0 <= args.timeout_sec <= 180.0:
@@ -135,7 +145,16 @@ def main():
     output.mkdir(parents=True, exist_ok=False)
     (output / 'ros_logs').mkdir()
     os.environ['ROS_LOG_DIR'] = str(output / 'ros_logs')
-    report = {'result': 'RUNNING', 'goal': [args.goal_x, args.goal_y], 'checks': {},
+    goals = {'open': (0.0, 1.0), 'avoidable': (4.5, 0.0), 'blocked': (4.5, 0.0)}
+    goal_x, goal_y = goals[args.scenario]
+    if args.goal_x is not None:
+        goal_x = args.goal_x
+    if args.goal_y is not None:
+        goal_y = args.goal_y
+    map_path = Path(get_package_share_directory('atlas_nav2_demo')) / 'maps' / f'{args.scenario}_map.yaml'
+    if args.scenario == 'open':
+        map_path = Path(get_package_share_directory('atlas_nav2_demo')) / 'maps/synthetic_map.yaml'
+    report = {'result': 'RUNNING', 'scenario': args.scenario, 'goal': [goal_x, goal_y], 'checks': {},
               'simulation_assumptions': ['ideal_no_slip_kinematics', 'identity_map_to_odom']}
     (output / 'summary.json').write_text(json.dumps(report, indent=2))
     launch = None
@@ -143,7 +162,8 @@ def main():
     log = (output / 'launch.log').open('w')
     try:
         launch = subprocess.Popen(
-            ['ros2', 'launch', 'atlas_nav2_demo', 'nav2_skid_steer.launch.py'],
+            ['ros2', 'launch', 'atlas_nav2_demo', 'nav2_skid_steer.launch.py',
+             f'scenario:={args.scenario}', f'map:={map_path}'],
             stdout=log, stderr=subprocess.STDOUT, start_new_session=True, env=os.environ.copy())
         rclpy.init()
         node = Monitor()
@@ -191,8 +211,8 @@ def main():
         goal = NavigateToPose.Goal()
         goal.pose.header.frame_id = 'map'
         goal.pose.header.stamp = node.get_clock().now().to_msg()
-        goal.pose.pose.position.x = args.goal_x
-        goal.pose.pose.position.y = args.goal_y
+        goal.pose.pose.position.x = goal_x
+        goal.pose.pose.position.y = goal_y
         goal.pose.pose.orientation.w = 1.0
         sent = node.navigator.send_goal_async(goal)
         if not spin_until(node, sent.done, 10.0, launch) or not sent.result().accepted:
@@ -206,9 +226,32 @@ def main():
             raise RuntimeError('navigation goal exceeded bounded timeout')
         result_status = result_future.result().status
         report['action_status'] = result_status
-        if result_status != GoalStatus.STATUS_SUCCEEDED:
+        if args.scenario != 'blocked' and result_status != GoalStatus.STATUS_SUCCEEDED:
             raise RuntimeError(f'navigation action did not succeed: status {result_status}')
-        report['checks']['goal_succeeded'] = True
+        if args.scenario == 'blocked':
+            if result_status == GoalStatus.STATUS_SUCCEEDED:
+                raise RuntimeError('blocked route unexpectedly succeeded')
+            report['checks']['blocked_goal_rejected_or_failed'] = True
+            before = len(node.safe_commands)
+            injected = Twist()
+            injected.linear.x = 0.1
+            node.nav_injector.publish(injected)
+            if not spin_until(node, lambda: len(node.safe_commands) > before + 5, 2.0, launch):
+                raise RuntimeError('missing gate output for stale-command check')
+            if not any(abs(v) > 0.02 for _, v, _ in node.safe_commands[before:]):
+                raise RuntimeError('gate did not forward fresh injected command')
+            time.sleep(0.35)
+            if not spin_until(node, lambda: node.safety and not node.safety[-1][1].get('command_fresh', True),
+                              2.0, launch):
+                raise RuntimeError('gate did not report stale injected command')
+            stale_index = len(node.safe_commands)
+            if not spin_until(node, lambda: len(node.safe_commands) >= stale_index + 5, 2.0, launch):
+                raise RuntimeError('missing post-stale gate samples')
+            if any(abs(v) > 1e-9 or abs(w) > 1e-9 for _, v, w in node.safe_commands[stale_index:]):
+                raise RuntimeError('stale command propagated through gate')
+            report['checks']['stale_command_zeroed'] = True
+        else:
+            report['checks']['goal_succeeded'] = True
 
         after_result = len(node.safe_commands)
         if not spin_until(node, lambda: len(node.safe_commands) >= after_result + 10, 3.0, launch):
@@ -228,11 +271,11 @@ def main():
         initial = node.odom[0]
         final = node.odom[-1]
         displacement = math.hypot(final[1] - initial[1], final[2] - initial[2])
-        goal_error = math.hypot(final[1] - args.goal_x, final[2] - args.goal_y)
+        goal_error = math.hypot(final[1] - goal_x, final[2] - goal_y)
         nonzero_nav = any(abs(v) > 0.02 or abs(w) > 0.02 for _, v, w in node.nav_commands)
         nonzero_safe = any(abs(v) > 0.02 or abs(w) > 0.02 for _, v, w in node.safe_commands)
         nonzero_wheels = any(any(abs(value) > 0.1 for value in values) for _, values in node.wheels)
-        local_obstacles = sum(value >= 99 for value in node.local_costmap.data)
+        min_clearance = min(clearance(sample[1], sample[2], 0.32, args.scenario) for sample in node.odom)
         metrics = {
             'duration_sec': time.monotonic() - started,
             'displacement_m': displacement,
@@ -243,18 +286,35 @@ def main():
             'odometry_samples': len(node.odom),
             'scan_samples': len(node.scans),
             'minimum_scan_range_m': min(value[1] for value in node.scans),
-            'local_costmap_occupied_cells': local_obstacles,
+            'local_costmap_peak_occupied_cells': node.local_costmap_peak,
+            'minimum_obstacle_clearance_m': min_clearance,
         }
         report['metrics'] = metrics
         assertions = {
             'nonzero_nav_commands': nonzero_nav,
             'nonzero_safe_commands': nonzero_safe,
             'nonzero_wheel_targets': nonzero_wheels,
-            'simulated_displacement': displacement > 0.7,
-            'goal_approach': goal_error < 0.35,
+            'simulated_displacement': (displacement > (0.7 if args.scenario == 'open' else 1.0)
+                                      if args.scenario != 'blocked' else True),
+            'goal_approach': goal_error < 0.35 if args.scenario != 'blocked' else True,
             'odometry_frames': all(sample[5:] == ('odom', 'base_link') for sample in node.odom),
             'laser_frame': all(sample[2] == 'laser' for sample in node.scans),
         }
+        if args.scenario == 'avoidable':
+            assertions.update({
+                'obstacle_seen_by_lidar': min(value[1] for value in node.scans) < 2.0,
+                'obstacle_registered_in_costmap': node.local_costmap_peak > 0,
+                'collision_clearance': min_clearance >= 0.02,
+                'lateral_detour': max(abs(sample[2]) for sample in node.odom) > 0.45,
+            })
+        if args.scenario == 'blocked':
+            assertions.update({
+                'obstacle_seen_by_lidar': min(value[1] for value in node.scans) < 2.0,
+                'obstacle_registered_in_costmap': node.local_costmap_peak > 0,
+                'collision_clearance': min_clearance >= 0.02,
+                'stopped_after_failure': all(abs(v) <= 0.01 and abs(w) <= 0.01
+                                             for _, v, w in node.safe_commands[-5:]),
+            })
         report['checks'].update(assertions)
         if not all(assertions.values()):
             raise RuntimeError('one or more closed-loop assertions failed')
