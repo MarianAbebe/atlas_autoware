@@ -19,18 +19,17 @@ or autonomous engagement.
 
 ## 1. Obtain the release source
 
-The release branch currently exists locally and has not been pushed. A team member
-must first receive it through the team's approved Git remote or a verified source
-bundle. Once available remotely:
+The release branch is available on the project remote. Clone and select it with:
 
 ```bash
-git clone <approved-atlas-repository-url> atlas_autoware
+git clone https://github.com/MarianAbebe/atlas_autoware.git atlas_autoware
 cd atlas_autoware
-git checkout handoff/native-ubuntu-validation-2026-10-25
+git checkout --track origin/handoff/native-ubuntu-validation-2026-10-25
+git status --short --branch
 ```
 
-The branch name is exact. Verify `git status --short` is clean before following
-the rest of the guide.
+The branch name is exact. Verify the status shows that branch tracking `origin`
+and no modified or untracked files before following the rest of the guide.
 
 ## 2. Install reviewed system prerequisites
 
@@ -43,6 +42,24 @@ packages declared by the pinned Autoware and Atlas manifests. Installing those
 system packages requires `sudo` and operator review; this repository does not
 run privileged installers.
 
+After installing ROS 2 Humble, the reviewed Ubuntu package command for the
+non-ROS build tools is:
+
+```bash
+sudo apt-get update
+sudo apt-get install --no-upgrade \
+  build-essential binutils-gold cmake git python3-catkin-pkg \
+  python3-colcon-common-extensions python3-rosdep python3-vcstool
+```
+
+Do not add `-y`; review the proposed package changes. Initialize rosdep only if
+`rosdep check` reports that it has not been initialized:
+
+```bash
+sudo rosdep init
+rosdep update
+```
+
 After installing ROS Humble and the standard build tools, open a new shell and
 source ROS before running preflight:
 
@@ -52,7 +69,8 @@ cd ~/atlas_autoware
 tools/native_ubuntu/preflight.sh
 ```
 
-Review the exact dependency closure command without installing anything:
+Import and verify the pinned source in section 3 before generating the dependency
+closure. Then print the exact `rosdep` command without installing anything:
 
 ```bash
 source /opt/ros/humble/setup.bash
@@ -80,6 +98,9 @@ tools/native_ubuntu/fetch_autoware.sh
 The helper checks out/imports the pinned repositories and verifies every recorded
 revision in `tools/native_ubuntu/autoware_pins.tsv`. It stops on a revision
 mismatch. It requires network access and `vcs` (`python3-vcstool`).
+
+Now run the dependency-plan command from section 2, review its printed command,
+and run that printed `rosdep install` command before starting the build.
 
 ## 4. Transfer campus map assets
 
@@ -110,7 +131,10 @@ export ATLAS_MAP_DIR="$HOME/atlas_assets"
 
 All three hashes must report `OK`. The assets are not bundled in Git. Their
 validated source files were under `/home/marian/Downloads`; they need approved
-transfer to the target machine.
+transfer to the target machine. Follow [ASSET_TRANSFER.md](ASSET_TRANSFER.md)
+for concrete `rsync`/`scp` commands and source-side plus destination-side hash
+verification. No native-Ubuntu command assumes that `/home/marian/Downloads`
+exists on the destination.
 
 ## 5. Preflight and build
 

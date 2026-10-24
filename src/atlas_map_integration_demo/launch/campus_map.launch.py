@@ -55,8 +55,8 @@ def generate_launch_description():
                 arguments=['-d', os.path.join(share, 'config', 'campus_map.rviz')],
                 condition=IfCondition(LaunchConfiguration('launch_rviz')))
     return LaunchDescription([
-        DeclareLaunchArgument('osm_path', default_value=os.path.join(os.environ.get('ATLAS_MAP_DIR', os.path.expanduser('~/Downloads')), 'finalMap_repaired.osm')),
-        DeclareLaunchArgument('pcd_path', default_value=os.path.join(os.environ.get('ATLAS_MAP_DIR', os.path.expanduser('~/Downloads')), 'pointcloud_map_georeferenced.pcd')),
-        DeclareLaunchArgument('projector_path', default_value=os.path.join(os.environ.get('ATLAS_MAP_DIR', os.path.expanduser('~/Downloads')), 'map_projector_info.yaml')),
+        DeclareLaunchArgument('osm_path', default_value=os.path.join(os.environ.get('ATLAS_MAP_DIR', os.path.expanduser('~/atlas_assets')), 'finalMap_repaired.osm')),
+        DeclareLaunchArgument('pcd_path', default_value=os.path.join(os.environ.get('ATLAS_MAP_DIR', os.path.expanduser('~/atlas_assets')), 'pointcloud_map_georeferenced.pcd')),
+        DeclareLaunchArgument('projector_path', default_value=os.path.join(os.environ.get('ATLAS_MAP_DIR', os.path.expanduser('~/atlas_assets')), 'map_projector_info.yaml')),
         DeclareLaunchArgument('results_dir', default_value='/tmp/atlas_map_demo_results'),
         DeclareLaunchArgument('launch_rviz', default_value='true'), container, probe, rviz])

@@ -11,8 +11,8 @@ for atlas_overlay in /tmp/atlas_deskew_deps_install /tmp/atlas_ndt_install /tmp/
     source "$atlas_overlay/setup.bash"
   fi
 done
-export CMAKE_BUILD_PARALLEL_LEVEL=2
-export MAKEFLAGS=-j2
+export CMAKE_BUILD_PARALLEL_LEVEL="${CMAKE_BUILD_PARALLEL_LEVEL:-2}"
+export MAKEFLAGS="${MAKEFLAGS:--j$CMAKE_BUILD_PARALLEL_LEVEL}"
 python3 - <<'PY'
 import json
 import os

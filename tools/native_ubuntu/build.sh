@@ -4,11 +4,16 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$repo_root"
 export ATLAS_REPO_ROOT="$repo_root"
 export ATLAS_AUTOWARE_ROOT="${ATLAS_AUTOWARE_ROOT:-$(cd "$repo_root/.." && pwd)/references/autoware}"
-export ATLAS_MAP_DIR="${ATLAS_MAP_DIR:-$HOME/Downloads}"
+export ATLAS_MAP_DIR="${ATLAS_MAP_DIR:-$HOME/atlas_assets}"
 
 "$repo_root/tools/native_ubuntu/preflight.sh"
 "$repo_root/tools/native_ubuntu/fetch_autoware.sh"
-source /opt/ros/humble/setup.bash
+had_nounset=0
+case $- in *u*) had_nounset=1 ;; esac
+set +u
+if source /opt/ros/humble/setup.bash; then source_status=0; else source_status=$?; fi
+if (( had_nounset )); then set -u; else set +u; fi
+(( source_status == 0 )) || { echo "Failed to source ROS 2 Humble" >&2; exit 7; }
 export ENABLE_AGNOCAST=0 CMAKE_BUILD_PARALLEL_LEVEL=1 MAKEFLAGS=-j1
 
 # Build dependencies in the order expected by each package's established workflow.

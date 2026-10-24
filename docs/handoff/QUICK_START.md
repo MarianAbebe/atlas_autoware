@@ -12,8 +12,8 @@ VM. They intentionally initialize localization without engaging the simulator.
 - Ubuntu 22.04 ARM64 under UTM on macOS
 - ROS 2 Humble, default Fast DDS RMW
 - Six virtual CPUs, approximately 4 GiB RAM
-- Repository: `/home/marian/roam/atlas_autoware`
-- Pinned Autoware source: `/home/marian/roam/references/autoware`
+- Repository: `~/roam/atlas_autoware`
+- Pinned Autoware source: `~/roam/references/autoware` (or set by `ATLAS_AUTOWARE_ROOT`)
 - ROS domain: 86, set by `environment.sh`
 
 A clean-clone build on another machine has not been validated. See
@@ -21,21 +21,24 @@ A clean-clone build on another machine has not been validated. See
 
 ## 2. Required local inputs
 
-The current launch requires these exact map assets:
+The current launch requires these exact map assets. They are not bundled in Git.
+Transfer them to a local directory (e.g., `~/atlas_assets`) and export
+`ATLAS_MAP_DIR`.
 
-| Path | SHA-256 |
+| File | SHA-256 |
 |---|---|
-| `/home/marian/Downloads/finalMap_repaired.osm` | `1e9360ea62b709271007d27672120b3d0040ebabc6667d646de68734b1702fee` |
-| `/home/marian/Downloads/map_projector_info.yaml` | `614af74d6aaefe052c435338b585797a451e7922efc290329374c2abd2b8992d` |
-| `/home/marian/Downloads/pointcloud_map_georeferenced.pcd` | `6121b6bf8df4324ab42286822f0e6f00c67ecc10daecf84d180129a6069ef9a3` |
+| `finalMap_repaired.osm` | `1e9360ea62b709271007d27672120b3d0040ebabc6667d646de68734b1702fee` |
+| `map_projector_info.yaml` | `614af74d6aaefe052c435338b585797a451e7922efc290329374c2abd2b8992d` |
+| `pointcloud_map_georeferenced.pcd` | `6121b6bf8df4324ab42286822f0e6f00c67ecc10daecf84d180129a6069ef9a3` |
 
 Verify without modifying them:
 
 ```bash
+export ATLAS_MAP_DIR="$HOME/atlas_assets"
 sha256sum \
-  /home/marian/Downloads/finalMap_repaired.osm \
-  /home/marian/Downloads/map_projector_info.yaml \
-  /home/marian/Downloads/pointcloud_map_georeferenced.pcd
+  "$ATLAS_MAP_DIR/finalMap_repaired.osm" \
+  "$ATLAS_MAP_DIR/map_projector_info.yaml" \
+  "$ATLAS_MAP_DIR/pointcloud_map_georeferenced.pcd"
 ```
 
 The build also requires the existing `.closed_loop_cache`, `.obstacle_cache`,
@@ -107,10 +110,11 @@ Use the clear scene for the stationary handoff:
 RESULTS=/tmp/atlas_handoff_stationary_$(date -u +%Y%m%d_%H%M%S)
 echo "$RESULTS"
 ros2 launch atlas_full_stack_demo full_stack.launch.py \
-  obstacle:=false results_dir:="$RESULTS"
+  obstacle:=false request_engagement:=false results_dir:="$RESULTS"
 ```
 
-The simulator starts disengaged. Do not run `manual_start.py`; that helper
+The explicit `request_engagement:=false` keeps the simulator disengaged. Do not
+omit it. Do not run `manual_start.py`; that helper
 publishes to `/atlas_loc/sim/input/engage` after initialization.
 
 ## 7. Initialize localization without engagement

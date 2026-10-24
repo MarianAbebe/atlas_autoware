@@ -6,7 +6,9 @@ source /opt/ros/humble/setup.bash
 source .closed_loop_cache/install/setup.bash
 source .closed_loop_cache/demo_install/setup.bash
 if [[ -f .obstacle_cache/install/setup.bash ]]; then source .obstacle_cache/install/setup.bash; fi
-export ENABLE_AGNOCAST=0 CMAKE_BUILD_PARALLEL_LEVEL=2 MAKEFLAGS=-j2
+export ENABLE_AGNOCAST=0
+export CMAKE_BUILD_PARALLEL_LEVEL="${CMAKE_BUILD_PARALLEL_LEVEL:-2}"
+export MAKEFLAGS="${MAKEFLAGS:--j$CMAKE_BUILD_PARALLEL_LEVEL}"
 python3 src/atlas_obstacle_stopping_demo/scripts/audit_dependencies.py --build
 if [[ -f .obstacle_cache/install/setup.bash ]]; then source .obstacle_cache/install/setup.bash; fi
 mkdir -p .obstacle_cache

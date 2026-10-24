@@ -175,8 +175,11 @@ def main():
     (run / "ros_logs").mkdir()
     env = dict(os.environ, ATLAS_REPO_ROOT=str(root),
                ATLAS_AUTOWARE_ROOT=os.environ.get("ATLAS_AUTOWARE_ROOT", str(root.parent/"references/autoware")),
-               ATLAS_MAP_DIR=os.environ.get("ATLAS_MAP_DIR", str(Path.home()/"Downloads")),
+               ATLAS_MAP_DIR=os.environ.get("ATLAS_MAP_DIR", str(Path.home()/"atlas_assets")),
                ROS_LOG_DIR=str(run/"ros_logs"), PYTHONDONTWRITEBYTECODE="1")
+    # rclpy is initialized in this process, not only in the child processes.
+    # Keep its logs with the rest of this run's evidence as documented.
+    os.environ["ROS_LOG_DIR"] = env["ROS_LOG_DIR"]
     report = {"result": "RUNNING", "output": str(run), "engagement_requested": False,
               "hold_sec": args.hold_sec, "phases": {}, "faults": []}
     (run / "summary.json").write_text(json.dumps(report, indent=2))
@@ -243,10 +246,13 @@ def main():
                                        cwd=root, env=env, stdout=init_log, stderr=subprocess.STDOUT,
                                        start_new_session=True)
         children.append(initializer)
-        while initializer.poll() is None:
+        initializer_deadline = time.monotonic() + 60
+        while initializer.poll() is None and time.monotonic() < initializer_deadline:
             rclpy.spin_once(node, timeout_sec=0.05)
             if launch.poll() is not None:
                 raise RuntimeError("Full-stack launch exited during localization initialization")
+        if initializer.poll() is None:
+            raise Inconclusive("Localization-only initializer did not finish within 60 seconds")
         if initializer.returncode:
             raise RuntimeError("Localization-only initializer failed; see localization_initialization.log")
         children.remove(initializer)

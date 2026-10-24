@@ -8,7 +8,9 @@ source .closed_loop_cache/demo_install/setup.bash
 source .obstacle_cache/install/setup.bash
 source .obstacle_cache/demo_install/setup.bash
 if [[ -f .perception_cache/install/setup.bash ]]; then source .perception_cache/install/setup.bash; fi
-export ENABLE_AGNOCAST=0 CMAKE_BUILD_PARALLEL_LEVEL=2 MAKEFLAGS=-j2
+export ENABLE_AGNOCAST=0
+export CMAKE_BUILD_PARALLEL_LEVEL="${CMAKE_BUILD_PARALLEL_LEVEL:-2}"
+export MAKEFLAGS="${MAKEFLAGS:--j$CMAKE_BUILD_PARALLEL_LEVEL}"
 python3 src/atlas_perception_planning_demo/scripts/audit_dependencies.py --build
 source .perception_cache/install/setup.bash
 python3 src/atlas_closed_loop_demo/scripts/colcon_sync_io.py --log-base .perception_cache/atlas_log build \

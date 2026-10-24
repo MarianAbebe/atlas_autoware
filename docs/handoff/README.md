@@ -33,6 +33,10 @@ also contained a smaller event that brought the bag-observable NDT age to about
 - [Repository audit](REPOSITORY_AUDIT.md): portability and reproducibility blockers.
 - [Native Ubuntu testing](NATIVE_UBUNTU_TESTING.md): pinned source, external map
   assets, build, no-graph smoke test and disengaged stationary validation.
+- [Map asset transfer](ASSET_TRANSFER.md): exact transfer and checksum workflow
+  for the three external campus-map files.
+- [PRD v0.2 traceability](PRD_V0_2_TRACEABILITY.md): explicit separation of the
+  current Autoware prototype from the target hardware and autonomy architecture.
 - [Provisional requirements](PDR_ALIGNED_REQUIREMENTS.md): evidence-backed
   capability matrix pending the official ROAM PDR.
 

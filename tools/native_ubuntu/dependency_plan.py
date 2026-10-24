@@ -12,8 +12,9 @@ from catkin_pkg.package import parse_package
 def main():
     root = Path(__file__).resolve().parents[2]
     autoware = Path(os.environ.get("ATLAS_AUTOWARE_ROOT", root.parent / "references/autoware"))
-    bases = [autoware / "src/core", autoware / "src/universe", autoware / "src/external",
-             root / "src"]
+    # The 1.9.0 manifest nests external repositories below core/universe; there
+    # is no top-level src/external directory in the pinned checkout.
+    bases = [autoware / "src/core", autoware / "src/universe", root / "src"]
     if not all(p.is_dir() for p in bases):
         raise SystemExit("Pinned Autoware source or Atlas src is missing; run fetch_autoware.sh first.")
     rows = subprocess.check_output(["colcon", "list", "--base-paths", *map(str, bases)], text=True)
@@ -30,7 +31,7 @@ def main():
         "autoware_ground_filter", "autoware_euclidean_cluster_object_detector",
         "atlas_full_stack_demo", "atlas_localization_closed_loop_demo", "atlas_obstacle_stopping_demo",
         "atlas_perception_planning_demo", "atlas_closed_loop_demo", "atlas_sensor_kit",
-        "atlas_distortion_corrector_test", "atlas_lidar_perception_test", "atlas_map_integration_demo",
+        "atlas_distortion_corrector_test", "atlas_map_integration_demo",
     }
     missing = sorted(roots - packages.keys())
     if missing:

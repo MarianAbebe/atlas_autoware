@@ -12,8 +12,8 @@ export ENABLE_AGNOCAST=0
 for atlas_overlay in /tmp/atlas_map_upstream_install /tmp/atlas_map_demo_install /tmp/atlas_trajectory_upstream_install /tmp/atlas_closed_loop_upstream_install "$atlas_root/.closed_loop_cache/install"; do
   if [[ -f "$atlas_overlay/setup.bash" ]]; then source "$atlas_overlay/setup.bash"; fi
 done
-export CMAKE_BUILD_PARALLEL_LEVEL=2
-export MAKEFLAGS=-j2
+export CMAKE_BUILD_PARALLEL_LEVEL="${CMAKE_BUILD_PARALLEL_LEVEL:-2}"
+export MAKEFLAGS="${MAKEFLAGS:--j$CMAKE_BUILD_PARALLEL_LEVEL}"
 python3 - <<'PY'
 import json
 import os

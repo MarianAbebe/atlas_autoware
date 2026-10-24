@@ -1,5 +1,26 @@
 # Validation status at handoff
 
+## Handoff audit run on 2026-10-24
+
+The repaired native-Ubuntu workflow was exercised on the existing Ubuntu 22.04
+ARM64 reference VM, not on the target x86_64 laptop. Evidence is under
+`/tmp/atlas_native_handoff_20261024_run2`; the authoritative result is
+`summary.json` and logs are under its `ros_logs` directory.
+
+- Map manifest: all three external assets matched their recorded SHA-256 values.
+- Full-stack incremental build: PASS with one compiler job; four static-object
+  and three scheduler-telemetry tests passed.
+- No-graph smoke test: PASS after refreshing the installed overlay.
+- Disengaged stationary validation: PASS for 120 seconds without RViz.
+- Engagement requests observed: 0; simulator maximum speed and displacement: 0.
+- Both watchdogs ended armed, unlatched, fresh, and with no health violations.
+- Maximum receipt gaps: NDT 139.415 ms and EKF 45.692 ms, below the unchanged
+  300 ms contract. No scene scan was skipped during the observation window.
+
+This result verifies the updated runner on the reference ARM64 VM only. It does
+not close the clean-clone or native x86_64 validation requirement and does not
+demonstrate autonomous driving.
+
 ## Latest synchronized stationary run
 
 - Bag: `/tmp/atlas_stability_20261023_213504/timing_bag`

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -uo pipefail
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-map_dir="${ATLAS_MAP_DIR:-$HOME/Downloads}"
+map_dir="${ATLAS_MAP_DIR:-$HOME/atlas_assets}"
 ref_root="${ATLAS_AUTOWARE_ROOT:-$(cd "$repo_root/.." && pwd)/references/autoware}"
 errors=0
 warnings=0
@@ -26,8 +26,13 @@ free_gib=$((free_kib / 1048576))
 (( $(nproc) >= 6 )) && ok "CPUs $(nproc)" || warn "Only $(nproc) CPUs; builds are sequential and will take longer"
 
 if [[ -f /opt/ros/humble/setup.bash ]]; then
+  had_nounset=0
+  case $- in *u*) had_nounset=1 ;; esac
+  set +u
   # shellcheck disable=SC1091
-  source /opt/ros/humble/setup.bash
+  if source /opt/ros/humble/setup.bash; then source_status=0; else source_status=$?; fi
+  if (( had_nounset )); then set -u; else set +u; fi
+  (( source_status == 0 )) || fail "ROS 2 Humble setup failed"
   command -v ros2 >/dev/null && ok "ROS 2 Humble" || fail "ROS setup exists but ros2 is unavailable"
 else fail "ROS 2 Humble not installed at /opt/ros/humble"; fi
 for bin in git python3 colcon rosdep vcs cmake; do command -v "$bin" >/dev/null 2>&1 && ok "$bin: $(command -v "$bin")" || fail "$bin not installed"; done
