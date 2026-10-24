@@ -1,0 +1,19 @@
+safety_gate:
+  ros__parameters:
+    command_timeout_sec: 0.25
+    max_linear_velocity: 0.55
+    max_angular_velocity: 1.20
+
+wheel_mixer:
+  ros__parameters:
+    # Provisional simulation geometry, configurable and not measured Atlas data.
+    wheel_radius: 0.15
+    track_width: 0.60
+
+skid_steer_simulator:
+  ros__parameters:
+    # Must match the mixer. This is an ideal no-slip kinematic model.
+    wheel_radius: 0.15
+    track_width: 0.60
+    target_timeout_sec: 0.30
+    update_rate_hz: 50.0

@@ -28,6 +28,7 @@ __pycache__/
 /.perception_cache/
 /.localization_cache/
 /.full_stack_cache/
+/.nav2_cache/
 
 # Raw rosbag and scheduler captures.
 *.db3
