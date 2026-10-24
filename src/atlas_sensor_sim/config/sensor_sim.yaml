@@ -1,0 +1,33 @@
+atlas_sensor_simulator:
+  ros__parameters:
+    namespace: /atlas/sensors
+    seed: 42
+    lidar_rate_hz: 5.0
+    imu_rate_hz: 50.0
+    gnss_rate_hz: 5.0
+    camera_rate_hz: 10.0
+    wheel_rate_hz: 30.0
+    lidar_range_m: 12.0
+    lidar_noise_m: 0.0
+    imu_noise: 0.0
+    imu_bias_rad_s: 0.0
+    gnss_noise_m: 0.0
+    gnss_dropout_probability: 0.0
+    lidar_dropout: false
+    camera_frame_loss_probability: 0.0
+    encoder_noise_rad_s: 0.0
+    timestamp_offset_sec: 0.0
+    timestamp_jitter_sec: 0.0
+    latitude_reference_deg: 37.4275 # provisional, configurable
+    longitude_reference_deg: -122.1697 # provisional, configurable
+    image_width: 160
+    image_height: 120
+    camera_fx_px: 120.0
+    camera_baseline_m: 0.12 # provisional
+    wheel_radius_m: 0.15 # provisional
+    track_width_m: 0.60 # provisional
+    encoder_resolution: 2048 # provisional
+atlas_sensor_health_monitor:
+  ros__parameters:
+    namespace: /atlas/sensors
+    timeout_sec: 1.0

@@ -1,0 +1,3 @@
+#!/usr/bin/env python3
+from atlas_sensor_sim.health import main
+main()

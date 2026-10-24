@@ -1,0 +1,13 @@
+cmake_minimum_required(VERSION 3.8)
+project(atlas_sensor_sim)
+find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
+# Source is already syntax-checked; skip compileall to keep low-RAM CI bounded.
+ament_python_install_package(${PROJECT_NAME} SKIP_COMPILE)
+install(PROGRAMS scripts/sensor_simulator scripts/sensor_health_monitor scripts/validate_sensor_stack.py DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY launch config DESTINATION share/${PROJECT_NAME})
+if(BUILD_TESTING)
+  find_package(ament_cmake_pytest REQUIRED)
+  ament_add_pytest_test(sensor_sim_unit_tests test TIMEOUT 30)
+endif()
+ament_package()

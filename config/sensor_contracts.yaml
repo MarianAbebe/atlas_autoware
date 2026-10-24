@@ -1,0 +1,14 @@
+version: 0.1
+coordinate_convention: "REP-103 SI units; map ENU (x east, y north, z up); base_link x forward/y left/z up; optical x right/y down/z forward. REP-105 frame tree requires calibrated static base_link->sensor transforms."
+timestamp_convention: "ROS clock acquisition timestamp; offsets/jitter are test faults. Measurement headers are never wall-clock strings."
+topics:
+  - {topic: /atlas/sensors/lidar/points, type: sensor_msgs/msg/PointCloud2, frame: lidar_link, rate_hz: 5, required: true, units: m}
+  - {topic: /atlas/sensors/imu/data, type: sensor_msgs/msg/Imu, frame: imu_link, rate_hz: 50, required: true, units: rad/s_and_m/s2}
+  - {topic: /atlas/sensors/gnss/fix, type: sensor_msgs/msg/NavSatFix, frame: gnss_link, rate_hz: 5, required: optional, units: degrees_m}
+  - {topic: /atlas/sensors/wheel_states, type: sensor_msgs/msg/JointState, frame: base_link, rate_hz: 30, required: true, units: rad_rad/s}
+  - {topic: /atlas/sensors/stereo/left/image_raw, type: sensor_msgs/msg/Image, frame: stereo_left_optical_frame, rate_hz: 10, required: optional, units: mono8}
+  - {topic: /atlas/sensors/stereo/right/image_raw, type: sensor_msgs/msg/Image, frame: stereo_right_optical_frame, rate_hz: 10, required: optional, units: mono8}
+  - {topic: /atlas/sensors/stereo/left/camera_info, type: sensor_msgs/msg/CameraInfo, frame: stereo_left_optical_frame, rate_hz: 10, required: optional, units: pixels_m}
+  - {topic: /atlas/sensors/stereo/right/camera_info, type: sensor_msgs/msg/CameraInfo, frame: stereo_right_optical_frame, rate_hz: 10, required: optional, units: pixels_m}
+  - {topic: /atlas/sensors/evaluation/ground_truth, type: geometry_msgs/msg/PoseStamped, frame: map, rate_hz: 20, required: false, units: m_rad}
+calibration: "camera fx=120 px and baseline=0.12 m; wheel radius=0.15 m and track=0.60 m are provisional defaults, not hardware specifications."
