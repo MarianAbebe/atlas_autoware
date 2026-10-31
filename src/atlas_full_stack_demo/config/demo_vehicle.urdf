@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+  Visualization-only copy of the link/visual geometry from Autoware 1.9.0
+  autoware_sample_vehicle_description/urdf/vehicle.xacro. The mesh is resolved
+  by the installed autoware_sample_vehicle_description package. This generic
+  Lexus sample is not an Atlas chassis model and is not used by simulation.
+-->
+<robot name="atlas_demo_sample_vehicle">
+  <link name="base_link">
+    <visual>
+      <origin xyz="1.395 0 0" rpy="1.57079632679 0 3.14159265359"/>
+      <geometry>
+        <mesh filename="package://autoware_sample_vehicle_description/mesh/lexus.dae" scale="1 1 1"/>
+      </geometry>
+      <material name="sample_vehicle">
+        <color rgba="0.72 0.78 0.84 1.0"/>
+      </material>
+    </visual>
+  </link>
+</robot>

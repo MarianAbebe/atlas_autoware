@@ -1,0 +1,158 @@
+# Low-load demonstration view for the existing full-stack simulation.
+# Campus lanelet markers provide the map context; the million-point campus PCD
+# is intentionally omitted. Obstacle clusters are shown as the detector output.
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Map grid
+      Enabled: true
+      Cell Size: 5
+      Plane Cell Count: 40
+      Reference Frame: map
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Campus lanelet map
+      Enabled: true
+      Topic:
+        Value: /atlas_map_demo/road_markers
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/RobotModel
+      Name: Ego sample vehicle (visual stand-in)
+      Enabled: true
+      Description Source: Topic
+      Description Topic:
+        Value: /robot_description
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Depth: 1
+      Visual Enabled: true
+      Collision Enabled: false
+      TF Prefix: ""
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Live synthetic LiDAR
+      Enabled: true
+      Topic:
+        Value: /atlas_loc/lidar/raw
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+      Style: Points
+      Size (Pixels): 2
+      Color Transformer: FlatColor
+      Color: 30; 190; 255
+      Position Transformer: XYZ
+      Decay Time: 0
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Detected obstacle clusters
+      Enabled: true
+      Topic:
+        Value: /atlas_loc/clusters
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+      Style: Points
+      Size (Pixels): 4
+      Color Transformer: RGB8
+      Position Transformer: XYZ
+      Decay Time: 0
+    - Class: rviz_default_plugins/Path
+      Name: Selected campus route
+      Enabled: true
+      Buffer Length: 1
+      Color: 100; 140; 255
+      Line Style: Lines
+      Line Width: 0.12
+      Pose Style: None
+      Topic:
+        Value: /atlas_loc/route_path
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/Path
+      Name: Planner trajectory
+      Enabled: true
+      Buffer Length: 1
+      Color: 40; 255; 100
+      Line Style: Lines
+      Line Width: 0.18
+      Pose Style: None
+      Topic:
+        Value: /atlas_loc/trajectory_visualization
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Route start and goal
+      Enabled: true
+      Namespaces:
+        route_endpoints: true
+        labels: false
+      Topic:
+        Value: /atlas_loc/markers
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/Odometry
+      Name: EKF vehicle pose
+      Enabled: true
+      Keep: 1
+      Shape:
+        Alpha: 1
+        Color: 255; 170; 0
+        Value: Arrow
+      Topic:
+        Value: /atlas_loc/ekf/ekf_odom
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/Axes
+      Name: base_link
+      Enabled: true
+      Length: 1.2
+      Radius: 0.06
+      Reference Frame: base_link
+    - Class: rviz_default_plugins/TF
+      Name: TF tree (enable for troubleshooting)
+      Enabled: false
+  Enabled: true
+  Global Options:
+    Background Color: 35; 35; 35
+    Fixed Frame: map
+    Frame Rate: 15
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 65
+      Focal Point:
+        X: 49
+        Y: 69
+        Z: 0
+      Name: Current View
+      Near Clip Distance: 0.1
+      Pitch: 0.85
+      Target Frame: map
+      Yaw: 1.57
+      Value: Orbit (rviz)
+    Saved: ~
+Window Geometry:
+  Height: 800
+  Width: 1280

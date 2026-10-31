@@ -1,0 +1,153 @@
+#!/usr/bin/env python3
+"""Record FAST-LIO raw odometry, pose-only shadow, diagnostics, and evaluation truth."""
+import argparse
+import json
+import math
+from pathlib import Path
+import time
+
+import rclpy
+from diagnostic_msgs.msg import DiagnosticArray
+from geometry_msgs.msg import PoseStamped
+from nav_msgs.msg import Odometry
+from rclpy.node import Node
+from rclpy.qos import DurabilityPolicy, QoSProfile, ReliabilityPolicy
+
+from atlas_lio_integration.pose_shadow_analysis import diagnostic_level_to_int
+
+
+def _stamp(value):
+    return {'sec': int(value.sec), 'nanosec': int(value.nanosec)}
+
+
+def _pose(value):
+    return {
+        'position': {'x': value.position.x, 'y': value.position.y, 'z': value.position.z},
+        'orientation': {'x': value.orientation.x, 'y': value.orientation.y,
+                        'z': value.orientation.z, 'w': value.orientation.w},
+    }
+
+
+class EvidenceRecorder(Node):
+    def __init__(self, output_dir):
+        super().__init__('atlas_pose_shadow_evidence_recorder')
+        self.output_dir = Path(output_dir)
+        self.paths = {
+            'raw': self.output_dir / 'raw_estimator_odometry.jsonl',
+            'shadow': self.output_dir / 'shadow_pose.jsonl',
+            'diagnostics': self.output_dir / 'shadow_pose_diagnostics.jsonl',
+            'truth': self.output_dir / 'ground_truth.jsonl',
+        }
+        for path in self.paths.values():
+            path.touch(exist_ok=False)
+        qos = QoSProfile(depth=100, reliability=ReliabilityPolicy.RELIABLE,
+                         durability=DurabilityPolicy.VOLATILE)
+        self.create_subscription(Odometry, '/atlas/lio/odometry', self.raw, qos)
+        self.create_subscription(PoseStamped, '/atlas/lio/shadow/pose', self.shadow, qos)
+        self.create_subscription(DiagnosticArray, '/atlas/lio/shadow/pose_diagnostics',
+                                 self.diagnostics, qos)
+        self.create_subscription(PoseStamped, '/atlas/sensors/evaluation/ground_truth',
+                                 self.truth, qos)
+        self.started_monotonic_ns = time.monotonic_ns()
+        self.counts = {name: 0 for name in self.paths}
+        self.metadata = {
+            'clock_domains': {
+                'header_stamp': 'ROS time from message header',
+                'receipt_monotonic_ns': 'recorder process monotonic clock',
+            },
+            'topics': {
+                'raw': '/atlas/lio/odometry',
+                'shadow': '/atlas/lio/shadow/pose',
+                'diagnostics': '/atlas/lio/shadow/pose_diagnostics',
+                'ground_truth': '/atlas/sensors/evaluation/ground_truth',
+            },
+            'qos': 'reliable, volatile, depth 100',
+        }
+
+    def _write(self, stream, record):
+        record['receipt_monotonic_ns'] = time.monotonic_ns()
+        with self.paths[stream].open('a', encoding='utf-8') as output:
+            output.write(json.dumps(record, allow_nan=True, separators=(',', ':')) + '\n')
+        self.counts[stream] += 1
+
+    def raw(self, msg):
+        # Twist/covariance are intentionally not read: FAST-LIO's wrapper does
+        # not provide valid fields for those portions of nav_msgs/Odometry.
+        self._write('raw', {
+            'message_type': 'nav_msgs/msg/Odometry',
+            'stamp': _stamp(msg.header.stamp),
+            'frame_id': msg.header.frame_id,
+            'child_frame_id': msg.child_frame_id,
+            'pose': _pose(msg.pose.pose),
+        })
+
+    def shadow(self, msg):
+        self._write('shadow', {
+            'message_type': 'geometry_msgs/msg/PoseStamped',
+            'has_twist': False,
+            'has_covariance': False,
+            'stamp': _stamp(msg.header.stamp),
+            'frame_id': msg.header.frame_id,
+            'pose': _pose(msg.pose),
+        })
+
+    def diagnostics(self, msg):
+        statuses = []
+        for status in msg.status:
+            statuses.append({
+                'name': status.name,
+                'level': diagnostic_level_to_int(status.level),
+                'message': status.message,
+                'values': {value.key: value.value for value in status.values},
+            })
+        self._write('diagnostics', {
+            'header_stamp': _stamp(msg.header.stamp),
+            'status': statuses,
+        })
+
+    def truth(self, msg):
+        self._write('truth', {
+            'message_type': 'geometry_msgs/msg/PoseStamped',
+            'stamp': _stamp(msg.header.stamp),
+            'frame_id': msg.header.frame_id,
+            'pose': _pose(msg.pose),
+        })
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output-dir', required=True, type=Path)
+    parser.add_argument('--duration-sec', type=float, default=30.0)
+    args = parser.parse_args(argv)
+    if not math.isfinite(args.duration_sec) or args.duration_sec <= 0:
+        parser.error('--duration-sec must be finite and positive')
+    out = args.output_dir.expanduser().resolve()
+    try:
+        out.mkdir(parents=True, exist_ok=False)
+    except FileExistsError:
+        parser.error('output directory already exists; choose a unique path')
+    rclpy.init()
+    node = EvidenceRecorder(out)
+    reason = 'duration_elapsed'
+    try:
+        deadline = time.monotonic() + args.duration_sec
+        while time.monotonic() < deadline and rclpy.ok():
+            rclpy.spin_once(node, timeout_sec=min(0.05, max(0.0, deadline-time.monotonic())))
+    except KeyboardInterrupt:
+        reason = 'interrupted'
+    finally:
+        node.metadata.update({
+            'result': reason,
+            'duration_sec': args.duration_sec,
+            'started_monotonic_ns': node.started_monotonic_ns,
+            'finished_monotonic_ns': time.monotonic_ns(),
+            'message_counts': node.counts,
+        })
+        (out / 'capture_metadata.json').write_text(json.dumps(node.metadata, indent=2) + '\n')
+        node.destroy_node()
+        rclpy.try_shutdown()
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

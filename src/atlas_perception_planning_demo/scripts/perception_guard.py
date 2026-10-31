@@ -21,7 +21,9 @@ def stamp(s):
 def sample_health(samples, names, ros_now, mono_now):
     return {name: {'source_stamp': samples[name][0] if name in samples else None,
                    'stamp_age_sec': ros_now-samples[name][0] if name in samples else None,
-                   'receipt_age_sec': mono_now-samples[name][1] if name in samples else None}
+                   'stamp_age_at_receipt_sec': samples[name][3] if name in samples else None,
+                   'receipt_age_sec': mono_now-samples[name][1] if name in samples else None,
+                   'receipt_gap_sec': samples[name][2] if name in samples else None}
             for name in names}
 
 
@@ -41,6 +43,8 @@ class Guard(Node):
         self.input_health = {}
         self.fault_health = None
         self.last_tick = None
+        self.last_tick_duration = None
+        self.last_tick_gap = None
         self.fault_tick_gap = None
         self.shutdown_requested = False
         self.pub = self.create_publisher(ManualOperatorHeartbeat, 'gate/input/external_emergency_stop_heartbeat', 10)
@@ -57,11 +61,15 @@ class Guard(Node):
         self.create_timer(0.02, self.tick)
 
     def receive(self, name, source_stamp):
-        self.samples[name] = (stamp(source_stamp), time.monotonic())
+        mono=time.monotonic();source=stamp(source_stamp);ros_now=self.get_clock().now().nanoseconds*1e-9
+        previous=self.samples.get(name)
+        self.samples[name] = (source, mono, None if previous is None else mono-previous[1], ros_now-source)
 
     def base_status(self, msg):
         self.base = json.loads(msg.data)
-        self.samples['base_status'] = (self.base['stamp'], time.monotonic())
+        mono=time.monotonic();source=float(self.base['stamp']);ros_now=self.get_clock().now().nanoseconds*1e-9
+        previous=self.samples.get('base_status')
+        self.samples['base_status']=(source,mono,None if previous is None else mono-previous[1],ros_now-source)
 
     def heartbeat(self, msg):
         if msg.ready:
@@ -107,6 +115,7 @@ class Guard(Node):
         tick_now = time.monotonic()
         tick_gap = tick_now-self.last_tick if self.last_tick is not None else None
         self.last_tick = tick_now
+        self.last_tick_gap = tick_gap
         stale = self.stale()
         now = self.get_clock().now()
         if self.ready and stale and not self.bad:
@@ -127,11 +136,15 @@ class Guard(Node):
                 msg.ready = True
                 self.pub.publish(msg)
         msg = String()
+        self.last_tick_duration = time.monotonic()-tick_now
         msg.data = json.dumps({'stamp': now.nanoseconds*1e-9, 'armed': self.ready and not self.bad,
                                'latched': self.bad, 'fault_stamp': self.fault_at,
                                'fault_inputs': self.fault_inputs, 'currently_stale': stale,
                                'fault_input_health': self.fault_health,
-                               'fault_tick_gap_sec': self.fault_tick_gap})
+                               'fault_tick_gap_sec': self.fault_tick_gap,
+                               'instrumentation': {'tick_schedule_gap_sec': tick_gap,
+                                                   'tick_work_sec': self.last_tick_duration,
+                                                   'inputs': self.input_health}})
         self.status.publish(msg)
 
 

@@ -1,0 +1,4 @@
+#!/usr/bin/env python3
+from atlas_lio_integration.pose_shadow import main
+
+main()

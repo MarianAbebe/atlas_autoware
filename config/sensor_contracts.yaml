@@ -3,7 +3,7 @@ coordinate_convention: "REP-103 SI units; map ENU (x east, y north, z up); base_
 timestamp_convention: "ROS clock acquisition timestamp; offsets/jitter are test faults. Measurement headers are never wall-clock strings."
 topics:
   - {topic: /atlas/sensors/lidar/points, type: sensor_msgs/msg/PointCloud2, frame: lidar_link, rate_hz: 10, required: true, units: "x,y,z:m; intensity:unitless; time:s_from_scan_start"}
-  - {topic: /atlas/sensors/imu/data, type: sensor_msgs/msg/Imu, frame: imu_link, rate_hz: 50, required: true, units: rad/s_and_m/s2}
+  - {topic: /atlas/sensors/imu/data, type: sensor_msgs/msg/Imu, frame: imu_link, rate_hz: 200, required: true, units: rad/s_and_m/s2}
   - {topic: /atlas/sensors/gnss/fix, type: sensor_msgs/msg/NavSatFix, frame: gnss_link, rate_hz: 5, required: optional, units: degrees_m}
   - {topic: /atlas/sensors/wheel_states, type: sensor_msgs/msg/JointState, frame: base_link, rate_hz: 30, required: true, units: rad_rad/s}
   - {topic: /atlas/sensors/stereo/left/image_raw, type: sensor_msgs/msg/Image, frame: stereo_left_optical_frame, rate_hz: 10, required: optional, units: mono8}

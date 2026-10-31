@@ -3,7 +3,7 @@
 Pinned clustering publishes centroids/UNKNOWN only. Membership comes exclusively
 from its colored debug cloud. This adapter neither re-clusters nor reads truth.
 """
-import copy,math
+import copy,math,time,json
 import numpy as np
 import rclpy
 from rclpy.node import Node
@@ -12,6 +12,7 @@ from rclpy.executors import ExternalShutdownException
 from rclpy.qos import qos_profile_sensor_data
 from tf2_ros import Buffer,TransformListener,TransformException
 from sensor_msgs.msg import PointCloud2
+from std_msgs.msg import String
 from autoware_perception_msgs.msg import DetectedObjects,PredictedObjects,PredictedObject,PredictedPath,Shape
 
 
@@ -54,29 +55,115 @@ def predictions(msg,transform,bounds):
 
 class Adapter(Node):
     def __init__(self):
-        super().__init__('static_objects_adapter',namespace='/atlas_loc');self.clouds={};self.pending={}
+        super().__init__('static_objects_adapter',namespace='/atlas_loc');self.clouds={};self.pending={};self.cloud_receipts={}
+        self.transform_pending={}
         self.buffer=Buffer();self.listener=TransformListener(self.buffer,self)
+        self.tf_retry_timeout=float(self.declare_parameter('tf_retry_timeout_sec',0.12).value)
+        if not 0.01<=self.tf_retry_timeout<=0.25:raise ValueError('tf_retry_timeout_sec must be between 0.01 and 0.25')
         self.pub=self.create_publisher(PredictedObjects,'obstacles/predicted_objects',10)
-        self.create_subscription(DetectedObjects,'obstacles/detected_objects',self.receive,10)
+        self.timing_pub=self.create_publisher(String,'diagnostics/object_adapter_timing',10)
+        self.last_cloud_receipt=None;self.last_detected_receipt=None;self.last_publish_receipt=None
+        self.create_subscription(DetectedObjects,'obstacles/detected_objects',self.detected,10)
         self.create_subscription(PointCloud2,'clusters',self.cloud,qos_profile_sensor_data)
+        self.create_timer(0.01,self.retry_transforms)
     @staticmethod
     def key(m):return m.header.stamp.sec,m.header.stamp.nanosec
+    def timing(self,record):
+        record['measurement']='object_adapter';record['callback_finished_monotonic_sec']=time.monotonic()
+        try:self.timing_pub.publish(String(data=json.dumps(record,separators=(',',':'))))
+        except Exception:pass
     def cloud(self,m):
-        k=self.key(m);self.clouds[k]=m
+        entered=time.monotonic();previous=self.last_cloud_receipt;self.last_cloud_receipt=entered
+        k=self.key(m);self.clouds[k]=m;self.cloud_receipts[k]=entered
         if len(self.clouds)>20:self.clouds.pop(next(iter(self.clouds)))
-        if k in self.pending:self.receive(self.pending.pop(k))
-    def receive(self,msg):
+        if len(self.cloud_receipts)>20:self.cloud_receipts.pop(next(iter(self.cloud_receipts)))
+        waiting=k in self.pending
+        if waiting:
+            msg,detected_receipt,detected_gap,detected_header_age=self.pending.pop(k)
+            self.receive(msg,detected_receipt,detected_gap,detected_header_age,entered)
+        else:
+            now=self.get_clock().now().nanoseconds*1e-9
+            self.timing(dict(event='cluster_membership_cloud_received',header_stamp=stamp(m.header.stamp),
+                header_age_at_receipt_sec=now-stamp(m.header.stamp),receipt_gap_sec=None if previous is None else entered-previous,
+                pending_detected_object_waiting=False,points=m.width*m.height))
+    def detected(self,msg):
+        entered=time.monotonic();previous=self.last_detected_receipt;self.last_detected_receipt=entered
+        now=self.get_clock().now().nanoseconds*1e-9;header_age=now-stamp(msg.header.stamp)
+        gap=None if previous is None else entered-previous
+        self.receive(msg,entered,gap,header_age,self.cloud_receipts.get(self.key(msg)))
+    def receive(self,msg,detected_receipt=None,detected_gap=None,detected_header_age=None,cloud_receipt=None,
+                transform_retry_started=None):
+        processing_start=time.monotonic()
+        if detected_receipt is None:
+            detected_receipt=processing_start
+            detected_header_age=self.get_clock().now().nanoseconds*1e-9-stamp(msg.header.stamp)
         k=self.key(msg)
         if k not in self.clouds:
-            self.pending[k]=msg
+            self.pending[k]=(msg,detected_receipt,detected_gap,detected_header_age)
             if len(self.pending)>20:self.pending.pop(next(iter(self.pending)))
+            self.timing(dict(event='detected_objects_waiting_for_membership',header_stamp=stamp(msg.header.stamp),
+                header_age_at_receipt_sec=detected_header_age,detected_receipt_gap_sec=detected_gap,
+                pending_count=len(self.pending)))
             return
+        cloud=self.clouds[k];now=self.get_clock().now().nanoseconds*1e-9
+        timing=dict(event='paired_detection_processing',header_stamp=stamp(msg.header.stamp),
+            header_age_at_detected_receipt_sec=detected_header_age,detected_receipt_gap_sec=detected_gap,
+            detected_to_membership_cloud_wait_sec=None if cloud_receipt is None else cloud_receipt-detected_receipt,
+            detected_to_processing_start_sec=processing_start-detected_receipt,
+            membership_cloud_points=cloud.width*cloud.height)
         try:
-            bounds=measured_bounds(msg,self.clouds[k])
+            tf_start=time.monotonic()
             tf=self.buffer.lookup_transform('map',msg.header.frame_id,Time.from_msg(msg.header.stamp)).transform
-        except (TransformException,ValueError) as error:
+            timing['tf_lookup_sec']=time.monotonic()-tf_start
+            bounds_start=time.monotonic();bounds=measured_bounds(msg,cloud);timing['bounds_processing_sec']=time.monotonic()-bounds_start
+        except TransformException as error:
+            if transform_retry_started is None:
+                self.transform_pending[k]=(msg,detected_receipt,detected_gap,detected_header_age,cloud_receipt,processing_start)
+                if len(self.transform_pending)>20:
+                    oldest=next(iter(self.transform_pending))
+                    dropped=self.transform_pending.pop(oldest)
+                    self.timing(dict(event='adapter_input_rejected',reason='transform_retry_queue_capacity',
+                        header_stamp=stamp(dropped[0].header.stamp),pending_transform_count=len(self.transform_pending)))
+                timing.update(event='waiting_for_timestamped_transform',error=str(error),
+                    pending_transform_count=len(self.transform_pending))
+                self.timing(timing)
+                return
+            if time.monotonic()-transform_retry_started<self.tf_retry_timeout:
+                return
+            self.transform_pending.pop(k,None)
+            timing.update(event='adapter_input_rejected',error=str(error),
+                tf_tree_yaml=self.buffer.all_frames_as_yaml(),
+                transform_retry_duration_sec=time.monotonic()-transform_retry_started,
+                total_processing_sec=time.monotonic()-processing_start)
+            self.timing(timing)
             self.get_logger().warn(str(error),throttle_duration_sec=2.);return
-        self.pub.publish(predictions(msg,tf,bounds))
+        except ValueError as error:
+            self.transform_pending.pop(k,None)
+            timing.update(event='adapter_input_rejected',error=str(error),total_processing_sec=time.monotonic()-processing_start)
+            self.timing(timing)
+            self.get_logger().warn(str(error),throttle_duration_sec=2.);return
+        self.transform_pending.pop(k,None)
+        output=predictions(msg,tf,bounds);self.pub.publish(output);published=time.monotonic();ros_published=self.get_clock().now().nanoseconds*1e-9
+        timing.update(event='predicted_objects_published',object_count=len(output.objects),
+            header_age_at_publication_sec=ros_published-stamp(output.header.stamp),
+            detected_to_publish_sec=published-detected_receipt,
+            predicted_receipt_gap_sec=None if self.last_publish_receipt is None else published-self.last_publish_receipt,
+            total_processing_sec=published-processing_start)
+        self.last_publish_receipt=published;self.timing(timing)
+
+    def retry_transforms(self):
+        # The TF listener shares this single-threaded executor. A detection
+        # callback can therefore run before the corresponding TF subscription
+        # callback; retry after returning to the executor, preserving the exact
+        # measurement timestamp and bounding both wait and queue size.
+        for k,item in list(self.transform_pending.items()):
+            if k not in self.clouds:
+                self.transform_pending.pop(k,None)
+                continue
+            msg,receipt,gap,age,cloud_receipt,started=item
+            self.receive(msg,receipt,gap,age,cloud_receipt,started)
+
+def stamp(s):return s.sec+s.nanosec*1e-9
 
 def main():
     rclpy.init();n=Adapter()
