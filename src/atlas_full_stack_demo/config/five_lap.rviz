@@ -1,0 +1,147 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Map grid
+      Enabled: true
+      Cell Size: 5
+      Plane Cell Count: 20
+      Reference Frame: map
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Synthetic Lanelet loop
+      Enabled: true
+      Topic:
+        Value: /atlas_map_demo/road_markers
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Synthetic NDT map geometry
+      Enabled: true
+      Topic:
+        Value: /atlas_loc/synthetic_map
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Depth: 1
+      Style: Points
+      Size (Pixels): 2
+      Color Transformer: FlatColor
+      Flat Color: 170; 180; 190
+      Position Transformer: XYZ
+      Decay Time: 0
+      Queue Size: 1
+    - Class: rviz_default_plugins/RobotModel
+      Name: Generic sample vehicle mesh (replaced by EKF marker)
+      Enabled: false
+      Description Source: Topic
+      Description Topic:
+        Value: /robot_description
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Depth: 1
+      Visual Enabled: true
+      Collision Enabled: false
+      TF Prefix: ""
+    - Class: rviz_default_plugins/MarkerArray
+      Name: EKF ego body and heading
+      Enabled: true
+      Topic:
+        Value: /atlas_loc/visualization/ego_vehicle
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 10
+    - Class: rviz_default_plugins/Path
+      Name: Planned Lanelet route
+      Enabled: true
+      Buffer Length: 1
+      Color: 100; 150; 255
+      Line Style: Lines
+      Line Width: 0.12
+      Pose Style: None
+      Topic:
+        Value: /atlas_loc/route_path
+        Reliability Policy: Reliable
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/Path
+      Name: Active smoothed trajectory
+      Enabled: true
+      Buffer Length: 1
+      Color: 35; 255; 100
+      Line Style: Lines
+      Line Width: 0.20
+      Pose Style: None
+      Topic:
+        Value: /atlas_loc/trajectory_visualization
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/Odometry
+      Name: EKF localization
+      Enabled: true
+      Keep: 1
+      Shape:
+        Alpha: 1
+        Color: 255; 160; 30
+        Value: Arrow
+      Topic:
+        Value: /atlas_loc/ekf/ekf_odom
+        Reliability Policy: Reliable
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/PointCloud2
+      Name: Detected obstacle clusters
+      Enabled: false
+      Topic:
+        Value: /atlas_loc/clusters
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+      Style: Points
+      Size (Pixels): 4
+      Color Transformer: FlatColor
+      Flat Color: 255; 80; 20
+      Position Transformer: XYZ
+      Decay Time: 0
+    - Class: rviz_default_plugins/TF
+      Name: TF troubleshooting
+      Enabled: false
+  Enabled: true
+  Global Options:
+    Background Color: 28; 30; 35
+    Fixed Frame: map
+    Frame Rate: 10
+  Name: five_lap_demo
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 42
+      Focal Point:
+        X: 5
+        Y: 5
+        Z: 0
+      Name: Loop overview
+      Near Clip Distance: 0.1
+      Pitch: 0.95
+      Yaw: 0.75
+      Value: Orbit (rviz)
+    Saved: ~
+Window Geometry:
+  Height: 850
+  Width: 1300

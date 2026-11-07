@@ -1,0 +1,14 @@
+<!--
+  Ackermann-safe, bounded navigation tree.  Unlike Nav2's stock recovery
+  tree, it deliberately has no Spin recovery: a wheeled Ackermann vehicle
+  cannot safely satisfy an in-place rotation request.  A planning or control
+  failure is returned to the caller, which leaves the command gate at zero.
+-->
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="ackermann_navigate_to_pose">
+      <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+      <FollowPath path="{path}" controller_id="FollowPath" goal_checker_id="goal_checker"/>
+    </Sequence>
+  </BehaviorTree>
+</root>

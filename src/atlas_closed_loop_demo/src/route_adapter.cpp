@@ -33,6 +33,8 @@ public:
   Fixture() : Node("route_adapter")
   {
     dir_=declare_parameter<std::string>("results_dir","/tmp/atlas_closed_loop_results");
+    start_id_=declare_parameter<int64_t>("start_lanelet_id",38184);
+    goal_id_=declare_parameter<int64_t>("goal_lanelet_id",23892);
     std::filesystem::create_directories(dir_);
     const auto latched=rclcpp::QoS(1).reliable().transient_local();
     route_pub_=create_publisher<autoware_planning_msgs::msg::LaneletRoute>("route",latched);
@@ -71,16 +73,21 @@ private:
     const auto map=autoware::experimental::lanelet2_utils::from_autoware_map_msgs(msg);
     const auto [graph,rules]=autoware::experimental::lanelet2_utils::instantiate_routing_graph_and_traffic_rules(
       map,lanelet::autoware::DefaultLocation,lanelet::Participants::Vehicle);
-    const auto computed=graph->getRoute(map->laneletLayer.get(38184),map->laneletLayer.get(23892),0,false);
+    const auto computed=graph->getRoute(map->laneletLayer.get(start_id_),map->laneletLayer.get(goal_id_),0,false);
     if(!computed)throw std::runtime_error("no actual route between selected lanelets");
     const auto lanes=computed->shortestPath();
-    if(lanes.size()!=2 || lanes[0].id()!=38184 || lanes[1].id()!=23892)throw std::runtime_error("unexpected route sequence");
-    auto followers=graph->following(lanes[0],false), previous=graph->previous(lanes[1],false);
+    if(lanes.size()<2 || lanes.front().id()!=start_id_ || lanes.back().id()!=goal_id_)
+      throw std::runtime_error("route does not contain requested start and goal lanelets");
     auto has=[](const auto & v,lanelet::Id id){return std::any_of(v.begin(),v.end(),[&](const auto & l){return l.id()==id;});};
-    if(!has(followers,23892)||!has(previous,38184)||!rules->canPass(lanes[0],lanes[1]))throw std::runtime_error("invalid transition");
-    const auto a=lanes[0].centerline().back(),b=lanes[1].centerline().front();
-    const double gap=std::hypot(a.x()-b.x(),a.y()-b.y());
-    if(gap>1e-5)throw std::runtime_error("route centerline gap");
+    double gap=0.0;
+    for(size_t i=1;i<lanes.size();++i) {
+      const auto followers=graph->following(lanes[i-1],false), previous=graph->previous(lanes[i],false);
+      if(!has(followers,lanes[i].id())||!has(previous,lanes[i-1].id())||!rules->canPass(lanes[i-1],lanes[i]))
+        throw std::runtime_error("invalid successor transition");
+      const auto a=lanes[i-1].centerline().back(),b=lanes[i].centerline().front();
+      const double join=std::hypot(a.x()-b.x(),a.y()-b.y());gap=std::max(gap,join);
+      if(join>0.05)throw std::runtime_error("route centerline join gap");
+    }
     nav_msgs::msg::Path path;path.header.frame_id="map";path.header.stamp=now();
     double length=0;
     for(const auto & l:lanes) {
@@ -109,9 +116,11 @@ private:
     route_.uuid.uuid[0]=0x54;route_.uuid.uuid[1]=0x47;route_.allow_modification=false;
     route_pub_->publish(route_);route_path_pub_->publish(path);
     std::ofstream out(dir_+"/selected_route.json");out<<std::setprecision(12)
-      <<"{\"lanelet_ids\":[38184,23892],\"route_length_m\":"<<length
-      <<",\"transition_gap_m\":"<<gap<<",\"pcd_xy_bbox_coverage_fraction\":1.0,\"frame\":\"map\",\"traffic_rules\":\"autoware/vehicle\"}\n";
-    RCLCPP_INFO(get_logger(),"Selected actual route 38184 -> 23892: %.6f m, wholly within PCD XY bbox; live simulator feedback is supplied by a separate relay",length);
+      <<"{\"start_lanelet_id\":"<<start_id_<<",\"goal_lanelet_id\":"<<goal_id_
+      <<",\"lanelet_count\":"<<lanes.size()<<",\"route_length_m\":"<<length
+      <<",\"maximum_transition_gap_m\":"<<gap<<",\"frame\":\"map\",\"traffic_rules\":\"autoware/vehicle\"}\n";
+    RCLCPP_INFO(get_logger(),"Selected Lanelet2 route %lld -> %lld across %zu lanelets: %.3f m, max join %.4f m",
+      static_cast<long long>(start_id_),static_cast<long long>(goal_id_),lanes.size(),length,gap);
   }
   void publish_markers() {
     nav_msgs::msg::Odometry odom;odom.header.frame_id="map";odom.header.stamp=now();
@@ -125,7 +134,7 @@ private:
     }
     markers_pub_->publish(markers);
   }
-  std::string dir_;bool ready_{false};autoware_planning_msgs::msg::LaneletRoute route_;
+  std::string dir_;int64_t start_id_{38184},goal_id_{23892};bool ready_{false};autoware_planning_msgs::msg::LaneletRoute route_;
   rclcpp::Subscription<autoware_map_msgs::msg::LaneletMapBin>::SharedPtr map_sub_;
   rclcpp::Subscription<autoware_internal_planning_msgs::msg::PathWithLaneId>::SharedPtr path_sub_;
   rclcpp::Subscription<autoware_planning_msgs::msg::Trajectory>::SharedPtr trajectory_sub_;

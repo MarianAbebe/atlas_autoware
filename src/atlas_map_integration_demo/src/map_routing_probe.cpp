@@ -50,8 +50,8 @@ struct GraphInfo
 {
   std::vector<lanelet::ConstLanelet> lanes;
   std::map<Key, int> index;
-  std::vector<std::vector<int>> outgoing, incoming, weak;
-  std::vector<int> components, component_sizes, scc_sizes;
+  std::vector<std::vector<int>> outgoing, incoming, weak, successors;
+  std::vector<int> components, component_sizes, scc_ids, scc_sizes;
   size_t successor_edges{0}, lane_change_edges{0}, denied{0};
 };
 
@@ -68,7 +68,7 @@ static GraphInfo inspect(
     }
   }
   const int n = g.lanes.size();
-  g.outgoing.resize(n); g.incoming.resize(n); g.weak.resize(n);
+  g.outgoing.resize(n); g.incoming.resize(n); g.weak.resize(n); g.successors.resize(n);
   for (int i = 0; i < n; ++i) {
     for (const auto & target : graph->following(g.lanes[i], true)) {
       auto it = g.index.find(key(target));
@@ -78,6 +78,10 @@ static GraphInfo inspect(
       g.weak[i].push_back(j); g.weak[j].push_back(i);
     }
     const auto following = graph->following(g.lanes[i], false);
+    for (const auto & target : following) {
+      auto it = g.index.find(key(target));
+      if (it != g.index.end()) g.successors[i].push_back(it->second);
+    }
     g.successor_edges += following.size();
     g.lane_change_edges += g.outgoing[i].size() - following.size();
   }
@@ -101,12 +105,16 @@ static GraphInfo inspect(
   };
   for (int i = 0; i < n; ++i) if (!seen[i]) visit(i);
   std::fill(seen.begin(), seen.end(), false);
-  std::function<int(int)> collect = [&](int v) {
-    seen[v] = true; int size = 1;
-    for (int j : g.incoming[v]) if (!seen[j]) size += collect(j);
+  g.scc_ids.assign(n, -1);
+  std::function<int(int,int)> collect = [&](int v, int component) {
+    seen[v] = true; g.scc_ids[v] = component; int size = 1;
+    for (int j : g.incoming[v]) if (!seen[j]) size += collect(j, component);
     return size;
   };
-  for (auto it = order.rbegin(); it != order.rend(); ++it) if (!seen[*it]) g.scc_sizes.push_back(collect(*it));
+  int scc_id = 0;
+  for (auto it = order.rbegin(); it != order.rend(); ++it) if (!seen[*it]) {
+    g.scc_sizes.push_back(collect(*it, scc_id)); ++scc_id;
+  }
   return g;
 }
 
@@ -252,6 +260,15 @@ private:
     for (size_t i=0;i<g.lanes.size();++i) {
       int j=0; for(const auto & pt:g.lanes[i].centerline()) centers<<g.lanes[i].id()<<','<<j++<<','<<pt.x()<<','<<pt.y()<<','<<pt.z()<<','<<g.components[i]<<'\n';
     }
+    std::ofstream directed(dir_+"/directed_lanelets.csv");
+    directed<<"node,id,inverted,weak_component,strong_component,point_index,x,y,z\n"<<std::setprecision(12);
+    for (size_t i=0;i<g.lanes.size();++i) {
+      size_t point_index=0;
+      for (const auto & pt:g.lanes[i].centerline())
+        directed<<i<<','<<g.lanes[i].id()<<','<<(g.lanes[i].inverted()?1:0)<<','<<g.components[i]<<','<<g.scc_ids[i]<<','<<point_index++<<','<<pt.x()<<','<<pt.y()<<','<<pt.z()<<'\n';
+    }
+    std::ofstream edges(dir_+"/successor_edges.csv"); edges<<"from_node,to_node\n";
+    for (size_t i=0;i<g.successors.size();++i) for (int j:g.successors[i]) edges<<i<<','<<j<<'\n';
     std::ofstream boundaries(dir_+"/boundaries.csv"); boundaries<<"way_id,index,x,y,z\n"<<std::setprecision(12);
     std::set<lanelet::Id> used;
     for (const auto & ll:map->laneletLayer) for (const auto & bound:{ll.leftBound(),ll.rightBound()}) {

@@ -49,7 +49,8 @@ def generate_launch_description():
         ])
     probe = Node(package='atlas_map_integration_demo', executable='map_routing_probe',
                  name='map_routing_probe', namespace='/atlas_map_demo', output='screen',
-                 parameters=[{'results_dir': LaunchConfiguration('results_dir')}])
+                 parameters=[{'results_dir': LaunchConfiguration('results_dir')}],
+                 condition=IfCondition(LaunchConfiguration('launch_routing_probe')))
     rviz = Node(package='rviz2', executable='rviz2', name='campus_rviz',
                 namespace='/atlas_map_demo', output='screen',
                 arguments=['-d', os.path.join(share, 'config', 'campus_map.rviz')],
@@ -59,4 +60,5 @@ def generate_launch_description():
         DeclareLaunchArgument('pcd_path', default_value=os.path.join(os.environ.get('ATLAS_MAP_DIR', os.path.expanduser('~/atlas_assets')), 'pointcloud_map_georeferenced.pcd')),
         DeclareLaunchArgument('projector_path', default_value=os.path.join(os.environ.get('ATLAS_MAP_DIR', os.path.expanduser('~/atlas_assets')), 'map_projector_info.yaml')),
         DeclareLaunchArgument('results_dir', default_value='/tmp/atlas_map_demo_results'),
-        DeclareLaunchArgument('launch_rviz', default_value='true'), container, probe, rviz])
+        DeclareLaunchArgument('launch_rviz', default_value='true'),
+        DeclareLaunchArgument('launch_routing_probe', default_value='true'), container, probe, rviz])

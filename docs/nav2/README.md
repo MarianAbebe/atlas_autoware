@@ -1,10 +1,19 @@
-# Atlas Nav2 skid-steer demo
+# Atlas Nav2 simulation fixtures
+
+Atlas is an Ackermann-steered vehicle. `nav2_skid_steer.launch.py` remains a
+historical regression fixture only. Use `nav2_ackermann.launch.py` for the
+intended simulation path; its currently verified evidence is limited to a
+bounded straight goal, not obstacle-navigation acceptance.
 
 This package is the first independently runnable PRD-aligned navigation
 milestone. It connects a deterministic 2D map and laser simulation to the ROS 2
 Humble Nav2 planner/controller and routes Nav2 velocity commands through a
 default-disabled simulation safety gate, four-wheel mixer, and ideal skid-steer
 kinematic simulator.
+
+The preceding paragraph describes the preserved skid-steer fixture, not the
+Atlas drivetrain. The Ackermann fixture replaces its mixer with a bounded
+bicycle simulator and an `autoware_control_msgs/Control` boundary.
 
 It is separate from the established Autoware prototype and does not source or
 build Autoware. It never connects to a physical motor controller.
@@ -41,6 +50,13 @@ cd ~/atlas_autoware
 source /opt/ros/humble/setup.bash
 source .nav2_cache/install/setup.bash
 ros2 launch atlas_nav2_demo nav2_skid_steer.launch.py
+```
+
+For the intended Ackermann fixture (development overlay shown):
+
+```bash
+source ~/roam/diagnostic_overlays/atlas_ackermann_v1/install/setup.bash
+ros2 launch atlas_nav2_demo nav2_ackermann.launch.py
 ```
 
 The gate starts disabled. For manual simulation testing only, explicitly enable

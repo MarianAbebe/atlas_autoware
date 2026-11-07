@@ -1,0 +1,3 @@
+#!/usr/bin/env python3
+from atlas_nav2_demo.showcase_joints import main
+main()

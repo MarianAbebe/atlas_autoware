@@ -1,0 +1,71 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Ground reference
+      Enabled: true
+      Cell Size: 1
+      Plane: XY
+      Plane Cell Count: 30
+      Alpha: 0.45
+    - Class: rviz_default_plugins/RobotModel
+      Name: Atlas rover
+      Enabled: true
+      Description Source: Topic
+      Description Topic: {Value: /robot_description, Reliability Policy: Reliable, Durability Policy: Transient Local, History Policy: Keep Last, Depth: 1}
+      Robot Description: robot_description
+      Visual Enabled: true
+      Collision Enabled: false
+    - Class: rviz_default_plugins/MarkerArray
+      Name: Outdoor course
+      Enabled: true
+      Marker Topic: {Value: /atlas_ackermann/showcase/course, Reliability Policy: Reliable, Durability Policy: Volatile, History Policy: Keep Last, Depth: 1}
+    - Class: rviz_default_plugins/LaserScan
+      Name: LiDAR obstacle observations
+      Enabled: true
+      Topic: {Value: /atlas_ackermann/scan, Reliability Policy: Reliable, Durability Policy: Volatile, History Policy: Keep Last, Depth: 1}
+      Size (m): 0.04
+    - Class: rviz_default_plugins/Map
+      Name: Static navigation map
+      Enabled: true
+      Topic: {Value: /map, Reliability Policy: Reliable, Durability Policy: Transient Local, History Policy: Keep Last, Depth: 1}
+    - Class: rviz_default_plugins/Map
+      Name: Local obstacle costmap
+      Enabled: true
+      Topic: {Value: /local_costmap/costmap, Reliability Policy: Reliable, Durability Policy: Volatile, History Policy: Keep Last, Depth: 1}
+      Alpha: 0.55
+    - Class: rviz_default_plugins/Path
+      Name: Global planned path
+      Enabled: true
+      Topic: {Value: /plan, Reliability Policy: Reliable, Durability Policy: Volatile, History Policy: Keep Last, Depth: 1}
+      Buffer Length: 1
+    - Class: rviz_default_plugins/TF
+      Name: Frames
+      Enabled: false
+  Enabled: true
+  Global Options: {Background Color: "38; 42; 48", Fixed Frame: map, Frame Rate: 15}
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 13
+      Focal Point: {X: 2, Y: 0, Z: 0.3}
+      Name: Course overview
+      Near Clip Distance: 0.05
+      Pitch: 0.75
+      Target Frame: <Fixed Frame>
+      Yaw: 0.8
+      Value: Orbit (rviz)
+    Saved: ~
+  Value: true
+Window Geometry: {Height: 820, Width: 1280}

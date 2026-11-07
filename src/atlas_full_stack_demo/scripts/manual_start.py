@@ -17,7 +17,9 @@ def main():
     n.create_subscription(String,'/atlas_loc/safety_status',lambda m:status.update(json.loads(m.data)),10)
     n.create_subscription(PoseWithCovarianceStamped,'/atlas_loc/ndt/ndt_pose_with_covariance',lambda m:seen.append(m.header.stamp),10)
     n.create_subscription(Odometry,'/atlas_loc/sim/output/odometry',lambda m:motion.append(m.twist.twist.linear.x),10)
-    boot=n.create_publisher(PoseWithCovarianceStamped,'/atlas_loc/bootstrap',10);engage=n.create_publisher(Engage,'/atlas_loc/sim/input/engage',10)
+    boot=n.create_publisher(PoseWithCovarianceStamped,'/atlas_loc/bootstrap',10)
+    sim_engage=n.create_publisher(Engage,'/atlas_loc/sim/input/engage',10)
+    gate_engage=n.create_publisher(Engage,'/atlas_loc/gate/input/engage',10)
     def wait(pred,seconds):
         end=time.monotonic()+seconds
         while time.monotonic()<end:
@@ -37,7 +39,9 @@ def main():
         for k,v in [(0,.25),(7,.25),(14,.0025),(21,.0006),(28,.0006),(35,.06)]:p.pose.covariance[k]=v
         boot.publish(p)
         if not wait(lambda:status.get('armed') and len(seen)>=10,20):raise RuntimeError('Localization/perception authorization unavailable: '+json.dumps(status))
-        engage.publish(Engage(stamp=n.get_clock().now().to_msg(),engage=True))
+        engage_msg=Engage(stamp=n.get_clock().now().to_msg(),engage=True)
+        sim_engage.publish(engage_msg)
+        gate_engage.publish(engage_msg)
         if not wait(lambda:bool(motion) and motion[-1]>.02,8):raise RuntimeError('Engagement requested but no verified motion: inspect safety and gate')
         print('Engaged with NDT/EKF and perception authorization. Launch remains running; inspect topics and RViz.')
     finally:n.destroy_node();rclpy.try_shutdown()

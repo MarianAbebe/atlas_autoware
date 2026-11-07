@@ -5,6 +5,7 @@ import time
 
 import rclpy
 from geometry_msgs.msg import Twist
+from nav_msgs.msg import Odometry
 from rclpy.node import Node
 from std_msgs.msg import String
 from std_srvs.srv import SetBool
@@ -24,9 +25,15 @@ class SafetyGate(Node):
         self.emergency_stop = False
         self.command = Twist()
         self.last_command = None
+        self.last_localization = None
+        self.last_localization_source_sec = None
         self.output = self.create_publisher(Twist, '/atlas_nav2/cmd_vel_safe', 10)
         self.status = self.create_publisher(String, '/atlas_nav2/safety_status', 10)
         self.create_subscription(Twist, '/atlas_nav2/cmd_vel_nav', self.on_command, 10)
+        # This isolated Nav2 fixture treats /odom as its authoritative
+        # estimator output.  The gate checks delivery freshness only; it never
+        # manufactures timestamps or falls back to simulator state.
+        self.create_subscription(Odometry, '/atlas_nav2/odom', self.on_localization, 20)
         self.create_service(SetBool, '~/enable', self.on_enable)
         self.create_service(SetBool, '~/emergency_stop', self.on_emergency_stop)
         self.timer = self.create_timer(0.02, self.tick)
@@ -39,6 +46,19 @@ class SafetyGate(Node):
         else:
             self.emergency_stop = True
             self.get_logger().error('Non-finite velocity command latched emergency stop')
+
+    def on_localization(self, msg):
+        stamp = msg.header.stamp
+        if stamp.sec < 0 or stamp.nanosec < 0 or stamp.nanosec >= 1_000_000_000:
+            self.get_logger().error('Rejected localization with invalid source timestamp')
+            return
+        source_sec = stamp.sec + stamp.nanosec * 1e-9
+        source_age = self.get_clock().now().nanoseconds * 1e-9 - source_sec
+        if not 0.0 <= source_age <= self.timeout:
+            self.get_logger().error('Rejected stale or future localization source timestamp')
+            return
+        self.last_localization = time.monotonic()
+        self.last_localization_source_sec = source_sec
 
     def on_enable(self, request, response):
         if request.data and self.emergency_stop:
@@ -67,11 +87,18 @@ class SafetyGate(Node):
     def tick(self):
         now = time.monotonic()
         age = math.inf if self.last_command is None else now - self.last_command
+        localization_age = (math.inf if self.last_localization is None
+                            else now - self.last_localization)
+        localization_source_age = (
+            math.inf if self.last_localization_source_sec is None else
+            self.get_clock().now().nanoseconds * 1e-9 - self.last_localization_source_sec)
         fresh = age <= self.timeout
+        localization_fresh = (localization_age <= self.timeout
+                              and 0.0 <= localization_source_age <= self.timeout)
         output = Twist()
-        if math.isfinite(age):
+        if math.isfinite(age) and localization_fresh:
             output.linear.x, output.angular.z = gated_velocity(
-                self.enabled, self.emergency_stop, age, self.timeout,
+                self.enabled, self.emergency_stop, age, localization_age, self.timeout,
                 self.command.linear.x, self.command.angular.z,
                 self.max_linear, self.max_angular)
         self.output.publish(output)
@@ -79,6 +106,13 @@ class SafetyGate(Node):
             'enabled': self.enabled,
             'emergency_stop': self.emergency_stop,
             'command_fresh': fresh,
+            'localization_fresh': localization_fresh,
+            # Keep diagnostic JSON standards-compliant when localization has
+            # not yet been observed; JSON has no portable infinity literal.
+            'localization_receipt_age_sec': (
+                localization_age if math.isfinite(localization_age) else None),
+            'localization_source_age_sec': (
+                localization_source_age if math.isfinite(localization_source_age) else None),
             'output_linear': output.linear.x,
             'output_angular': output.angular.z,
         }, separators=(',', ':'))))

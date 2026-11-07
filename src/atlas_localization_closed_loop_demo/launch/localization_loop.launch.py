@@ -3,10 +3,11 @@ from pathlib import Path
 from ament_index_python.packages import get_package_share_directory as share
 from launch import LaunchDescription
 from launch_ros.actions import Node, ComposableNodeContainer
+from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.descriptions import ComposableNode
 
 
-def generate_launch_description(include_fixture=True, ndt_points=None, smoother_input=None, watchdog_outputs=None):
+def generate_launch_description(include_fixture=True, ndt_points=None, smoother_input=None, watchdog_outputs=None, ndt_num_threads=1):
     ns = '/atlas_loc'
     old = Path(share('atlas_closed_loop_demo')) / 'config'
     control = Path(share('autoware_trajectory_follower_node')) / 'param'
@@ -26,7 +27,8 @@ def generate_launch_description(include_fixture=True, ndt_points=None, smoother_
     ndt = Node(package='autoware_ndt_scan_matcher', executable='autoware_ndt_scan_matcher_node',
         name='ndt_scan_matcher', namespace=ns+'/ndt', output='screen',
         parameters=[share('autoware_ndt_scan_matcher')+'/config/ndt_scan_matcher.param.yaml',
-                    {'ndt.num_threads': 1, 'dynamic_map_loading.publish_loaded_map': True}],
+                    {'ndt.num_threads': ParameterValue(ndt_num_threads, value_type=int),
+                     'dynamic_map_loading.publish_loaded_map': True}],
         remappings=[('pcd_loader_service', '/pcd_loader_service'),
                     ('points_raw', ndt_points or ns+'/sensors/points'),
                     ('ekf_pose_with_covariance', ns+'/ekf/ekf_pose_with_covariance')])

@@ -14,9 +14,11 @@ class SyntheticLaser(Node):
         super().__init__('synthetic_laser')
         self.pose = None
         self.scenario = self.declare_parameter('scenario', 'open').value
+        self.odom_topic = self.declare_parameter('odom_topic', '/atlas_nav2/odom').value
+        self.scan_topic = self.declare_parameter('scan_topic', '/atlas_nav2/scan').value
         rectangles(self.scenario)
-        self.publisher = self.create_publisher(LaserScan, '/atlas_nav2/scan', 10)
-        self.create_subscription(Odometry, '/atlas_nav2/odom', self.on_odom, 20)
+        self.publisher = self.create_publisher(LaserScan, self.scan_topic, 10)
+        self.create_subscription(Odometry, self.odom_topic, self.on_odom, 20)
         self.timer = self.create_timer(0.10, self.tick)
 
     def on_odom(self, msg):
