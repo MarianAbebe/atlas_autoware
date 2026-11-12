@@ -5,6 +5,7 @@ import rclpy
 from nav_msgs.msg import Odometry
 from rclpy.node import Node
 from sensor_msgs.msg import LaserScan
+from std_srvs.srv import SetBool
 
 from .world import occupied, rectangles
 
@@ -13,24 +14,37 @@ class SyntheticLaser(Node):
     def __init__(self):
         super().__init__('synthetic_laser')
         self.pose = None
+        self.pose_stamp = None
         self.scenario = self.declare_parameter('scenario', 'open').value
         self.odom_topic = self.declare_parameter('odom_topic', '/atlas_nav2/odom').value
         self.scan_topic = self.declare_parameter('scan_topic', '/atlas_nav2/scan').value
+        self.output_enabled = True
         rectangles(self.scenario)
         self.publisher = self.create_publisher(LaserScan, self.scan_topic, 10)
         self.create_subscription(Odometry, self.odom_topic, self.on_odom, 20)
+        self.create_service(SetBool, '~/set_output_enabled', self.on_output_enabled)
         self.timer = self.create_timer(0.10, self.tick)
+
+    def on_output_enabled(self, request, response):
+        self.output_enabled = bool(request.data)
+        response.success = True
+        response.message = ('synthetic scan publishing enabled' if request.data
+                            else 'synthetic scan publishing paused')
+        return response
 
     def on_odom(self, msg):
         q = msg.pose.pose.orientation
         yaw = math.atan2(2.0 * q.w * q.z, 1.0 - 2.0 * q.z * q.z)
         self.pose = (msg.pose.pose.position.x, msg.pose.pose.position.y, yaw)
+        # The scan is ray-cast from this odometry pose. Keep its source time so
+        # TF lookup uses the pose time instead of stamping stale geometry as now.
+        self.pose_stamp = msg.header.stamp
 
     def tick(self):
-        if self.pose is None:
+        if not self.output_enabled or self.pose is None or self.pose_stamp is None:
             return
         scan = LaserScan()
-        scan.header.stamp = self.get_clock().now().to_msg()
+        scan.header.stamp = self.pose_stamp
         scan.header.frame_id = 'laser'
         scan.angle_min = -2.35619449
         scan.angle_max = 2.35619449

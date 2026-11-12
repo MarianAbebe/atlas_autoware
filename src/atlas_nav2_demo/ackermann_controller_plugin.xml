@@ -1,0 +1,7 @@
+<library path="atlas_ackermann_controller">
+  <class name="atlas_nav2_demo::AckermannController"
+         type="atlas_nav2_demo::AckermannController"
+         base_class_type="nav2_core::Controller">
+    <description>Bounded bicycle-model Ackermann controller with local costmap swept-footprint checks.</description>
+  </class>
+</library>

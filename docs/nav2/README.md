@@ -1,118 +1,60 @@
-# Atlas Nav2 simulation fixtures
+# Atlas Nav2 simulation
 
-Atlas is an Ackermann-steered vehicle. `nav2_skid_steer.launch.py` remains a
-historical regression fixture only. Use `nav2_ackermann.launch.py` for the
-intended simulation path; its currently verified evidence is limited to a
-bounded straight goal, not obstacle-navigation acceptance.
+Atlas uses Ackermann steering. The current isolated simulation uses the custom
+ROS 2 Humble `nav2_core::Controller` plugin with Smac Hybrid-A*, a bicycle-model
+simulator, synthetic LaserScan input, live costmap checks, adapter, and
+default-disabled safety gate. It does not launch Autoware and has no physical
+actuator connection. `nav2_skid_steer.launch.py` is retained only as a
+historical regression fixture.
 
-This package is the first independently runnable PRD-aligned navigation
-milestone. It connects a deterministic 2D map and laser simulation to the ROS 2
-Humble Nav2 planner/controller and routes Nav2 velocity commands through a
-default-disabled simulation safety gate, four-wheel mixer, and ideal skid-steer
-kinematic simulator.
+## Current status
 
-The preceding paragraph describes the preserved skid-steer fixture, not the
-Atlas drivetrain. The Ackermann fixture replaces its mixer with a bounded
-bicycle simulator and an `autoware_control_msgs/Control` boundary.
+Straight, curved, and avoidable-obstacle navigation each have a five-run
+passing campaign; the blocked route aborts safely. Full-graph fault injection
+passed 6/6, package regression passed 70 tests, and 20 cancellation trials
+produced safe zero within the configured 250 ms window. One other curved run
+recorded 731 ms gate and 758 ms simulator timer gaps and safely aborted. The
+cause remains unresolved. Status:
+**navigation validated; timing acceptance open**. This is not hardware
+readiness or a real-time safety guarantee.
 
-It is separate from the established Autoware prototype and does not source or
-build Autoware. It never connects to a physical motor controller.
+See [Ackermann architecture](ACKERMANN_ARCHITECTURE.md),
+[validation results](VALIDATION.md), and
+[integration status](NAV2_INTEGRATION_STATUS.md).
 
-## Dependencies
+## Native Ubuntu validation
 
-On Ubuntu 22.04 with ROS 2 Humble installed:
-
-```bash
-sudo apt-get update
-sudo apt-get install --no-upgrade --no-remove \
-  ros-humble-navigation2 ros-humble-nav2-bringup \
-  ros-humble-nav2-simple-commander python3-pytest
-```
-
-Review the package transaction before approving it. The demo uses the binary
-Humble Nav2 release and only builds `atlas_nav2_demo` locally.
-
-## Build and test
+For Ubuntu 22.04 and ROS 2 Humble dependencies, a clean development-branch
+checkout, isolated overlay build, headless acceptance scenarios, cancellation
+timing campaign, resource capture, and pass/fail criteria, follow
+[NATIVE_UBUNTU_VALIDATION.md](NATIVE_UBUNTU_VALIDATION.md). The single campaign
+entry point is:
 
 ```bash
-cd ~/atlas_autoware
 source /opt/ros/humble/setup.bash
-python3 -m pytest -q src/atlas_nav2_demo/test
-tools/nav2/build.sh
+tools/nav2/run_ackermann_native_validation.sh
 ```
 
-The build uses one job and writes ignored artifacts to `.nav2_cache`.
+It builds only `atlas_nav2_demo`, runs its tests, then runs straight (5), curved
+(5), avoidable obstacle (5), blocked route (1), all six full-graph fault cases,
+and 20 sequential cancellation trials. It does not launch RViz. Evidence is
+written outside source directories by default.
 
-## Launch
+The active launch can also be started directly after building and sourcing the
+development overlay:
 
 ```bash
-cd ~/atlas_autoware
 source /opt/ros/humble/setup.bash
-source .nav2_cache/install/setup.bash
-ros2 launch atlas_nav2_demo nav2_skid_steer.launch.py
+source "$ATLAS_NAV2_OVERLAY/setup.bash"
+export ROS_LOCALHOST_ONLY=1
+ros2 launch atlas_nav2_demo nav2_ackermann_controller.launch.py scenario:=open
 ```
 
-For the intended Ackermann fixture (development overlay shown):
+The gate starts disabled. Prefer the automated test runner, which manages gate
+enable/disable, goals, evidence, isolated domains, and graph cleanup.
 
-```bash
-source ~/roam/diagnostic_overlays/atlas_ackermann_v1/install/setup.bash
-ros2 launch atlas_nav2_demo nav2_ackermann.launch.py
-```
+## Preserved skid-steer fixture
 
-The gate starts disabled. For manual simulation testing only, explicitly enable
-it after Nav2 becomes active:
-
-```bash
-ros2 service call /safety_gate/enable std_srvs/srv/SetBool '{data: true}'
-```
-
-Disable it before shutdown:
-
-```bash
-ros2 service call /safety_gate/enable std_srvs/srv/SetBool '{data: false}'
-```
-
-The automated validator handles enable, goal submission, zero-command checks,
-disable, evidence capture, and cleanup:
-
-```bash
-tools/nav2/run_validation.sh
-```
-
-## Configuration
-
-- Simulation geometry: `config/simulation.yaml`. `wheel_radius` and
-  `track_width` must match in the mixer and simulator. Defaults are provisional
-  test geometry, not measured chassis dimensions.
-- Nav2: `config/nav2_params.yaml`.
-- Map: `maps/synthetic_map.yaml`, an 8.0 m by 6.0 m, 0.10 m/cell occupancy map
-  with boundary walls and a central rectangular obstacle.
-- Frames: `map -> odom -> base_link -> laser`.
-
-Important topics:
-
-| Topic | Type | Purpose |
-|---|---|---|
-| `/map` | `nav_msgs/OccupancyGrid` | Synthetic static map |
-| `/atlas_nav2/scan` | `sensor_msgs/LaserScan` | Deterministic ray-cast sensor |
-| `/atlas_nav2/cmd_vel_nav` | `geometry_msgs/Twist` | Ungated Nav2 output |
-| `/atlas_nav2/cmd_vel_safe` | `geometry_msgs/Twist` | Safety-gated simulation command |
-| `/atlas_nav2/wheel_speed_targets` | `sensor_msgs/JointState` | Four angular-velocity targets |
-| `/atlas_nav2/wheel_states` | `sensor_msgs/JointState` | Ideal encoder position/velocity feedback |
-| `/atlas_nav2/odom` | `nav_msgs/Odometry` | Simulated odometry feedback |
-| `/atlas_nav2/safety_status` | `std_msgs/String` | JSON gate state and freshness |
-
-## Troubleshooting
-
-- `Missing nav2_*`: install the listed Humble packages; do not add Autoware
-  overlays to solve a Nav2 dependency.
-- Lifecycle nodes remain inactive: inspect the launch log in the validator output
-  directory and verify `map_server`, planner, controller, behavior server, and BT
-  navigator parameters.
-- No motion: confirm the simulation gate was explicitly enabled and that
-  `/atlas_nav2/cmd_vel_nav` is fresh. Never increase the 250 ms gate timeout to
-  hide scheduling or discovery failures.
-- No local obstacles: verify `/atlas_nav2/scan` uses frame `laser`, the TF chain
-  exists, and the local obstacle layer subscribes to that exact topic.
-- A failed validator run is not a pass. Preserve its directory, inspect
-  `summary.json` and `launch.log`, and rerun only after fixing the cause.
+The older Nav2 demo includes a skid-steer launch, wheel mixer, and differential
+model. It is not representative of Atlas's confirmed drivetrain and its
+validation must not be cited as Atlas Ackermann acceptance.

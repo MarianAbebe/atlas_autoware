@@ -25,7 +25,9 @@ class SafetyGate(Node):
         self.emergency_stop = False
         self.command = Twist()
         self.last_command = None
+        self.last_command_mono_ns = None
         self.last_localization = None
+        self.last_localization_mono_ns = None
         self.last_localization_source_sec = None
         self.output = self.create_publisher(Twist, '/atlas_nav2/cmd_vel_safe', 10)
         self.status = self.create_publisher(String, '/atlas_nav2/safety_status', 10)
@@ -42,9 +44,12 @@ class SafetyGate(Node):
         values = (msg.linear.x, msg.angular.z)
         if all(math.isfinite(value) for value in values):
             self.command = msg
-            self.last_command = time.monotonic()
+            self.last_command_mono_ns = time.monotonic_ns()
+            self.last_command = self.last_command_mono_ns * 1.0e-9
         else:
             self.emergency_stop = True
+            self.enabled = False
+            self.publish_zero()
             self.get_logger().error('Non-finite velocity command latched emergency stop')
 
     def on_localization(self, msg):
@@ -57,7 +62,8 @@ class SafetyGate(Node):
         if not 0.0 <= source_age <= self.timeout:
             self.get_logger().error('Rejected stale or future localization source timestamp')
             return
-        self.last_localization = time.monotonic()
+        self.last_localization_mono_ns = time.monotonic_ns()
+        self.last_localization = self.last_localization_mono_ns * 1.0e-9
         self.last_localization_source_sec = source_sec
 
     def on_enable(self, request, response):
@@ -85,7 +91,8 @@ class SafetyGate(Node):
         self.output.publish(Twist())
 
     def tick(self):
-        now = time.monotonic()
+        tick_mono_ns = time.monotonic_ns()
+        now = tick_mono_ns * 1.0e-9
         age = math.inf if self.last_command is None else now - self.last_command
         localization_age = (math.inf if self.last_localization is None
                             else now - self.last_localization)
@@ -102,6 +109,7 @@ class SafetyGate(Node):
                 self.command.linear.x, self.command.angular.z,
                 self.max_linear, self.max_angular)
         self.output.publish(output)
+        output_publish_mono_ns = time.monotonic_ns()
         self.status.publish(String(data=json.dumps({
             'enabled': self.enabled,
             'emergency_stop': self.emergency_stop,
@@ -115,6 +123,14 @@ class SafetyGate(Node):
                 localization_source_age if math.isfinite(localization_source_age) else None),
             'output_linear': output.linear.x,
             'output_angular': output.angular.z,
+            # Embedded monotonic stamps separate callback/timer delays from
+            # downstream ROS delivery and recorder receipt delays.
+            'gate_tick_monotonic_ns': tick_mono_ns,
+            'safe_output_publish_monotonic_ns': output_publish_mono_ns,
+            'last_command_receipt_monotonic_ns': self.last_command_mono_ns,
+            'last_localization_receipt_monotonic_ns':
+                self.last_localization_mono_ns,
+            'command_age_monotonic_sec': age if math.isfinite(age) else None,
         }, separators=(',', ':'))))
 
     def destroy_node(self):
