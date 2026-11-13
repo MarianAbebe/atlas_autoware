@@ -7,6 +7,15 @@ components. The campus Lanelet map provides route coordinates. NDT uses a
 separate synthetic point-cloud map constructed in those coordinates; it does not
 localize against the supplied campus PCD.
 
+The Autoware simulator path uses the Ackermann-native
+`autoware_control_msgs/msg/Control` contract and the shared provisional vehicle
+geometry in `src/atlas_vehicle_interface/config/ackermann_vehicle.param.yaml`.
+The localization/full-stack launch selects the rate-limited
+`DELAY_STEER_ACC_GEARED` simulation model; see
+[`docs/autoware/ACKERMANN_INTEGRATION.md`](../autoware/ACKERMANN_INTEGRATION.md)
+for the current topic contract and validation evidence. This remains a
+simulation endpoint, not a physical actuator interface.
+
 ```mermaid
 flowchart LR
   Truth["Pinned simulator\nhidden truth"] --> Scene["Atlas synthetic scene"]
@@ -86,3 +95,23 @@ The scene is planar, instantaneous, co-located, noise-free and lacks ray tracing
 or occlusion. The static-object adapter is not general tracking. The actual campus
 PCD remains unregistered to this synthetic NDT world. None of these contracts
 justify deployment on a physical vehicle.
+
+## Isolated Nav2 Ackermann simulation
+
+The separate `src/atlas_nav2_demo` graph uses Nav2 goal handling and Smac
+Hybrid-A* paths, then the Atlas Ackermann controller plugin, command adapter,
+safety gate, and bicycle-model simulator. Synthetic LaserScan feeds the live
+Nav2 obstacle and costmaps. Simulator odometry/TF feeds the controller; the
+simulator's hidden pose is not a controller input. The package's old
+skid-steer fixture remains historical test code and is not Atlas drivetrain
+validation.
+
+Nav2 and Autoware are alternative command owners. Their launches are isolated
+and must never target one simulator concurrently. The shared simulation
+assumptions live in `atlas_vehicle_interface/config/ackermann_vehicle.param.yaml`;
+the Autoware Simple Planning Simulator has its compatible parameter load and
+rate-limited model configuration. Geometry and actuator values remain
+provisional, not measured hardware specifications. Nav2 route success does not
+validate Autoware timing, and Autoware route success does not validate Nav2.
+See `docs/nav2/NAV2_INTEGRATION_STATUS.md` and
+`docs/autoware/ACKERMANN_INTEGRATION.md` for the separate acceptance evidence.

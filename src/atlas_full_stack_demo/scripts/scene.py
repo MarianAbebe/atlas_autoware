@@ -132,6 +132,22 @@ class SceneTimingHistory:
         return json.dumps(list(self.records),separators=(',',':'))
 
 
+def parse_linux_memory_info(text):
+    """Return Linux MemAvailable and MemFree byte counts without conflating them."""
+    values = {}
+    for line in text.splitlines():
+        fields = line.split()
+        if len(fields) >= 2 and fields[0] in ('MemAvailable:', 'MemFree:'):
+            try:
+                values[fields[0][:-1]] = int(fields[1]) * 1024
+            except ValueError:
+                continue
+    return {
+        'system_available_memory_bytes': values.get('MemAvailable'),
+        'system_free_memory_bytes': values.get('MemFree'),
+    }
+
+
 class Scene(Node):
     def __init__(self):
         super().__init__('full_stack_scene',namespace='/atlas_loc')
@@ -209,14 +225,16 @@ class Scene(Node):
             cpu_fraction=None
             if interval and interval>0 and previous.get('process_cpu_time_sec') is not None:
                 cpu_fraction=max(0.0,(cpu_sec-previous['process_cpu_time_sec'])/interval)
+            with open('/proc/meminfo', encoding='ascii') as memory_file:
+                memory_info=parse_linux_memory_info(memory_file.read())
             self.process_resource_sample=dict(process_cpu_time_sec=cpu_sec,
                 process_cpu_fraction_since_sample=cpu_fraction,process_max_rss_kib=int(usage.ru_maxrss),
                 system_load_1m=float(os.getloadavg()[0]),
-                system_available_memory_bytes=int(os.sysconf('SC_AVPHYS_PAGES')*os.sysconf('SC_PAGE_SIZE')))
+                **memory_info)
         except (OSError,ValueError,AttributeError):
             self.process_resource_sample={key:None for key in ('process_cpu_time_sec',
                 'process_cpu_fraction_since_sample','process_max_rss_kib','system_load_1m',
-                'system_available_memory_bytes')}
+                'system_available_memory_bytes','system_free_memory_bytes')}
         self.process_resource_sample_monotonic=now_monotonic
 
     def on_map_cloud(self,msg):

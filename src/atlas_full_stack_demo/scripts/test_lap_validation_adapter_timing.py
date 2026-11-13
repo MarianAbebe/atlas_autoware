@@ -10,7 +10,10 @@ class AdapterTimingCapture(unittest.TestCase):
         default = build_launch_command(5, '/tmp/atlas-run')
         self.assertIn('launch_rviz:=false', default)
         self.assertIn('launch_ego_marker:=false', default)
+        self.assertIn('steering_step_diagnostics:=false', default)
         self.assertIn('launch_ego_marker:=true', build_launch_command(1, '/tmp/atlas-one', True))
+        diagnostic = build_launch_command(1, '/tmp/atlas-diag', steering_step_diagnostics=True)
+        self.assertIn('steering_step_diagnostics:=true', diagnostic)
 
     def test_raw_adapter_payload_and_collector_clock_are_both_preserved(self):
         payload = '{"event":"predicted_objects_published","header_stamp":42.0,' \

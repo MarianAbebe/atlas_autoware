@@ -7,6 +7,7 @@
   <license>Apache-2.0</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
   <exec_depend>atlas_closed_loop_demo</exec_depend>
+  <exec_depend>atlas_vehicle_interface</exec_depend>
   <exec_depend>autoware_motion_velocity_planner</exec_depend>
   <exec_depend>autoware_motion_velocity_obstacle_stop_module</exec_depend>
   <exec_depend>autoware_perception_msgs</exec_depend>

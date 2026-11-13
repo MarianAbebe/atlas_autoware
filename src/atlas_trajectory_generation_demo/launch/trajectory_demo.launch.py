@@ -15,7 +15,8 @@ def generate_launch_description():
     if not autoware_root:
         raise RuntimeError('Set ATLAS_AUTOWARE_ROOT to the pinned Autoware checkout before launch')
     core = os.path.join(autoware_root, 'src/core/autoware_core/planning')
-    vehicle = os.path.join(share, 'config', 'test_vehicle.param.yaml')
+    vehicle = os.path.join(get_package_share_directory('atlas_vehicle_interface'),
+                           'config', 'ackermann_vehicle.param.yaml')
     overrides = os.path.join(share, 'config', 'planning_overrides.param.yaml')
     results = LaunchConfiguration('results_dir')
     map_launch = IncludeLaunchDescription(

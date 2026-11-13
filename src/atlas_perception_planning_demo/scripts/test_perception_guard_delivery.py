@@ -37,6 +37,9 @@ class DeliveryIsolation(unittest.TestCase):
         self.assertIs(groups['base_safety_heartbeat'], node.base_callback_group)
         self.assertIs(groups['base_safety_status'], node.base_callback_group)
         self.assertIs(groups['lidar/raw'], node.sensor_callback_group)
+        self.assertNotIn('lidar/extended', groups)
+        self.assertNotIn('lidar/deskewed', groups)
+        self.assertNotIn('lidar/compact', groups)
         self.assertIs(groups['obstacles/pointcloud'], node.sensor_callback_group)
         self.assertIs(groups['obstacles/predicted_objects'], node.predicted_callback_group)
         self.assertIs(groups['obstacles/detected_objects'], node.sensor_callback_group)
@@ -112,8 +115,7 @@ class DeliveryIsolation(unittest.TestCase):
         self.assertAlmostEqual(node.base_callback_last_duration_sec['base_status'], .003)
 
     def test_freshness_limit_and_authorization_semantics_are_unchanged(self):
-        names=('raw','extended','deskewed','compact','pointcloud',
-               'predicted_objects','base_heartbeat','base_status')
+        names=('raw','pointcloud','predicted_objects','base_heartbeat','base_status')
         node=SimpleNamespace(state_lock=threading.RLock(), timeout=.3,
             samples={name:(.9,99.9,.02,.1) for name in names},
             base={'armed':True,'latched':False}, input_health={},

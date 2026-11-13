@@ -16,12 +16,12 @@ def generate_launch_description():
     ns='/atlas_loc';old=Path(share('atlas_closed_loop_demo'))/'config'
     path=Path(share('atlas_localization_closed_loop_demo'))/'launch/localization_loop.launch.py'
     spec=importlib.util.spec_from_file_location('localization_composition',path);loc=importlib.util.module_from_spec(spec);spec.loader.exec_module(loc)
-    base=loc.generate_launch_description(include_fixture=False,ndt_points=ns+'/lidar/compact',smoother_input=ns+'/obstacle_trajectory',watchdog_outputs=[('gate/input/external_emergency_stop_heartbeat',ns+'/base_safety_heartbeat'),('safety_status',ns+'/base_safety_status')],ndt_num_threads=LaunchConfiguration('ndt_num_threads'))
+    base=loc.generate_launch_description(include_fixture=False,ndt_points=ns+'/lidar/compact',smoother_input=ns+'/obstacle_trajectory',watchdog_outputs=[('gate/input/external_emergency_stop_heartbeat',ns+'/base_safety_heartbeat'),('safety_status',ns+'/base_safety_status')],ndt_num_threads=LaunchConfiguration('ndt_num_threads'),steering_step_diagnostics=ParameterValue(LaunchConfiguration('steering_step_diagnostics'),value_type=bool))
     configured_autoware_root = os.environ.get('ATLAS_AUTOWARE_ROOT')
     if not configured_autoware_root:
         raise RuntimeError('Set ATLAS_AUTOWARE_ROOT to the pinned Autoware 1.9.0 checkout before launch')
     autoware_root=Path(configured_autoware_root).expanduser().resolve()
-    core=autoware_root/'src/core/autoware_core';vehicle=str(old/'test_vehicle.param.yaml')
+    core=autoware_root/'src/core/autoware_core';vehicle=str(Path(share('atlas_vehicle_interface'))/'config'/'ackermann_vehicle.param.yaml')
     perception_share=Path(share('atlas_perception_planning_demo'))
     preprocessing=ComposableNodeContainer(name='perception_container',namespace=ns,package='rclcpp_components',executable='component_container',output='screen',composable_node_descriptions=[
         ComposableNode(package='atlas_sensor_kit',plugin='atlas_sensor_kit::LivoxToExtendedComponent',name='livox_converter',namespace=ns,remappings=[('~/input/pointcloud',ns+'/lidar/raw'),('~/output/pointcloud',ns+'/lidar/extended')]),
@@ -34,6 +34,7 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('obstacle',default_value='true'),
         DeclareLaunchArgument('ndt_num_threads',default_value='1',description='NDT worker threads; five-lap scenario selects 2 for sustained synthetic scan processing.'),
+        DeclareLaunchArgument('steering_step_diagnostics',default_value='false',description='Enable diagnostic-only simulator integration-step telemetry; requires the isolated instrumented simulator overlay.'),
         DeclareLaunchArgument('request_engagement',default_value='true'),
         DeclareLaunchArgument('results_dir',default_value='/tmp/atlas_full_stack_manual'),
         DeclareLaunchArgument('osm_path',default_value=str(Path(map_dir)/'finalMap_repaired.osm')),

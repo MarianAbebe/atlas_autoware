@@ -13,7 +13,7 @@ import numpy as np
 
 from scene import (LIDAR_SERIALIZATION_TIMING_FIELDS, ODOMETRY_TIMING_FIELDS,
     SCAN_DTYPE, SCAN_FIELDS, TICK_TIMING_FIELDS, Scene, SceneTimingHistory,
-    packed_xyz_view, source_age_at_receipt_sec, thread_cpu_elapsed_sec, thread_cpu_time_sec,
+    packed_xyz_view, parse_linux_memory_info, source_age_at_receipt_sec, thread_cpu_elapsed_sec, thread_cpu_time_sec,
     transform_world_points, SCAN_FIELDS)
 from std_msgs.msg import Header
 from nav_msgs.msg import Odometry
@@ -69,6 +69,14 @@ def fake_scene(truth_stamp=(1,0), path=None):
 
 
 class ScanGeometry(unittest.TestCase):
+    def test_memory_sampler_distinguishes_available_from_free_pages(self):
+        sample = parse_linux_memory_info('MemFree: 10 kB\nMemAvailable: 25 kB\n')
+        self.assertEqual(sample['system_available_memory_bytes'], 25 * 1024)
+        self.assertEqual(sample['system_free_memory_bytes'], 10 * 1024)
+        missing = parse_linux_memory_info('MemFree: 10 kB\n')
+        self.assertIsNone(missing['system_available_memory_bytes'])
+        self.assertEqual(missing['system_free_memory_bytes'], 10 * 1024)
+
     def test_distinct_start_finish_loop_repeats_with_connected_transitions(self):
         scene=SimpleNamespace(path=None,lap_path=None,pending_path=None,external_map_world=None,
             external_map_cloud=None,map_cloud_topic='',route_length_requested=sum(

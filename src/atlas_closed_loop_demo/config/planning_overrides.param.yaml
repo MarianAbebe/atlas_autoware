@@ -6,8 +6,8 @@
     path_length:
       backward: 0.5
       forward: 100.0
-    max_velocity: 1.0
-    max_vel: 1.0
+    max_velocity: 0.8
+    max_vel: 0.8
     normal:
       min_acc: -0.5
       max_acc: 0.5

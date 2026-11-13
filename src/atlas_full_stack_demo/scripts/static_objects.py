@@ -9,7 +9,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.time import Time
 from rclpy.executors import ExternalShutdownException
-from rclpy.qos import qos_profile_sensor_data
+from rclpy.qos import QoSProfile, ReliabilityPolicy
 from tf2_ros import Buffer,TransformListener,TransformException
 from sensor_msgs.msg import PointCloud2
 from std_msgs.msg import String
@@ -64,7 +64,14 @@ class Adapter(Node):
         self.timing_pub=self.create_publisher(String,'diagnostics/object_adapter_timing',10)
         self.last_cloud_receipt=None;self.last_detected_receipt=None;self.last_publish_receipt=None
         self.create_subscription(DetectedObjects,'obstacles/detected_objects',self.detected,10)
-        self.create_subscription(PointCloud2,'clusters',self.cloud,qos_profile_sensor_data)
+        # This reliable depth-1 topic is the exact per-frame membership
+        # companion to DetectedObjects. Best-effort sensor QoS could lose the
+        # cloud while the reliable detection remained queued, leaving a
+        # detection waiting without the geometry needed to publish a valid
+        # prediction. Depth 1 prefers the newest pair and does not retain a
+        # backlog; message stamps are still matched exactly below.
+        self.create_subscription(PointCloud2,'clusters',self.cloud,
+            QoSProfile(depth=1,reliability=ReliabilityPolicy.RELIABLE))
         self.create_timer(0.01,self.retry_transforms)
     @staticmethod
     def key(m):return m.header.stamp.sec,m.header.stamp.nanosec

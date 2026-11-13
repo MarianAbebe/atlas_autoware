@@ -15,7 +15,8 @@ def generate_launch_description():
     share = get_package_share_directory('atlas_closed_loop_demo')
     autoware_root = Path(os.environ.get('ATLAS_AUTOWARE_ROOT', Path(__file__).resolve().parents[4] / 'references/autoware'))
     core = str(autoware_root / 'src/core/autoware_core/planning')
-    vehicle = os.path.join(share, 'config', 'test_vehicle.param.yaml')
+    vehicle = os.path.join(get_package_share_directory('atlas_vehicle_interface'),
+                           'config', 'ackermann_vehicle.param.yaml')
     overrides = os.path.join(share, 'config', 'planning_overrides.param.yaml')
     obstacle_share = get_package_share_directory('atlas_obstacle_stopping_demo')
     results = LaunchConfiguration('results_dir')

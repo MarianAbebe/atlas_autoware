@@ -94,7 +94,9 @@ def main():
             valid['quaternions'] &= abs(q.x*q.x+q.y*q.y+q.z*q.z+q.w*q.w-1) < 1e-4
         elif name in ['command', 'gate']:
             rows[name].append([t, stamp(msg.stamp), msg.lateral.steering_tire_angle,
-                               msg.longitudinal.velocity, msg.longitudinal.acceleration])
+                               msg.longitudinal.velocity, msg.longitudinal.acceleration,
+                               msg.lateral.steering_tire_rotation_rate,
+                               msg.lateral.is_defined_steering_tire_rotation_rate])
         elif name == 'scan':
             rows[name].append([t, stamp(msg.header.stamp), msg.width*msg.height])
             valid['frames'] &= msg.header.frame_id == 'synthetic_lidar'
@@ -309,14 +311,14 @@ def main():
                   ndt_pose_exclusive=graph.get('ndt/ndt_pose_with_covariance',{}).get('publishers') == ['/atlas_loc/ndt/ndt_scan_matcher'],
                   ekf_receives_ndt='/atlas_loc/ekf/ekf_localizer' in graph.get('ndt/ndt_pose_with_covariance',{}).get('subscribers',[]),
                   ndt_predictions_exclusively_ekf=graph.get('ekf/ekf_pose_with_covariance',{}).get('publishers') == ['/atlas_loc/ekf/ekf_localizer'],
-                  speed_limit=all(-.05 <= r[6] <= 1.1 for r in truth),
+                  speed_limit=all(-.05 <= r[6] <= .8 for r in truth),
                   actual_simulator_samples=len(truth)>100,
                   scans_exclusive_fixture=graph.get('sensors/points',{}).get('publishers') == ['/atlas_loc/synthetic_sensor_fixture'],
                   ndt_receives_generated_scans='/atlas_loc/ndt/ndt_scan_matcher' in graph.get('sensors/points',{}).get('subscribers',[]),
                   simulator_exclusive_gate=graph.get('gated/control_cmd',{}).get('publishers') == ['/atlas_loc/gate/vehicle_cmd_gate'],
                   scan_world_consistency=world_residual is not None and world_residual < .001,
                   finite_scan_samples=all(math.isfinite(x) for sample in scan_samples for p in sample['points'] for x in p),
-                  bounded_control=all(all(math.isfinite(v) for v in r[2:]) and abs(r[2])<=.45 and abs(r[4])<=.501 for r in rows['command']),
+                  bounded_control=all(all(math.isfinite(v) for v in r[2:6]) and abs(r[2])<=.50 and abs(r[4])<=.501 and abs(r[5])<=.6001 for r in rows['command']),
                   acceleration_limit=bool(accelerations) and max(map(abs,accelerations))<.55)
     checks['timestamps_nondecreasing'] = all(all(b[1]>=a[1] for a,b in zip(data,data[1:])) for data in rows.values())
     checks['timestamps_positive'] = all(r[1]>0 for data in rows.values() for r in data)
@@ -356,6 +358,8 @@ def main():
         truth_distance_m=sum(distances), final_goal_distance_m=math.hypot(truth[-1][2]-108,truth[-1][3]-100) if truth else None,
         max_lateral_error_m=max((abs(r[3]-100) for r in truth),default=None),
         max_speed_mps=max((r[6] for r in truth),default=None),
+        max_command_steering_rad=max((abs(r[2]) for r in rows['command']),default=None),
+        max_command_steering_rate_radps=max((abs(r[5]) for r in rows['command']),default=None),
         scan_world_residual_m=world_residual, scan_world_matched=len(world_samples), scan_sample_displacement_m=scan_change,
         max_acceleration_mps2=max(map(abs,accelerations),default=None),
         ndt_execution_ms_max=max((r[2] for r in rows['ndt_ms']),default=None),

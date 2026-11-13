@@ -79,11 +79,15 @@ class Guard(Node):
         self.shutdown_requested = False
         self.pub = self.create_publisher(ManualOperatorHeartbeat, 'gate/input/external_emergency_stop_heartbeat', 10)
         self.status = self.create_publisher(String, 'safety_status', 10)
+        # Monitor the raw acquisition stream and the final processed obstacle
+        # cloud. The intervening converters preserve the original cloud
+        # timestamp, and a stalled stage therefore ages the final output too.
+        # Subscribing in Python to every full PointCloud2 payload only to read
+        # its header caused redundant deserialization and scheduling cost.
         self.create_subscription(PointCloud2, 'obstacles/pointcloud', lambda m: self.receive('pointcloud', m.header.stamp), qos_profile_sensor_data,
                                  callback_group=self.sensor_callback_group)
-        for stage in ['raw', 'extended', 'deskewed', 'compact']:
-            self.create_subscription(PointCloud2, 'lidar/'+stage, lambda m, n=stage: self.receive(n, m.header.stamp), qos_profile_sensor_data,
-                                     callback_group=self.sensor_callback_group)
+        self.create_subscription(PointCloud2, 'lidar/raw', lambda m: self.receive('raw', m.header.stamp), qos_profile_sensor_data,
+                                 callback_group=self.sensor_callback_group)
         self.create_subscription(DetectedObjects, 'obstacles/detected_objects',
                                  self.detected_objects, 10,
                                  callback_group=self.sensor_callback_group)
@@ -199,7 +203,7 @@ class Guard(Node):
     def stale(self):
         ros_now = self.get_clock().now().nanoseconds * 1e-9
         mono = time.monotonic()
-        names = ('raw', 'extended', 'deskewed', 'compact', 'pointcloud', 'predicted_objects', 'base_heartbeat', 'base_status')
+        names = ('raw', 'pointcloud', 'predicted_objects', 'base_heartbeat', 'base_status')
         with self.state_lock:
             self.input_health = sample_health(self.samples, names, ros_now, mono)
             bad = [n for n in names
@@ -228,6 +232,7 @@ class Guard(Node):
 
     def tick(self):
         with self.state_lock:
+            was_bad = self.bad
             tick_now = time.monotonic()
             tick_gap = tick_now-self.last_tick if self.last_tick is not None else None
             self.last_tick = tick_now
@@ -263,55 +268,61 @@ class Guard(Node):
                 # atomic with respect to input freshness updates.
                 self.pub.publish(heartbeat_msg)
             self.last_tick_duration = time.monotonic()-tick_now
-            diagnostic = {'stamp': now.nanoseconds*1e-9, 'armed': self.ready and not self.bad,
-                          'latched': self.bad, 'fault_stamp': self.fault_at,
-                          'fault_inputs': list(self.fault_inputs), 'currently_stale': stale,
-                          'fault_input_health': self.fault_health,
-                          'fault_tick_gap_sec': self.fault_tick_gap,
-                          'instrumentation': {'tick_count': self.tick_count,
-                                              'tick_schedule_gap_sec': tick_gap,
-                                              'tick_max_schedule_gap_sec': self.max_tick_gap,
-                                              'tick_work_sec': self.last_tick_duration,
-                                              'inputs': dict(self.input_health),
-                                              'base_callback_diagnostics': {
-                                                  'callback_count': dict(self.base_callback_counts),
-                                                  'last_receipt_monotonic_sec': dict(self.base_callback_last_receipt_monotonic),
-                                                  'max_receipt_gap_sec': dict(self.base_callback_max_gap_sec),
-                                                  'last_callback_duration_sec': dict(self.base_callback_last_duration_sec),
-                                                  'max_callback_duration_sec': dict(self.base_callback_max_duration_sec),
-                                                  'source_age_at_callback_sec': dict(self.base_callback_source_age_sec),
-                                                  'process_cpu_time_sec': time.process_time(),
-                                              },
-                                              'detected_objects_callback': {
-                                                  'count': self.detected_callback_count,
-                                                  'last_receipt_monotonic_sec': self.detected_callback_last_receipt_monotonic,
-                                                  'max_receipt_gap_sec': self.detected_callback_max_gap_sec,
-                                                  'last_source_stamp': self.detected_callback_last_source_stamp,
-                                                  'last_source_age_sec': self.detected_callback_last_source_age_sec,
-                                                  'last_callback_duration_sec': self.detected_callback_last_duration_sec,
-                                                  'max_callback_duration_sec': self.detected_callback_max_duration_sec,
-                                              },
-                                              'predicted_objects_callback': {
-                                                  'count': self.predicted_callback_count,
-                                                  'last_receipt_monotonic_sec': self.predicted_callback_last_receipt_monotonic,
-                                                  'max_receipt_gap_sec': self.predicted_callback_max_gap_sec,
-                                                  'last_callback_duration_sec': self.predicted_callback_last_duration_sec,
-                                                  'max_callback_duration_sec': self.predicted_callback_max_duration_sec,
-                                              },
-                                              'base_watchdog_state': (None if self.base is None else {
-                                                  'stamp': self.base.get('stamp'),
-                                                  'armed': self.base.get('armed'),
-                                                  'latched': self.base.get('latched'),
-                                                  'fault_inputs': self.base.get('fault_inputs'),
-                                                  'currently_stale': self.base.get('currently_stale'),
-                                                  'instrumentation': self.base.get('instrumentation', {}),
-                                              })}}
+            publish_diagnostic = self.tick_count % 5 == 0 or (self.bad and not was_bad)
+            if publish_diagnostic:
+                diagnostic = {'stamp': now.nanoseconds*1e-9, 'armed': self.ready and not self.bad,
+                              'latched': self.bad, 'fault_stamp': self.fault_at,
+                              'fault_inputs': list(self.fault_inputs), 'currently_stale': stale,
+                              'fault_input_health': self.fault_health,
+                              'fault_tick_gap_sec': self.fault_tick_gap,
+                              'instrumentation': {'tick_count': self.tick_count,
+                                                  'tick_schedule_gap_sec': tick_gap,
+                                                  'tick_max_schedule_gap_sec': self.max_tick_gap,
+                                                  'tick_work_sec': self.last_tick_duration,
+                                                  'inputs': dict(self.input_health),
+                                                  'base_callback_diagnostics': {
+                                                      'callback_count': dict(self.base_callback_counts),
+                                                      'last_receipt_monotonic_sec': dict(self.base_callback_last_receipt_monotonic),
+                                                      'max_receipt_gap_sec': dict(self.base_callback_max_gap_sec),
+                                                      'last_callback_duration_sec': dict(self.base_callback_last_duration_sec),
+                                                      'max_callback_duration_sec': dict(self.base_callback_max_duration_sec),
+                                                      'source_age_at_callback_sec': dict(self.base_callback_source_age_sec),
+                                                      'process_cpu_time_sec': time.process_time(),
+                                                  },
+                                                  'detected_objects_callback': {
+                                                      'count': self.detected_callback_count,
+                                                      'last_receipt_monotonic_sec': self.detected_callback_last_receipt_monotonic,
+                                                      'max_receipt_gap_sec': self.detected_callback_max_gap_sec,
+                                                      'last_source_stamp': self.detected_callback_last_source_stamp,
+                                                      'last_source_age_sec': self.detected_callback_last_source_age_sec,
+                                                      'last_callback_duration_sec': self.detected_callback_last_duration_sec,
+                                                      'max_callback_duration_sec': self.detected_callback_max_duration_sec,
+                                                  },
+                                                  'predicted_objects_callback': {
+                                                      'count': self.predicted_callback_count,
+                                                      'last_receipt_monotonic_sec': self.predicted_callback_last_receipt_monotonic,
+                                                      'max_receipt_gap_sec': self.predicted_callback_max_gap_sec,
+                                                      'last_callback_duration_sec': self.predicted_callback_last_duration_sec,
+                                                      'max_callback_duration_sec': self.predicted_callback_max_duration_sec,
+                                                  },
+                                                  'base_watchdog_state': (None if self.base is None else {
+                                                      'stamp': self.base.get('stamp'),
+                                                      'armed': self.base.get('armed'),
+                                                      'latched': self.base.get('latched'),
+                                                      'fault_inputs': self.base.get('fault_inputs'),
+                                                      'currently_stale': self.base.get('currently_stale'),
+                                                      'instrumentation': self.base.get('instrumentation', {}),
+                                                  })}}
 
         # Keep serialization and DDS publication outside the state lock so
         # base status/heartbeat callbacks are not blocked by diagnostics.
-        msg = String()
-        msg.data = json.dumps(diagnostic)
-        self.status.publish(msg)
+        # Status is recorder-facing diagnostics; heartbeat authorization and
+        # safety decisions above remain at 50 Hz. Avoid repeatedly encoding
+        # the nested callback/timing snapshot on every safety tick.
+        if publish_diagnostic:
+            msg = String()
+            msg.data = json.dumps(diagnostic, separators=(',', ':'))
+            self.status.publish(msg)
 
 
 def main():

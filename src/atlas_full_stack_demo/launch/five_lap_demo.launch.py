@@ -35,6 +35,7 @@ def generate_launch_description():
             'lidar_max_range_m': '12.0',
             'launch_routing_probe': 'false',
             'ndt_num_threads': '2',
+            'steering_step_diagnostics': 'true',
         }.items(),
     )
     operator_start = Node(

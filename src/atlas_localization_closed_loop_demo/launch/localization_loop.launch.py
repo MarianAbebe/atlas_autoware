@@ -7,11 +7,12 @@ from launch_ros.parameter_descriptions import ParameterValue
 from launch_ros.descriptions import ComposableNode
 
 
-def generate_launch_description(include_fixture=True, ndt_points=None, smoother_input=None, watchdog_outputs=None, ndt_num_threads=1):
+def generate_launch_description(include_fixture=True, ndt_points=None, smoother_input=None, watchdog_outputs=None,
+                               ndt_num_threads=1, steering_step_diagnostics=False):
     ns = '/atlas_loc'
     old = Path(share('atlas_closed_loop_demo')) / 'config'
     control = Path(share('autoware_trajectory_follower_node')) / 'param'
-    vehicle = str(old / 'test_vehicle.param.yaml')
+    vehicle = str(Path(share('atlas_vehicle_interface')) / 'config' / 'ackermann_vehicle.param.yaml')
     simulator = ComposableNodeContainer(
         name='simulator_container', namespace=ns+'/sim',
         package='rclcpp_components', executable='component_container', output='screen',
@@ -20,8 +21,16 @@ def generate_launch_description(include_fixture=True, ndt_points=None, smoother_
             plugin='autoware::simulator::simple_planning_simulator::SimplePlanningSimulator',
             name='simple_planning_simulator', namespace=ns+'/sim',
             parameters=[str(old/'simulator.param.yaml'), {
-                'vehicle_model_type': 'IDEAL_STEER_ACC_GEARED',
-                'simulated_frame_id': 'hidden_truth_base', 'initial_engage_state': False}],
+                # The ideal model jumps directly to the requested steering angle and
+                # therefore ignores steer_rate_lim. Use the Humble delayed model with
+                # zero input delay and its minimum 30 ms time constant so the configured
+                # steering and acceleration rate limits are enforced without adding an
+                # unvalidated transport delay to this closed-loop fixture.
+                'vehicle_model_type': 'DELAY_STEER_ACC_GEARED',
+                'acc_time_delay': 0.0, 'acc_time_constant': 0.03,
+                'steer_time_delay': 0.0, 'steer_time_constant': 0.03,
+                'simulated_frame_id': 'hidden_truth_base', 'initial_engage_state': False,
+                'enable_steering_step_diagnostics': steering_step_diagnostics}],
             remappings=[('input/ackermann_control_command', ns+'/gated/control_cmd'),
                         ('input/trajectory', ns+'/trajectory')])])
     ndt = Node(package='autoware_ndt_scan_matcher', executable='autoware_ndt_scan_matcher_node',
@@ -56,7 +65,7 @@ def generate_launch_description(include_fixture=True, ndt_points=None, smoother_
                     str(smoother_root/'default_velocity_smoother.param.yaml'),
                     str(smoother_root/'Analytical.param.yaml'), vehicle,
                     str(old/'planning_overrides.param.yaml'),
-                    {'algorithm_type': 'Analytical', 'max_velocity': 1., 'max_vel': 1.}],
+                    {'algorithm_type': 'Analytical', 'max_velocity': 0.8, 'max_vel': 0.8}],
         remappings=[('/localization/kinematic_state', ns+'/ekf/ekf_odom'),
                     ('~/input/acceleration', ns+'/sensors/acceleration'),
                     ('~/input/operation_mode_state', ns+'/operation_mode'),
@@ -79,4 +88,7 @@ def generate_launch_description(include_fixture=True, ndt_points=None, smoother_
                     ('feedback/steering', ns+'/sim/output/steering')])
     fixture = Node(package='atlas_localization_closed_loop_demo', executable='localization_fixture',
                    output='screen')
-    return LaunchDescription([simulator, ndt, ekf] + ([fixture] if include_fixture else []) + [smoother, controller, gate, watchdog])
+    estop_disengage = Node(package='atlas_localization_closed_loop_demo',
+                           executable='estop_disengage.py', output='screen')
+    return LaunchDescription([simulator, ndt, ekf] + ([fixture] if include_fixture else []) +
+                             [smoother, controller, gate, watchdog, estop_disengage])

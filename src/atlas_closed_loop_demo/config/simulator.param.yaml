@@ -3,17 +3,20 @@
   ros__parameters:
     origin_frame_id: map
     simulated_frame_id: atlas_closed_loop_base_link
-    vehicle_model_type: IDEAL_STEER_ACC
+    # Default to the rate-limited Ackermann model. An ideal model ignores steer_rate_lim.
+    vehicle_model_type: DELAY_STEER_ACC_GEARED
     initialize_source: INITIAL_POSE_TOPIC
     initial_engage_state: true
     enable_road_slope_simulation: false
     enable_pub_steer: true
     add_measurement_noise: false
     timer_sampling_time_ms: 20
-    vel_lim: 1.5
-    vel_rate_lim: 1.5
-    steer_lim: 0.45
-    steer_rate_lim: 1.0
+    vel_lim: 0.80
+    vel_rate_lim: 0.80
+    steer_lim: 0.50
+    # Conservative model-side margin below the shared 0.60 rad/s command limit;
+    # protects the measured update-to-update rate from integration/float error.
+    steer_rate_lim: 0.59
     x_stddev: 0.0001
     y_stddev: 0.0001
     # Provisional geometry for this visualization and the simulator bicycle model only.
@@ -26,4 +29,4 @@
     left_overhang: 0.10
     right_overhang: 0.10
     vehicle_height: 0.50
-    max_steer_angle: 0.45
+    max_steer_angle: 0.50

@@ -21,6 +21,7 @@
   <depend>lanelet2_core</depend>
   <depend>lanelet2_routing</depend>
   <exec_depend>atlas_map_integration_demo</exec_depend>
+  <exec_depend>atlas_vehicle_interface</exec_depend>
   <exec_depend>autoware_path_generator</exec_depend>
   <exec_depend>autoware_planning_topic_converter</exec_depend>
   <exec_depend>autoware_velocity_smoother</exec_depend>

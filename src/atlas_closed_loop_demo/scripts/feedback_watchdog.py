@@ -7,6 +7,7 @@ import json
 import threading
 import time
 import rclpy
+from rclpy.clock import Clock, ClockType
 from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.node import Node
@@ -28,6 +29,47 @@ def format_fault_detail(fault_health, tick_gap_sec):
     }, sort_keys=True, separators=(',', ':'))
 
 
+class ClockDiscontinuityMonitor:
+    """Compare ROS system-clock progression with monotonic elapsed time.
+
+    The full-stack simulator uses system ROS time (no /clock). A clock step can
+    otherwise produce a huge simulator integration dt or make source stamps
+    appear future-dated. This monitor deliberately does not compare unlike
+    absolute epochs; only deltas within each clock are compared.
+    """
+
+    def __init__(self, tolerance_sec=0.1):
+        self.tolerance_sec = float(tolerance_sec)
+        self.previous_ros_ns = None
+        self.previous_monotonic_ns = None
+        self.last_sample = None
+
+    def observe(self, ros_time_ns, monotonic_time_ns):
+        ros_ns = int(ros_time_ns)
+        mono_ns = int(monotonic_time_ns)
+        if self.previous_ros_ns is None:
+            self.previous_ros_ns = ros_ns
+            self.previous_monotonic_ns = mono_ns
+            return None
+        ros_delta = (ros_ns - self.previous_ros_ns) * 1e-9
+        mono_delta = (mono_ns - self.previous_monotonic_ns) * 1e-9
+        discrepancy = ros_delta - mono_delta
+        sample = {
+            'ros_delta_sec': ros_delta,
+            'monotonic_delta_sec': mono_delta,
+            'delta_discrepancy_sec': discrepancy,
+            'tolerance_sec': self.tolerance_sec,
+        }
+        jumped = (mono_delta < 0.0 or ros_delta < 0.0 or
+                  abs(discrepancy) > self.tolerance_sec)
+        self.previous_ros_ns = ros_ns
+        self.previous_monotonic_ns = mono_ns
+        if jumped:
+            self.last_sample = sample
+            return sample
+        return None
+
+
 class Watchdog(Node):
     def __init__(self):
         super().__init__('feedback_watchdog')
@@ -38,6 +80,7 @@ class Watchdog(Node):
         self.state_lock=threading.RLock()
         self.input_callback_group=MutuallyExclusiveCallbackGroup()
         self.timer_callback_group=MutuallyExclusiveCallbackGroup()
+        self.status_callback_group=MutuallyExclusiveCallbackGroup()
         self.shutdown_requested=False
         self.create_subscription(String,'test_shutdown',lambda m:setattr(self,'shutdown_requested',True),10,
                                  callback_group=self.input_callback_group)
@@ -45,6 +88,7 @@ class Watchdog(Node):
         self.arm_stability=self.declare_parameter("arm_stability_sec",1.0).value
         self.timeout=self.declare_parameter('freshness_sec',.3).value
         self.fault_at=None; self.fault_inputs=[]; self.stationary_since=None
+        self.pending_fault_log=None
         self.input_health={};self.fault_health=None;self.last_tick=None;self.fault_tick_gap=None
         self.tick_count=0;self.last_tick_start_monotonic=None;self.last_tick_gap_sec=None
         self.max_tick_gap_sec=0.0;self.last_tick_duration_sec=None
@@ -54,6 +98,11 @@ class Watchdog(Node):
         self.last_status_publish_call_start_monotonic=None
         self.status_publish_duration_sec=None
         self.status_publish_operation_duration_sec=None
+        self.last_stale=[]
+        use_sim_time = bool(self.get_parameter('use_sim_time').value)
+        self.clock_monitor = None if use_sim_time else ClockDiscontinuityMonitor(
+            self.declare_parameter('clock_discontinuity_tolerance_sec', 0.1).value)
+        self.clock_discontinuity = None
         self.pub=self.create_publisher(Heartbeat,'gate/input/external_emergency_stop_heartbeat',10)
         self.status=self.create_publisher(String,'safety_status',10)
         for name,typ,topic in [('odometry',Odometry,'feedback/odometry'),('steering',SteeringReport,'feedback/steering'),('acceleration',AccelWithCovarianceStamped,'feedback/acceleration'),('trajectory',Trajectory,'trajectory'),('command',Control,'control_cmd')]:
@@ -62,7 +111,15 @@ class Watchdog(Node):
         self.create_subscription(Odometry,'sim/output/odometry',self.actual_state,10,
                                  callback_group=self.input_callback_group)
         self.create_service(Trigger,'~/rearm',self.rearm,callback_group=self.input_callback_group)
-        self.create_timer(.02,self.tick,callback_group=self.timer_callback_group)
+        # Freshness/latch evaluation must not wait for a ROS/system-clock
+        # timer after a wall-clock step. This graph has use_sim_time=false.
+        self.create_timer(.02,self.tick,callback_group=self.timer_callback_group,
+                          clock=Clock(clock_type=ClockType.STEADY_TIME))
+        # Detailed JSON telemetry is diagnostic only. Keep its serialization
+        # off the 50 Hz safety timer and publish at 10 Hz; the heartbeat and
+        # every freshness/latch decision remain at 50 Hz.
+        self.create_timer(.1,self.publish_status_tick,callback_group=self.status_callback_group,
+                          clock=Clock(clock_type=ClockType.STEADY_TIME))
 
     def receive(self,name,msg):
         stamp=msg.header.stamp if hasattr(msg,'header') else msg.stamp
@@ -106,8 +163,18 @@ class Watchdog(Node):
         self.tick_count+=1;self.last_tick_start_monotonic=tick_now
         self.last_tick_gap_sec=tick_gap
         if tick_gap is not None:self.max_tick_gap_sec=max(self.max_tick_gap_sec,tick_gap)
+        clock_sample = None
+        if self.clock_monitor is not None:
+            clock_sample = self.clock_monitor.observe(
+                self.get_clock().now().nanoseconds, time.monotonic_ns())
         with self.state_lock:
             stale=self.stale()
+            if clock_sample is not None:
+                self.clock_discontinuity = clock_sample
+                stale = list(stale)
+                if 'clock_discontinuity' not in stale:
+                    stale.append('clock_discontinuity')
+            self.last_stale=stale
             if not stale and not self.bad:
                 if self.good_since is None:self.good_since=time.monotonic()
                 if self.ready or time.monotonic()-self.good_since>=self.arm_stability:
@@ -119,15 +186,30 @@ class Watchdog(Node):
                     pub_start=time.monotonic();self.pub.publish(hb);pub_end=time.monotonic()
                     self.heartbeat_publish_count+=1;self.last_heartbeat_publish_monotonic=pub_start
                     self.heartbeat_publish_duration_sec=pub_end-pub_start
-            elif self.ready and not self.bad:
+            elif (self.ready or clock_sample is not None) and not self.bad:
                 self.bad=True;self.fault_at=self.get_clock().now().nanoseconds*1e-9;self.fault_inputs=stale
                 self.fault_health=dict(self.input_health);self.fault_tick_gap=tick_gap
-                detail = format_fault_detail(self.fault_health, self.fault_tick_gap)
-                self.get_logger().warn('LATCHED stale required input: '+','.join(stale)+
-                    '; heartbeat withheld; pinned gate must brake; fault diagnostics: '+detail)
+                if self.clock_discontinuity is not None:
+                    self.fault_health['clock_discontinuity'] = dict(self.clock_discontinuity)
+                self.pending_fault_log=('LATCHED stale required input: '+','.join(stale)+
+                    '; heartbeat withheld; pinned gate must brake')
             if stale:self.good_since=None
-        self.publish_status(stale)
         self.last_tick_duration_sec=time.monotonic()-tick_now
+
+    def publish_status_tick(self):
+        with self.state_lock:
+            stale=list(self.last_stale)
+            pending_fault_log=self.pending_fault_log
+            self.pending_fault_log=None
+            fault_health=dict(self.fault_health or {})
+            fault_tick_gap=self.fault_tick_gap
+        self.publish_status(stale)
+        # Detailed ROS logging can block on rosout or console I/O. Keep it off
+        # the 50 Hz freshness/latch callback; safety_status remains the
+        # structured diagnostic source.
+        if pending_fault_log:
+            detail=format_fault_detail(fault_health, fault_tick_gap)
+            self.get_logger().warn(pending_fault_log+'; fault diagnostics: '+detail)
 
     def publish_status(self,stale):
         publish_start=time.monotonic()
@@ -137,6 +219,7 @@ class Watchdog(Node):
                 'fault_inputs':self.fault_inputs,'currently_stale':stale,
                 'stationary_since_monotonic':self.stationary_since,
                 'fault_input_health':self.fault_health,'fault_tick_gap_sec':self.fault_tick_gap,
+                'clock_discontinuity':self.clock_discontinuity,
                 'instrumentation':self.publication_diagnostics(publish_start)})
         # Do not hold the shared input-state lock across the RMW call. A slow
         # diagnostic publisher must not prevent feedback callbacks from

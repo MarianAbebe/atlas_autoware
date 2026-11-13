@@ -1,0 +1,15 @@
+# Shared simulation geometry only. These are provisional fixture values, not
+# measured Atlas dimensions. Consuming Autoware launch files should load this
+# file rather than maintain another wheelbase/steering-angle copy.
+/**:
+  ros__parameters:
+    wheel_radius: 0.20
+    wheel_width: 0.08
+    wheel_base: 1.20
+    wheel_tread: 0.80
+    front_overhang: 0.30
+    rear_overhang: 0.30
+    left_overhang: 0.10
+    right_overhang: 0.10
+    vehicle_height: 0.50
+    max_steer_angle: 0.50

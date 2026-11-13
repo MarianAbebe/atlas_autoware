@@ -14,16 +14,16 @@
     moderate_stop_service_acceleration: -0.5
     stop_check_duration: 0.1
     nominal:
-      vel_lim: 1.0
+      vel_lim: 0.8
       reference_speed_points:
       - 0.0
       - 1.0
       steer_cmd_lim:
-      - 0.45
-      - 0.45
+      - 0.50
+      - 0.50
       steer_rate_lim_for_steer_cmd:
-      - 1.0
-      - 1.0
+      - 0.60
+      - 0.60
       lon_acc_lim_for_lon_vel:
       - 0.5
       - 0.5
@@ -38,19 +38,19 @@
       - 1.0
       lat_jerk_lim_for_steer_rate: 10.0
       steer_cmd_diff_lim_from_current_steer:
-      - 1.0
-      - 1.0
+      - 0.60
+      - 0.60
     on_transition:
-      vel_lim: 1.0
+      vel_lim: 0.8
       reference_speed_points:
       - 0.0
       - 1.0
       steer_cmd_lim:
-      - 0.45
-      - 0.45
+      - 0.50
+      - 0.50
       steer_rate_lim_for_steer_cmd:
-      - 1.0
-      - 1.0
+      - 0.60
+      - 0.60
       lon_acc_lim_for_lon_vel:
       - 0.5
       - 0.5
@@ -65,5 +65,5 @@
       - 1.0
       lat_jerk_lim_for_steer_rate: 10.0
       steer_cmd_diff_lim_from_current_steer:
-      - 1.0
-      - 1.0
+      - 0.60
+      - 0.60

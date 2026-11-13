@@ -12,18 +12,22 @@ from collections import deque
 from pathlib import Path
 
 import rclpy
-from rclpy.qos import QoSProfile, DurabilityPolicy, qos_profile_sensor_data
+from rclpy.qos import (QoSProfile, DurabilityPolicy, HistoryPolicy, ReliabilityPolicy,
+                       qos_profile_sensor_data)
 from nav_msgs.msg import Odometry, Path as RosPath
 from sensor_msgs.msg import PointCloud2
-from std_msgs.msg import String
+from std_msgs.msg import Float64MultiArray, String
 from autoware_control_msgs.msg import Control
-from autoware_internal_debug_msgs.msg import Float32Stamped
+from autoware_vehicle_msgs.msg import SteeringReport
+from autoware_internal_debug_msgs.msg import Float32Stamped, Float64Stamped
 from autoware_perception_msgs.msg import DetectedObjects, PredictedObjects
 from geometry_msgs.msg import PoseWithCovarianceStamped
 from autoware_planning_msgs.msg import Trajectory
 
 from lap_metrics import (angle_error, extract_loop_prefix, prepare_route, project_pose,
-                         nearest_trajectory_reference, terminal_goal_stopped, unwrap_progress)
+                         nearest_trajectory_reference, terminal_goal_stopped, unwrap_progress,
+                         synchronized_steering_rates, simulator_steering_integration_check,
+                         perception_stage_observation)
 
 NS = '/atlas_loc/'
 MAX_SAMPLES = 40000
@@ -31,6 +35,16 @@ SAFETY_STATUS_SOURCES = {
     NS+'safety_status': 'perception_guard',
     NS+'base_safety_status': 'localization_watchdog',
 }
+PERCEPTION_TRACE_TOPICS = (
+    ('extended', 'lidar/extended'), ('deskewed', 'lidar/deskewed'),
+    ('compact', 'lidar/compact'),
+    ('ground_filtered', 'obstacles/pointcloud'), ('clusters', 'clusters'),
+)
+
+
+def perception_trace_topics(enabled):
+    """Full-cloud observer set is opt-in to bound normal recorder overhead."""
+    return PERCEPTION_TRACE_TOPICS if enabled else ()
 
 
 def stamp(s):
@@ -56,11 +70,12 @@ def object_adapter_timing_record(payload, collector_receipt_monotonic_sec):
             'payload': payload}
 
 
-def build_launch_command(laps, output, launch_ego_marker=False):
+def build_launch_command(laps, output, launch_ego_marker=False, steering_step_diagnostics=False):
     """Build a headless validation launch; marker output is opt-in when RViz is off."""
     return ['ros2', 'launch', 'atlas_full_stack_demo', 'five_lap_demo.launch.py',
             f'laps:={laps}', f'results_dir:={output}', 'launch_rviz:=false',
-            f'launch_ego_marker:={str(bool(launch_ego_marker)).lower()}']
+            f'launch_ego_marker:={str(bool(launch_ego_marker)).lower()}',
+            f'steering_step_diagnostics:={str(bool(steering_step_diagnostics)).lower()}']
 
 
 def append_process_event(path, event, **fields):
@@ -101,9 +116,10 @@ def stop_launch_process(process, lifecycle_path, reason):
 
 
 class Trial:
-    def __init__(self, output, laps):
+    def __init__(self, output, laps, trace_perception=False):
         self.node = rclpy.create_node('atlas_lap_evaluator')
         self.output, self.target_laps = output, laps
+        self.trace_perception = bool(trace_perception)
         self.started = time.monotonic()
         self.route_message = None
         self.route_points = None
@@ -112,7 +128,11 @@ class Trial:
         self.samples = {k: deque(maxlen=MAX_SAMPLES) for k in
                         ('truth', 'ekf', 'ndt', 'ndt_runtime', 'raw', 'detected_objects',
                          'predicted_objects', 'trajectory', 'planned_trajectory', 'controller_commands',
-                         'commands', 'scene_timing', 'object_adapter_timing')}
+                         'commands', 'steering_report', 'scene_timing', 'object_adapter_timing',
+                         'clock_timing', 'steering_integration', 'cluster_metrics',
+                         'perception_raw', 'perception_extended', 'perception_deskewed',
+                         'perception_compact', 'perception_ground_filtered', 'perception_clusters',
+                         'process_resources')}
         self.samples['scene_route'] = deque(maxlen=MAX_SAMPLES)
         self.samples['planner_trajectory'] = deque(maxlen=MAX_SAMPLES)
         self.safety = deque(maxlen=1000)
@@ -131,11 +151,20 @@ class Trial:
         self.actual_ekf_distance = 0.0
         self.prev_truth = self.prev_ekf = None
         self.latch_seen = False
+        self.last_clock_sample_monotonic_ns = None
+        self.last_clock_values = None
+        self.clock_sample_interval_ns = 250_000_000
         self.end_hold_started = None
         self.last_truth = self.last_ekf = None
         self.last_command = None
         self.last_controller_command = None
+        self.last_steering_report = None
         self.nondet = False
+        self.last_trajectory_stage_capture = {}
+        self.last_perception_stage = {}
+        self.runtime_log_offset = 0
+        self.last_resource_sample_monotonic_ns = None
+        self.previous_process_counters = {}
 
         self.node.create_subscription(RosPath, NS+'route_path', self.on_route,
                                       QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL))
@@ -143,15 +172,31 @@ class Trial:
         self.node.create_subscription(Odometry, NS+'ekf/ekf_odom', self.on_ekf, 20)
         self.node.create_subscription(PoseWithCovarianceStamped, NS+'ndt/ndt_pose_with_covariance',
                                       lambda m: self.on_timed('ndt', m.header.stamp, pose=self._pose(m)), 20)
-        self.node.create_subscription(PointCloud2, NS+'lidar/raw',
-                                      lambda m: self.on_timed('raw', m.header.stamp,
-                                          points=m.width*m.height, frame=m.header.frame_id), qos_profile_sensor_data)
+        self.perception_observer_qos = QoSProfile(
+            history=HistoryPolicy.KEEP_LAST, depth=1,
+            reliability=ReliabilityPolicy.BEST_EFFORT,
+            durability=DurabilityPolicy.VOLATILE)
+        # Deep tracing deserializes multiple full PointCloud2 streams in the
+        # evaluator process. Keep this opt-in so acceptance runs do not pay
+        # that diagnostic cost. Retain the original raw-cloud receipt observer
+        # in every mode for source/receipt freshness comparison.
+        self.node.create_subscription(PointCloud2, NS+'lidar/raw', self.on_raw_pointcloud,
+                                      self.perception_observer_qos)
+        # Best-effort depth-1 observers retain only stamps, receipt clocks,
+        # frame and counts for exact cross-stage correlation.
+        for stage, topic in perception_trace_topics(self.trace_perception):
+            self.node.create_subscription(PointCloud2, NS+topic,
+                lambda msg, name=stage: self.on_perception_cloud(name, msg),
+                                          self.perception_observer_qos)
         self.node.create_subscription(DetectedObjects, NS+'obstacles/detected_objects',
                                       self.on_detected_objects, 10)
         self.node.create_subscription(PredictedObjects, NS+'obstacles/predicted_objects',
                                       self.on_predicted_objects, 10)
         self.node.create_subscription(Control, NS+'gated/control_cmd', self.on_command, 20)
         self.node.create_subscription(Control, NS+'control_cmd', self.on_controller_command, 20)
+        self.node.create_subscription(SteeringReport, NS+'sim/output/steering', self.on_steering_report, 20)
+        self.node.create_subscription(Float64MultiArray,
+            NS+'sim/output/steering_integration_step', self.on_steering_integration, 50)
         self.node.create_subscription(RosPath, NS+'trajectory_visualization', self.on_trajectory, 10)
         self.node.create_subscription(Trajectory, NS+'raw_trajectory',
                                       lambda m: self.on_trajectory_stage('scene_route', m), 10)
@@ -172,6 +217,121 @@ class Trial:
                                       self.on_object_adapter_timing, 20)
         self.node.create_subscription(Float32Stamped, NS+'ndt/exe_time_ms',
                                       lambda m: self.on_timed('ndt_runtime', m.stamp, ms=m.data), 10)
+        for metric_name in ('cyclic_time_ms', 'processing_time_ms', 'pipeline_latency_ms'):
+            self.node.create_subscription(Float64Stamped,
+                NS+'euclidean_cluster/debug/'+metric_name,
+                lambda msg, name=metric_name: self.on_cluster_metric(name, msg), 10)
+        self.sample_clocks(force=True)
+
+    def sample_clocks(self, force=False):
+        """Record ROS, realtime, and monotonic clocks without mixing their epochs."""
+        mono_ns = time.monotonic_ns()
+        if (not force and self.last_clock_sample_monotonic_ns is not None and
+                mono_ns - self.last_clock_sample_monotonic_ns < self.clock_sample_interval_ns):
+            return
+        ros_ns = int(self.node.get_clock().now().nanoseconds)
+        wall_ns = time.time_ns()
+        row = {
+            'receipt_monotonic_ns': mono_ns,
+            'system_wall_time_ns': wall_ns,
+            'ros_time_ns': ros_ns,
+            'system_wall_minus_ros_ns': wall_ns - ros_ns,
+        }
+        if self.last_clock_values is not None:
+            mono_delta = (mono_ns - self.last_clock_values['monotonic_ns']) * 1e-9
+            wall_delta = (wall_ns - self.last_clock_values['wall_ns']) * 1e-9
+            ros_delta = (ros_ns - self.last_clock_values['ros_ns']) * 1e-9
+            row.update(monotonic_delta_sec=mono_delta, wall_delta_sec=wall_delta,
+                       ros_delta_sec=ros_delta,
+                       ros_monotonic_delta_discrepancy_sec=ros_delta - mono_delta,
+                       wall_monotonic_delta_discrepancy_sec=wall_delta - mono_delta,
+                       likely_clock_discontinuity=(abs(ros_delta - mono_delta) > 0.1 or
+                                                   abs(wall_delta - mono_delta) > 0.1))
+        else:
+            row['likely_clock_discontinuity'] = False
+        self.samples['clock_timing'].append(row)
+        self.last_clock_sample_monotonic_ns = mono_ns
+        self.last_clock_values = {'monotonic_ns': mono_ns, 'wall_ns': wall_ns, 'ros_ns': ros_ns}
+
+    def sample_process_resources(self):
+        """Sample only relevant Linux processes once per second using procfs."""
+        now_ns = time.monotonic_ns()
+        if (self.last_resource_sample_monotonic_ns is not None and
+                now_ns-self.last_resource_sample_monotonic_ns < 1_000_000_000):
+            return
+        self.last_resource_sample_monotonic_ns = now_ns
+        # Record host pressure alongside per-process scheduling data. Memory
+        # pressure and swap activity can delay ROS delivery without one process
+        # appearing CPU-saturated; these fields are sampled once per second.
+        try:
+            meminfo = {}
+            for line in Path('/proc/meminfo').read_text().splitlines():
+                key, value = line.split(':', 1)
+                fields = value.split()
+                if fields and fields[0].isdigit():
+                    meminfo[key] = int(fields[0]) * (1024 if len(fields) > 1 and fields[1] == 'kB' else 1)
+            pressure = {}
+            for resource in ('cpu', 'memory', 'io'):
+                values = {}
+                for line in Path(f'/proc/pressure/{resource}').read_text().splitlines():
+                    fields = line.split()
+                    values[fields[0]] = dict(field.split('=', 1) for field in fields[1:] if '=' in field)
+                pressure[resource] = values
+            load = Path('/proc/loadavg').read_text().split()
+            self.samples['process_resources'].append({
+                'sample_monotonic_ns': now_ns, 'pid': None, 'command': '__system__',
+                'load_average_1m': float(load[0]),
+                'memory_available_bytes': meminfo.get('MemAvailable'),
+                'swap_free_bytes': meminfo.get('SwapFree'),
+                'swap_total_bytes': meminfo.get('SwapTotal'),
+                'pressure': pressure,
+            })
+        except (OSError, ValueError, IndexError):
+            pass
+        markers = ('component_container', 'static_objects.py', 'scene.py',
+                   'perception_guard.py', 'run_lap_validation.py')
+        hz = float(os.sysconf('SC_CLK_TCK'))
+        for entry in Path('/proc').iterdir():
+            if not entry.name.isdigit():
+                continue
+            try:
+                pid = int(entry.name)
+                command = (entry/'cmdline').read_bytes().replace(b'\0', b' ').decode(errors='replace').strip()
+                if not command or not any(marker in command for marker in markers):
+                    continue
+                stat_text = (entry/'stat').read_text()
+                stat_fields = stat_text[stat_text.rfind(')')+2:].split()
+                cpu_ticks = int(stat_fields[11])+int(stat_fields[12])
+                status = (entry/'status').read_text(errors='replace')
+                rss_kib = next((int(line.split()[1]) for line in status.splitlines()
+                                if line.startswith('VmRSS:')), None)
+                threads = next((int(line.split()[1]) for line in status.splitlines()
+                                if line.startswith('Threads:')), None)
+                try:
+                    sched = [int(value) for value in (entry/'schedstat').read_text().split()[:3]]
+                except (OSError, ValueError):
+                    sched = []
+                previous = self.previous_process_counters.get(pid)
+                elapsed = None if previous is None else (now_ns-previous['monotonic_ns'])*1e-9
+                cpu_sec = cpu_ticks/hz
+                cpu_percent = None
+                runqueue_wait_delta_sec = None
+                if previous is not None and elapsed and elapsed > 0:
+                    cpu_percent = max(0.0, (cpu_sec-previous['cpu_sec'])/elapsed*100.0)
+                    if len(sched) >= 2 and previous.get('runqueue_wait_ns') is not None:
+                        runqueue_wait_delta_sec = max(0, sched[1]-previous['runqueue_wait_ns'])*1e-9
+                self.previous_process_counters[pid] = {
+                    'monotonic_ns': now_ns, 'cpu_sec': cpu_sec,
+                    'runqueue_wait_ns': sched[1] if len(sched) >= 2 else None,
+                }
+                self.samples['process_resources'].append({
+                    'sample_monotonic_ns': now_ns, 'pid': pid, 'command': command[:240],
+                    'interval_sec': elapsed, 'cpu_time_sec': cpu_sec,
+                    'cpu_percent_of_one_core': cpu_percent, 'rss_kib': rss_kib,
+                    'thread_count': threads, 'runqueue_wait_delta_sec': runqueue_wait_delta_sec,
+                })
+            except (OSError, ValueError, IndexError, PermissionError):
+                continue
 
     @staticmethod
     def _pose(msg):
@@ -197,7 +357,8 @@ class Trial:
         now_mono = time.monotonic()
         now_ros = self.node.get_clock().now().nanoseconds
         state_stamp = stamp(header_stamp)
-        row = dict(receipt_monotonic_sec=now_mono, header_stamp_ns=state_stamp,
+        row = dict(receipt_monotonic_sec=now_mono, receipt_system_wall_time_ns=time.time_ns(),
+                   receipt_ros_time_ns=now_ros, header_stamp_ns=state_stamp,
                    header_age_sec=(now_ros-state_stamp)*1e-9, **values)
         self.samples[name].append(row)
         if name in ('raw', 'ndt'):
@@ -252,6 +413,8 @@ class Trial:
     def on_command(self, msg):
         row = dict(receipt_monotonic_sec=time.monotonic(), stamp_ns=stamp(msg.stamp),
                    steering=msg.lateral.steering_tire_angle,
+                   steering_rate=msg.lateral.steering_tire_rotation_rate,
+                   steering_rate_defined=msg.lateral.is_defined_steering_tire_rotation_rate,
                    velocity=msg.longitudinal.velocity, acceleration=msg.longitudinal.acceleration)
         self.samples['commands'].append(row)
         self.last_command = row
@@ -259,9 +422,51 @@ class Trial:
     def on_controller_command(self, msg):
         row = dict(receipt_monotonic_sec=time.monotonic(), stamp_ns=stamp(msg.stamp),
                    steering=msg.lateral.steering_tire_angle,
+                   steering_rate=msg.lateral.steering_tire_rotation_rate,
+                   steering_rate_defined=msg.lateral.is_defined_steering_tire_rotation_rate,
                    velocity=msg.longitudinal.velocity, acceleration=msg.longitudinal.acceleration)
         self.samples['controller_commands'].append(row)
         self.last_controller_command = row
+
+    def on_steering_report(self, msg):
+        source_stamp_ns = stamp(msg.stamp)
+        receipt = time.monotonic()
+        rate = None
+        if self.last_steering_report is not None:
+            prior_stamp, prior_angle = self.last_steering_report
+            dt = (source_stamp_ns - prior_stamp) * 1e-9
+            if dt > 0.0:
+                rate = (msg.steering_tire_angle - prior_angle) / dt
+        self.samples['steering_report'].append({
+            'receipt_monotonic_sec': receipt,
+            'stamp_ns': source_stamp_ns,
+            'steering_angle_rad': msg.steering_tire_angle,
+            'derived_rate_radps': rate,
+        })
+        self.last_steering_report = (source_stamp_ns, msg.steering_tire_angle)
+
+    def on_steering_integration(self, msg):
+        """Record the simulator's actual model step; array schema is documented by the patch tool."""
+        receipt = time.monotonic()
+        data = list(msg.data)
+        if len(data) != 9:
+            self.nondet = True
+            return
+        dt, previous, requested, applied, increment, rate, limit, ros_seconds, valid_dt = data
+        self.samples['steering_integration'].append({
+            'receipt_monotonic_sec': receipt,
+            'receipt_system_wall_time_ns': time.time_ns(),
+            'receipt_ros_time_ns': self.node.get_clock().now().nanoseconds,
+            'integration_dt_sec': float(dt),
+            'previous_steering_rad': float(previous),
+            'requested_steering_rad': float(requested),
+            'applied_steering_rad': float(applied),
+            'steering_increment_rad': float(increment),
+            'internal_steering_rate_radps': float(rate),
+            'configured_steering_rate_limit_radps': float(limit),
+            'integration_ros_time_sec': float(ros_seconds),
+            'valid_dt': bool(valid_dt),
+        })
 
     def on_trajectory(self, msg):
         self.samples['trajectory'].append({
@@ -272,7 +477,11 @@ class Trial:
         })
 
     def on_trajectory_stage(self, stage, msg):
-        """Keep compact route/planner snapshots to locate terminal-path truncation."""
+        """Keep at most one compact route/planner snapshot per second and stage."""
+        capture_mono = time.monotonic()
+        if capture_mono - self.last_trajectory_stage_capture.get(stage, -math.inf) < 1.0:
+            return
+        self.last_trajectory_stage_capture[stage] = capture_mono
         points = msg.points
         if not points:
             summary = dict(point_count=0, path_length_m=0.0, first_position=None,
@@ -301,7 +510,7 @@ class Trial:
             ego = {'position': self.last_truth[1:3], 'yaw_rad': self.last_truth[4],
                    'speed_mps': math.hypot(self.last_truth[5], self.last_truth[6])}
         self.samples[stage].append(dict(
-            receipt_monotonic_sec=time.monotonic(), header_stamp_ns=stamp(msg.header.stamp),
+            receipt_monotonic_sec=capture_mono, header_stamp_ns=stamp(msg.header.stamp),
             frame_id=msg.header.frame_id, ego=ego, **summary))
 
     def on_planned_trajectory(self, msg):
@@ -337,14 +546,42 @@ class Trial:
         })
 
     def on_detected_objects(self, msg):
-        self.samples['detected_objects'].append({
-            'receipt_monotonic_sec': time.monotonic(),
-            'header_stamp_ns': stamp(msg.header.stamp),
-            'frame_id': msg.header.frame_id,
-            'object_count': len(msg.objects),
+        row = self.perception_observation('detected_objects', msg.header.stamp, msg.header.frame_id,
+                                          len(msg.objects))
+        row['object_count'] = len(msg.objects)
+        self.samples['detected_objects'].append(row)
+
+    def perception_observation(self, stage, header, frame_id, item_count):
+        mono_ns = time.monotonic_ns()
+        ros_ns = self.node.get_clock().now().nanoseconds
+        source_ns = stamp(header)
+        previous = self.last_perception_stage.get(stage)
+        row = perception_stage_observation(stage, source_ns, mono_ns, ros_ns,
+                                           frame_id, item_count, previous)
+        self.last_perception_stage[stage] = row
+        return row
+
+    def on_perception_cloud(self, stage, msg):
+        self.samples['perception_'+stage].append(self.perception_observation(
+            stage, msg.header.stamp, msg.header.frame_id, msg.width*msg.height))
+
+    def on_raw_pointcloud(self, msg):
+        self.on_timed('raw', msg.header.stamp, points=msg.width*msg.height,
+                      frame=msg.header.frame_id)
+        self.on_perception_cloud('raw', msg)
+
+    def on_cluster_metric(self, metric_name, msg):
+        self.samples['cluster_metrics'].append({
+            'metric': metric_name,
+            'measurement_stamp_ns': stamp(msg.stamp),
+            'receipt_monotonic_ns': time.monotonic_ns(),
+            'receipt_ros_time_ns': self.node.get_clock().now().nanoseconds,
+            'value_ms': float(msg.data),
         })
 
     def on_predicted_objects(self, msg):
+        row = self.perception_observation('predicted_objects', msg.header.stamp, msg.header.frame_id,
+                                          len(msg.objects))
         objects = []
         for obj in msg.objects:
             p = obj.kinematics.initial_pose_with_covariance.pose.position
@@ -353,12 +590,8 @@ class Trial:
             if self.last_truth is not None:
                 distance = math.dist(xyz, self.last_truth[1:4])
             objects.append({'position': xyz, 'distance_to_truth_m': distance})
-        self.samples['predicted_objects'].append({
-            'receipt_monotonic_sec': time.monotonic(),
-            'header_stamp_ns': stamp(msg.header.stamp),
-            'frame_id': msg.header.frame_id,
-            'objects': objects,
-        })
+        row['objects'] = objects
+        self.samples['predicted_objects'].append(row)
 
     def on_safety(self, source, msg):
         try:
@@ -394,10 +627,17 @@ class Trial:
         next_log_check = time.monotonic()
         while rclpy.ok() and time.monotonic() < deadline and process.poll() is None:
             rclpy.spin_once(self.node, timeout_sec=0.01)
+            self.sample_clocks()
+            self.sample_process_resources()
             if time.monotonic() >= next_log_check:
                 next_log_check = time.monotonic() + 0.5
                 try:
-                    text = runtime_log_path.read_text(encoding='utf-8', errors='replace')
+                    # Inspect only newly appended output; rereading an ever-
+                    # growing launch log on every poll caused quadratic I/O.
+                    with runtime_log_path.open('r', encoding='utf-8', errors='replace') as log:
+                        log.seek(self.runtime_log_offset)
+                        text = log.read()
+                        self.runtime_log_offset = log.tell()
                     if 'process has died' in text and 'user interrupted with ctrl-c' not in text:
                         return 'child_process_failed'
                 except OSError:
@@ -453,6 +693,54 @@ class Trial:
             final_position_error = math.dist(self.last_ekf[1:3], goal[:2])
         metric = lambda xs: {'rms': math.sqrt(sum(x*x for x in xs)/len(xs)),
                              'maximum': max(xs)} if xs else None
+        controller_reference_distance = []
+        controller_reference_heading = []
+        for row in self.samples['planned_trajectory']:
+            reference = row.get('nearest_controller_reference')
+            ego = row.get('controller_ego_at_receipt')
+            if reference and ego and reference.get('points'):
+                controller_reference_distance.append(float(reference['distance_m']))
+                controller_reference_heading.append(abs(angle_error(
+                    float(ego['yaw_rad']), float(reference['points'][0]['yaw_rad']))))
+        gated_commands = list(self.samples['commands'])
+        raw_commands = list(self.samples['controller_commands'])
+        steering_feedback = list(self.samples['steering_report'])
+        steering_angles = [abs(float(row['steering_angle_rad'])) for row in steering_feedback]
+        steering_rate_measurement = synchronized_steering_rates(steering_feedback, truth)
+        steering_rates = steering_rate_measurement['rates_radps']
+        integration_steps = list(self.samples['steering_integration'])
+        integration_check = simulator_steering_integration_check(integration_steps, len(truth))
+        max_gated_speed = max((abs(float(row['velocity'])) for row in gated_commands), default=None)
+        max_raw_speed = max((abs(float(row['velocity'])) for row in raw_commands), default=None)
+        max_gated_steer = max((abs(float(row['steering'])) for row in gated_commands), default=None)
+        acceleration_samples = []
+        for before, after in zip(truth, truth[1:]):
+            dt = (after['header_stamp_ns'] - before['header_stamp_ns']) * 1e-9
+            if dt > 0.0:
+                acceleration_samples.append((after['speed_xy'] - before['speed_xy']) / dt)
+        measured_accel_max = max((abs(v) for v in acceleration_samples), default=None)
+        acceptance_checks = {
+            'target_lap_progress': self.route_length is not None and
+                self.max_progress >= self.target_laps * self.route_length - 0.25,
+            'goal_position_tolerance': final_position_error is not None and final_position_error <= 0.15,
+            'terminal_hold_completed': status == 'completed_and_held' and self.end_hold_started is not None,
+            'safety_gate_not_latched': not self.latch_seen,
+            'controller_reference_cross_track': bool(controller_reference_distance) and
+                max(controller_reference_distance) <= 0.30,
+            'controller_reference_heading': bool(controller_reference_heading) and
+                max(controller_reference_heading) <= 0.15,
+            'gated_speed_limit': max_gated_speed is not None and max_gated_speed <= 0.81,
+            'gated_steering_limit': max_gated_steer is not None and max_gated_steer <= 0.501,
+            'simulated_steering_limit': bool(steering_angles) and max(steering_angles) <= 0.501,
+            # The report/odometry streams have independent publication stamps;
+            # only integration-step telemetry identifies the actual model dt.
+            # Keep the paired estimate in the report as a diagnostic, not as a
+            # substitute for the simulator's applied-step measurement.
+            'simulated_steering_rate_limit': integration_check['passed'],
+            'internal_steering_integration_step_limit': integration_check['passed'],
+            'simulated_acceleration_limit': bool(acceleration_samples) and measured_accel_max <= 0.85,
+            'controller_respects_speed_limit': max_raw_speed is not None and max_raw_speed <= 0.81,
+        }
         log_lines = runtime_log.splitlines()
         shutdown_index = next((i for i, line in enumerate(log_lines)
                                if 'user interrupted with ctrl-c' in line), len(log_lines))
@@ -463,8 +751,12 @@ class Trial:
                                if any(token in line for token in ('Traceback (most recent call last)', 'process has died'))]
         result = {
             'schema_version': 1, 'target_laps': self.target_laps,
-            'status': status, 'passed': status == 'completed_and_held' and not self.latch_seen and
-                      process_rc in (0, -signal.SIGINT) and not runtime_errors,
+            'status': status,
+            'passed': status == 'completed_and_held' and
+                      process_rc in (0, -signal.SIGINT) and not runtime_errors and
+                      all(acceptance_checks.values()),
+            'acceptance_checks': acceptance_checks,
+            'acceptance_failures': [name for name, passed in acceptance_checks.items() if not passed],
             'timeout_sec': timeout_sec, 'launch_exit_code': process_rc,
             'runtime_error_lines': runtime_errors,
             'expected_shutdown_exception_lines': shutdown_exceptions,
@@ -476,6 +768,27 @@ class Trial:
             'actual_ekf_distance_m': self.actual_ekf_distance,
             'final_route_cross_track_m': final_position_error,
             'cross_track_error_m': metric(cross), 'heading_error_rad': metric(heading),
+            'controller_reference_cross_track_m': metric(controller_reference_distance),
+            'controller_reference_heading_error_rad': metric(controller_reference_heading),
+            'max_gated_speed_mps': max_gated_speed,
+            'max_controller_speed_mps': max_raw_speed,
+            'max_gated_steering_angle_rad': max_gated_steer,
+            'max_simulated_steering_angle_rad': max(steering_angles, default=None),
+            'max_simulated_steering_rate_radps': max(steering_rates, default=None),
+            'internal_steering_integration_step_measurement': integration_check,
+            'steering_rate_measurement': {
+                'method': 'SteeringReport angle deltas paired to nearest simulator odometry update stamp',
+                'paired_samples': steering_rate_measurement['paired_samples'],
+                'input_samples': steering_rate_measurement['input_samples'],
+                'maximum_pair_skew_sec': steering_rate_measurement['maximum_pair_skew_sec'],
+                'maximum_message_stamp_secant_radps': max((abs(float(row['derived_rate_radps']))
+                    for row in steering_feedback if row['derived_rate_radps'] is not None), default=None),
+                'maximum_synchronized_update_rate_radps': max(steering_rates, default=None),
+                'interpretation': ('Informational only: SteeringReport and odometry are stamped in separate '
+                    'publication calls and do not carry a shared simulator-step identifier. The authoritative '
+                    'simulated rate check uses integration-step telemetry.'),
+            },
+            'max_odometry_derived_acceleration_mps2': measured_accel_max,
             'localization_error_against_evaluation_truth': {
                 'matched_samples': len(matched),
                 'position_3d_rmse_m': math.sqrt(sum(x[0]*x[0] for x in matched)/len(matched)) if matched else None,
@@ -507,6 +820,10 @@ def main():
     parser.add_argument('--timeout', type=float, help='bounded wall timeout; default 90 + 95 seconds per lap')
     parser.add_argument('--launch-ego-marker', action='store_true',
                         help='enable the visualization marker during headless validation (off by default)')
+    parser.add_argument('--trace-perception', action='store_true',
+                        help='subscribe to raw/intermediate full point clouds for source-stamp stage tracing')
+    parser.add_argument('--steering-step-diagnostics', action='store_true',
+                        help='enable simulator integration-step telemetry (requires diagnostic simulator overlay)')
     args = parser.parse_args()
     timeout = args.timeout if args.timeout is not None else 90.0 + 95.0*args.laps
     if timeout < 60 or timeout > 700:
@@ -517,16 +834,19 @@ def main():
     lifecycle_path = args.output/'process_lifecycle.jsonl'
     (args.output/'run_metadata.json').write_text(json.dumps({
         'laps': args.laps, 'timeout_sec': timeout, 'ros_domain_id': os.environ.get('ROS_DOMAIN_ID'),
+        'perception_stage_trace_enabled': args.trace_perception,
+        'steering_step_diagnostics_enabled': args.steering_step_diagnostics,
         'atlas_autoware_root': os.environ.get('ATLAS_AUTOWARE_ROOT'),
         'started_utc': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
     }, indent=2)+'\n')
 
     rclpy.init()
-    trial = Trial(args.output, args.laps)
+    trial = Trial(args.output, args.laps, trace_perception=args.trace_perception)
     append_process_event(lifecycle_path, 'validator_started', process_pid=os.getpid(),
                          ros_time_ns=trial.node.get_clock().now().nanoseconds,
                          monotonic_clock='time.monotonic shared host clock')
-    launch_cmd = build_launch_command(args.laps, args.output, args.launch_ego_marker)
+    launch_cmd = build_launch_command(args.laps, args.output, args.launch_ego_marker,
+                                      args.steering_step_diagnostics)
     log = (args.output/'runtime.log').open('w', encoding='utf-8')
     process = None
     result = None
